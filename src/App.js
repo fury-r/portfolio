@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import MainRoute from './Routes/MainRoute';
+import { HashRouter} from "react-router-dom";
+import { ServerProvider } from './context/Authcontext';
+import Scroll from './component/Scroll';
+import { ThemeProvider } from 'styled-components';
+import { Globalstyle, ToggleMode, } from './context/component';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { lightmode,darkmode } from './context/theme';
+import { useState } from 'react';
+import MainNavbar from './component/navbar';
+const App=()=>{
+  const [mode, themeToggler, mountedComponent] = ToggleMode();
+
+
+    const themeMode = mode === 'light' ? lightmode : darkmode;
+    if(!mountedComponent) return <div/>
+
+    return(<>
+      <HashRouter>
+      <ServerProvider>
+      <ThemeProvider theme={themeMode}>
+    <Globalstyle/>
+  <Scroll/>
+  <MainNavbar toggletheme={themeToggler} />
+
+  <MainRoute/>
+  </ThemeProvider>
+</ServerProvider>
+  </HashRouter>
+    </>)
 }
-
 export default App;

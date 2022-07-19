@@ -1,4 +1,4 @@
-export const darkmode={
+export const dark={
     background_color:"#1d1d1d",
     color:"whitesmoke",
     box_shadow_1:"#171717",
@@ -15,7 +15,7 @@ export const darkmode={
 
 
 }
-export const lightmode={
+export const light={
     background_color:"#ebebed",
     color:"black",
     box_shadow_1:"#b1b1b5",
@@ -24,7 +24,7 @@ export const lightmode={
     border_shadow_2:"#efeff5" ,
     background: " linear-gradient(315deg, #fbfbfe, #d4d4d5)",
     theme_text:"grey",
-    image:" -15px -15px 30px #c8c8c9, 15px 15px 30px #ffffff",
+    image:" -10px -10px 30px #c8c8c9, 15px 15px 30px #ffffff",
     buttonshadow:"   -12px -12px 24px #c8c8c9,12px 12px 24px #ffffff",
     bordershadow:" -15px -15px 30px #c8c8c9, 15px 15px 30px #ffffff",
     textshadow:" -6px 6px 15px #c8c8c9, 6px -6px 15px #ffffff",

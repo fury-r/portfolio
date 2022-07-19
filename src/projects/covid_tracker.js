@@ -4,7 +4,8 @@ import Api from './api/covidTable';
 const CovidTracker=()=>{
 
     return(
-        <Api/>
+       
+        <label>test</label>
     )
 }
 

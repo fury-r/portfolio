@@ -7,6 +7,8 @@ import { useState,useEffect } from "react";
 import styled from "styled-components"
 import Tilty from "react-tilty";
 import { func } from "prop-types";
+import { dark, light } from "./theme";
+import { Parallax, ParallaxLayer } from "@react-spring/parallax";
 
 export const Globalstyle=createGlobalStyle`
   margin: 0;
@@ -80,7 +82,6 @@ export const NeuromorphicText=styled(FloatingLabel)
 }
 `
 export const NeuromorphicCard=styled(Card)`
-border-radius: 10px;
 border:none;
 width: 70%;
 color: ${({theme})=>theme.theme_text};
@@ -89,7 +90,6 @@ box-shadow:  ${({theme})=>theme.bordershadow};
 
 `
 export const NeuromorphicCard2=styled(Card)`
-border-radius: 10px;
 border:none;
 width:70%;
 color: ${({theme})=>theme.theme_text};
@@ -154,6 +154,9 @@ export const Themebody=styled.main`
   transition: all 0.50s linear;
 
 `
+export  const ParallaxLayerTheme=styled(Parallax)`
+background: ${({theme})=>theme.background_color};
+`
 
 /* 
 export const NeuroNav=styled(Nav)`
@@ -167,42 +170,42 @@ export const NeuroNavlink=styled(Nav.link)`
 ` */
 
 export const ToggleMode=()=>{
-  const [mode,setMode]=useState('dark')
+  const [mode,setMode]=useState(true) //true dark false light
   const [mountedComponent, setMountedComponent] = useState(false)
-
+  const [main,setMain]=useState({})
   const setTheme=theme=>{
   localStorage.setItem('mode',theme)
   setMode(theme)
   }
   const themeToggler=()=>{
-    mode==='light'?setMode('dark'):setMode('light')
+    setMode(!mode)
   }
   useEffect(()=>{
     const localtheme=localStorage.getItem('mode')
-    localtheme?setMode(localtheme):setMode('dark')
+    localtheme?setMode(localtheme):setMode(true)
     setMountedComponent(true)
+    setMain(localtheme?dark:light)
   },[])
-  return [mode,themeToggler,mountedComponent]
+  return [mode,themeToggler,mountedComponent,main]
 }
 export const Toggle=({Toggler})=>{
   const [isDark, setDark] = useState(true);
   useEffect(() => {
-    if(localStorage.getItem('mode')==='light'){
-      setDark(false)}
-
-    else if(localStorage.getItem('mode')==='dark'){
-       setDark(true)
+    if(localStorage.getItem('mode')===false){
+      setDark(false)
     }
+    
+  
     }, [])
   const ToggleTheme=()=>{
     if(localStorage.getItem('mode')==null){
-      localStorage.setItem('mode','light')
+      localStorage.setItem('mode',false)
     }
-    else if(localStorage.getItem('mode') ==='dark'){
-      localStorage.setItem('mode','light')
+    else if(localStorage.getItem('mode') ===true){
+      localStorage.setItem('mode',false)
     }
     else{
-      localStorage.setItem('mode','dark')
+      localStorage.setItem('mode',true)
 
     }
     console.log(localStorage.getItem('mode'))

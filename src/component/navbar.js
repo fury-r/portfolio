@@ -22,7 +22,7 @@ const MainNavbar=({toggletheme})=>{
 
     return(
         <>
-                <NeuroNavbar collapseOnSelect color='faded' fixed='top' expand='sm' variant='white' className='justify-content-start    sticky-top   '>
+                <NeuroNavbar collapseOnSelect color='faded' fixed='top' expand='sm' variant='white' className='justify-content-start    sticky-top '>
             <Container >
 
             <Navbar.Toggle aria-controls='responsive-navbar-nav ' ><FontAwesomeIcon className="nav-toggle" icon={faCaretDown}/></Navbar.Toggle>
@@ -55,7 +55,7 @@ const MainNavbar=({toggletheme})=>{
                          </NueromorphicNavItem>
                     </Nav>
                 </Navbar.Collapse>
-                <Toggle Toggler={toggletheme} />
+                {/*<Toggle Toggler={toggletheme} />*/}
             </Container>
 
 

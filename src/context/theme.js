@@ -31,3 +31,10 @@ export const light={
     text_shadow:"#ebebed"
 
 }
+
+export const blackandwhite ={
+    
+}
+export const glossy={
+    
+}

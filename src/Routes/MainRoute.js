@@ -28,8 +28,14 @@ const RouteWithLoader=({ component: Component, ...rest })=>{
             
             <Themebody>
             
+                <div className='min-h-screen flex flex-col justify-between '> 
+                <div className='h-3/4'>
                 <Component {...props}/>
+                </div>
+                <div className='h-1/4'>
                 <MainFooter/>
+                </div>
+                </div>
             </Themebody>
             </>
         )} />

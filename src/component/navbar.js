@@ -34,18 +34,13 @@ const MainNavbar=({toggletheme})=>{
                     <label className='btn-outline-none' >Home</label>
                     </NueromorphicNavLink>
                 </NueromorphicNavItem>
+    
+{/*         
                 <NueromorphicNavItem >
-                    <NueromorphicNavLink   as={HashLink} eventkey='link-2' className='nav-text active  '  to={Routes.about.path}>
-                    <label >About</label>
+                    <NueromorphicNavLink as={HashLink} eventkey='link-3' className=' nav-text  active '}>
+                    <label >CV</label>
                     </NueromorphicNavLink>
-                </NueromorphicNavItem>
-                
-        
-                <NueromorphicNavItem >
-                    <NueromorphicNavLink as={HashLink} eventkey='link-3' className=' nav-text  active ' to={Routes.skills.path}>
-                    <label >Skills</label>
-                    </NueromorphicNavLink>
-                </NueromorphicNavItem>
+                </NueromorphicNavItem> */}
                 <NueromorphicNavItem >
                     <NueromorphicNavLink  as={HashLink}   eventkey='link-4' className=' nav-text active' to={Routes.project.path}>
                     <label >Projects</label>
@@ -54,8 +49,14 @@ const MainNavbar=({toggletheme})=>{
                 <NueromorphicNavItem>
                          </NueromorphicNavItem>
                     </Nav>
+                    {/* <NueromorphicNavItem >
+                    <NueromorphicNavLink   as={HashLink} eventkey='link-2' className='nav-text active  '  to={Routes.about.path}>
+                    <label >Contact</label>
+                    </NueromorphicNavLink>
+                </NueromorphicNavItem> */}
+                
                 </Navbar.Collapse>
-                {/*<Toggle Toggler={toggletheme} />*/}
+                <Toggle Toggler={toggletheme} />
             </Container>
 
 

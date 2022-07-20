@@ -9,21 +9,17 @@ const Introduction = () => {
         
      </div>
     <div className="flex flex-row justify-around items-center ">
-        <div className="flex flex-col">
-        <div className="jumbotron ">
-              <div class="profile-text animate-fade-in-top">
-                <label className='opacity-60 ' >Hello!</label>
-                
-              </div>
-            </div>
-            <label className="text-2xl font-bold opacity-60">My name is Rajeev Dessai</label>
+
+        <div className="p-3 bg-white rounded-2xl mt-4 flex flex-col px-4 ">
+          <label className="text-xl text-gray-500">Hello,I am</label>
+          <label className="text-3xl font-semibold text-gray-500">Rajeev</label>
         </div>
       <Tilty style={{ transformStyle: "preserve-3d" }} className="p-2 mt-10 ">
         <Image
           src={Pic}
           fluid
           alt="User Photo"
-          width="220"
+          width="150"
           className="neuromorphic-border-animation responsive border-2 "
           roundedCircle
           style={{ transform: "translateZ(30px)", objectFit: "cover" }}
@@ -31,10 +27,10 @@ const Introduction = () => {
       </Tilty>
 
     </div>
-        <div className="flex flex-col m-10 w-full">
+        <div className="flex flex-col m-10 ">
    
-      <div className="shadow-md p-4  rounded-xl bg-white mt-10 w-2/3">
-        <label className="text-xl text-gray-500 "> I am a Software Developer I am  a Full Stack Developer.Currently pursuing MSc IT.</label>
+      <div className="shadow-md p-4  rounded-xl bg-white mt-10 w-3/5 ">
+        <label className="text-xl text-gray-500  " >  I am  a Full Stack Software Developer.</label>
       </div>
         </div>
     </div>

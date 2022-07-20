@@ -17,7 +17,7 @@ export const Globalstyle=createGlobalStyle`
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: ${({ theme }) => theme.background_color};
+  backgroundColor: ${({ theme }) => theme.background_color};
     color: ${({ theme }) => theme.color};
 `
 
@@ -91,7 +91,6 @@ box-shadow:  ${({theme})=>theme.bordershadow};
 `
 export const NeuromorphicCard2=styled(Card)`
 border:none;
-width:70%;
 color: ${({theme})=>theme.theme_text};
 background: ${({theme})=>theme.background};
 box-shadow: ${({theme})=>theme.bordershadow};
@@ -141,6 +140,10 @@ export const navLabel=styled.label`
 	transform: scale(1);
 }
 
+`
+export  const arrow=styled.main`
+border-bottom: 5px solid ${({theme})=>theme.theme_text};
+border-right: 5px solid ${({theme})=>theme.theme_text};
 `
 export const Themebody=styled.main`
  margin: 0;

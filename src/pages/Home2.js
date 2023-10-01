@@ -21,7 +21,7 @@ import Pic from "../assets/img/pic.png";
 import Tilty from "react-tilty";
 import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 import {  NeuromorphicButton,NeuromorphicCard,NeuromorphicImage,Label } from "../context/component";
-const Home = () => {
+const Homdde = () => {
   
   const [Popup,setPopup]=useState(false)
 

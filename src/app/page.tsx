@@ -15,7 +15,7 @@ import { BiUser } from "react-icons/bi";
 
           </div>
           <div className="flex items-center justify-start">
-          <StyledLabel className="bg-red flex  bolder underline italic  " fontSize={30}>{"I'm Rajeev Dessai"}</StyledLabel><Image height={50} src={require("./assets/Wave.svg")} alt={""}/>
+          <StyledLabel className="bg-red flex  bolder underline italic  " fontSize={30}>{"I'm Rajeev Dessai"}</StyledLabel><Image height={50} src={require("../assets/Wave.svg")} alt={""}/>
 
           </div>
           <StyledLabel fontWeight={"bolder"} fontSize={20}>A Software Engineer</StyledLabel>

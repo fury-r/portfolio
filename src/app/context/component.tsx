@@ -30,7 +30,7 @@ export const MainLayout = styled.div`
   width: 100%;
   height: 100%;
 `;
-export const StyledButton = styled<any>(Button)`
+export const StyledButton = styled.button`
   color: ${({ theme }: props) => theme.color};
 
   outline: 0;
@@ -41,6 +41,7 @@ export const StyledButton = styled<any>(Button)`
   &:hover {
     animation: ripple-effect 1.4s ease forwards;
     color: ${({ theme }: props) => theme.color};
+    border:none;
   }
   @keyframes ripple-effect {
     0% {

@@ -52,6 +52,16 @@ export const StyledButton = styled.button`
     }
   }
 `;
+
+export const Container=styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+
+  
+
+`
 export const StyledNavLink = styled<any>(Link)`
   display: block;
   padding: 15px;
@@ -140,8 +150,27 @@ export const StyledLabel = styled<any>(FloatingLabel)`
   font-family: "Poppins", sans-serif;
   color: ${({ theme }: props) => theme.color};
   text-transform: none;
-`;
 
+`;
+export const AnimatedStyledLabel = styled<any>(FloatingLabel)`
+  font-family: "Poppins", sans-serif;
+  color: ${({ theme }: props) => theme.color};
+  text-transform: none;
+  &::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 1px;
+    background: ${({ theme }: props) => theme.color};
+    transition: width .3s;
+}
+
+  &:hover::after {
+    width: 100%;
+
+    //transition: width .3s;
+}
+`;
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const navLabel = styled.label`

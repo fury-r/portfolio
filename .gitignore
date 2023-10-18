@@ -59,3 +59,4 @@ dist-ssr
 *.sw?
 .turbo
 .next
+yarn.lock

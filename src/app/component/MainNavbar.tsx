@@ -1,7 +1,7 @@
 'use client'
 import React from "react";
 import {
-  StyledLabel,
+  AnimatedStyledLabel,
   StyledNavItem,
   StyledNavLink,
   StyledNavbar,
@@ -12,7 +12,7 @@ import { BiHomeAlt, BiInfoCircle } from "react-icons/bi";
 import { AiOutlineProject } from "react-icons/ai";
 import { FaCaretDown } from "react-icons/fa";
 
-import { Container, Navbar ,Collapse} from "react-bootstrap";
+import { Navbar} from "react-bootstrap";
 import { Routes } from "../Routes/routes";
 
 const NAV_ITEMS: {
@@ -60,19 +60,19 @@ export const MainNavbar = () => {
       <Navbar.Toggle aria-controls="responsive-navbar-nav">
         <FaCaretDown />
       </Navbar.Toggle>
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Container className="flex w-1/5">
+      <Navbar.Collapse id="responsive-navbar-nav " className="flex justify-end">
+        <div className="flex w-6/12 ">
           {NAV_ITEMS.map((value, index) => (
             <StyledNavItem key={index.toString()}>
               <StyledNavLink href={value.routes}>
-                <Container className="flex  justify-between items-center">
-                  <StyledLabel className="mr-2">{value.title}</StyledLabel>
+                <div className="flex  justify-between items-center">
+                  <AnimatedStyledLabel className="mr-2">{value.title}</AnimatedStyledLabel>
                   {value.icon}
-                </Container>
+                </div>
               </StyledNavLink>
             </StyledNavItem>
           ))}
-        </Container>
+        </div>
       </Navbar.Collapse>
     </StyledNavbar>
   );

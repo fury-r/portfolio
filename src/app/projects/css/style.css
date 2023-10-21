@@ -1,0 +1,21 @@
+
+
+.imageContainer{
+    gap: 5px;
+    width: fit-content;
+
+}
+
+.imageContainer:hover{
+    animation: imageSpread 0.5s forwards;
+
+}
+
+@keyframes imageSpread{
+
+    100%{
+        gap: 10px;
+        width: fit-content;
+    }
+    
+}

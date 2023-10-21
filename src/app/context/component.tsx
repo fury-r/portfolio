@@ -34,23 +34,23 @@ export const StyledButton = styled.button`
   color: ${({ theme }: props) => theme.color};
 
   outline: 0;
-  padding: 18px;
+  border:0;
+  padding: 10px;
   border-radius: 8px;
   background: ${({ theme }: props) => theme.background};
 
   &:hover {
-    animation: ripple-effect 1.4s ease forwards;
-    color: ${({ theme }: props) => theme.color};
+ 
     border:none;
   }
-  @keyframes ripple-effect {
+  /* @keyframes ripple-effect {
     0% {
       box-shadow: 0px;
     }
     100% {
       box-shadow: ${({ theme }: props) => theme.buttonshadow};
     }
-  }
+  } */
 `;
 
 export const Container=styled.div`
@@ -171,6 +171,29 @@ export const AnimatedStyledLabel = styled<any>(FloatingLabel)`
     //transition: width .3s;
 }
 `;
+export const GlassContainer=styled.div`
+    background-color: ${({ theme }: props) => theme.background};
+border-radius: 15px;
+
+color: ${({ theme }: props) => theme.color};
+padding: 10px;
+height: fit-content;
+&:hover{
+
+animation: hoverAnimate 1s forwards;
+
+}
+@keyframes hoverAnimate {
+  100%{
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(19.6px);
+-webkit-backdrop-filter: blur(19.6px);
+background: rgba(255, 255, 255, 0.2);
+
+  }
+}
+`
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const navLabel = styled.label`

@@ -10,7 +10,6 @@ const StyledInputGroup = styled.div`
         overflow: hidden;
         position: relative;
         width: 100%;
-
         &-title {
           position: absolute;
           top: 15px;
@@ -38,7 +37,7 @@ const StyledInputGroup = styled.div`
             background: none;
             border: 1px solid #ccc;
             outline: none;
-            width: 70%;
+            width: 100%;
 
             margin-top: 5px;
             border-radius: 5px;

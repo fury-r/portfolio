@@ -17,7 +17,6 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
   const { mode } = ToggleMode();
   useEffect(() => {
     setTheme(mode ? dark : light);
-    //@ts-nocheck
   }, [mode]);
   const stateChange = () => {
     setMain(!main);

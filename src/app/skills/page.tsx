@@ -1,28 +1,63 @@
 "use client";
 import React, { lazy } from "react";
-import { StyledButton, StyledLabel } from "../context/component";
+import {
+  GlassContainer,
+  StyledButton,
+  StyledLabel,
+} from "../context/component";
 import Image, { StaticImageData } from "next/image";
-import Python from "../../assets/icon_programming/Python.svg"
+import Python from "../../assets/icon_programming/Python.svg";
 
 import Java from "../../assets/icon_programming/Java.svg";
-import Php from "../../assets/icon_programming/Php.svg"
-import CSS from  "../../assets/icon_programming/css.svg"
-import Html from  "../../assets/icon_programming/html.svg"
-import ReactJs from "../../assets/icon_programming/React.svg"
-import NodeJs from "../../assets/icon_programming/NodeJs.svg"
-import Javascript from "../../assets/icon_programming/Javascript.svg"
-import Golang from "../../assets/icon_programming/Go.svg"
-import Cpp from "../../assets/icon_programming/C++.svg"
-import Sql from "../../assets/icon_programming/Sql.svg"
-import Mongo from "../../assets/icon_programming/mongodb.svg"
-import Moralis from "../../assets/icon_programming/moralis.png"
-import FireBase from "../../assets/icon_programming/firebase.svg"
-import Fluter from "../../assets/icon_programming/flutter.svg"
-import Ai from "../../assets/icon_programming/ai-network.svg"
-import Kotlin from "../../assets/icon_programming/kotlin.svg"
-import Laravel from "../../assets/icon_programming/laravel.svg"
-import NextJs from "../../assets/icon_programming/next.png"
+import Php from "../../assets/icon_programming/Php.svg";
+import CSS from "../../assets/icon_programming/css.svg";
+import Html from "../../assets/icon_programming/html.svg";
+import ReactJs from "../../assets/icon_programming/React.svg";
+import NodeJs from "../../assets/icon_programming/NodeJs.svg";
+import Javascript from "../../assets/icon_programming/Javascript.svg";
+import Golang from "../../assets/icon_programming/Go.svg";
+import Grpc from "../../assets/icon_programming/grpc.png";
 
+import Cpp from "../../assets/icon_programming/C++.svg";
+import Sql from "../../assets/icon_programming/Sql.svg";
+import Mongo from "../../assets/icon_programming/mongodb.svg";
+import Moralis from "../../assets/icon_programming/moralis.png";
+import FireBase from "../../assets/icon_programming/firebase.svg";
+import Fluter from "../../assets/icon_programming/flutter.svg";
+import Ai from "../../assets/icon_programming/ai-network.svg";
+import Kotlin from "../../assets/icon_programming/kotlin.svg";
+import Laravel from "../../assets/icon_programming/laravel.svg";
+import NextJs from "../../assets/icon_programming/nextjs.svg";
+import Web3 from "../../assets/icon_programming/web3.svg";
+
+import styled from "styled-components";
+import { Container } from "react-bootstrap";
+
+const SkillsContainer = styled(Container)`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 0;
+  @media (max-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column: 2;
+  }
+  .skill {
+    width: 12%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 1020px) {
+      width: 20%;
+    }
+    @media (max-width: 768px) {
+      width: 80%;
+    }
+  }
+`;
 const Row = ({
   type,
   data,
@@ -34,29 +69,32 @@ const Row = ({
   }[];
 }) => {
   return (
-    <div className="flex flex-col ">
-      <label className="text-2xl font-semibold border-b-2 opacity-80 w-1/4 pb-2 ">
-        {type}
-      </label>
+    <Container className="flex flex-col ">
+      <StyledLabel className="heading-point">{type}</StyledLabel>
 
-      <div className="flex flex-row flex-wrap justify-center">
-        {data.map((value, key) => 
-           (
-              <StyledButton
-                className="transform hover:scale-100  motion-reduce:transform-none w-40 h-16  btn-outline-secondary  m-4 "
-                key={key.toString()}
-              >
-                <div className="flex justify-center items-center">
-                  
-                <StyledLabel className="me-2">{value.title}</StyledLabel>
-                <Image src={value.iconPath} width={30} height={40} alt={""} loading="lazy" />
-                </div>
-
-              </StyledButton>
-          )
-        )}
-      </div>
-    </div>
+      <SkillsContainer>
+        {data.map((value, key) => (
+          <GlassContainer
+            className="transform hover:scale-100  motion-reduce:transform-none skill  btn-outline-secondary  m-4  flex justify-center items-center"
+            key={key.toString()}
+          >
+            <div className="grid grid-cols-2 gap-0 w-full ">
+              <StyledLabel className=" self-center ">{value.title}</StyledLabel>
+              <Container>
+                <Image
+                  src={value.iconPath}
+                  width={30}
+                  height={40}
+                  alt={value.title}
+                  loading="lazy"
+                  className="self-center  "
+                />
+              </Container>
+            </div>
+          </GlassContainer>
+        ))}
+      </SkillsContainer>
+    </Container>
   );
 };
 const Skills = () => {
@@ -73,7 +111,7 @@ const Skills = () => {
       title: "Java",
     },
     {
-      iconPath:Javascript,
+      iconPath: Javascript,
       title: "Javascript",
     },
     {
@@ -93,7 +131,7 @@ const Skills = () => {
       title: "Reactjs",
     },
     {
-      iconPath:Laravel,
+      iconPath: Laravel,
       title: "Laravel",
     },
     {
@@ -118,12 +156,12 @@ const Skills = () => {
       title: "Moralis",
     },
     {
-      iconPath:NodeJs,
+      iconPath: NodeJs,
       title: "NodeJs",
     },
 
     {
-      iconPath: Python,
+      iconPath: Web3,
       title: "web3",
     },
     {
@@ -147,18 +185,11 @@ const Skills = () => {
       title: "Kotlin",
     },
     {
-      iconPath: Golang,
+      iconPath: Grpc,
       title: "Grpc",
     },
   ];
-  // /   const services: string[] = [
-  // /     "Backend Development",
-  // /     "Frontend Development",
-  // /     "Recat Native Development",
-  // /     "ReactJs Development",
-  // /     "Flutter Development",
-  // /     "Python Development",
-  // /   ];
+
   return (
     <div id="Skills" className=" ms-3  ext-lg h-min-screen ">
       <Row type={"Skills"} data={skills} />

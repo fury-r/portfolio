@@ -12,14 +12,18 @@ import LeylinesImage2 from "../../assets/projects/leylines/image_11.png";
 import AgileSprint from "../../assets/projects/agilemanagement/image_9.jpg";
 import AgileSprintImage1 from "../../assets/projects/agilemanagement/image_6.png";
 import AgileSprintImage2 from "../../assets/projects/agilemanagement/image_2.png";
-import { GlassContainer, StyledButton, StyledLabel } from "../context/component";
-import "./css/style.css"
+import {
+  GlassContainer,
+  StyledButton,
+  StyledLabel,
+} from "../context/component";
+import "./css/style.css";
 import { useState } from "react";
 import { MenuItem } from "./types";
 import { RowItem } from "./components/RowItem";
 import { Modal } from "../component/Modal";
 import { ModalChildren } from "./components/ModalChildren";
-
+import { useModalContext } from "../context/ModalContext";
 
 const ProjectsMenu: MenuItem[] = [
   {
@@ -29,10 +33,11 @@ const ProjectsMenu: MenuItem[] = [
         Lifeline, a cross-platform healthcare application, seamlessly connects patients, doctors, and other healthcare professionals, revolutionizing the way healthcare is delivered and experienced
         `,
     images: [Lifeline],
-    iconImage:Lifeline,
+    iconImage: LifelineImage2,
     subItems: [
       {
-        title:"Lifeline bridges the gap between healthcare providers and patients, transforming the healthcare experience through technology."
+        title:
+          "Lifeline bridges the gap between healthcare providers and patients, transforming the healthcare experience through technology.",
       },
       {
         title: "Key Features:",
@@ -51,13 +56,13 @@ const ProjectsMenu: MenuItem[] = [
             Nodejs`.split("\n"),
       },
     ],
+    techStack: ["ReactJS", "CSS", "Firebase", "NodeJs", "Express", "Sockets"],
   },
   {
-    title:
-      "Project Management: Streamlining Collaboration and Enhancing Productivity",
-    desc: `Project Management Software: Streamlining Collaboration and Enhancing Productivity`,
+    title: "Project Management Web application",
+    desc: ` Streamlining Collaboration and Enhancing Productivity`,
     images: [AgileSprint, AgileSprintImage1, AgileSprintImage2],
-    iconImage:AgileSprint,
+    iconImage: AgileSprintImage2,
     subItems: [
       {
         title: "Key Features:",
@@ -78,10 +83,18 @@ const ProjectsMenu: MenuItem[] = [
             Solidity`.split("\n"),
       },
     ],
+    techStack: [
+      "React Typescript",
+      "Python",
+      "Python flask",
+      "Mongodb",
+      "CSS",
+      "Sockets",
+    ],
   },
   {
-    title: "Leylines: A Web3 Social Media Revolution",
-    desc: `Leylines, a Web3-powered social media application, empowers users with ownership, privacy, and creative freedom. Share content, manage connections, and mint your photos into NFTs, all within a secure and decentralized ecosystem.`,
+    title: "Leylines: A Web3 Social Media",
+    desc: `Leylines, a Web3-powered social media application, empowers users with ownership, privacy, and creative freedom`,
     subItems: [
       {
         title: "Key Features:",
@@ -103,28 +116,31 @@ const ProjectsMenu: MenuItem[] = [
       },
     ],
     images: [Leylines, LeylinesImage1, LeylinesImage2],
-    iconImage:Leylines
+    iconImage: LeylinesImage2,
+    techStack: [
+      "ReactJS",
+      "CSS",
+      "TailwindCSS",
+      "Python",
+      "Python Flask",
+      "Mongodb",
+      "Web3",
+      "MoralisDb",
+      "Sockets",
+    ],
   },
-  
 ];
 
-
 const Project = () => {
-  const [selected,setSelected]=useState<number >(-1)
-
-  return ( 
+  const { setData } = useModalContext();
+  const handleSetData = (data: MenuItem | null) => setData!(data);
+  return (
     <Container>
-
-      <Modal isOpen={selected>=0} setIsOpen={()=>setSelected(-1)} title={selected>=0? ProjectsMenu[selected].title:''}>
-        {
-          selected>=0?<ModalChildren {...ProjectsMenu[selected]}/>:<></>
-        }
-      </Modal>
-       <div className="grid grid-cols-2  gap-2 ">
-      {ProjectsMenu.map((item,index) => (
-        <RowItem pos={index} setSelected={setSelected} {...item} />
-      ))}
-    </div>
+      <Container className="grid grid-cols-1 ">
+        {ProjectsMenu.map((item, index) => (
+          <RowItem pos={index} setSelected={handleSetData} {...item} />
+        ))}
+      </Container>
     </Container>
   );
 };

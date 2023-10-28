@@ -2,6 +2,7 @@ import {
   GlassContainer,
   StyledButton,
   StyledLabel,
+  ThemeContainer,
 } from "../../context/component";
 import Image from "next/image";
 import { MenuItem } from "../types";
@@ -108,10 +109,10 @@ const StyledProject = styled.li`
 
   .project-overline {
     margin: 10px 0;
-    color: var(--green);
+    color: var(--color);
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
-    font-weight: 400;
+    font-weight: 600;
   }
 
   .project-title {
@@ -148,8 +149,8 @@ const StyledProject = styled.li`
     z-index: 2;
     padding: 25px;
     border-radius: var(--border-radius);
-    background-color: ${({ theme }) => theme?.background_color};
-    color: var(--light-slate);
+    background-color: ${({ theme }) => theme?.secondaryColor};
+    color: var(--color);
     font-size: var(--fz-lg);
 
     @media (max-width: 768px) {
@@ -234,7 +235,7 @@ const StyledProject = styled.li`
   .color-grey {
     width: 100%;
     height: 100%;
-    background-color: var(--green);
+    background-color: var(--shade);
     border-radius: var(--border-radius);
     vertical-align: middle;
 
@@ -266,11 +267,12 @@ const StyledProject = styled.li`
     }
   }
   .project-image {
-    ${({ theme }) => theme?.mixins?.boxShadow};
+    /* ${({ theme }) => theme?.mixins?.boxShadow}; */
     grid-column: 6 / -1;
     grid-row: 1 / -1;
     position: relative;
     z-index: 1;
+    border-radius: var(--border-radius);
 
     @media (max-width: 768px) {
       grid-column: 1 / -1;
@@ -303,12 +305,12 @@ export const RowItem = (
       <div>
         <h3 className="project-overline">{props.title}</h3>
 
-        <div
+        <ThemeContainer
           className="project-description"
           // dangerouslySetInnerHTML={{ __html: props.desc!}}
         >
           {props.desc}
-        </div>
+        </ThemeContainer>
 
         {(props.techStack || []).length && (
           <ul className="project-tech-list">
@@ -339,7 +341,7 @@ export const RowItem = (
     </div>
 
     <div
-      className="project-image  color-grey"
+      className="project-image  color-grey rounded-[10px]"
       onClick={() =>
         props.setSelected({
           ...omit(props, ["pos", "setSelected"]),

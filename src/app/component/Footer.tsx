@@ -8,7 +8,6 @@ const MainFooter = () => {
         <Container className="p-5 flex justify-content-center">
           <Row xs={1} xl={1}>
             <label className="footer ">
-              {" "}
               Designed & built by Rajeev Dessai.
             </label>
           </Row>

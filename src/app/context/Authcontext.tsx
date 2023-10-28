@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { ReactNode, useContext, useEffect, useState } from "react";
 import { ToggleMode } from "./component";
 import { dark, light } from "./theme";
@@ -10,13 +10,12 @@ const AuthContext = React.createContext<{
   setTheme: React.Dispatch<React.SetStateAction<any>>;
 } | null>(null);
 
-
 export const ServerProvider = ({ children }: { children: ReactNode }) => {
   const [main, setMain] = useState(false);
-  const [theme, setTheme] = useState({});
+  const [theme, setTheme] = useState(light);
   const { mode } = ToggleMode();
   useEffect(() => {
-    setTheme(mode ? dark : light);
+    setTheme(main ? dark : light);
   }, [mode]);
   const stateChange = () => {
     setMain(!main);

@@ -4,6 +4,7 @@ import {
   GlassContainer,
   StyledButton,
   StyledLabel,
+  ThemeContainer,
 } from "../context/component";
 import Image, { StaticImageData } from "next/image";
 import Python from "../../assets/icon_programming/Python.svg";
@@ -27,8 +28,10 @@ import Fluter from "../../assets/icon_programming/flutter.svg";
 import Ai from "../../assets/icon_programming/ai-network.svg";
 import Kotlin from "../../assets/icon_programming/kotlin.svg";
 import Laravel from "../../assets/icon_programming/laravel.svg";
-import NextJs from "../../assets/icon_programming/nextjs.svg";
+import NextJs from "../../assets/icon_programming/next-js.svg";
 import Web3 from "../../assets/icon_programming/web3.svg";
+import Git from "../../assets/icon_programming/Git.svg";
+import TailwindCSS from "../../assets/icon_programming/tailwind-css.svg";
 
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
@@ -69,13 +72,13 @@ const Row = ({
   }[];
 }) => {
   return (
-    <Container className="flex flex-col ">
+    <Container className="flex flex-col  ">
       <StyledLabel className="heading-point">{type}</StyledLabel>
 
       <SkillsContainer>
         {data.map((value, key) => (
-          <GlassContainer
-            className="transform hover:scale-100  motion-reduce:transform-none skill  btn-outline-secondary  m-4  flex justify-center items-center"
+          <ThemeContainer
+            className="transform hover:scale-100  motion-reduce:transform-none skill  btn-outline-secondary w-44 h-14  p-2 rounded-[10px] m-4  flex justify-center items-center"
             key={key.toString()}
           >
             <div className="grid grid-cols-2 gap-0 w-full ">
@@ -91,7 +94,7 @@ const Row = ({
                 />
               </Container>
             </div>
-          </GlassContainer>
+          </ThemeContainer>
         ))}
       </SkillsContainer>
     </Container>
@@ -188,11 +191,19 @@ const Skills = () => {
       iconPath: Grpc,
       title: "Grpc",
     },
+    {
+      iconPath: Git,
+      title: "Git",
+    },
+    {
+      iconPath: TailwindCSS,
+      title: "Tailwind",
+    },
   ];
 
   return (
     <div id="Skills" className=" ms-3  ext-lg h-min-screen ">
-      <Row type={"Skills"} data={skills} />
+      <Row type={"Tech Knowledge"} data={skills} />
     </div>
   );
 };

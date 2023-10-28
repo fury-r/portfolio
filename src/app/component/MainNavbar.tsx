@@ -2,19 +2,23 @@
 import React, { useCallback, useState } from "react";
 import {
   AnimatedStyledLabel,
+  StyledButton,
+  StyledLabel,
   StyledNavItem,
   StyledNavLink,
   StyledNavbar,
 } from "../context/component";
 import { FiSettings } from "react-icons/fi";
 import { LuContact } from "react-icons/lu";
-import { BiHomeAlt, BiInfoCircle } from "react-icons/bi";
+import { BiHomeAlt, BiInfoCircle, BiMoon, BiSun } from "react-icons/bi";
 import { AiOutlineProject } from "react-icons/ai";
 import { FaCaretDown } from "react-icons/fa";
 
-import { Navbar } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import { Routes } from "../Routes/routes";
 import { useModalContext } from "../context/ModalContext";
+import "../scss/navbar.css";
+import { useAuth } from "../context/Authcontext";
 
 const NAV_ITEMS: {
   title: string;
@@ -47,52 +51,95 @@ const NAV_ITEMS: {
     routes: Routes.contact.path,
   },
 ];
-
+let data = 0;
 export const MainNavbar = () => {
   const [lastScroll, setLastScroll] = useState(-1);
   const [showNavbar, setShowNavbar] = useState(true);
   const { data } = useModalContext();
+  const [scrollPosition, setSrollPosition] = useState<number>(0);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { stateChange, main, theme } = useAuth();
 
-  window.addEventListener(
-    "scroll",
-    useCallback(
-      () => () => {
-        var scrollTop = window.scrollY || document.documentElement.scrollTop;
-        if (scrollTop > lastScroll) {
-          setShowNavbar(false);
-        } else {
-          setShowNavbar(true);
-        }
-        setLastScroll(scrollTop);
-      },
-      []
-    )
-  );
+  const handleScroll = useCallback(async () => {
+    console.log("CALLING");
+    const position = window.scrollY;
+    if (scrollPosition <= position && open) {
+      setOpen(false);
+    }
+    if (scrollPosition != position) {
+      // setShowNavbar(scrollPosition > position || position == 0);
+
+      setSrollPosition(position);
+    }
+  }, [window, scrollPosition]);
+
+  React.useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  console.log(theme.secondaryColor);
   return (
     showNavbar && (
       <StyledNavbar
         collapseOnSelect
-        color="faded"
         fixed="top"
         expand="sm"
-        variant="white"
+        variant="dark"
+        data-bs-theme="dark"
         className={
-          "justify-content-end sticky-top w-full " +
+          ` sticky-top w-full  ${window.scrollY > 1 ? "shadow-md " : ""} p-3 ` +
           (data !== null ? "z-0" : "z-10")
         }
+        style={{
+          backgroundColor: theme.secondaryColor,
+        }}
       >
-        <Navbar.Toggle aria-controls="responsive-navbar-nav">
-          <FaCaretDown />
-        </Navbar.Toggle>
-        <Navbar.Collapse
-          id="responsive-navbar-nav "
-          className="flex justify-end"
-        >
-          <div className="flex w-6/12 ">
+        <Navbar.Brand href="#home">
+          <StyledLabel>Rajeev Dessai</StyledLabel>
+        </Navbar.Brand>
+
+        <div className="flex items-center">
+          <StyledButton
+            className={
+              "rounded-[30px] shadow-md h-9 w-9 self-center  me-2 " +
+              (main ? "rotate-icon" : "rotate-icon")
+            }
+            onClick={() => stateChange(!main)}
+          >
+            {main ? <BiSun /> : <BiMoon />}
+          </StyledButton>
+          <Navbar.Toggle
+            aria-controls="responsive-navbar-nav"
+            className="border-none"
+            onClick={() => setOpen((prev) => !prev)}
+          >
+            <div className={"nav-icon4 " + (open ? "  open " : "")}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </Navbar.Toggle>
+        </div>
+        <Navbar.Collapse id="responsive-navbar-nav  ">
+          <Nav
+            className={open ? "" : " absolute right-6"}
+            activeKey={location.pathname}
+          >
             {NAV_ITEMS.map((value, index) => (
-              <StyledNavItem key={index.toString()}>
+              <StyledNavItem
+                key={index.toString()}
+                background={open && "transparent"}
+              >
                 <StyledNavLink href={value.routes}>
-                  <div className="flex  justify-between items-center">
+                  <div
+                    className={
+                      "flex   items-center " +
+                      (open ? "justify-center" : "justify-between")
+                    }
+                  >
                     <AnimatedStyledLabel className="mr-2">
                       {value.title}
                     </AnimatedStyledLabel>
@@ -101,7 +148,7 @@ export const MainNavbar = () => {
                 </StyledNavLink>
               </StyledNavItem>
             ))}
-          </div>
+          </Nav>
         </Navbar.Collapse>
       </StyledNavbar>
     )

@@ -33,8 +33,8 @@ const StyledInputGroup = styled.div`
             box-sizing: border-box;
             line-height: 30px;
             font-size: 14px;
-            border: 0;
-            background: none;
+            border: none;
+            background: var(--secondary-color);
             border: 1px solid #ccc;
             outline: none;
             width: 100%;
@@ -53,8 +53,8 @@ const StyledInputGroup = styled.div`
               }
             }
             &:focus {
-              background-color: #f7f7f72f;
-              border: 2px dotted black;
+              /* background-color: #f7f7f72f; */
+              border: 1px dotted black;
             }
           }
           label {

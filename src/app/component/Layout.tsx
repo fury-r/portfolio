@@ -1,21 +1,39 @@
 import React from "react";
-import { Themebody } from "../context/component";
+import { Globalstyle, Themebody } from "../context/component";
 import MainFooter from "./Footer";
 import Contact from "./Contact";
 import { MainNavbar } from "./MainNavbar";
+import { ThemeProvider } from "styled-components";
+import { ModalProvider } from "../context/ModalContext";
+import { ModalPortal } from "./ModalPortal";
+import { useAuth } from "../context/Authcontext";
+import { dark, light } from "../context/theme";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <Themebody>
-      <MainNavbar />
-      <div className="min-h-screen flex flex-col ">
-        <div className="h-3/4">{children}</div>
+  const { main } = useAuth();
+  const themeMode = main ? dark : light;
 
-        <div className="h-1/4">
-          <Contact />
-          <MainFooter />
-        </div>
-      </div>
-    </Themebody>
+  return (
+    <ThemeProvider theme={themeMode}>
+      <ModalProvider>
+        <ModalPortal />
+        <Globalstyle />
+        <Themebody
+          onScroll={(e: { currentTarget: { scrollTop: any } }) =>
+            console.log(e.currentTarget.scrollTop)
+          }
+        >
+          <MainNavbar />
+          <div className="flex flex-col border-black min-h-screen">
+            <div className=""> {children}</div>
+
+            <div className=" ">
+              <Contact />
+              <MainFooter />
+            </div>
+          </div>
+        </Themebody>{" "}
+      </ModalProvider>
+    </ThemeProvider>
   );
 };

@@ -22,8 +22,8 @@ ${StyledVariables};
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: ${({ theme }: props) => theme.background_color};
-    color: ${({ theme }: props) => theme.color};
+  background-color: var(--secondary-color);
+    color: var(--color);
 
     .heading-point {
     display: flex;
@@ -32,14 +32,14 @@ ${StyledVariables};
     margin: 10px 0 40px;
     font-size: clamp(26px, 5vw, var(--fz-heading));
     white-space: nowrap;
-    text-decoration: underline var(---green);
+    text-decoration: underline var(--shade);
 
     &:before {
       position: relative;
       bottom: 4px;
       counter-increment: section;
       margin-right: 10px;
-      color: var(--green);
+      color: var(--shade);
       font-family: var(--font-mono);
       font-size: clamp(var(--fz-md), 3vw, var(--fz-xl));
       content: '0' counter(section) '.';
@@ -59,13 +59,12 @@ export const MainLayout = styled.div`
   height: 100%;
 `;
 export const StyledButton = styled.button`
-  color: ${({ theme }: props) => theme.color};
+  color: var(--color);
 
   outline: 0;
   border: 0;
   padding: 10px;
-  border-radius: 8px;
-  background: ${({ theme }: props) => theme.background};
+  background: var(--primary-color);
 
   &:hover {
     border: none;
@@ -80,10 +79,8 @@ export const StyledButton = styled.button`
   } */
 `;
 
-export const Container = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+export const ThemeContainer = styled.div`
+  background-color: var(--primary-color);
   text-decoration: none;
 `;
 export const StyledNavLink = styled<any>(Link)`
@@ -91,10 +88,10 @@ export const StyledNavLink = styled<any>(Link)`
   padding: 15px;
   text-decoration: none;
   color: ${({ theme }: props) => theme.theme_text};
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  margin: 0 10px;
   position: relative;
+  align-items: center;
   z-index: 1;
   &:hover {
     color: ${({ theme }: props) => theme.theme_text};
@@ -104,25 +101,16 @@ export const StyledNavLink = styled<any>(Link)`
 `;
 
 export const StyledNavItem = styled<any>(Nav.Item)`
-  &:hover {
-    animation: ripple1 1.4s ease forwards;
-    background-color: transparent;
-    color: ${({ theme }: props) => theme.theme_text};
-  }
-  @keyframes ripple1 {
-    0% {
-      border-radius: 100%;
-    }
-    100% {
-      border-radius: 10px;
-      box-shadow: ${({ theme }: props) => theme.bordershadow};
-    }
-  }
+  background-color: ${({ background }) =>
+    background || ` var(--primary-color)`};
+  color: var(--text-color);
+  border-radius: 10px;
+  margin-right: 15px;
 `;
 
 export const StyledNavbar = styled<any>(Navbar)`
-  background: ${({ theme }: props) => theme.background_color};
-  color: ${({ theme }: props) => theme.color};
+  background-color: var(--primary-color);
+  color: var(--color);
 `;
 
 export const StyledText = styled<any>(FloatingLabel)`
@@ -135,20 +123,20 @@ export const StyledCard = styled<any>(Card)`
   border: none;
   width: 70%;
   color: ${({ theme }: props) => theme.theme_text};
-  background: ${({ theme }: props) => theme.background};
+  background: var(--secondary-color);
   box-shadow: ${({ theme }: props) => theme.bordershadow};
 `;
 export const StyledCard2 = styled<any>(Card)`
-  color: ${({ theme }: props) => theme.color};
+  color: var(--color);
 
   outline: 0;
   padding: 18px;
   border-radius: 8px;
-  background: ${({ theme }: props) => theme.background};
+  background: var(--secondary-color);
 
   &:hover {
     animation: ripple 1.4s ease forwards;
-    color: ${({ theme }: props) => theme.color};
+    color: var(--color);
   }
   @keyframes ripple {
     0% {
@@ -161,24 +149,24 @@ export const StyledCard2 = styled<any>(Card)`
 
 export const Label = styled.label`
   border-radius: 10px;
-  background: ${({ theme }: props) => theme.background};
+  background: var(--secondary-color);
 
   box-shadow: ${({ theme }: props) => theme.bordershadow};
 `;
 export const StyledLabel = styled<any>(FloatingLabel)`
   font-family: "Poppins", sans-serif;
-  color: ${({ theme }: props) => theme.color};
+  color: var(--color);
 `;
 export const AnimatedStyledLabel = styled<any>(FloatingLabel)`
   font-family: "Poppins", sans-serif;
-  color: ${({ theme }: props) => theme.color};
+  color: var(--color);
   text-transform: none;
   &::after {
     content: "";
     display: block;
     width: 0;
     height: 1px;
-    background: ${({ theme }: props) => theme.color};
+    background: var(--color);
     transition: width 0.3s;
   }
 
@@ -187,12 +175,20 @@ export const AnimatedStyledLabel = styled<any>(FloatingLabel)`
 
     //transition: width .3s;
   }
+  &:active::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 1px;
+    background: var(--color);
+    width: 100%;
+  }
 `;
 export const GlassContainer = styled.div`
-  background-color: ${({ theme }: props) => theme.background};
+  background-color: var(--secondary-color);
   border-radius: 15px;
 
-  color: ${({ theme }: props) => theme.color};
+  color: var(--color);
   padding: 10px;
   &:hover {
     animation: hoverAnimate 1s forwards;
@@ -223,7 +219,7 @@ export const navLabel = styled.label`
     transition: opacity 0.35s, transform 0.35s;
     -webkit-transform: scale(0, 1);
     transform: scale(0, 1);
-    color: ${({ theme }: props) => theme.color};
+    color: var(--color);
   }
 
   .effect-underline:hover:after {
@@ -236,7 +232,9 @@ export const Arrow = styled.main`
   border-bottom: 5px solid ${({ theme }: props) => theme.theme_text};
   border-right: 5px solid ${({ theme }: props) => theme.theme_text};
 `;
-export const Themebody = styled.main<any>`
+export const Themebody = styled.div<any>`
+  height: 100%;
+  width: 100%;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -244,11 +242,11 @@ export const Themebody = styled.main<any>`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: ${({ theme }: props) => theme.theme_text};
-  background: ${({ theme }: props) => theme.background_color};
+  background: var(--secondary-color);
   transition: all 0.5s linear;
 `;
 export const ParallaxLayerTheme = styled<any>(Parallax)`
-  background: ${({ theme }: props) => theme.background_color};
+  background: var(--secondary-color);
 `;
 
 /* 
@@ -275,9 +273,9 @@ export const ToggleMode = () => {
   };
   useEffect(() => {
     const localtheme = Boolean(localStorage.getItem("mode"));
-    localtheme ? setMode(localtheme) : setMode(true);
+    localtheme ? setMode(localtheme) : setMode(false);
     setMountedComponent(true);
-    setMain(localtheme ? dark : light);
+    setMain(light);
   }, []);
   return { mode, themeToggler, mountedComponent, main };
 };

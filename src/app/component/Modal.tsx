@@ -19,7 +19,7 @@ export const Modal = ({ isOpen, setIsOpen, children, title }: ModalProps) => {
           as="div"
           className="fixed  inset-0 z-30 flex items-center justify-center  h-fit mb-20 "
         >
-          <div className="flex flex-col  text-center justify-center    border-blue-500 border-2">
+          <div className="flex flex-col  text-center justify-center  ">
             <Dialog.Overlay />
             <div
               className="fixed inset-0 transition-opacity  "
@@ -59,7 +59,7 @@ export const Modal = ({ isOpen, setIsOpen, children, title }: ModalProps) => {
               </span>
 
               <div
-                className="inline-block  bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full  border-red-500 border-2"
+                className="inline-block  bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full "
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby="modal-headline"

@@ -1,8 +1,8 @@
 import { css } from "styled-components"
 const button = css`
-  color: var(--green);
+  color: var(--shade);
   background-color: transparent;
-  border: 1px solid var(--green);
+  border: 1px solid var(--shade);
   border-radius: var(--border-radius);
   font-size: var(--fz-xs);
   font-family: var(--font-mono);
@@ -14,7 +14,7 @@ const button = css`
   &:hover,
   &:focus-visible {
     outline: none;
-    box-shadow: 4px 4px 0 0 var(--green);
+    box-shadow: 4px 4px 0 0 var(--shade);
     transform: translate(-5px, -5px);
   }
   &:after {
@@ -23,8 +23,11 @@ const button = css`
 `;
 
 export const dark = {
-    background_color: "#183D3D",
+    primaryColor: "#000000",
+    secondaryColor:"#222222",
     color: "whitesmoke",
+    accentColor:"#FFA500",
+
     box_shadow_1: "#183D3D",
     box_shadow_2: "#183D3D",
     border_shadow_1: "#191919",
@@ -59,7 +62,7 @@ export const dark = {
       
           &:hover,
           &:focus-visible {
-            color: var(--green);
+            color: var(--shade);
             outline: 0;
           }
         `,
@@ -67,18 +70,18 @@ export const dark = {
         inlineLink: css`
           display: inline-block;
           position: relative;
-          color: var(--green);
+          color: var(--shade);
           transition: var(--transition);
       
           &:hover,
           &:focus-visible {
-            color: var(--green);
+            color: var(--shade);
             outline: 0;
             &:after {
               width: 100%;
             }
             & > * {
-              color: var(--green) !important;
+              color: var(--shade) !important;
               transition: var(--transition);
             }
           }
@@ -89,7 +92,7 @@ export const dark = {
             height: 1px;
             position: relative;
             bottom: 0.37em;
-            background-color: var(--green);
+            background-color: var(--shade);
             opacity: 0.5;
             @media (prefers-reduced-motion: no-preference) {
               transition: var(--transition);
@@ -100,9 +103,9 @@ export const dark = {
         button,
       
         smallButton: css`
-          color: var(--green);
+          color: var(--shade);
           background-color: transparent;
-          border: 1px solid var(--green);
+          border: 1px solid var(--shade);
           border-radius: var(--border-radius);
           padding: 0.75rem 1rem;
           font-size: var(--fz-xs);
@@ -114,7 +117,7 @@ export const dark = {
           &:hover,
           &:focus-visible {
             outline: none;
-            box-shadow: 3px 3px 0 0 var(--green);
+            box-shadow: 3px 3px 0 0 var(--shade);
             transform: translate(-4px, -4px);
           }
           &:after {
@@ -123,9 +126,9 @@ export const dark = {
         `,
       
         bigButton: css`
-          color: var(--green);
+          color: var(--shade);
           background-color: transparent;
-          border: 1px solid var(--green);
+          border: 1px solid var(--shade);
           border-radius: var(--border-radius);
           padding: 1.25rem 1.75rem;
           font-size: var(--fz-sm);
@@ -137,7 +140,7 @@ export const dark = {
           &:hover,
           &:focus-visible {
             outline: none;
-            box-shadow: 4px 4px 0 0 var(--green);
+            box-shadow: 4px 4px 0 0 var(--shade);
             transform: translate(-5px, -5px);
           }
           &:after {
@@ -168,7 +171,7 @@ export const dark = {
               content: '▹';
               position: absolute;
               left: 0;
-              color: var(--green);
+              color: var(--shade);
             }
           }
         `,
@@ -182,8 +185,10 @@ export const dark = {
 
 }
 export const light = {
-    background_color: "#ebebed",
+    primaryColor: "whitesmoke",
+    secondaryColor:"#FFFFF",
     color: "black",
+    accentColor:"#FFA500",
     box_shadow_1: "#b1b1b5",
     box_shadow_2: "#efeff5",
     border_shadow_1: "#b1b1b5",
@@ -194,8 +199,150 @@ export const light = {
     buttonshadow: "   -12px -12px 24px #c8c8c9,12px 12px 24px #ffffff",
     bordershadow: " -15px -15px 30px #c8c8c9, 15px 15px 30px #ffffff",
     textshadow: " -6px 6px 15px #c8c8c9, 6px -6px 15px #ffffff",
-    text_shadow: "#ebebed"
-
+    text_shadow: "#ebebed",
+    mixins :{
+      flexCenter: css`
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      `,
+    
+      flexBetween: css`
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      `,
+    
+      link: css`
+        display: inline-block;
+        text-decoration: none;
+        text-decoration-skip-ink: auto;
+        color: inherit;
+        position: relative;
+        transition: var(--transition);
+    
+        &:hover,
+        &:focus-visible {
+          color: var(--shade);
+          outline: 0;
+        }
+      `,
+    
+      inlineLink: css`
+        display: inline-block;
+        position: relative;
+        color: var(--shade);
+        transition: var(--transition);
+    
+        &:hover,
+        &:focus-visible {
+          color: var(--shade);
+          outline: 0;
+          &:after {
+            width: 100%;
+          }
+          & > * {
+            color: var(--shade) !important;
+            transition: var(--transition);
+          }
+        }
+        &:after {
+          content: '';
+          display: block;
+          width: 0;
+          height: 1px;
+          position: relative;
+          bottom: 0.37em;
+          background-color: var(--shade);
+          opacity: 0.5;
+          @media (prefers-reduced-motion: no-preference) {
+            transition: var(--transition);
+          }
+        }
+      `,
+    
+      button,
+    
+      smallButton: css`
+        color: var(--shade);
+        background-color: transparent;
+        border: 1px solid var(--shade);
+        border-radius: var(--border-radius);
+        padding: 0.75rem 1rem;
+        font-size: var(--fz-xs);
+        font-family: var(--font-mono);
+        line-height: 1;
+        text-decoration: none;
+        transition: var(--transition);
+    
+        &:hover,
+        &:focus-visible {
+          outline: none;
+          box-shadow: 3px 3px 0 0 var(--shade);
+          transform: translate(-4px, -4px);
+        }
+        &:after {
+          display: none !important;
+        }
+      `,
+    
+      bigButton: css`
+        color: var(--shade);
+        background-color: transparent;
+        border: 1px solid var(--shade);
+        border-radius: var(--border-radius);
+        padding: 1.25rem 1.75rem;
+        font-size: var(--fz-sm);
+        font-family: var(--font-mono);
+        line-height: 1;
+        text-decoration: none;
+        transition: var(--transition);
+    
+        &:hover,
+        &:focus-visible {
+          outline: none;
+          box-shadow: 4px 4px 0 0 var(--shade);
+          transform: translate(-5px, -5px);
+        }
+        &:after {
+          display: none !important;
+        }
+      `,
+    
+      boxShadow: css`
+        box-shadow: 0 10px 30px -15px var(--navy-shadow);
+        transition: var(--transition);
+    
+        &:hover,
+        &:focus-visible {
+          box-shadow: 0 20px 30px -15px var(--navy-shadow);
+        }
+      `,
+    
+      fancyList: css`
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        font-size: var(--fz-lg);
+        li {
+          position: relative;
+          padding-left: 30px;
+          margin-bottom: 10px;
+          &:before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--shade);
+          }
+        }
+      `,
+    
+      resetList: css`
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      `,
+    }
 }
 
 export const blackandwhite = {

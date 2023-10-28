@@ -5,7 +5,7 @@ import Oqton from "../../assets/company/DarkOqton.svg";
 import CtrlSave from "../../assets/company/ctrlsave-white.png";
 import Image from "next/image";
 import Vtech from "../../assets/company/vtech.png";
-import { StyledLabel } from "../context/component";
+import { StyledLabel, ThemeContainer } from "../context/component";
 
 const StyledContainer = styled(Container)`
   display: grid;
@@ -64,18 +64,18 @@ export const Companies = () => {
 
       <StyledContainer>
         {companies.map((company) => (
-          <Container className="flex flex-col items-center ">
+          <ThemeContainer className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[350px] ">
             <Image
-              className="img self-center "
+              className="img relative top-[-10px] text-slate-950 "
               src={company.image}
               alt={company.name}
               onClick={() => window.open(company.site)}
             />
-            <StyledLabel className="text-xl whitespace-nowrap font-bold">
+            <StyledLabel className="text-lg whitespace-nowrap font-bold">
               {company.role}
             </StyledLabel>
             <StyledLabel className="italic">{company.duration}</StyledLabel>
-          </Container>
+          </ThemeContainer>
         ))}
       </StyledContainer>
     </Container>

@@ -1,21 +1,21 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { StyledLabel } from "../context/component";
+import { StyledLabel, ThemeContainer } from "../context/component";
 const About = () => {
   return (
     <Container className="flex flex-col h-[80vh]  items-center w-[70rem] ">
       <StyledLabel className="heading-point">About Me</StyledLabel>
 
       <div className="flex flex-col items-start justify-between h-4/5">
-        <Container className="flex flex-row justify-between h-1/2">
+        <Container className="flex flex-row justify-between h-fit">
           <div className="flex justify-between items-end h-14 w-full ">
             <StyledLabel className="flex text-lg">This is it.</StyledLabel>
 
             <div className="bg-black w-11/12 h-[0.7px] mb-2 "></div>
           </div>
         </Container>
-        <Container className="bg-white mt-2 p-4 shadow-md rounded-lg flex flex-col items-center">
-          <StyledLabel className=" text-black line leading-8 tracking-wide ">
+        <ThemeContainer className=" mt-2 p-4  rounded-[10px] flex flex-col items-center">
+          <StyledLabel className="  line leading-8 tracking-wide ">
             <ul>
               <li>
                 I am a skilled and experienced software engineer with a
@@ -50,7 +50,7 @@ const About = () => {
               </li>
             </ul>
           </StyledLabel>
-        </Container>
+        </ThemeContainer>
         <div className="bg-black w-5/12 h-[0.7px] mt-6 self-center"></div>
       </div>
     </Container>

@@ -51,10 +51,7 @@ const NAV_ITEMS: {
     routes: Routes.contact.path,
   },
 ];
-let data = 0;
 export const MainNavbar = () => {
-  const [lastScroll, setLastScroll] = useState(-1);
-  const [showNavbar, setShowNavbar] = useState(true);
   const { data } = useModalContext();
   const [scrollPosition, setSrollPosition] = useState<number>(0);
   const [open, setOpen] = useState(false);
@@ -65,92 +62,103 @@ export const MainNavbar = () => {
     console.log("CALLING");
     const position = window.scrollY;
     if (scrollPosition <= position && open) {
-      setOpen(false);
+      document.getElementById("nav")!.style.top = "0px";
     }
     if (scrollPosition != position) {
-      // setShowNavbar(scrollPosition > position || position == 0);
-
+      if (position > scrollPosition || position == 0) {
+        document.getElementById("nav")!.style.top = "-100px";
+      } else {
+        document.getElementById("nav")!.style.top = "0px";
+      }
       setSrollPosition(position);
     }
   }, [window, scrollPosition]);
 
-  React.useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-  console.log(theme.secondaryColor);
+  window.addEventListener("scroll", handleScroll);
+  const locationpath = location.pathname
+    .split("/")
+    .at(location.pathname.split("/").length - 1);
+  console.log(locationpath?.length);
   return (
-    showNavbar && (
-      <StyledNavbar
-        collapseOnSelect
-        fixed="top"
-        expand="sm"
-        variant="dark"
-        data-bs-theme="dark"
-        className={
-          ` sticky-top w-full  ${window.scrollY > 1 ? "shadow-md " : ""} p-3 ` +
-          (data !== null ? "z-0" : "z-10")
-        }
-        style={{
-          backgroundColor: theme.secondaryColor,
-        }}
-      >
-        <Navbar.Brand href="#home">
-          <StyledLabel>Rajeev Dessai</StyledLabel>
-        </Navbar.Brand>
+    <StyledNavbar
+      collapseOnSelect
+      fixed="top"
+      expand="sm"
+      variant="dark"
+      data-bs-theme="dark"
+      className={
+        ` sticky-top w-full  ${window.scrollY > 1 ? "shadow-md " : ""} p-3 ` +
+        (data !== null ? "z-0" : "z-10")
+      }
+      style={{
+        backgroundColor: theme.secondaryColor,
+      }}
+      id="nav"
+    >
+      <Navbar.Brand href="#home">
+        <StyledLabel>Rajeev Dessai</StyledLabel>
+      </Navbar.Brand>
 
-        <div className="flex items-center">
-          <StyledButton
-            className={
-              "rounded-[30px] shadow-md h-9 w-9 self-center  me-2 " +
-              (main ? "rotate-icon" : "rotate-icon")
-            }
-            onClick={() => stateChange()}
-          >
-            {main ? <BiSun /> : <BiMoon />}
-          </StyledButton>
-          <Navbar.Toggle
-            aria-controls="responsive-navbar-nav"
-            className="border-none"
-            onClick={() => setOpen((prev) => !prev)}
-          >
-            <div className={"nav-icon4 " + (open ? "  open " : "")}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </Navbar.Toggle>
-        </div>
-        <Navbar.Collapse id="responsive-navbar-nav  ">
-          <Nav
-            className={open ? "" : " absolute right-6"}
-            activeKey={location.pathname}
-          >
-            {NAV_ITEMS.map((value, index) => (
-              <StyledNavItem
-                key={index.toString()}
-                background={open && "transparent"}
-              >
-                <StyledNavLink href={value.routes}>
-                  <div
+      <div className="flex items-center">
+        <StyledButton
+          className={
+            "rounded-[30px] shadow-md h-9 w-9 self-center  me-2 " +
+            (main ? "rotate-icon" : "rotate-icon")
+          }
+          onClick={() => stateChange()}
+        >
+          {main ? <BiSun /> : <BiMoon />}
+        </StyledButton>
+        <Navbar.Toggle
+          aria-controls="responsive-navbar-nav"
+          className="border-none"
+          onClick={() => setOpen((prev) => !prev)}
+        >
+          <div className={"nav-icon4 " + (open ? "  open " : "")}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </Navbar.Toggle>
+      </div>
+      <Navbar.Collapse id="responsive-navbar-nav  ">
+        <Nav
+          className={open ? "" : " absolute right-6"}
+          activeKey={location.pathname}
+        >
+          {NAV_ITEMS.map((value, index) => (
+            <StyledNavItem
+              key={index.toString()}
+              background={open && "transparent"}
+            >
+              <StyledNavLink href={value.routes}>
+                <div
+                  className={
+                    "flex   items-center " +
+                    (open ? "justify-center" : "justify-between")
+                  }
+                >
+                  <AnimatedStyledLabel
                     className={
-                      "flex   items-center " +
-                      (open ? "justify-center" : "justify-between")
+                      "mr-2 " +
+                      ((locationpath?.length === 0 &&
+                        value.routes.split("/").filter((value) => value)
+                          .length === 0) ||
+                      (locationpath?.length !== 0 &&
+                        value.routes.includes(locationpath || ""))
+                        ? "active"
+                        : "")
                     }
                   >
-                    <AnimatedStyledLabel className="mr-2">
-                      {value.title}
-                    </AnimatedStyledLabel>
-                    {value.icon}
-                  </div>
-                </StyledNavLink>
-              </StyledNavItem>
-            ))}
-          </Nav>
-        </Navbar.Collapse>
-      </StyledNavbar>
-    )
+                    {value.title}
+                  </AnimatedStyledLabel>
+                  {value.icon}
+                </div>
+              </StyledNavLink>
+            </StyledNavItem>
+          ))}
+        </Nav>
+      </Navbar.Collapse>
+    </StyledNavbar>
   );
 };

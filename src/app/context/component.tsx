@@ -98,6 +98,9 @@ export const StyledNavLink = styled<any>(Link)`
 
     transform: scale(1.1);
   }
+  .active {
+    border-bottom: 1px solid var(--color);
+  }
 `;
 
 export const StyledNavItem = styled<any>(Nav.Item)`

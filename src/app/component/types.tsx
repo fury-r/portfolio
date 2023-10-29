@@ -5,6 +5,7 @@ export type TCompany = {
   name: string;
   duration: string;
   site: string;
-  image: StaticImageData;
+  image?: StaticImageData;
   role: string;
+  icon?: JSX.Element;
 };

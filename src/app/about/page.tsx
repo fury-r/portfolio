@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import { StyledLabel, ThemeContainer } from "../context/component";
 const About = () => {
   return (
-    <Container className="flex flex-col h-[80vh]  items-center w-[70rem] ">
+    <Container className="flex flex-col ">
       <StyledLabel className="heading-point">About Me</StyledLabel>
 
       <div className="flex flex-col items-start justify-between h-4/5">
@@ -15,7 +15,7 @@ const About = () => {
           </div>
         </Container>
         <ThemeContainer className=" mt-2 p-4  rounded-[10px] flex flex-col items-center">
-          <StyledLabel className="  line leading-8 tracking-wide ">
+          <StyledLabel className="  line leading-8 tracking-wide  grid-cols-1  m-3">
             <ul>
               <li>
                 I am a skilled and experienced software engineer with a

@@ -9,6 +9,11 @@ import { light, dark } from "./context/theme";
 import { ToggleMode } from "./context/component";
 import { Layout } from "./component/Layout";
 import "./index.css";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Rajeev Dessai",
+  description: "Test",
+};
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const { mode, mountedComponent } = ToggleMode();

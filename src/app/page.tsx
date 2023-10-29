@@ -7,6 +7,7 @@ import "./css/introduction.css";
 import { BiUser } from "react-icons/bi";
 import styled from "styled-components";
 import { Companies } from "./component/Company";
+import { Metadata } from "next";
 
 const IntroductionContainer = styled(Container)`
   display: grid;

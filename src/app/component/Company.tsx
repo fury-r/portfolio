@@ -64,7 +64,7 @@ export const Companies = () => {
 
       <StyledContainer>
         {companies.map((company) => (
-          <ThemeContainer className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[350px] ">
+          <ThemeContainer className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[320px] ">
             <Image
               className="img relative top-[-10px] text-slate-950 "
               src={company.image}

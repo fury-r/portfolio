@@ -60,3 +60,4 @@ dist-ssr
 .turbo
 .next
 yarn.lock
+.vercel

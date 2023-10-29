@@ -5,14 +5,13 @@ const StyledInputGroup = styled.div`
     &-content {
       position: relative;
       z-index: 10;
-
       .inputbox {
         overflow: hidden;
         position: relative;
         width: 100%;
         &-title {
           position: absolute;
-          top: 15px;
+          top: 10px;
           left: 0;
           width: 200px;
           height: 30px;
@@ -23,7 +22,10 @@ const StyledInputGroup = styled.div`
         &-content {
           position: relative;
           width: 100%;
-
+          height: 70px;
+          display: flex;
+          flex-direction: column;
+          justify-content: end;
           .input-size {
             height: 40px;
           }
@@ -47,8 +49,9 @@ const StyledInputGroup = styled.div`
             &:valid {
               & ~ label {
                 color: $accent-color;
-                transform: translateY(-30px);
+                transform: translateY(-28px);
                 font-size: 0.825em;
+                font-weight: bold;
                 cursor: default;
               }
             }
@@ -59,10 +62,11 @@ const StyledInputGroup = styled.div`
           }
           label {
             position: absolute;
-            top: 10px;
+            top: 35px;
             left: 8px;
             height: 30px;
             line-height: 30px;
+            pointer-events: none;
             color: #ccc;
             cursor: text;
             transition: all 200ms ease-out;
@@ -94,19 +98,28 @@ export const FormGroup = ({
       <section className="input-content">
         <div className="input-content-wrap">
           <dl className="inputbox">
-            <dd className="inputbox-content">
+            <dd className="inputbox-content ">
               {textArea ? (
-                <textarea id="input1" cols={50} rows={6} />
+                <>
+                  <textarea
+                    id="input1"
+                    cols={50}
+                    rows={6}
+                    placeholder={title}
+                  />
+                </>
               ) : (
-                <input
-                  className="input-size "
-                  name={name}
-                  id="input1"
-                  type="text"
-                  required
-                />
+                <>
+                  <input
+                    className="input-size "
+                    name={name}
+                    id="input1"
+                    type="text"
+                    required
+                  />
+                  <label>{title}</label>
+                </>
               )}
-              <label>{title}</label>
             </dd>
           </dl>
         </div>

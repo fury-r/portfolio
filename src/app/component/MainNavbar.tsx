@@ -107,7 +107,7 @@ export const MainNavbar = () => {
               "rounded-[30px] shadow-md h-9 w-9 self-center  me-2 " +
               (main ? "rotate-icon" : "rotate-icon")
             }
-            onClick={() => stateChange(!main)}
+            onClick={() => stateChange()}
           >
             {main ? <BiSun /> : <BiMoon />}
           </StyledButton>

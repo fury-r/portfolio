@@ -8,7 +8,12 @@ const AuthContext = React.createContext<{
   main: boolean;
   theme: any;
   setTheme: React.Dispatch<React.SetStateAction<any>>;
-} | null>(null);
+}>({
+  stateChange: () => {},
+  main: false,
+  theme: [],
+  setTheme: Function,
+});
 
 export const ServerProvider = ({ children }: { children: ReactNode }) => {
   const [main, setMain] = useState(false);

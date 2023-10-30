@@ -9,6 +9,7 @@ import Image from "next/image";
 import Vtech from "../../assets/company/vtech.png";
 import { StyledLabel, ThemeContainer } from "../context/component";
 import { useAuth } from "../context/Authcontext";
+import { useMemo } from "react";
 
 const StyledContainer = styled(Container)`
   display: grid;
@@ -33,35 +34,38 @@ const StyledContainer = styled(Container)`
 
 export const Companies = () => {
   const { main } = useAuth();
-  const companies: TCompany[] = [
-    {
-      name: "Oqton",
-      duration: "Dec 2022 - Present",
-      image: Oqton,
-      site: "https://oqton.com",
-      role: "Software Development Consultant",
-    },
-    {
-      name: "13th June Infotech",
-      duration: "Sept 2022 - Nov 2022",
-      site: "https://www.linkedin.com/company/13thjune-infotech-private-limited/about/",
-      role: "Consultant/Frontend Engineer",
-    },
-    {
-      name: "Ctrl Save Pvt Ltd",
-      duration: "Oct 2021 - Sept 2022",
-      image: main ? CtrlSaveDark : CtrlSaveWhite,
-      site: "https://www.ctrlsave.in/",
-      role: "Full Stack Developer",
-    },
-    {
-      name: "VTech",
-      duration: "May 2019 - June 2019",
-      image: Vtech,
-      site: "https://vtechgoa.com/",
-      role: "Web Developer",
-    },
-  ];
+  const companies: TCompany[] = useMemo(
+    () => [
+      {
+        name: "Oqton",
+        duration: "Dec 2022 - Present",
+        image: Oqton,
+        site: "https://oqton.com",
+        role: "Software Development Consultant",
+      },
+      {
+        name: "13th June Infotech",
+        duration: "Sept 2022 - Nov 2022",
+        site: "https://www.linkedin.com/company/13thjune-infotech-private-limited/about/",
+        role: "Consultant/Frontend Engineer",
+      },
+      {
+        name: "Ctrl Save Pvt Ltd",
+        duration: "Oct 2021 - Sept 2022",
+        image: main ? CtrlSaveWhite : CtrlSaveDark,
+        site: "https://www.ctrlsave.in/",
+        role: "Full Stack Developer",
+      },
+      {
+        name: "VTech",
+        duration: "May 2019 - June 2019",
+        image: Vtech,
+        site: "https://vtechgoa.com/",
+        role: "Web Developer",
+      },
+    ],
+    [main]
+  );
   return (
     <Container>
       <StyledLabel className="heading-point">Where I’ve Worked</StyledLabel>

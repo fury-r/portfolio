@@ -11,6 +11,12 @@ import {
 } from "react";
 import { useAuth } from "../context/Authcontext";
 
+const StyledContainer = styled(Container)`
+  width: 25%;
+  @media (max-width: 748px) {
+    width: 90%;
+  }
+`;
 const Contact = () => {
   const { theme } = useAuth();
   const handleOnSubmit = (e: any) => {
@@ -23,7 +29,7 @@ const Contact = () => {
       <Container
         style={{
           backgroundColor: theme.shade,
-          width: "25%",
+          width: "400px",
         }}
         className="p-9 rounded-[10px] shadow-md"
       >

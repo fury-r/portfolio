@@ -12,7 +12,7 @@ import { FiSettings } from "react-icons/fi";
 import { LuContact } from "react-icons/lu";
 import { BiHomeAlt, BiInfoCircle, BiMoon, BiSun } from "react-icons/bi";
 import { AiOutlineProject } from "react-icons/ai";
-import { FaCaretDown } from "react-icons/fa";
+import { SiGradleplaypublisher } from "react-icons/si";
 
 import { Nav, Navbar } from "react-bootstrap";
 import { Routes } from "../Routes/routes";
@@ -44,6 +44,11 @@ const NAV_ITEMS: {
     title: "Project",
     icon: <AiOutlineProject />,
     routes: Routes.project.path,
+  },
+  {
+    title: "Publications",
+    icon: <SiGradleplaypublisher />,
+    routes: Routes.publications.path,
   },
   {
     title: "Contact",

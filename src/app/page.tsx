@@ -8,7 +8,7 @@ import { BiUser } from "react-icons/bi";
 import styled from "styled-components";
 import { Companies } from "./component/Company";
 import { Metadata } from "next";
-
+import Profile from "../assets/profile.jpg";
 const IntroductionContainer = styled(Container)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -68,8 +68,15 @@ const App = () => {
           className=" responsive  blobby-div"
           style={{ transform: "translateZ(30px)", objectFit: "cover",height:"70%" }}
         /> */}
+
         <Container className="flex justify-center">
-          <BiUser className=" responsive img blobby-div" />
+          <Image
+            src={Profile}
+            alt="User photo"
+            objectFit="scale-down"
+            className=" responsive img blobby-div shadow-md"
+          />
+          {/* <BiUser className=" responsive img blobby-div" /> */}
         </Container>
       </IntroductionContainer>
       <Companies />

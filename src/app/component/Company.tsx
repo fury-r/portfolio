@@ -44,7 +44,7 @@ export const Companies = () => {
         role: "Software Development Consultant",
       },
       {
-        name: "13th June Infotech",
+        name: "13th June Infotech Pvt Ltd",
         duration: "Sept 2022 - Nov 2022",
         site: "https://www.linkedin.com/company/13thjune-infotech-private-limited/about/",
         role: "Consultant/Frontend Engineer",
@@ -73,7 +73,7 @@ export const Companies = () => {
       <StyledContainer>
         {companies.map((company) => (
           <ThemeContainer className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[320px] ">
-            {company.image && (
+            {company.image ? (
               <Image
                 className="img relative top-[-10px] text-slate-950 "
                 src={company.image}
@@ -81,6 +81,10 @@ export const Companies = () => {
                 onClick={() => window.open(company.site)}
                 objectFit="cover"
               />
+            ) : (
+              <StyledLabel className="font-bold text-xl">
+                {company.name}
+              </StyledLabel>
             )}
             <StyledLabel className="text-lg whitespace-nowrap font-bold">
               {company.role}

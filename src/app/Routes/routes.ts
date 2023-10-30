@@ -3,6 +3,7 @@ export const Routes={
     about:{path:"/about"},
     skills:{path:"/skills"},
     project:{path:"/projects"},
-    contact:{path:'/contact'}
+    contact:{path:'/contact'},
+    publications:{path:'/publications'}
 
 }

@@ -105,7 +105,7 @@ export const StyledNavLink = styled<any>(Link)`
 
 export const StyledNavItem = styled<any>(Nav.Item)`
   background-color: ${({ background }) =>
-    background || ` var(--primary-color)`};
+    background || ` var(--secondary-color)`};
   color: var(--text-color);
   border-radius: 10px;
   margin-right: 15px;

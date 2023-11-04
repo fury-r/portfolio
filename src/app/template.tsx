@@ -17,7 +17,6 @@ export const metadata: Metadata = {
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const { mode, mountedComponent } = ToggleMode();
-  console.log("hello");
 
   const themeMode = mode === false ? dark : light;
   if (!mountedComponent) return <div />;

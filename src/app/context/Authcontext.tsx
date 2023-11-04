@@ -1,5 +1,11 @@
 "use client";
-import React, { ReactNode, useContext, useEffect, useState } from "react";
+import React, {
+  ReactNode,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { ToggleMode } from "./component";
 import { dark, light } from "./theme";
 
@@ -22,9 +28,22 @@ export const ServerProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     setTheme(main ? dark : light);
   }, [mode]);
-  const stateChange = () => {
+
+  const getThemeFromStorage = useCallback(async () => {
+    const mode = await localStorage.getItem("theme_mode");
+    setMain(mode === "dark");
+    setTheme(mode === "dark" ? dark : light);
+  }, [setMain]);
+
+  useEffect(() => {
+    getThemeFromStorage();
+  }, [getThemeFromStorage]);
+
+  const stateChange = useCallback(() => {
+    localStorage.setItem("theme_mode", !main ? "dark" : "light");
+    setTheme(!main ? dark : light);
     setMain(!main);
-  };
+  }, [setTheme, setMain, main]);
   const value = {
     stateChange,
     main,

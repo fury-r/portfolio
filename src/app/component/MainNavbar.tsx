@@ -60,19 +60,20 @@ export const MainNavbar = () => {
   const { data } = useModalContext();
   const [scrollPosition, setSrollPosition] = useState<number>(0);
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const { stateChange, main, theme } = useAuth();
 
   const handleScroll = useCallback(async () => {
-    console.log("CALLING");
     const position = window.scrollY;
     if (scrollPosition <= position && open) {
       document.getElementById("nav")!.style.top = "0px";
     }
     if (scrollPosition != position) {
-      if (position > scrollPosition || position == 0) {
+      if (
+        position > scrollPosition ||
+        (position == 0 && document.getElementById("nav")?.style.top)
+      ) {
         document.getElementById("nav")!.style.top = "-100px";
-      } else {
+      } else if (document.getElementById("nav")?.style.top) {
         document.getElementById("nav")!.style.top = "0px";
       }
       setSrollPosition(position);
@@ -83,7 +84,6 @@ export const MainNavbar = () => {
   const locationpath = location.pathname
     .split("/")
     .at(location.pathname.split("/").length - 1);
-  console.log(locationpath?.length);
   return (
     <StyledNavbar
       collapseOnSelect
@@ -96,11 +96,11 @@ export const MainNavbar = () => {
         (data !== null ? "z-0" : "z-10")
       }
       style={{
-        backgroundColor: theme.secondaryColor,
+        backgroundColor: theme.secondaryColor || "transparent",
       }}
       id="nav"
     >
-      <Navbar.Brand href="#home">
+      <Navbar.Brand href="/">
         <StyledLabel>Rajeev Dessai</StyledLabel>
       </Navbar.Brand>
 
@@ -117,6 +117,9 @@ export const MainNavbar = () => {
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           className="border-none"
+          style={{
+            border: "none",
+          }}
           onClick={() => setOpen((prev) => !prev)}
         >
           <div className={"nav-icon4 " + (open ? "  open " : "")}>
@@ -134,7 +137,7 @@ export const MainNavbar = () => {
           {NAV_ITEMS.map((value, index) => (
             <StyledNavItem
               key={index.toString()}
-              background={open && "transparent"}
+              background={open ? "transparent" : ""}
             >
               <StyledNavLink href={value.routes}>
                 <div

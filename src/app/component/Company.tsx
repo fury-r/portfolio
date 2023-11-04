@@ -71,8 +71,11 @@ export const Companies = () => {
       <StyledLabel className="heading-point">Where I’ve Worked</StyledLabel>
 
       <StyledContainer>
-        {companies.map((company) => (
-          <ThemeContainer className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[320px] ">
+        {companies.map((company, index) => (
+          <ThemeContainer
+            key={index.toString()}
+            className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[320px] "
+          >
             {company.image ? (
               <Image
                 className="img relative top-[-10px] text-slate-950 "

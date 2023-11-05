@@ -1,13 +1,19 @@
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import { TCompany } from "./types";
-import Oqton from "../../assets/company/DarkOqton.svg";
+import DarkOqton from "../../assets/company/DarkOqton.svg";
+import LightOqton from "../../assets/company/LightOqton.svg";
+
 import CtrlSaveDark from "../../assets/company/ctrlsave.png";
 import CtrlSaveWhite from "../../assets/company/ctrlsave-white.png";
 
 import Image from "next/image";
 import Vtech from "../../assets/company/vtech.png";
-import { StyledLabel, ThemeContainer } from "../context/component";
+import {
+  StyledButtonLabel,
+  StyledLabel,
+  ThemeContainer,
+} from "../context/component";
 import { useAuth } from "../context/Authcontext";
 import { useMemo } from "react";
 
@@ -39,7 +45,7 @@ export const Companies = () => {
       {
         name: "Oqton",
         duration: "Dec 2022 - Present",
-        image: Oqton,
+        image: main === "DARK" ? LightOqton : DarkOqton,
         site: "https://oqton.com",
         role: "Software Development Consultant",
       },
@@ -52,7 +58,7 @@ export const Companies = () => {
       {
         name: "Ctrl Save Pvt Ltd",
         duration: "Oct 2021 - Sept 2022",
-        image: main ? CtrlSaveWhite : CtrlSaveDark,
+        image: main === "DARK" ? CtrlSaveWhite : CtrlSaveDark,
         site: "https://www.ctrlsave.in/",
         role: "Full Stack Developer",
       },
@@ -85,14 +91,16 @@ export const Companies = () => {
                 objectFit="cover"
               />
             ) : (
-              <StyledLabel className="font-bold text-xl">
+              <StyledButtonLabel className="font-bold text-xl">
                 {company.name}
-              </StyledLabel>
+              </StyledButtonLabel>
             )}
-            <StyledLabel className="text-lg whitespace-nowrap font-bold">
+            <StyledButtonLabel className="text-lg whitespace-nowrap font-bold">
               {company.role}
-            </StyledLabel>
-            <StyledLabel className="italic">{company.duration}</StyledLabel>
+            </StyledButtonLabel>
+            <StyledButtonLabel className="italic">
+              {company.duration}
+            </StyledButtonLabel>
           </ThemeContainer>
         ))}
       </StyledContainer>

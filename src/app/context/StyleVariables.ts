@@ -23,8 +23,9 @@ const StyledVariables = css`
     --color:${({theme})=>theme?.color};
     --shade:${({theme})=>theme?.shade};
     --secondary-color:${({theme})=>theme?.secondaryColor};
+    --input-fields:#3e3d42;
     --text-color:${({theme})=>theme?.color};
-
+    --accent:${({theme})=>theme?.accentColor};
     --font-sans: 'Calibre', 'Inter', 'San Francisco', 'SF Pro Text', -apple-system, system-ui,
       sans-serif;
     --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;

@@ -19,6 +19,7 @@ import { Routes } from "../Routes/routes";
 import { useModalContext } from "../context/ModalContext";
 import "../scss/navbar.css";
 import { useAuth } from "../context/Authcontext";
+import { useTheme } from "styled-components";
 
 const NAV_ITEMS: {
   title: string;
@@ -60,45 +61,44 @@ export const MainNavbar = () => {
   const { data } = useModalContext();
   const [scrollPosition, setSrollPosition] = useState<number>(0);
   const [open, setOpen] = useState(false);
-  const { stateChange, main, theme } = useAuth();
-
+  const theme = useTheme();
+  const { stateChange, main } = useAuth();
+  const navbar = document.getElementById("nav");
   const handleScroll = useCallback(async () => {
     const position = window.scrollY;
     if (scrollPosition <= position && open) {
-      document.getElementById("nav")!.style.top = "0px";
+      navbar!.style.top = "0px";
     }
     if (scrollPosition != position) {
-      if (
-        position > scrollPosition ||
-        (position == 0 && document.getElementById("nav")?.style.top)
-      ) {
-        document.getElementById("nav")!.style.top = "-100px";
-      } else if (document.getElementById("nav")?.style.top) {
-        document.getElementById("nav")!.style.top = "0px";
+      if ((position > scrollPosition || position == 0) && navbar?.style.top) {
+        navbar!.style.top = "-100px";
+      } else if (navbar?.style.top) {
+        navbar!.style.top = "0px";
       }
       setSrollPosition(position);
     }
-  }, [window, scrollPosition]);
+  }, [window, scrollPosition, navbar]);
 
   window.addEventListener("scroll", handleScroll);
   const locationpath = location.pathname
     .split("/")
     .at(location.pathname.split("/").length - 1);
+
   return (
     <StyledNavbar
       collapseOnSelect
       fixed="top"
       expand="sm"
-      variant="dark"
       data-bs-theme="dark"
       className={
         ` sticky-top w-full  ${window.scrollY > 1 ? "shadow-md " : ""} p-3 ` +
         (data !== null ? "z-0" : "z-10")
       }
-      style={{
-        backgroundColor: theme.secondaryColor || "transparent",
-      }}
       id="nav"
+      style={{
+        //@ts-ignore
+        backgroundColor: theme.secondaryColor,
+      }}
     >
       <Navbar.Brand href="/">
         <StyledLabel>Rajeev Dessai</StyledLabel>
@@ -108,11 +108,11 @@ export const MainNavbar = () => {
         <StyledButton
           className={
             "rounded-[30px] shadow-md h-9 w-9 self-center  me-2 " +
-            (main ? "rotate-icon" : "rotate-icon")
+            (main === "DARK" ? "rotate-icon" : "rotate-icon")
           }
-          onClick={() => stateChange()}
+          onClick={() => stateChange(main === "DARK" ? "LIGHT" : "DARK")}
         >
-          {main ? <BiSun /> : <BiMoon />}
+          {main === "DARK" ? <BiSun /> : <BiMoon />}
         </StyledButton>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
@@ -160,7 +160,7 @@ export const MainNavbar = () => {
                   >
                     {value.title}
                   </AnimatedStyledLabel>
-                  {value.icon}
+                  <StyledLabel>{value.icon}</StyledLabel>
                 </div>
               </StyledNavLink>
             </StyledNavItem>

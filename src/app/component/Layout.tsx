@@ -11,7 +11,7 @@ import { dark, light } from "../context/theme";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const { main } = useAuth();
-  const themeMode = main ? dark : light;
+  const themeMode = main === "DARK" ? dark : light;
 
   return (
     <ThemeProvider theme={themeMode}>

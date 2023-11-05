@@ -87,32 +87,31 @@ export const StyledNavLink = styled<any>(Link)`
   display: block;
   padding: 15px;
   text-decoration: none;
-  color: ${({ theme }: props) => theme.theme_text};
+  color: var(--accent);
   font-weight: 600;
   text-transform: uppercase;
   position: relative;
   align-items: center;
   z-index: 1;
   &:hover {
-    color: ${({ theme }: props) => theme.theme_text};
+    color: var(--accent);
 
     transform: scale(1.1);
   }
   .active {
-    border-bottom: 1px solid var(--color);
+    border-bottom: 1px solid #6e07f3;
   }
 `;
 
 export const StyledNavItem = styled<any>(Nav.Item)`
   background-color: ${({ background }) =>
     background || ` var(--secondary-color)`};
-  color: var(--text-color);
+  color: var(--color);
   border-radius: 10px;
   margin-right: 15px;
 `;
 
 export const StyledNavbar = styled<any>(Navbar)`
-  background-color: var(--primary-color);
   color: var(--color);
 `;
 
@@ -155,6 +154,10 @@ export const Label = styled.label`
   background: var(--secondary-color);
 
   box-shadow: ${({ theme }: props) => theme.bordershadow};
+`;
+export const StyledButtonLabel = styled<any>(FloatingLabel)`
+  font-family: "Poppins", sans-serif;
+  color: var(--accent);
 `;
 export const StyledLabel = styled<any>(FloatingLabel)`
   font-family: "Poppins", sans-serif;

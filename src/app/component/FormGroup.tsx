@@ -36,7 +36,7 @@ const StyledInputGroup = styled.div`
             line-height: 30px;
             font-size: 14px;
             border: none;
-            background: var(--secondary-color);
+            background: var(--input-fields);
             border: 1px solid #ccc;
             outline: none;
             width: 100%;

@@ -23,17 +23,16 @@ const button = css`
 `;
 
 export const dark = {
-    primaryColor: "#000000",
-    secondaryColor:"#222222",
+    primaryColor: "#222529",
+    secondaryColor:"#1a1d21",
     color: "whitesmoke",
-    accentColor:"#FFA500",
-
+    accentColor:"white",
     box_shadow_1: "#183D3D",
     box_shadow_2: "#183D3D",
     border_shadow_1: "#191919",
     border_shadow_2: "#212121",
     background: "#5C8374",
-    shade: "whitesmoke",
+    shade: "#19171d",
     theme_text: "grey",
     image: "-10px -10px 20px #171717,10px 5px 20px  #232323",
     buttonshadow: "-5px -5px 18px #183D3D ,    5px 5px 18px #183D3D",
@@ -186,16 +185,17 @@ export const dark = {
 
 }
 export const light = {
-    primaryColor: "whitesmoke",
-    secondaryColor:"#FFFFF",
+    primaryColor: "#6e07f3",
+    secondaryColor:"#ffffff",
+    buttonAccent:"white",
     color: "black",
-    accentColor:"#FFA500",
+    accentColor:"white",
     box_shadow_1: "#b1b1b5",
     box_shadow_2: "#efeff5",
     border_shadow_1: "#b1b1b5",
     border_shadow_2: "#efeff5",
     background: "linear-gradient(315deg, #ebebed, #ebebed)",
-    shade: "grey",
+    shade: "#350d36",
     theme_text: "grey",
     image: " -10px -10px 30px #c8c8c9, 15px 15px 30px #ffffff",
     buttonshadow: "   -12px -12px 24px #c8c8c9,12px 12px 24px #ffffff",

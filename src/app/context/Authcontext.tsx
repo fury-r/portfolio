@@ -9,41 +9,47 @@ import React, {
 import { ToggleMode } from "./component";
 import { dark, light } from "./theme";
 
+export type MODE = "DARK" | "LIGHT";
 const AuthContext = React.createContext<{
-  stateChange: () => void;
-  main: boolean;
+  stateChange: (mode: MODE) => void;
+  main: MODE;
   theme: any;
   setTheme: React.Dispatch<React.SetStateAction<any>>;
 }>({
   stateChange: () => {},
-  main: false,
+  main: "LIGHT",
   theme: [],
   setTheme: Function,
 });
 
 export const ServerProvider = ({ children }: { children: ReactNode }) => {
-  const [main, setMain] = useState(false);
+  const [main, setMain] = useState<MODE>("LIGHT");
   const [theme, setTheme] = useState(light);
   const { mode } = ToggleMode();
   useEffect(() => {
-    setTheme(main ? dark : light);
+    console.log(main);
+    setTheme(main === "DARK" ? dark : light);
   }, [mode]);
 
   const getThemeFromStorage = useCallback(async () => {
     const mode = await localStorage.getItem("theme_mode");
-    setMain(mode === "dark");
-    setTheme(mode === "dark" ? dark : light);
+    if (mode) {
+      setMain(mode as MODE);
+      setTheme(mode === "DARK" ? dark : light);
+    }
   }, [setMain]);
 
   useEffect(() => {
     getThemeFromStorage();
   }, [getThemeFromStorage]);
 
-  const stateChange = useCallback(() => {
-    localStorage.setItem("theme_mode", !main ? "dark" : "light");
-    setTheme(!main ? dark : light);
-    setMain(!main);
-  }, [setTheme, setMain, main]);
+  const stateChange = useCallback(
+    (mode: MODE) => {
+      localStorage.setItem("theme_mode", mode);
+      setMain(mode);
+    },
+    [setTheme, setMain, main]
+  );
   const value = {
     stateChange,
     main,

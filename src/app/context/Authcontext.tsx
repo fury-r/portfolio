@@ -23,13 +23,12 @@ const AuthContext = React.createContext<{
 });
 
 export const ServerProvider = ({ children }: { children: ReactNode }) => {
-  const [main, setMain] = useState<MODE>("LIGHT");
-  const [theme, setTheme] = useState(light);
+  const [main, setMain] = useState<MODE>("DARK");
+  const [theme, setTheme] = useState(dark);
   const { mode } = ToggleMode();
   useEffect(() => {
-    console.log(main);
     setTheme(main === "DARK" ? dark : light);
-  }, [mode]);
+  }, [main]);
 
   const getThemeFromStorage = useCallback(async () => {
     const mode = await localStorage.getItem("theme_mode");

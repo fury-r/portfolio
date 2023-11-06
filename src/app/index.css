@@ -61,6 +61,18 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.align-center-sm-device{
+  @media (max-width:740px) {
+    justify-items: center;
+    align-items: center;
+  }
+}
+
+.font-sm{
+  @media (max-width: 740px) {
+    font-size: 15px;
+  }
+}
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

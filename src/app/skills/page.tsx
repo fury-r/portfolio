@@ -2,6 +2,7 @@
 import React, { lazy } from "react";
 import {
   GlassContainer,
+  StyledAccentLabel,
   StyledButton,
   StyledLabel,
   ThemeContainer,
@@ -82,7 +83,9 @@ const Row = ({
             key={key.toString()}
           >
             <div className="grid grid-cols-2 gap-0 w-full ">
-              <StyledLabel className=" self-center ">{value.title}</StyledLabel>
+              <StyledAccentLabel className=" self-center ">
+                {value.title}
+              </StyledAccentLabel>
               <Container>
                 <Image
                   src={value.iconPath}

@@ -10,6 +10,11 @@
 	/* box-shadow: 15px 15px 50px rgba(0,0,0,0.2); */
 	animation: morphing 10s infinite;
 	overflow :hidden;
+
+	@media (max-width:740px) {
+		width :150px;
+		height: 150px;
+	}
 }
 
 

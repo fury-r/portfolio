@@ -59,7 +59,7 @@ export const MainLayout = styled.div`
   height: 100%;
 `;
 export const StyledButton = styled.button`
-  color: var(--color);
+  color: var(--accent);
 
   outline: 0;
   border: 0;
@@ -155,13 +155,16 @@ export const Label = styled.label`
 
   box-shadow: ${({ theme }: props) => theme.bordershadow};
 `;
-export const StyledButtonLabel = styled<any>(FloatingLabel)`
+export const StyledAccentLabel = styled<any>(FloatingLabel)`
   font-family: "Poppins", sans-serif;
   color: var(--accent);
 `;
 export const StyledLabel = styled<any>(FloatingLabel)`
   font-family: "Poppins", sans-serif;
   color: var(--color);
+  @media (max-width: 740px) {
+    font-size: 18px;
+  }
 `;
 export const AnimatedStyledLabel = styled<any>(FloatingLabel)`
   font-family: "Poppins", sans-serif;

@@ -71,7 +71,7 @@ export const MainNavbar = () => {
     }
     if (scrollPosition != position) {
       if ((position > scrollPosition || position == 0) && navbar?.style.top) {
-        navbar!.style.top = "-100px";
+        navbar!.style.top = "-500px";
       } else if (navbar?.style.top) {
         navbar!.style.top = "0px";
       }

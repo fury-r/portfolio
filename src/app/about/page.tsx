@@ -1,6 +1,10 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { StyledLabel, ThemeContainer } from "../context/component";
+import {
+  StyledAccentLabel,
+  StyledLabel,
+  ThemeContainer,
+} from "../context/component";
 const About = () => {
   return (
     <Container className="flex flex-col ">
@@ -15,7 +19,7 @@ const About = () => {
           </div>
         </Container>
         <ThemeContainer className=" mt-2 p-4  rounded-[10px] flex flex-col items-center">
-          <StyledLabel className="  line leading-8 tracking-wide  grid-cols-1  m-3">
+          <StyledAccentLabel className="  line leading-8 tracking-wide  grid-cols-1  m-3">
             <ul>
               <li>
                 I am a skilled and experienced software engineer with a
@@ -49,7 +53,7 @@ const About = () => {
                 me an asset to any team or organization.
               </li>
             </ul>
-          </StyledLabel>
+          </StyledAccentLabel>
         </ThemeContainer>
         <div className="bg-black w-5/12 h-[0.7px] mt-6 self-center"></div>
       </div>

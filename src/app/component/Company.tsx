@@ -10,7 +10,7 @@ import CtrlSaveWhite from "../../assets/company/ctrlsave-white.png";
 import Image from "next/image";
 import Vtech from "../../assets/company/vtech.png";
 import {
-  StyledButtonLabel,
+  StyledAccentLabel,
   StyledLabel,
   ThemeContainer,
 } from "../context/component";
@@ -91,16 +91,16 @@ export const Companies = () => {
                 objectFit="cover"
               />
             ) : (
-              <StyledButtonLabel className="font-bold text-xl">
+              <StyledAccentLabel className="font-bold text-xl">
                 {company.name}
-              </StyledButtonLabel>
+              </StyledAccentLabel>
             )}
-            <StyledButtonLabel className="text-lg whitespace-nowrap font-bold">
+            <StyledAccentLabel className="text-lg whitespace-nowrap font-bold">
               {company.role}
-            </StyledButtonLabel>
-            <StyledButtonLabel className="italic">
+            </StyledAccentLabel>
+            <StyledAccentLabel className="italic">
               {company.duration}
-            </StyledButtonLabel>
+            </StyledAccentLabel>
           </ThemeContainer>
         ))}
       </StyledContainer>

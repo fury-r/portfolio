@@ -39,8 +39,8 @@ const App = () => {
   return (
     <Container className="flex flex-col  items-center w-fit mt-10 ">
       <IntroductionContainer className=" ">
-        <div className="flex flex-col justify-end items-start mb-10  ">
-          <StyledLabel className=" w-32  h-16 flex justify-start items-center    rounded-t-3xl rounded-e-3xl ">
+        <div className="flex flex-col justify-end items-start mb-10  align-center-sm-device  ">
+          <StyledLabel className="  h-16 flex justify-start items-center  rounded-t-3xl rounded-e-3xl  ">
             <StyledLabel className=" text-[32px]">Hello</StyledLabel>
             <Image height={30} src={require("../assets/Wave.svg")} alt={""} />
           </StyledLabel>

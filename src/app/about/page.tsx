@@ -13,7 +13,9 @@ const About = () => {
       <div className="flex flex-col items-start justify-between h-4/5">
         <Container className="flex flex-row justify-between h-fit">
           <div className="flex justify-between items-end h-14 w-full ">
-            <StyledLabel className="flex text-lg">This is it.</StyledLabel>
+            <StyledLabel className="flex text-lg whitespace-nowrap me-2">
+              This is it.
+            </StyledLabel>
 
             <div className="bg-black w-11/12 h-[0.7px] mb-2 "></div>
           </div>

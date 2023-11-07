@@ -125,6 +125,86 @@ const ProjectsMenu: MenuItem[] = [
       "Sockets",
     ],
   },
+  {
+    title: "Chat Messenger with E2EE ",
+    desc: `Chat Messenger like WhatsApp.`,
+    subItems: [
+      {
+        title: "Key Features:",
+        points: `Content sharing and social networking
+                Friend and follower management
+                Personalized profile control
+                Enhanced privacy settings
+                Photo minting into NFTs
+                NFT transfer and exchange`.split("\n"),
+      },
+      {
+        title: "Technologies Used:",
+        points: `  "Kotlin",
+        "AndroidXML",
+        "NodeJs",
+        "Typescript",
+        "Protocol Buffers",
+        "Grpc",
+        "Firebase",
+        "Golang",
+        "RabbitMQ"`.split("\n"),
+      },
+    ],
+    images: [Leylines, LeylinesImage1, LeylinesImage2],
+    iconImage: LeylinesImage2,
+    techStack: [
+      "Kotlin",
+      "AndroidXML",
+      "NodeJs",
+      "Typescript",
+      "Protocol Buffers",
+      "Grpc",
+      "Firebase",
+      "Golang",
+      "RabbitMQ",
+    ],
+  },
+  {
+    title: "Chat Messenger with E2EE ",
+    desc: `Chat Messenger like WhatsApp.`,
+    subItems: [
+      {
+        title: "Key Features:",
+        points: `Content sharing and social networking
+                Friend and follower management
+                Personalized profile control
+                Enhanced privacy settings
+                Photo minting into NFTs
+                NFT transfer and exchange`.split("\n"),
+      },
+      {
+        title: "Technologies Used:",
+        points: `  "Kotlin",
+        "AndroidXML",
+        "NodeJs",
+        "Typescript",
+        "Protocol Buffers",
+        "Grpc",
+        "Firebase",
+        "Golang",
+        "RabbitMQ"`.split("\n"),
+      },
+    ],
+    images: [Leylines, LeylinesImage1, LeylinesImage2],
+    iconImage: LeylinesImage2,
+    techStack: [
+      "Kotlin",
+      "AndroidXML",
+      "NodeJs",
+      "Typescript",
+      "Protocol Buffers",
+      "Grpc",
+      "Firebase",
+      "Golang",
+      "RabbitMQ",
+    ],
+  },
 ];
 
 const Project = () => {

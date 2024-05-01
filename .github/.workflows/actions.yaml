@@ -1,0 +1,30 @@
+name: Portfolio Actions
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+
+jobs:
+  run-lint-app:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+      - name: Clean install
+        uses: yarn install --frozen-lockfile
+        shell: bash
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.yarn
+            ./node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+      - name: Run lint
+        uses: turbo fix-lint
+        shell: bash

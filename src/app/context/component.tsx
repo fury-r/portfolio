@@ -1,11 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Card, Button, Nav, Navbar, FloatingLabel } from "react-bootstrap";
+import { Card, Nav, Navbar, FloatingLabel } from "react-bootstrap";
 import { createGlobalStyle } from "styled-components";
 import DarkModeToggle from "react-dark-mode-toggle";
 import styled from "styled-components";
 import { func } from "prop-types";
-import { dark, light } from "./theme";
+import { light } from "./theme";
 
 import { Parallax } from "@react-spring/parallax";
 import React from "react";

@@ -14,8 +14,8 @@ import {
   StyledLabel,
   ThemeContainer,
 } from "../context/component";
-import { useAuth } from "../context/Authcontext";
 import { useMemo } from "react";
+import { useThemeContext } from "../context/ThemeContext/useContext";
 
 const StyledContainer = styled(Container)`
   display: grid;
@@ -39,7 +39,7 @@ const StyledContainer = styled(Container)`
 `;
 
 export const Companies = () => {
-  const { main } = useAuth();
+  const { main } = useThemeContext();
   const companies: TCompany[] = useMemo(
     () => [
       {

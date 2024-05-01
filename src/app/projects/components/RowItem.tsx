@@ -1,7 +1,4 @@
 import {
-  GlassContainer,
-  StyledButton,
-  StyledLabel,
   ThemeContainer,
 } from "../../context/component";
 import Image from "next/image";

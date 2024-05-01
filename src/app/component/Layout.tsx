@@ -4,13 +4,13 @@ import MainFooter from "./Footer";
 import Contact from "./Contact";
 import { MainNavbar } from "./MainNavbar";
 import { ThemeProvider } from "styled-components";
-import { ModalProvider } from "../context/ModalContext";
 import { ModalPortal } from "./ModalPortal";
-import { useAuth } from "../context/Authcontext";
 import { dark, light } from "../context/theme";
+import { useThemeContext } from "../context/ThemeContext/useContext";
+import { ModalProvider } from "../context/ModalContext/Provider";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
-  const { main } = useAuth();
+  const { main } = useThemeContext();
   const themeMode = main === "DARK" ? dark : light;
 
   return (

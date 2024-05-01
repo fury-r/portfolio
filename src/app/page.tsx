@@ -1,13 +1,11 @@
 "use client";
 import React from "react";
 import { Container } from "react-bootstrap";
-import { StyledLabel, ThemeContainer } from "./context/component";
+import { StyledLabel } from "./context/component";
 import Image from "next/image";
 import "./css/introduction.css";
-import { BiUser } from "react-icons/bi";
 import styled from "styled-components";
 import { Companies } from "./component/Company";
-import { Metadata } from "next";
 import Profile from "../assets/profile.jpg";
 const IntroductionContainer = styled(Container)`
   display: grid;

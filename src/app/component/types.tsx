@@ -1,5 +1,4 @@
 import { StaticImageData } from "next/image";
-import { URL } from "url";
 
 export type TCompany = {
   name: string;

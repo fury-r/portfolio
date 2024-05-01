@@ -80,10 +80,7 @@ const StyledInputGroup = styled.div`
 
 export const FormGroup = ({
   title,
-  error,
-  hasError,
   name,
-  value,
   textArea,
 }: {
   title: string;

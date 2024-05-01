@@ -16,10 +16,10 @@ import { SiGradleplaypublisher } from "react-icons/si";
 
 import { Nav, Navbar } from "react-bootstrap";
 import { Routes } from "../Routes/routes";
-import { useModalContext } from "../context/ModalContext";
 import "../scss/navbar.css";
-import { useAuth } from "../context/Authcontext";
 import { useTheme } from "styled-components";
+import { useModalContext } from "../context/ModalContext/useContext";
+import { useThemeContext } from "../context/ThemeContext/useContext";
 
 const NAV_ITEMS: {
   title: string;
@@ -62,7 +62,7 @@ export const MainNavbar = () => {
   const [scrollPosition, setSrollPosition] = useState<number>(0);
   const [open, setOpen] = useState(false);
   const theme = useTheme();
-  const { stateChange, main } = useAuth();
+  const { stateChange, main } = useThemeContext();
   const navbar = document.getElementById("nav");
   const handleScroll = useCallback(async () => {
     const position = window.scrollY;
@@ -77,7 +77,7 @@ export const MainNavbar = () => {
       }
       setSrollPosition(position);
     }
-  }, [window, scrollPosition, navbar]);
+  }, [scrollPosition, navbar, open]);
 
   window.addEventListener("scroll", handleScroll);
   const locationpath = location.pathname

@@ -13,7 +13,7 @@ import AgileSprintImage2 from "../../assets/projects/agilemanagement/image_2.png
 import "./css/style.css";
 import { MenuItem } from "./types";
 import { RowItem } from "./components/RowItem";
-import { useModalContext } from "../context/ModalContext";
+import { useModalContext } from "../context/ModalContext/useContext";
 
 const ProjectsMenu: MenuItem[] = [
   {
@@ -214,7 +214,12 @@ const Project = () => {
     <Container className="h-full overflow-auto ">
       <Container className="grid grid-cols-1 ">
         {ProjectsMenu.map((item, index) => (
-          <RowItem pos={index} setSelected={handleSetData} {...item} />
+          <RowItem
+            pos={index}
+            key={index.toString()}
+            setSelected={handleSetData}
+            {...item}
+          />
         ))}
       </Container>
     </Container>

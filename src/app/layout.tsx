@@ -1,10 +1,9 @@
-import { Metadata } from "next";
 import React from "react";
 
-export const metadata: Metadata = {
-  title: "Rajeev Dessai",
-  description: "Test",
-};
+// export const metadata: Metadata = {
+//   title: "Rajeev Dessai",
+//   description: "Test",
+// };
 export default function RootLayout({
   children,
 }: {

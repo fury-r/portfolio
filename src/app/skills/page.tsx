@@ -1,9 +1,7 @@
 "use client";
-import React, { lazy } from "react";
+import React from "react";
 import {
-  GlassContainer,
   StyledAccentLabel,
-  StyledButton,
   StyledLabel,
   ThemeContainer,
 } from "../context/component";

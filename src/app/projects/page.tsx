@@ -10,6 +10,8 @@ import LeylinesImage2 from "../../assets/projects/leylines/image_11.png";
 import AgileSprint from "../../assets/projects/agilemanagement/image_9.jpg";
 import AgileSprintImage1 from "../../assets/projects/agilemanagement/image_6.png";
 import AgileSprintImage2 from "../../assets/projects/agilemanagement/image_2.png";
+import ERP1 from "../../assets/projects/erp/ERP1.png";
+
 import "./css/style.css";
 import { MenuItem } from "./types";
 import { RowItem } from "./components/RowItem";
@@ -21,6 +23,7 @@ const ProjectsMenu: MenuItem[] = [
     desc: `
         Lifeline, a cross-platform healthcare application, seamlessly connects patients, doctors, and other healthcare professionals, revolutionizing the way healthcare is delivered and experienced
         `,
+    link: "https://github.com/fury-r/Lifeline",
     images: [Lifeline],
     iconImage: LifelineImage2,
     subItems: [
@@ -57,6 +60,7 @@ const ProjectsMenu: MenuItem[] = [
   {
     title: "Project Management Web application",
     desc: ` Streamlining Collaboration and Enhancing Productivity`,
+    link: "https://github.com/Ayush-Noorani/Agile-Project",
     images: [AgileSprint, AgileSprintImage1, AgileSprintImage2],
     iconImage: AgileSprintImage2,
     subItems: [
@@ -91,6 +95,7 @@ const ProjectsMenu: MenuItem[] = [
   {
     title: "Leylines: A Web3 Social Media",
     desc: `Leylines, a Web3-powered social media application, empowers users with ownership, privacy, and creative freedom`,
+    link: "https://github.com/fury-r/web3-social-media",
     subItems: [
       {
         title: "Key Features:",
@@ -126,83 +131,22 @@ const ProjectsMenu: MenuItem[] = [
     ],
   },
   {
-    title: "Chat Messenger with E2EE ",
-    desc: `Chat Messenger like WhatsApp.`,
-    subItems: [
-      {
-        title: "Key Features:",
-        points: `Content sharing and social networking
-                Friend and follower management
-                Personalized profile control
-                Enhanced privacy settings
-                Photo minting into NFTs
-                NFT transfer and exchange`.split("\n"),
-      },
-      {
-        title: "Technologies Used:",
-        points: `  "Kotlin",
-        "AndroidXML",
-        "NodeJs",
-        "Typescript",
-        "Protocol Buffers",
-        "Grpc",
-        "Firebase",
-        "Golang",
-        "RabbitMQ"`.split("\n"),
-      },
-    ],
-    images: [Leylines, LeylinesImage1, LeylinesImage2],
-    iconImage: LeylinesImage2,
+    title: "ERP Application",
+    desc: "The Orders Management System is a robust application designed to streamline business operations by efficiently tracking and managing customer orders. It includes a comprehensive product schema for organizing product structures, along with features for adding, editing, and deleting product information. The system also provides expense tracking to help businesses monitor their financials effectively.",
+    link: "https://github.com/fury-r/encrypted-messenger",
+    subItems: [],
+    images: [ERP1],
+    iconImage: ERP1,
     techStack: [
-      "Kotlin",
-      "AndroidXML",
-      "NodeJs",
+      "React",
+      "Vite",
       "Typescript",
-      "Protocol Buffers",
-      "Grpc",
-      "Firebase",
-      "Golang",
-      "RabbitMQ",
-    ],
-  },
-  {
-    title: "Chat Messenger with E2EE ",
-    desc: `Chat Messenger like WhatsApp.`,
-    subItems: [
-      {
-        title: "Key Features:",
-        points: `Content sharing and social networking
-                Friend and follower management
-                Personalized profile control
-                Enhanced privacy settings
-                Photo minting into NFTs
-                NFT transfer and exchange`.split("\n"),
-      },
-      {
-        title: "Technologies Used:",
-        points: `  "Kotlin",
-        "AndroidXML",
-        "NodeJs",
-        "Typescript",
-        "Protocol Buffers",
-        "Grpc",
-        "Firebase",
-        "Golang",
-        "RabbitMQ"`.split("\n"),
-      },
-    ],
-    images: [Leylines, LeylinesImage1, LeylinesImage2],
-    iconImage: LeylinesImage2,
-    techStack: [
-      "Kotlin",
-      "AndroidXML",
-      "NodeJs",
-      "Typescript",
-      "Protocol Buffers",
-      "Grpc",
-      "Firebase",
-      "Golang",
-      "RabbitMQ",
+      "Node.js",
+      "GraphQL",
+      "styled-components",
+      "OAuth",
+      "JEST",
+      "MongoDB",
     ],
   },
 ];

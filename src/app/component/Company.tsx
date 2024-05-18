@@ -74,7 +74,7 @@ export const Companies = () => {
   );
   return (
     <Container>
-      <StyledLabel className="heading-point">Where I’ve Worked</StyledLabel>
+      <StyledLabel className="heading-point">Work Experience</StyledLabel>
 
       <StyledContainer>
         {companies.map((company, index) => (

@@ -24,10 +24,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
           }
         >
           <MainNavbar />
-          <div className="flex flex-col border-black min-h-screen">
+          <div className="flex flex-col border-black min-h-screen ">
             <div className=""> {children}</div>
 
-            <div className=" ">
+            <div className="">
               <Contact />
               <MainFooter />
             </div>

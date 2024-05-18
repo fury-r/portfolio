@@ -1,8 +1,8 @@
 import { ReactNode, useState, useEffect, useCallback } from "react";
-import { ThemeContext } from "styled-components";
 import { ToggleMode } from "../component";
 import { dark, light } from "../theme";
 import { MODE } from "../../types/theme";
+import { ThemeContext } from "./Context";
 
 export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
   const [main, setMain] = useState<MODE>("DARK");
@@ -26,6 +26,7 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
 
   const stateChange = useCallback(
     (mode: MODE) => {
+      console.log(mode);
       localStorage.setItem("theme_mode", mode);
       setMain(mode);
     },

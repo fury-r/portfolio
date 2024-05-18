@@ -1,6 +1,12 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Card, Nav, Navbar, FloatingLabel } from "react-bootstrap";
+import {
+  Card,
+  Nav,
+  Navbar,
+  FloatingLabel,
+  FloatingLabelProps,
+} from "react-bootstrap";
 import { createGlobalStyle } from "styled-components";
 import DarkModeToggle from "react-dark-mode-toggle";
 import styled from "styled-components";
@@ -11,9 +17,14 @@ import { Parallax } from "@react-spring/parallax";
 import React from "react";
 import Link from "next/link";
 import StyledVariables from "./StyleVariables";
+import { BsPrefixRefForwardingComponent } from "react-bootstrap/esm/helpers";
 type props = {
   theme: any;
 };
+interface StyledFloatingLabelProps
+  extends BsPrefixRefForwardingComponent<"div", FloatingLabelProps> {
+  color?: string;
+}
 export const Globalstyle = createGlobalStyle`
 ${StyledVariables};
   margin: 0;
@@ -37,12 +48,10 @@ ${StyledVariables};
     &:before {
       position: relative;
       bottom: 4px;
-      counter-increment: section;
       margin-right: 10px;
       color: var(--shade);
       font-family: var(--font-mono);
       font-size: clamp(var(--fz-md), 3vw, var(--fz-xl));
-      content: '0' counter(section) '.';
 
       font-weight: 400;
       @media (max-width: 480px) {
@@ -58,7 +67,9 @@ export const MainLayout = styled.div`
   width: 100%;
   height: 100%;
 `;
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<{
+  color?: string;
+}>`
   color: var(--accent);
 
   outline: 0;
@@ -78,7 +89,77 @@ export const StyledButton = styled.button`
     }
   } */
 `;
+export const StyledRoundedButton = styled.button`
+  color: var(--color);
 
+  outline: 0;
+  border: 0;
+  padding: 10px;
+  background: var(--accent);
+  border-radius: 30px;
+
+  &:hover {
+    border: none;
+  }
+  /* @keyframes ripple-effect {
+    0% {
+      box-shadow: 0px;
+    }
+    100% {
+      box-shadow: ${({ theme }: props) => theme.buttonshadow};
+    }
+  } */
+`;
+export const AnimatedButton = styled(StyledButton)`
+  display: block;
+  padding: 15px;
+  text-decoration: none;
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  position: relative;
+  align-items: center;
+  z-index: 1;
+  &:hover {
+    transform: scale(1.1);
+  }
+  .active {
+    border-bottom: 1px solid #6e07f3;
+  }
+
+  .btn-three::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+  }
+  .btn-three:hover::before {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+  }
+  .btn-three::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transform: scale(1.2, 1.2);
+  }
+  .btn-three:hover::after {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+`;
 export const ThemeContainer = styled.div`
   background-color: var(--primary-color);
   text-decoration: none;
@@ -99,7 +180,7 @@ export const StyledNavLink = styled<any>(Link)`
     transform: scale(1.1);
   }
   .active {
-    border-bottom: 1px solid #6e07f3;
+    border-bottom: 1px solid var(--accent);
   }
 `;
 
@@ -166,16 +247,19 @@ export const StyledLabel = styled<any>(FloatingLabel)`
     font-size: 18px;
   }
 `;
-export const AnimatedStyledLabel = styled<any>(FloatingLabel)`
+export const AnimatedStyledLabel = styled<StyledFloatingLabelProps>(
+  FloatingLabel
+)`
   font-family: "Poppins", sans-serif;
-  color: var(--color);
+  font-size: var(--fz-md);
+  color: ${({ color }) => (color ? color : "var(--color)")};
   text-transform: none;
   &::after {
     content: "";
     display: block;
     width: 0;
     height: 1px;
-    background: var(--color);
+    background: ${({ color }) => (color ? color : "var(--color)")};
     transition: width 0.3s;
   }
 
@@ -189,7 +273,7 @@ export const AnimatedStyledLabel = styled<any>(FloatingLabel)`
     display: block;
     width: 0;
     height: 1px;
-    background: var(--color);
+    background: ${({ color }) => (color ? color : "var(--color)")};
     width: 100%;
   }
 `;

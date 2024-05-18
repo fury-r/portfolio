@@ -58,6 +58,7 @@
     "@types/react-dom": "^18",
     "@types/styled-components": "^5.1.28",
     "autoprefixer": "^10",
+    "daisyui": "^4.10.3",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
     "eslint-plugin-unused-imports": "^3.2.0",

@@ -2,13 +2,12 @@
 import React, { useCallback, useState } from "react";
 import {
   AnimatedStyledLabel,
-  StyledButton,
+  StyledRoundedButton,
   StyledLabel,
   StyledNavItem,
   StyledNavLink,
   StyledNavbar,
 } from "../context/component";
-import { FiSettings } from "react-icons/fi";
 import { LuContact } from "react-icons/lu";
 import { BiHomeAlt, BiInfoCircle, BiMoon, BiSun } from "react-icons/bi";
 import { AiOutlineProject } from "react-icons/ai";
@@ -35,11 +34,6 @@ const NAV_ITEMS: {
     title: "About",
     icon: <BiInfoCircle />,
     routes: Routes.about.path,
-  },
-  {
-    title: "Skills",
-    icon: <FiSettings />,
-    routes: Routes.skills.path,
   },
   {
     title: "Project",
@@ -105,15 +99,21 @@ export const MainNavbar = () => {
       </Navbar.Brand>
 
       <div className="flex items-center">
-        <StyledButton
+        <StyledRoundedButton
           className={
-            "rounded-[30px] shadow-md h-9 w-9 self-center  me-2 " +
-            (main === "DARK" ? "rotate-icon" : "rotate-icon")
+            "rounded-[30px] shadow-md h-9 w-9 self-center  me-2  rotate-icon"
           }
           onClick={() => stateChange(main === "DARK" ? "LIGHT" : "DARK")}
         >
-          {main === "DARK" ? <BiSun /> : <BiMoon />}
-        </StyledButton>
+          {main === "DARK" ? (
+            <BiSun color="black" />
+          ) : (
+            <BiMoon
+              color="black
+          "
+            />
+          )}
+        </StyledRoundedButton>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           className="border-none"

@@ -5,6 +5,7 @@ import {
   StyledLabel,
   ThemeContainer,
 } from "../context/component";
+import { Skills } from "../skills/skills";
 const About = () => {
   return (
     <Container className="flex flex-col ">
@@ -59,6 +60,7 @@ const About = () => {
         </ThemeContainer>
         <div className="bg-black w-5/12 h-[0.7px] mt-6 self-center"></div>
       </div>
+      <Skills />
     </Container>
   );
 };

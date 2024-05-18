@@ -80,20 +80,28 @@ const Row = ({
             className="transform hover:scale-100  motion-reduce:transform-none skill  btn-outline-secondary w-44 h-14  p-2 rounded-[10px] m-4  flex justify-center items-center"
             key={key.toString()}
           >
-            <div className="grid grid-cols-2 gap-0 w-full ">
+            <div
+              className={` ${
+                value.iconPath
+                  ? "grid grid-cols-2 gap-0"
+                  : " flex justify-center"
+              }  w-full `}
+            >
               <StyledAccentLabel className=" self-center ">
                 {value.title}
               </StyledAccentLabel>
-              <Container>
-                <Image
-                  src={value.iconPath}
-                  width={30}
-                  height={40}
-                  alt={value.title}
-                  loading="lazy"
-                  className="self-center  "
-                />
-              </Container>
+              {value.iconPath && (
+                <Container>
+                  <Image
+                    src={value.iconPath}
+                    width={30}
+                    height={40}
+                    alt={value.title}
+                    loading="lazy"
+                    className="self-center  "
+                  />
+                </Container>
+              )}
             </div>
           </ThemeContainer>
         ))}
@@ -101,7 +109,7 @@ const Row = ({
     </Container>
   );
 };
-const Skills = () => {
+export const Skills = () => {
   const skills: {
     title: string;
     iconPath: StaticImageData;
@@ -165,7 +173,7 @@ const Skills = () => {
     },
 
     {
-      iconPath: Web3,
+      iconPath: null,
       title: "web3",
     },
     {
@@ -208,5 +216,3 @@ const Skills = () => {
     </div>
   );
 };
-
-export default Skills;

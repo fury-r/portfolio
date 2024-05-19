@@ -28,13 +28,17 @@ import Ai from "../../assets/icon_programming/ai-network.svg";
 import Kotlin from "../../assets/icon_programming/kotlin.svg";
 import Laravel from "../../assets/icon_programming/laravel.svg";
 import NextJs from "../../assets/icon_programming/next-js.svg";
-import Web3 from "../../assets/icon_programming/web3.svg";
+import Docker from "../../assets/icon_programming/docker.svg";
 import Git from "../../assets/icon_programming/Git.svg";
 import TailwindCSS from "../../assets/icon_programming/tailwind-css.svg";
 
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
-
+type Item = {
+  title: string;
+  iconPath: StaticImageData;
+  renderOnlyIcon?: boolean;
+};
 const SkillsContainer = styled(Container)`
   display: flex;
   flex-direction: row;
@@ -59,17 +63,13 @@ const SkillsContainer = styled(Container)`
       width: 80%;
     }
   }
+  .skill-container {
+    background-color: var(--secodary-color);
+    border: 1px solid var(--primary-color);
+  }
 `;
-const Row = ({
-  type,
-  data,
-}: {
-  type: string;
-  data: {
-    title: string;
-    iconPath: StaticImageData;
-  }[];
-}) => {
+
+const Row = ({ type, data }: { type: string; data: Item[] }) => {
   return (
     <Container className="flex flex-col  ">
       <StyledLabel className="heading-point">{type}</StyledLabel>
@@ -77,28 +77,30 @@ const Row = ({
       <SkillsContainer>
         {data.map((value, key) => (
           <ThemeContainer
-            className="transform hover:scale-100  motion-reduce:transform-none skill  btn-outline-secondary w-44 h-14  p-2 rounded-[10px] m-4  flex justify-center items-center"
+            className="transform hover:scale-100  skill-container  motion-reduce:transform-none skill  btn-outline-secondary w-44 h-14  p-2 rounded-[10px] m-4  flex justify-center items-center"
             key={key.toString()}
           >
             <div
               className={` ${
-                value.iconPath
+                value.iconPath && !value.renderOnlyIcon
                   ? "grid grid-cols-2 gap-0"
                   : " flex justify-center"
               }  w-full `}
             >
-              <StyledAccentLabel className=" self-center ">
-                {value.title}
-              </StyledAccentLabel>
+              {!value.renderOnlyIcon && (
+                <StyledAccentLabel className=" self-center ">
+                  {value.title}
+                </StyledAccentLabel>
+              )}
               {value.iconPath && (
-                <Container>
+                <Container className="p-3">
                   <Image
                     src={value.iconPath}
                     width={30}
                     height={40}
                     alt={value.title}
                     loading="lazy"
-                    className="self-center  "
+                    className="self-center  w-fit"
                   />
                 </Container>
               )}
@@ -109,11 +111,9 @@ const Row = ({
     </Container>
   );
 };
+
 export const Skills = () => {
-  const skills: {
-    title: string;
-    iconPath: StaticImageData;
-  }[] = [
+  const skills: Item[] = [
     {
       iconPath: Python,
       title: "Python",
@@ -170,6 +170,7 @@ export const Skills = () => {
     {
       iconPath: NodeJs,
       title: "NodeJs",
+      renderOnlyIcon: true,
     },
 
     {
@@ -195,6 +196,11 @@ export const Skills = () => {
     {
       iconPath: Kotlin,
       title: "Kotlin",
+    },
+    {
+      iconPath: Docker,
+      title: "Docker",
+      renderOnlyIcon: true,
     },
     {
       iconPath: Grpc,

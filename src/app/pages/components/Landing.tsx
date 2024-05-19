@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { StyledLabel, AnimatedButton } from "../../context/component";
+import { StyledLabel, StyledBoldLabel } from "../../context/component";
 import Image from "next/image";
 import "../css/introduction.css";
 export const Landing = () => {
@@ -26,12 +26,12 @@ export const Landing = () => {
               alt={""}
             />
           </div>
-          <StyledLabel fontWeight={"bolder"} fontSize={20}>
-            A Software Engineer
-          </StyledLabel>
-          <StyledLabel fontWeight={"bolder"} fontSize={20}>
+          <StyledBoldLabel className="font-bold" fontSize={20}>
+            Software Engineer
+          </StyledBoldLabel>
+          <StyledBoldLabel className="font-bold" fontSize={20}>
             Based in Goa, India.
-          </StyledLabel>
+          </StyledBoldLabel>
         </div>
         <Image
           src={require("../../../assets/pic.png")}

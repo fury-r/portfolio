@@ -48,7 +48,7 @@ const StyledInputGroup = styled.div`
             &:focus,
             &:valid {
               & ~ label {
-                color: $accent-color;
+                color: var(--color);
                 transform: translateY(-28px);
                 font-size: 0.825em;
                 font-weight: bold;

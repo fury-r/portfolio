@@ -12,7 +12,7 @@ import Vtech from "../../assets/company/vtech.png";
 import {
   StyledAccentLabel,
   StyledLabel,
-  ThemeContainer,
+  ThemeBorderContainer,
 } from "../context/component";
 import { useMemo } from "react";
 import { useThemeContext } from "../context/ThemeContext/useContext";
@@ -78,7 +78,7 @@ export const Companies = () => {
 
       <StyledContainer>
         {companies.map((company, index) => (
-          <ThemeContainer
+          <ThemeBorderContainer
             key={index.toString()}
             className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[320px] "
           >
@@ -91,7 +91,7 @@ export const Companies = () => {
                 objectFit="cover"
               />
             ) : (
-              <StyledAccentLabel className="font-bold text-xl">
+              <StyledAccentLabel className="font-bold text-2xl">
                 {company.name}
               </StyledAccentLabel>
             )}
@@ -101,7 +101,7 @@ export const Companies = () => {
             <StyledAccentLabel className="italic">
               {company.duration}
             </StyledAccentLabel>
-          </ThemeContainer>
+          </ThemeBorderContainer>
         ))}
       </StyledContainer>
     </Container>

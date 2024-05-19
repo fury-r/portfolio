@@ -106,7 +106,7 @@ export const MainNavbar = () => {
           onClick={() => stateChange(main === "DARK" ? "LIGHT" : "DARK")}
         >
           {main === "DARK" ? (
-            <BiSun color="black" />
+            <BiSun color="white" />
           ) : (
             <BiMoon
               color="black

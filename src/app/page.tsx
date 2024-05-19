@@ -13,7 +13,7 @@ const IntroductionContainer = styled(Container)`
   grid-template-columns: repeat(2, 1fr);
   @media (max-width: 768px) {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
   }
   .img {
@@ -57,14 +57,10 @@ const App = () => {
               {"I am Rajeev Dessai"}
             </StyledLabel>
           </div>
-          <StyledLabel
-            fontWeight={"bolder"}
-            className="text-[25px]"
-            fontSize={25}
-          >
+          <StyledLabel className="text-[25px] font-bold" fontSize={25}>
             A Software Engineer
           </StyledLabel>
-          <StyledLabel fontWeight={"bolder"} fontSize={20}>
+          <StyledLabel className="font-bold" fontSize={20}>
             Based in Goa, India.
           </StyledLabel>
           <AnimatedButton

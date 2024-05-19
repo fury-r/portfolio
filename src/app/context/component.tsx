@@ -43,7 +43,7 @@ ${StyledVariables};
     margin: 10px 0 40px;
     font-size: clamp(26px, 5vw, var(--fz-heading));
     white-space: nowrap;
-    text-decoration: underline var(--shade);
+    text-decoration: underline var(--color);
 
     &:before {
       position: relative;
@@ -95,7 +95,7 @@ export const StyledRoundedButton = styled.button`
   outline: 0;
   border: 0;
   padding: 10px;
-  background: var(--accent);
+  background: var(--secondary-color);
   border-radius: 30px;
 
   &:hover {
@@ -160,10 +160,22 @@ export const AnimatedButton = styled(StyledButton)`
     transform: scale(1, 1);
   }
 `;
+export const ThemeBorderContainer = styled.div`
+  background-color: var(--secondary-color);
+  text-decoration: none;
+  border: 1px solid var(--color);
+`;
+
 export const ThemeContainer = styled.div`
   background-color: var(--primary-color);
   text-decoration: none;
+  position: relative;
+  &:hover {
+    opacity: 0.8;
+    float: right;
+  }
 `;
+
 export const StyledNavLink = styled<any>(Link)`
   display: block;
   padding: 15px;
@@ -238,14 +250,19 @@ export const Label = styled.label`
 `;
 export const StyledAccentLabel = styled<any>(FloatingLabel)`
   font-family: "Poppins", sans-serif;
-  color: var(--accent);
+  color: var(--color);
 `;
+
 export const StyledLabel = styled<any>(FloatingLabel)`
   font-family: "Poppins", sans-serif;
   color: var(--color);
   @media (max-width: 740px) {
     font-size: 18px;
   }
+`;
+
+export const StyledBoldLabel = styled<any>(StyledLabel)`
+  font-weight: bold;
 `;
 export const AnimatedStyledLabel = styled<StyledFloatingLabelProps>(
   FloatingLabel

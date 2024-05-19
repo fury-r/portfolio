@@ -373,6 +373,7 @@ display: flex;
 flex-wrap: wrap;
 justify-content: center;
 margin-top: -10px;
+background-color: var(--secondary-color);
 
 &__button {
 margin: 10px 5px 0;
@@ -381,7 +382,7 @@ margin: 10px 5px 0;
 
 $social-button-size: 40px;
 $social-button-icon-size: 0.4;
-$social-button-background: var(--primary-color);
+$social-button-background: var(--secondary-color);
 $social-button-active-color: #040D12;
 $social-button-transition-time: 0.3s;
 
@@ -406,6 +407,7 @@ text-decoration: none;
 border-radius: 100%;
 background: $social-button-background;
 text-align: center;
+border:1px solid var(--primary-color);
 
 &::after {
 content: '';

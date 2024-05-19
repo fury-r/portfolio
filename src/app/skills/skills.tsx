@@ -6,31 +6,31 @@ import {
   ThemeContainer,
 } from "../context/component";
 import Image, { StaticImageData } from "next/image";
-import Python from "../../assets/icon_programming/Python.svg";
+import Python from "../../assets/iconprogramming/Python.svg";
 
-import Java from "../../assets/icon_programming/Java.svg";
-import Php from "../../assets/icon_programming/Php.svg";
-import CSS from "../../assets/icon_programming/css.svg";
-import Html from "../../assets/icon_programming/html.svg";
-import ReactJs from "../../assets/icon_programming/React.svg";
-import NodeJs from "../../assets/icon_programming/NodeJs.svg";
-import Javascript from "../../assets/icon_programming/Javascript.svg";
-import Golang from "../../assets/icon_programming/Go.svg";
-import Grpc from "../../assets/icon_programming/grpc.png";
+import Java from "../../assets/iconprogramming/Java.svg";
+import Php from "../../assets/iconprogramming/Php.svg";
+import CSS from "../../assets/iconprogramming/css.svg";
+import Html from "../../assets/iconprogramming/html.svg";
+import ReactJs from "../../assets/iconprogramming/React.svg";
+import NodeJs from "../../assets/iconprogramming/NodeJs.svg";
+import Javascript from "../../assets/iconprogramming/Javascript.svg";
+import Golang from "../../assets/iconprogramming/Go.svg";
+import Grpc from "../../assets/iconprogramming/grpc.png";
 
-import Cpp from "../../assets/icon_programming/C++.svg";
-import Sql from "../../assets/icon_programming/Sql.svg";
-import Mongo from "../../assets/icon_programming/mongodb.svg";
-import Moralis from "../../assets/icon_programming/moralis.png";
-import FireBase from "../../assets/icon_programming/firebase.svg";
-import Fluter from "../../assets/icon_programming/flutter.svg";
-import Ai from "../../assets/icon_programming/ai-network.svg";
-import Kotlin from "../../assets/icon_programming/kotlin.svg";
-import Laravel from "../../assets/icon_programming/laravel.svg";
-import NextJs from "../../assets/icon_programming/next-js.svg";
-import Docker from "../../assets/icon_programming/docker.svg";
-import Git from "../../assets/icon_programming/Git.svg";
-import TailwindCSS from "../../assets/icon_programming/tailwind-css.svg";
+import Cpp from "../../assets/iconprogramming/C++.svg";
+import Sql from "../../assets/iconprogramming/Sql.svg";
+import Mongo from "../../assets/iconprogramming/mongodb.svg";
+import Moralis from "../../assets/iconprogramming/moralis.png";
+import FireBase from "../../assets/iconprogramming/firebase.svg";
+import Fluter from "../../assets/iconprogramming/flutter.svg";
+import Ai from "../../assets/iconprogramming/ai-network.svg";
+import Kotlin from "../../assets/iconprogramming/kotlin.svg";
+import Laravel from "../../assets/iconprogramming/laravel.svg";
+import NextJs from "../../assets/iconprogramming/next-js.svg";
+import Docker from "../../assets/iconprogramming/docker.svg";
+import Git from "../../assets/iconprogramming/Git.svg";
+import TailwindCSS from "../../assets/iconprogramming/tailwind-css.svg";
 
 import styled from "styled-components";
 import { Container } from "react-bootstrap";

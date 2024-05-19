@@ -86,6 +86,7 @@ const App = () => {
             alt="User photo"
             objectFit="scale-down"
             className=" responsive img blobby-div shadow-md"
+            loading="lazy"
           />
           {/* <BiUser className=" responsive img blobby-div" /> */}
         </Container>

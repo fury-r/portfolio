@@ -14,12 +14,12 @@ import CSS from "../../assets/iconprogramming/css.svg";
 import Html from "../../assets/iconprogramming/html.svg";
 import ReactJs from "../../assets/iconprogramming/React.svg";
 import NodeJs from "../../assets/iconprogramming/NodeJs.svg";
-import Javascript from "../../assets/iconprogramming/Javascript.svg";
+import Javascript from "../../assets/iconprogramming/javascript.svg";
 import Golang from "../../assets/iconprogramming/Go.svg";
 import Grpc from "../../assets/iconprogramming/grpc.png";
 
 import Cpp from "../../assets/iconprogramming/C++.svg";
-import Sql from "../../assets/iconprogramming/Sql.svg";
+import Sql from "../../assets/iconprogramming/sql.svg";
 import Mongo from "../../assets/iconprogramming/mongodb.svg";
 import Moralis from "../../assets/iconprogramming/moralis.png";
 import FireBase from "../../assets/iconprogramming/firebase.svg";

@@ -40,11 +40,11 @@ const NAV_ITEMS: {
     icon: <AiOutlineProject />,
     routes: Routes.project.path,
   },
-  {
-    title: "Publications",
-    icon: <SiGradleplaypublisher />,
-    routes: Routes.publications.path,
-  },
+  // {
+  //   title: "Publications",
+  //   icon: <SiGradleplaypublisher />,
+  //   routes: Routes.publications.path,
+  // },
   {
     title: "Contact",
     icon: <LuContact />,

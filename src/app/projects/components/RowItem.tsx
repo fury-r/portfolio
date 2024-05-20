@@ -248,7 +248,6 @@ const StyledProject = styled.li`
     &:hover,
     &:focus {
       background-color: var(--shade);
-
       outline: 0;
       vertical-align: middle;
       .image-link {
@@ -286,7 +285,6 @@ const StyledProject = styled.li`
 
     @media (max-width: 768px) {
       grid-column: 1 / -1;
-      height: 100%;
       opacity: 0.25;
     }
     .image-link {
@@ -322,7 +320,7 @@ const StyledProject = styled.li`
   }
   a {
     text-decoration: none;
-    color: var(--secondary-color);
+    color: var(--accent);
   }
 `;
 export const RowItem = (

@@ -21,7 +21,7 @@ import { useModalContext } from "../context/ModalContext/useContext";
 const ProjectsMenu: MenuItem[] = [
   {
     title: "Chat Messenger with E2EE ",
-    desc: "SecureMessenger is a secure and end-to-end encrypted (E2EE) messaging application designed to prioritize user privacy and data security. The application is written in Kotlin for the Android platform, utilizes gRPC for communication, employs Protocol Buffers for efficient data serialization, and includes middleware written in Node.js using TypeScript. The backend server is implemented in the Go programming language.",
+    desc: "SecureMessenger is a secure and end-to-end encrypted (E2EE) messaging application designed to prioritize user privacy and data security. ",
     link: "https://github.com/fury-r/encrypted-messenger",
 
     images: [],

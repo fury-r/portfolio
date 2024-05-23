@@ -17,6 +17,7 @@ import NodeJs from "../../assets/iconprogramming/NodeJs.svg";
 import Javascript from "../../assets/iconprogramming/javascript.svg";
 import Golang from "../../assets/iconprogramming/Go.svg";
 import Grpc from "../../assets/iconprogramming/grpc.png";
+import NodejsDark from "../../assets/iconprogramming/NodejsDark.svg";
 
 import Cpp from "../../assets/iconprogramming/C++.svg";
 import Sql from "../../assets/iconprogramming/sql.svg";
@@ -34,6 +35,7 @@ import TailwindCSS from "../../assets/iconprogramming/tailwind-css.svg";
 
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
+import { useThemeContext } from "../context/ThemeContext/useContext";
 type Item = {
   title: string;
   iconPath: StaticImageData;
@@ -113,6 +115,7 @@ const Row = ({ type, data }: { type: string; data: Item[] }) => {
 };
 
 export const Skills = () => {
+  const { main } = useThemeContext();
   const skills: Item[] = [
     {
       iconPath: Python,
@@ -168,7 +171,7 @@ export const Skills = () => {
       title: "Moralis",
     },
     {
-      iconPath: NodeJs,
+      iconPath: main === "LIGHT" ? NodejsDark : NodeJs,
       title: "NodeJs",
       renderOnlyIcon: true,
     },

@@ -16,7 +16,7 @@ const StyledVariables = css`
     --green-tint: rgba(100, 255, 218, 0.1);
     --pink: #f57dff;
     --blue: #57cbff;
-
+    --dark-accent: ${({ theme }) => theme?.darkAccent};
     --primary-color: ${({ theme }) => theme?.primaryColor};
     --color: ${({ theme }) => theme?.color};
     --shade: ${({ theme }) => theme?.shade};

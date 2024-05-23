@@ -26,6 +26,8 @@ export const dark = {
   primaryColor: "#222529",
   secondaryColor: "#1a1d21",
   color: "whitesmoke",
+  darkAccent: "#1d1d1d",
+
   accentColor: "white",
   box_shadow_1: "#183D3D",
   box_shadow_2: "#183D3D",
@@ -184,9 +186,11 @@ export const dark = {
   },
 };
 export const light = {
-  primaryColor: "#1a1d21",
+  // primaryColor: "#1a1d21",
+  primaryColor: "#d2d2d2",
   secondaryColor: "#ffffff",
   buttonAccent: "white",
+  darkAccent: "#1d1d1d",
   color: "black",
   accentColor: "white",
   box_shadow_1: "#b1b1b5",

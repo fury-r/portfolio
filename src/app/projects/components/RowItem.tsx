@@ -16,6 +16,7 @@ const StyledProject = styled.li`
 
   @media (max-width: 768px) {
     ${({ theme }) => theme?.mixins?.boxShadow};
+    height: 70%;
   }
 
   &:not(:last-of-type) {

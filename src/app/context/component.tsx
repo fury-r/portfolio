@@ -71,11 +71,11 @@ export const StyledButton = styled.button<{
   color?: string;
 }>`
   color: var(--accent);
+  background-color: var(--dark-accent);
 
   outline: 0;
   border: 0;
   padding: 10px;
-  background: var(--primary-color);
 
   &:hover {
     border: none;
@@ -117,6 +117,7 @@ export const AnimatedButton = styled(StyledButton)`
   color: var(--accent);
   font-weight: 600;
   text-transform: uppercase;
+
   position: relative;
   align-items: center;
   z-index: 1;
@@ -163,7 +164,7 @@ export const AnimatedButton = styled(StyledButton)`
 export const ThemeBorderContainer = styled.div`
   background-color: var(--secondary-color);
   text-decoration: none;
-  border: 1px solid var(--color);
+  border: 1px solid var(--primary-color);
 `;
 
 export const ThemeContainer = styled.div`

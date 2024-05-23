@@ -1,24 +1,18 @@
 "use client";
-import { Container, InputGroup } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import { FormGroup } from "../component/FormGroup";
 import { StyledButton, StyledLabel } from "../context/component";
-import {
-  DetailedHTMLProps,
-  FormEvent,
-  FormEventHandler,
-  FormHTMLAttributes,
-} from "react";
-import { useAuth } from "../context/Authcontext";
+import { useThemeContext } from "../context/ThemeContext/useContext";
 
-const StyledContainer = styled(Container)`
+const _StyledContainer = styled(Container)`
   width: 25%;
   @media (max-width: 748px) {
     width: 90%;
   }
 `;
 const Contact = () => {
-  const { theme } = useAuth();
+  const { theme } = useThemeContext();
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
     console.log(e.currentTarget.value);

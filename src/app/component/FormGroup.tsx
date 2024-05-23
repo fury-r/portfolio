@@ -36,8 +36,8 @@ const StyledInputGroup = styled.div`
             line-height: 30px;
             font-size: 14px;
             border: none;
-            background: var(--secondary-color);
-            border: 1px solid #ccc;
+            background: var(--primary-color);
+            border: 1px solid var(--secondary-color);
             outline: none;
             width: 100%;
 
@@ -48,7 +48,7 @@ const StyledInputGroup = styled.div`
             &:focus,
             &:valid {
               & ~ label {
-                color: $accent-color;
+                color: var(--color);
                 transform: translateY(-28px);
                 font-size: 0.825em;
                 font-weight: bold;
@@ -59,6 +59,9 @@ const StyledInputGroup = styled.div`
               /* background-color: #f7f7f72f; */
               border: 1px dotted black;
             }
+            &::placeholder {
+              color: var(--color);
+            }
           }
           label {
             position: absolute;
@@ -67,7 +70,7 @@ const StyledInputGroup = styled.div`
             height: 30px;
             line-height: 30px;
             pointer-events: none;
-            color: #ccc;
+            color: var(--color);
             cursor: text;
             transition: all 200ms ease-out;
             z-index: 10;
@@ -80,10 +83,7 @@ const StyledInputGroup = styled.div`
 
 export const FormGroup = ({
   title,
-  error,
-  hasError,
   name,
-  value,
   textArea,
 }: {
   title: string;

@@ -1,20 +1,19 @@
 "use client";
 import React from "react";
 import { Container } from "react-bootstrap";
-import { StyledLabel, ThemeContainer } from "./context/component";
+import { StyledLabel, AnimatedButton } from "./context/component";
 import Image from "next/image";
 import "./css/introduction.css";
-import { BiUser } from "react-icons/bi";
 import styled from "styled-components";
 import { Companies } from "./component/Company";
-import { Metadata } from "next";
 import Profile from "../assets/profile.jpg";
+import { useRouter } from "next/navigation";
 const IntroductionContainer = styled(Container)`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   @media (max-width: 768px) {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
   }
   .img {
@@ -22,7 +21,10 @@ const IntroductionContainer = styled(Container)`
     @media (max-width: 768px) {
       width: 50%;
     }
+    transform: scale(0.9);
+    border: 1px solid var(--color);
   }
+
   &:not(:last-of-type) {
     margin-bottom: 100px;
 
@@ -36,29 +38,38 @@ const IntroductionContainer = styled(Container)`
   }
 `;
 const App = () => {
+  const { push } = useRouter();
   return (
     <Container className="flex flex-col  items-center w-fit mt-10 ">
       <IntroductionContainer className=" ">
-        <div className="flex flex-col justify-end items-start mb-10  ">
-          <StyledLabel className=" w-32  h-16 flex justify-start items-center    rounded-t-3xl rounded-e-3xl ">
+        <div className="flex flex-col justify-end items-start mb-10  align-center-sm-device  ">
+          <StyledLabel className="  h-16 flex justify-start items-center  rounded-t-3xl rounded-e-3xl  ">
             <StyledLabel className=" text-[32px]">Hello</StyledLabel>
-            <Image height={30} src={require("../assets/Wave.svg")} alt={""} />
+            <Image
+              height={30}
+              className="m-3"
+              src={require("../assets/Wave.svg")}
+              alt={""}
+            />
           </StyledLabel>
           <div className="flex items-center justify-start">
             <StyledLabel className="bg-red flex  bolder underline italic text-[32px] ">
-              {"I'm Rajeev Dessai"}
+              {"I am Rajeev Dessai"}
             </StyledLabel>
           </div>
-          <StyledLabel
-            fontWeight={"bolder"}
-            className="text-[25px]"
-            fontSize={25}
-          >
+          <StyledLabel className="text-[25px] font-bold" fontSize={25}>
             A Software Engineer
           </StyledLabel>
-          <StyledLabel fontWeight={"bolder"} fontSize={20}>
+          <StyledLabel className="font-bold" fontSize={20}>
             Based in Goa, India.
           </StyledLabel>
+          <AnimatedButton
+            className="mt-5 rounded-md"
+            color="white"
+            onClick={() => push("/contact")}
+          >
+            Contact me
+          </AnimatedButton>
         </div>
         {/* <Image
           src={require("./assets/pic.png")}
@@ -75,6 +86,7 @@ const App = () => {
             alt="User photo"
             objectFit="scale-down"
             className=" responsive img blobby-div shadow-md"
+            loading="lazy"
           />
           {/* <BiUser className=" responsive img blobby-div" /> */}
         </Container>

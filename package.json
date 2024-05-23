@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 ",
+    "fix-lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0  --fix"
   },
   "dependencies": {
     "@emotion/react": "^11.4.1",
@@ -18,11 +19,13 @@
     "@reduxjs/toolkit": "^1.6.1",
     "@types/lodash": "^4.14.200",
     "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^7.8.0",
     "animate.css": "^4.1.1",
     "aos": "^3.0.0-beta.6",
     "axios": "^0.21.4",
     "bootstrap": "^5.3.2",
     "browserslist": "^4.16.5",
+    "eslint-plugin-react-refresh": "^0.4.6",
     "framer-motion": "^10.16.4",
     "gsap": "^3.12.2",
     "loadsh": "^0.0.4",
@@ -55,11 +58,13 @@
     "@types/react-dom": "^18",
     "@types/styled-components": "^5.1.28",
     "autoprefixer": "^10",
+    "daisyui": "^4.10.3",
     "eslint": "^8",
     "eslint-config-next": "13.5.4",
+    "eslint-plugin-unused-imports": "^3.2.0",
     "postcss": "^8",
     "tailwindcss": "^3",
-    "turbo": "^1.10.16",
+    "turbo": "^1.13.3",
     "typescript": "^5"
   }
 }

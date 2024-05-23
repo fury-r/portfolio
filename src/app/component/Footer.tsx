@@ -5,12 +5,13 @@ const MainFooter = () => {
   return (
     <>
       <footer className="footer flex  mt-4">
-        <Container className="p-5 flex justify-content-center">
-          <Row xs={1} xl={1}>
-            <label className="footer ">
+        <Container className="p-5 flex-row justify-content-center items-center justify-center">
+          <div className="flex flex-col  justify-center  items-center">
+            <label className="footer font-sm w-fit">
               Designed & built by Rajeev Dessai.
             </label>
-          </Row>
+            <label className="footer font-sm w-fit ">(Under Development)</label>
+          </div>
         </Container>
       </footer>
     </>

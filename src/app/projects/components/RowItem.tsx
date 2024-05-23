@@ -1,22 +1,22 @@
 import {
-  GlassContainer,
-  StyledButton,
-  StyledLabel,
+  AnimatedStyledLabel,
+  AnimatedButton,
   ThemeContainer,
 } from "../../context/component";
 import Image from "next/image";
 import { MenuItem } from "../types";
 import styled from "styled-components";
-import { omit } from "lodash";
 const StyledProject = styled.li`
   position: relative;
   display: grid;
   grid-gap: 10px;
   grid-template-columns: repeat(12, 1fr);
   align-items: center;
+  border-radius: var(--border-radius);
 
   @media (max-width: 768px) {
     ${({ theme }) => theme?.mixins?.boxShadow};
+    height: 70%;
   }
 
   &:not(:last-of-type) {
@@ -50,9 +50,10 @@ const StyledProject = styled.li`
     }
     .project-tech-list {
       justify-content: flex-end;
-
+      margin-left: 70px;
       @media (max-width: 768px) {
         justify-content: flex-start;
+        margin: 0;
       }
 
       li {
@@ -100,6 +101,9 @@ const StyledProject = styled.li`
       grid-column: 1 / -1;
       padding: 40px 40px 30px;
       z-index: 5;
+      .image-button {
+        display: block;
+      }
     }
 
     @media (max-width: 480px) {
@@ -111,7 +115,7 @@ const StyledProject = styled.li`
     margin: 10px 0;
     color: var(--color);
     font-family: var(--font-mono);
-    font-size: var(--fz-xs);
+    font-size: var(--fz-xl);
     font-weight: 600;
   }
 
@@ -178,9 +182,12 @@ const StyledProject = styled.li`
     flex-wrap: wrap;
     position: relative;
     z-index: 2;
-    margin: 25px 0 10px;
-    padding: 0;
+    margin: 25px;
+    margin-right: 70px;
+
+    padding: 0px 5px 0 0;
     list-style: none;
+    white-space: pre-wrap;
 
     li {
       margin: 0 20px 5px 0;
@@ -196,7 +203,7 @@ const StyledProject = styled.li`
 
       li {
         margin: 0 10px 5px 0;
-        color: var(--lightest-slate);
+        color: var(--color);
       }
     }
   }
@@ -235,19 +242,21 @@ const StyledProject = styled.li`
   .color-grey {
     width: 100%;
     height: 100%;
-    background-color: var(--shade);
+    background-color: transparent;
+
     border-radius: var(--border-radius);
-    vertical-align: middle;
 
     &:hover,
     &:focus {
-      background: transparent;
+      background-color: var(--shade);
       outline: 0;
-
+      vertical-align: middle;
+      .image-link {
+        display: block;
+      }
       &:before,
       .img {
-        background: transparent;
-        filter: none;
+        background-color: var(--shade);
       }
     }
 
@@ -264,6 +273,7 @@ const StyledProject = styled.li`
       transition: var(--transition);
       background-color: var(--navy);
       mix-blend-mode: screen;
+      border-radius: var(--border-radius);
     }
   }
   .project-image {
@@ -276,14 +286,21 @@ const StyledProject = styled.li`
 
     @media (max-width: 768px) {
       grid-column: 1 / -1;
-      height: 100%;
       opacity: 0.25;
     }
+    .image-link {
+      display: none;
 
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+    }
     .img {
       border-radius: var(--border-radius);
+      width: 100%;
       mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1) brightness(90%);
 
       @media (max-width: 768px) {
         object-fit: cover;
@@ -293,62 +310,94 @@ const StyledProject = styled.li`
       }
     }
   }
+  .image-button {
+    display: none;
+    z-index: 5;
+    align-self: center;
+    width: 100%;
+    &:hover {
+      filter: grayscale(100%) contrast(1) brightness(50%);
+    }
+  }
+  a {
+    text-decoration: none;
+    color: var(--accent);
+  }
 `;
 export const RowItem = (
   props: MenuItem & {
     setSelected: (data: null | MenuItem) => void;
     pos: number;
   }
-) => (
-  <StyledProject>
-    <div className="project-content">
-      <div>
-        <h3 className="project-overline">{props.title}</h3>
-
-        <ThemeContainer
-          className="project-description"
-          // dangerouslySetInnerHTML={{ __html: props.desc!}}
-        >
-          {props.desc}
-        </ThemeContainer>
-
-        {(props.techStack || []).length && (
-          <ul className="project-tech-list">
-            {props.techStack?.map((tech, i) => (
-              <li key={i}>{tech}</li>
-            ))}
-          </ul>
-        )}
-
-        {/* <div className="project-links">
-                      {cta && (
-                        <a href={cta} aria-label="Course Link" className="cta">
-                          Learn More
-                        </a>
-                      )}
-                      {github && (
-                        <a href={github} aria-label="GitHub Link">
-                          <Icon name="GitHub" />
-                        </a>
-                      )}
-                      {external && !cta && (
-                        <a href={external} aria-label="External Link" className="external">
-                          <Icon name="External" />
-                        </a>
-                      )}
-                    </div> */}
+) => {
+  return (
+    <StyledProject>
+      <div className="project-content">
+        <div>
+          <h3 className="project-overline">{props.title}</h3>
+          <ThemeContainer
+            className="project-description"
+            // dangerouslySetInnerHTML={{ __html: props.desc!}}
+          >
+            {props.desc}
+          </ThemeContainer>
+          {(props.techStack || []).length && (
+            <ul className="project-tech-list">
+              {props.techStack?.map((tech, i) => (
+                <li key={i}>{tech}</li>
+              ))}
+            </ul>
+          )}
+          <AnimatedButton className="image-button ">
+            <a
+              className=" image-link"
+              href={props.link}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View on Github
+            </a>
+          </AnimatedButton>
+          {/* <div className="project-links">
+                        {cta && (
+                          <a href={cta} aria-label="Course Link" className="cta">
+                            Learn More
+                          </a>
+                        )}
+                        {github && (
+                          <a href={github} aria-label="GitHub Link">
+                            <Icon name="GitHub" />
+                          </a>
+                        )}
+                        {external && !cta && (
+                          <a href={external} aria-label="External Link" className="external">
+                            <Icon name="External" />
+                          </a>
+                        )}
+                      </div> */}
+        </div>
       </div>
-    </div>
 
-    <div
-      className="project-image  color-grey rounded-[10px]"
-      onClick={() =>
-        props.setSelected({
-          ...omit(props, ["pos", "setSelected"]),
-        })
-      }
-    >
-      <Image src={props.iconImage!} className="img  " alt="image" />
-    </div>
-  </StyledProject>
-);
+      <div
+        className="project-image  color-grey rounded-[10px] relative"
+        // onClick={() =>
+        //   props.setSelected({
+        //     ...omit(props, ["pos", "setSelected"]),
+        //   })
+        // }
+      >
+        <Image src={props.iconImage!} className="img  w-full" alt="image" />
+        {props.link && (
+          <a
+            className=" image-link"
+            href={props.link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <AnimatedStyledLabel>View on Github</AnimatedStyledLabel>
+          </a>
+        )}
+      </div>
+    </StyledProject>
+  );
+};

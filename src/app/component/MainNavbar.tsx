@@ -2,13 +2,12 @@
 import React, { useCallback, useState } from "react";
 import {
   AnimatedStyledLabel,
-  StyledButton,
+  StyledRoundedButton,
   StyledLabel,
   StyledNavItem,
   StyledNavLink,
   StyledNavbar,
 } from "../context/component";
-import { FiSettings } from "react-icons/fi";
 import { LuContact } from "react-icons/lu";
 import { BiHomeAlt, BiInfoCircle, BiMoon, BiSun } from "react-icons/bi";
 import { AiOutlineProject } from "react-icons/ai";
@@ -16,9 +15,10 @@ import { SiGradleplaypublisher } from "react-icons/si";
 
 import { Nav, Navbar } from "react-bootstrap";
 import { Routes } from "../Routes/routes";
-import { useModalContext } from "../context/ModalContext";
 import "../scss/navbar.css";
-import { useAuth } from "../context/Authcontext";
+import { useTheme } from "styled-components";
+import { useModalContext } from "../context/ModalContext/useContext";
+import { useThemeContext } from "../context/ThemeContext/useContext";
 
 const NAV_ITEMS: {
   title: string;
@@ -36,20 +36,15 @@ const NAV_ITEMS: {
     routes: Routes.about.path,
   },
   {
-    title: "Skills",
-    icon: <FiSettings />,
-    routes: Routes.skills.path,
-  },
-  {
     title: "Project",
     icon: <AiOutlineProject />,
     routes: Routes.project.path,
   },
-  {
-    title: "Publications",
-    icon: <SiGradleplaypublisher />,
-    routes: Routes.publications.path,
-  },
+  // {
+  //   title: "Publications",
+  //   icon: <SiGradleplaypublisher />,
+  //   routes: Routes.publications.path,
+  // },
   {
     title: "Contact",
     icon: <LuContact />,
@@ -60,60 +55,65 @@ export const MainNavbar = () => {
   const { data } = useModalContext();
   const [scrollPosition, setSrollPosition] = useState<number>(0);
   const [open, setOpen] = useState(false);
-  const { stateChange, main, theme } = useAuth();
-
+  const theme = useTheme();
+  const { stateChange, main } = useThemeContext();
+  const navbar = document.getElementById("nav");
   const handleScroll = useCallback(async () => {
     const position = window.scrollY;
     if (scrollPosition <= position && open) {
-      document.getElementById("nav")!.style.top = "0px";
+      navbar!.style.top = "0px";
     }
     if (scrollPosition != position) {
-      if (
-        position > scrollPosition ||
-        (position == 0 && document.getElementById("nav")?.style.top)
-      ) {
-        document.getElementById("nav")!.style.top = "-100px";
-      } else if (document.getElementById("nav")?.style.top) {
-        document.getElementById("nav")!.style.top = "0px";
+      if ((position > scrollPosition || position == 0) && navbar?.style.top) {
+        navbar!.style.top = "-500px";
+      } else if (navbar?.style.top) {
+        navbar!.style.top = "0px";
       }
       setSrollPosition(position);
     }
-  }, [window, scrollPosition]);
+  }, [scrollPosition, navbar, open]);
 
   window.addEventListener("scroll", handleScroll);
   const locationpath = location.pathname
     .split("/")
     .at(location.pathname.split("/").length - 1);
+
   return (
     <StyledNavbar
       collapseOnSelect
       fixed="top"
       expand="sm"
-      variant="dark"
       data-bs-theme="dark"
       className={
         ` sticky-top w-full  ${window.scrollY > 1 ? "shadow-md " : ""} p-3 ` +
         (data !== null ? "z-0" : "z-10")
       }
-      style={{
-        backgroundColor: theme.secondaryColor || "transparent",
-      }}
       id="nav"
+      style={{
+        //@ts-ignore
+        backgroundColor: theme.secondaryColor,
+      }}
     >
       <Navbar.Brand href="/">
         <StyledLabel>Rajeev Dessai</StyledLabel>
       </Navbar.Brand>
 
       <div className="flex items-center">
-        <StyledButton
+        <StyledRoundedButton
           className={
-            "rounded-[30px] shadow-md h-9 w-9 self-center  me-2 " +
-            (main ? "rotate-icon" : "rotate-icon")
+            "rounded-[30px] shadow-md h-9 w-9 self-center  me-2  rotate-icon"
           }
-          onClick={() => stateChange()}
+          onClick={() => stateChange(main === "DARK" ? "LIGHT" : "DARK")}
         >
-          {main ? <BiSun /> : <BiMoon />}
-        </StyledButton>
+          {main === "DARK" ? (
+            <BiSun color="white" />
+          ) : (
+            <BiMoon
+              color="black
+          "
+            />
+          )}
+        </StyledRoundedButton>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           className="border-none"
@@ -160,7 +160,7 @@ export const MainNavbar = () => {
                   >
                     {value.title}
                   </AnimatedStyledLabel>
-                  {value.icon}
+                  <StyledLabel>{value.icon}</StyledLabel>
                 </div>
               </StyledNavLink>
             </StyledNavItem>

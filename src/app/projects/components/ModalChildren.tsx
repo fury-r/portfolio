@@ -10,8 +10,13 @@ export const ModalChildren = (props: MenuItem) => {
         style={{}}
         className="grid grid-cols-2 grid-rows-2 w-1/5 m-2  imageContainer"
       >
-        {props.images?.map((image) => (
-          <Image src={image} className="w-40 rounded-md " alt="image" />
+        {props.images?.map((image, index) => (
+          <Image
+            src={image}
+            key={index.toString()}
+            className="w-40 rounded-md "
+            alt="image"
+          />
         ))}
       </div>
     </Container>

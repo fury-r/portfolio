@@ -1,4 +1,4 @@
-import { useModalContext } from "../context/ModalContext";
+import { useModalContext } from "../context/ModalContext/useContext";
 import { ModalChildren } from "../projects/components/ModalChildren";
 import { Modal } from "./Modal";
 

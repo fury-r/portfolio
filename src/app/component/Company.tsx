@@ -1,15 +1,21 @@
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
 import { TCompany } from "./types";
-import Oqton from "../../assets/company/DarkOqton.svg";
+import DarkOqton from "../../assets/company/DarkOqton.svg";
+import LightOqton from "../../assets/company/LightOqton.svg";
+
 import CtrlSaveDark from "../../assets/company/ctrlsave.png";
 import CtrlSaveWhite from "../../assets/company/ctrlsave-white.png";
 
 import Image from "next/image";
 import Vtech from "../../assets/company/vtech.png";
-import { StyledLabel, ThemeContainer } from "../context/component";
-import { useAuth } from "../context/Authcontext";
+import {
+  StyledAccentLabel,
+  StyledLabel,
+  ThemeBorderContainer,
+} from "../context/component";
 import { useMemo } from "react";
+import { useThemeContext } from "../context/ThemeContext/useContext";
 
 const StyledContainer = styled(Container)`
   display: grid;
@@ -33,13 +39,13 @@ const StyledContainer = styled(Container)`
 `;
 
 export const Companies = () => {
-  const { main } = useAuth();
+  const { main } = useThemeContext();
   const companies: TCompany[] = useMemo(
     () => [
       {
         name: "Oqton",
         duration: "Dec 2022 - Present",
-        image: Oqton,
+        image: main === "DARK" ? LightOqton : DarkOqton,
         site: "https://oqton.com",
         role: "Software Development Consultant",
       },
@@ -52,7 +58,7 @@ export const Companies = () => {
       {
         name: "Ctrl Save Pvt Ltd",
         duration: "Oct 2021 - Sept 2022",
-        image: main ? CtrlSaveWhite : CtrlSaveDark,
+        image: main === "DARK" ? CtrlSaveWhite : CtrlSaveDark,
         site: "https://www.ctrlsave.in/",
         role: "Full Stack Developer",
       },
@@ -68,11 +74,11 @@ export const Companies = () => {
   );
   return (
     <Container>
-      <StyledLabel className="heading-point">Where I’ve Worked</StyledLabel>
+      <StyledLabel className="heading-point">Work Experience</StyledLabel>
 
       <StyledContainer>
         {companies.map((company, index) => (
-          <ThemeContainer
+          <ThemeBorderContainer
             key={index.toString()}
             className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[320px] "
           >
@@ -85,15 +91,17 @@ export const Companies = () => {
                 objectFit="cover"
               />
             ) : (
-              <StyledLabel className="font-bold text-xl">
+              <StyledAccentLabel className="font-bold text-2xl">
                 {company.name}
-              </StyledLabel>
+              </StyledAccentLabel>
             )}
-            <StyledLabel className="text-lg whitespace-nowrap font-bold">
+            <StyledAccentLabel className="text-lg whitespace-nowrap font-bold">
               {company.role}
-            </StyledLabel>
-            <StyledLabel className="italic">{company.duration}</StyledLabel>
-          </ThemeContainer>
+            </StyledAccentLabel>
+            <StyledAccentLabel className="italic">
+              {company.duration}
+            </StyledAccentLabel>
+          </ThemeBorderContainer>
         ))}
       </StyledContainer>
     </Container>

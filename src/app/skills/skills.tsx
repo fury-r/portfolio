@@ -74,8 +74,9 @@ const SkillsContainer = styled(Container)`
 const Row = ({ type, data }: { type: string; data: Item[] }) => {
   return (
     <Container className="flex flex-col  ">
-      <StyledLabel className="heading-point">{type}</StyledLabel>
-
+      <div className="w-full flex  justify-center">
+        <StyledLabel className="heading-point">{type}</StyledLabel>
+      </div>
       <SkillsContainer>
         {data.map((value, key) => (
           <ThemeContainer

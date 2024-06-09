@@ -203,6 +203,7 @@ export const StyledNavItem = styled<any>(Nav.Item)`
   color: var(--color);
   border-radius: 10px;
   margin-right: 15px;
+  width: 100%;
 `;
 
 export const StyledNavbar = styled<any>(Navbar)`

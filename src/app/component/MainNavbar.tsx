@@ -11,7 +11,6 @@ import {
 import { LuContact } from "react-icons/lu";
 import { BiHomeAlt, BiInfoCircle, BiMoon, BiSun } from "react-icons/bi";
 import { AiOutlineProject } from "react-icons/ai";
-import { SiGradleplaypublisher } from "react-icons/si";
 
 import { Nav, Navbar } from "react-bootstrap";
 import { Routes } from "../Routes/routes";
@@ -129,9 +128,9 @@ export const MainNavbar = () => {
           </div>
         </Navbar.Toggle>
       </div>
-      <Navbar.Collapse id="responsive-navbar-nav  ">
+      <Navbar.Collapse id="responsive-navbar-nav   ">
         <Nav
-          className={open ? "" : " absolute right-6"}
+          className={open ? "w-full" : " absolute right-6"}
           activeKey={location.pathname}
         >
           {NAV_ITEMS.map((value, index) => (

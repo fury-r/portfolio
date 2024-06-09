@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Container } from "react-bootstrap";
 import {
@@ -5,12 +6,16 @@ import {
   StyledLabel,
   ThemeBorderContainer,
 } from "../context/component";
+
 import { Skills } from "../skills/skills";
+import { useTheme } from "styled-components";
 const About = () => {
+  const theme = useTheme();
   return (
     <Container className="flex flex-col ">
-      <StyledLabel className="heading-point">About Me</StyledLabel>
-
+      <div className="w-full flex  justify-center">
+        <StyledLabel className="heading-point">About Me</StyledLabel>
+      </div>
       <div className="flex flex-col items-start justify-between h-4/5">
         <Container className="flex flex-row justify-between h-fit"></Container>
         <ThemeBorderContainer className=" mt-2 p-4  rounded-[10px] flex flex-col items-center">
@@ -30,7 +35,11 @@ const About = () => {
             </p>
           </StyledAccentLabel>
         </ThemeBorderContainer>
-        <div className="bg-black w-5/12 h-[0.7px] mt-6 self-center"></div>
+        <div
+          //@ts-ignore
+          style={{ backgroundColor: theme.color }}
+          className=" w-5/12 h-[0.7px] mt-6 self-center"
+        ></div>
       </div>
       <Skills />
     </Container>

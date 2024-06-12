@@ -74,8 +74,9 @@ export const Companies = () => {
   );
   return (
     <Container>
-      <StyledLabel className="heading-point">Work Experience</StyledLabel>
-
+      <div className="w-full flex  justify-center">
+        <StyledLabel className="heading-point">Work Experience</StyledLabel>
+      </div>
       <StyledContainer>
         {companies.map((company, index) => (
           <ThemeBorderContainer

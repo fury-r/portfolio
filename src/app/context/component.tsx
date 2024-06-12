@@ -10,7 +10,6 @@ import {
 import { createGlobalStyle } from "styled-components";
 import DarkModeToggle from "react-dark-mode-toggle";
 import styled from "styled-components";
-import { func } from "prop-types";
 import { light } from "./theme";
 
 import { Parallax } from "@react-spring/parallax";
@@ -79,6 +78,9 @@ export const StyledButton = styled.button<{
 
   &:hover {
     border: none;
+  }
+  &.disabled {
+    opacity: 0.1;
   }
   /* @keyframes ripple-effect {
     0% {
@@ -376,6 +378,7 @@ export const ToggleMode = () => {
   const [mode, setMode] = useState(true); //true dark false light
   const [mountedComponent, setMountedComponent] = useState(false);
   const [main, setMain] = useState({});
+
   // const setTheme = (theme) => {
   //   localStorage.setItem("mode", theme);
   //   setMode(theme);
@@ -415,7 +418,4 @@ export const Toggle = ({ Toggler }: any) => {
     Toggler();
   };
   return <DarkModeToggle onChange={ToggleTheme} checked={isDark} size={40} />;
-};
-Toggle.propTypes = {
-  Toggler: func.isRequired,
 };

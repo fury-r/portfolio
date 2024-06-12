@@ -71,14 +71,6 @@ const App = () => {
             Contact me
           </AnimatedButton>
         </div>
-        {/* <Image
-          src={require("./assets/pic.png")}
-          
-          alt="User Photo"
-   
-          className=" responsive  blobby-div"
-          style={{ transform: "translateZ(30px)", objectFit: "cover",height:"70%" }}
-        /> */}
 
         <Container className="flex justify-center">
           <Image

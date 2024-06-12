@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 const MainFooter = () => {
   return (
@@ -10,7 +10,7 @@ const MainFooter = () => {
             <label className="footer font-sm w-fit">
               Designed & built by Rajeev Dessai.
             </label>
-            <label className="footer font-sm w-fit ">(Under Development)</label>
+            <label className="footer font-sm w-fit ">(v1.0.0)</label>
           </div>
         </Container>
       </footer>

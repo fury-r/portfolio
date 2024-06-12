@@ -6,9 +6,4 @@ export const ThemeContext = React.createContext<{
   main: MODE;
   theme: any;
   setTheme: React.Dispatch<React.SetStateAction<any>>;
-}>({
-  stateChange: () => null,
-  main: "LIGHT",
-  theme: [],
-  setTheme: Function,
-});
+} | null>(null);

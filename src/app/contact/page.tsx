@@ -4,6 +4,10 @@ import { FormGroup } from "../component/FormGroup";
 import { StyledButton, StyledLabel } from "../context/component";
 import { useThemeContext } from "../context/ThemeContext/useContext";
 import { Container } from "react-bootstrap";
+import ReCAPTCHA from "react-google-recaptcha";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-toastify";
 
 const StyledContainer = styled(Container)`
   width: 400px;
@@ -13,32 +17,69 @@ const StyledContainer = styled(Container)`
 `;
 const Contact = () => {
   const { theme } = useThemeContext();
+  const [captchaVerified, setCaptchaVerified] = useState(true);
+  const form = useRef<HTMLFormElement>(null);
+
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
+    emailjs
+      .sendForm(
+        process.env.NEXT_PUBLIC_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_TEMPLATE_ID!,
+        form.current as HTMLFormElement,
+        {
+          publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY,
+        }
+      )
+      .then(
+        () => {
+          toast.success("Message has been sent.Thank You 🙂!");
+        },
+        (error) => {
+          console.error(error);
+          toast.error("Failed to send.Try again 🙁!");
+        }
+      );
+    form.current?.reset();
   };
+
   return (
     <div className="flex flex-col items-center">
       <StyledLabel className="heading-point w-fit">Reach out</StyledLabel>
       <StyledContainer
         style={{
-          backgroundColor: theme.shade,
+          backgroundColor: theme.form,
         }}
-        className="p-9 rounded-[10px] shadow-md md:w-2/3 w-[400px]"
+        className="p-10  rounded-[10px] shadow-md md:w-2/3 w-[400px] "
       >
-        <form className="grid grid-cols-1 gap-2" onSubmit={handleOnSubmit}>
-          <FormGroup name="name" title="Name" value="" />
-          <FormGroup name="email" title="Email" value="" />
+        <form
+          ref={form}
+          className="grid grid-cols-1 gap-2"
+          onSubmit={handleOnSubmit}
+        >
+          <FormGroup name="user_name" title="Name" value="" />
+          <FormGroup name="user_email" title="Email" value="" />
           <FormGroup
-            name="description"
+            name="user_description"
             title="Description"
             textArea={true}
             value=""
           />
+          <div className="flex justify-center m-4 ">
+            <ReCAPTCHA
+              sitekey={process.env.NEXT_PUBLIC_SITE_KEY!}
+              onChange={(e) => {
+                setCaptchaVerified(e === null);
+              }}
+            />
+          </div>
           <Container className="flex justify-center">
             <StyledButton
               type="submit"
-              className="w-4/12 rounded-[10px] "
-              disabled
+              className={`w-4/12 rounded-[10px] ${
+                captchaVerified ? "disabled" : ""
+              }`}
+              disabled={captchaVerified}
             >
               Submit
             </StyledButton>

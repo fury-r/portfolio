@@ -9,6 +9,10 @@ const StyledInputGroup = styled.div`
         overflow: hidden;
         position: relative;
         width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
         &-title {
           position: absolute;
           top: 10px;
@@ -21,7 +25,7 @@ const StyledInputGroup = styled.div`
         }
         &-content {
           position: relative;
-          width: 100%;
+          width: 80%;
           height: 70px;
           display: flex;
           flex-direction: column;
@@ -106,6 +110,7 @@ export const FormGroup = ({
                     cols={50}
                     rows={6}
                     placeholder={title}
+                    name={name}
                   />
                 </>
               ) : (

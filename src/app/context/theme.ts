@@ -27,7 +27,7 @@ export const dark = {
   secondaryColor: "#1a1d21",
   color: "whitesmoke",
   darkAccent: "#1d1d1d",
-
+  form: "#2a323c",
   accentColor: "white",
   box_shadow_1: "#183D3D",
   box_shadow_2: "#183D3D",
@@ -191,6 +191,7 @@ export const light = {
   secondaryColor: "#ffffff",
   buttonAccent: "white",
   darkAccent: "#1d1d1d",
+  form: "#f2f2f2",
   color: "black",
   accentColor: "white",
   box_shadow_1: "#b1b1b5",

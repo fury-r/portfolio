@@ -12,6 +12,7 @@ import AgileSprintImage1 from "../../assets/projects/agilemanagement/image_6.png
 import AgileSprintImage2 from "../../assets/projects/agilemanagement/image_2.png";
 import ERP1 from "../../assets/projects/erp/ERP1.png";
 import Messenger from "../../assets/projects/chatapp/messenger.png";
+import FileSharer from "../../assets/projects/filesharer/image.png";
 
 import "./css/style.css";
 import { MenuItem } from "./types";
@@ -171,13 +172,31 @@ const ProjectsMenu: MenuItem[] = [
       "MongoDB",
     ],
   },
+  {
+    title: "File Sharer",
+    desc: "The FileShare Web Application is a platform built to facilitate easy sharing of files through file uploads and QR code generation. It utilizes React with TypeScript on the frontend and Django with Python on the backend. The app allows users to upload files, generate QR codes for those files, and share them effortlessly.",
+    link: "https://github.com/fury-r/filesharer",
+    subItems: [],
+    images: [FileSharer],
+    iconImage: FileSharer,
+    techStack: [
+      "React",
+      "Vite",
+      "Typescript",
+      "Tailwind",
+      "Socket",
+      "Python",
+      "Django",
+      "SQLite",
+    ],
+  },
 ];
 
 const Project = () => {
   const { setData } = useModalContext();
   const handleSetData = (data: MenuItem | null) => setData!(data);
   return (
-    <Container className="h-full overflow-auto ">
+    <Container className="h-full ">
       <Container className="grid grid-cols-1 ">
         {ProjectsMenu.map((item, index) => (
           <RowItem

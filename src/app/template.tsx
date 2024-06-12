@@ -9,6 +9,8 @@ import { ToggleMode } from "./context/component";
 import { Layout } from "./component/Layout";
 import "./index.css";
 import { CustomThemeProvider } from "./context/ThemeContext/Provider";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 export default function Template({ children }: { children: React.ReactNode }) {
   const { mode, mountedComponent } = ToggleMode();
 
@@ -20,6 +22,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       <div className="cursor"></div>
       <div className="cursor2"></div>
       <Layout>{children}</Layout>
+      <ToastContainer />
     </CustomThemeProvider>
   );
 }

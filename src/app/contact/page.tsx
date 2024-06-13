@@ -1,7 +1,7 @@
 "use client";
 import styled from "styled-components";
 import { FormGroup } from "../component/FormGroup";
-import { StyledButton, StyledLabel } from "../context/component";
+import { AnimatedButton, StyledLabel } from "../context/component";
 import { useThemeContext } from "../context/ThemeContext/useContext";
 import { Container } from "react-bootstrap";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -48,9 +48,9 @@ const Contact = () => {
       <StyledLabel className="heading-point w-fit">Reach out</StyledLabel>
       <StyledContainer
         style={{
-          backgroundColor: theme.form,
+          border: `1px solid  ${theme.primaryColor}`,
         }}
-        className="p-10  rounded-[10px] shadow-md md:w-2/3 w-[400px] "
+        className="p-10  rounded-[10px] shadow-sm md:w-2/3 w-[400px] "
       >
         <form
           ref={form}
@@ -74,7 +74,7 @@ const Contact = () => {
             />
           </div>
           <Container className="flex justify-center">
-            <StyledButton
+            <AnimatedButton
               type="submit"
               className={`w-4/12 rounded-[10px] ${
                 captchaVerified ? "disabled" : ""
@@ -82,7 +82,7 @@ const Contact = () => {
               disabled={captchaVerified}
             >
               Submit
-            </StyledButton>
+            </AnimatedButton>
           </Container>
         </form>
       </StyledContainer>

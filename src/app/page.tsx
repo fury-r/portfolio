@@ -22,7 +22,7 @@ const IntroductionContainer = styled(Container)`
       width: 50%;
     }
     transform: scale(0.9);
-    border: 1px solid var(--color);
+    border: 1px solid var(--primary-color);
   }
 
   &:not(:last-of-type) {

@@ -101,7 +101,7 @@ export const StyledRoundedButton = styled.button`
   border-radius: 30px;
 
   &:hover {
-    border: none;
+    border: 10px solid black;
   }
   /* @keyframes ripple-effect {
     0% {
@@ -116,15 +116,19 @@ export const AnimatedButton = styled(StyledButton)`
   display: block;
   padding: 15px;
   text-decoration: none;
-  color: var(--accent);
+  color: var(--color);
   font-weight: 600;
   text-transform: uppercase;
 
   position: relative;
   align-items: center;
+  background-color: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+
   z-index: 1;
   &:hover {
     transform: scale(1.1);
+    border: 1px solid var(--primary-color);
   }
   .active {
     border-bottom: 1px solid #6e07f3;
@@ -155,7 +159,7 @@ export const AnimatedButton = styled(StyledButton)`
     z-index: 1;
     opacity: 0;
     transition: all 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* border: 1px solid rgba(255, 255, 255, 0.5); */
     transform: scale(1.2, 1.2);
   }
   .btn-three:hover::after {
@@ -210,6 +214,9 @@ export const StyledNavItem = styled<any>(Nav.Item)`
 
 export const StyledNavbar = styled<any>(Navbar)`
   color: var(--color);
+  .button {
+    border: 1px solid var(--primary-color);
+  }
 `;
 
 export const StyledText = styled<any>(FloatingLabel)`

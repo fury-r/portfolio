@@ -36,6 +36,11 @@ const StyledContainer = styled(Container)`
     height: 40px;
     filter: grayscale(80%) contrast(1) brightness(90%);
   }
+  .pointer {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const Companies = () => {
@@ -81,7 +86,7 @@ export const Companies = () => {
         {companies.map((company, index) => (
           <ThemeBorderContainer
             key={index.toString()}
-            className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[320px] "
+            className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[320px] pointer "
           >
             {company.image ? (
               <Image

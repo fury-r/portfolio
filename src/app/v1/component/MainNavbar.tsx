@@ -97,7 +97,7 @@ export const MainNavbar = () => {
       <div className="flex items-center">
         <StyledRoundedButton
           className={
-            "rounded-[30px] shadow-md h-9 w-9 self-center  me-2  rotate-icon"
+            "rounded-[30px] shadow-md h-10 w-10 self-center  me-2  rotate-icon button flex justify-center items-center"
           }
           onClick={() => stateChange(main === "DARK" ? "LIGHT" : "DARK")}
         >

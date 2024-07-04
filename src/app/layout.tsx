@@ -1,9 +1,12 @@
+"use client";
 import React from "react";
 
 // export const metadata: Metadata = {
 //   title: "Rajeev Dessai",
 //   description: "Test",
 // };
+import "./index.css";
+import "../css/index.scss";
 export default function RootLayout({
   children,
 }: {

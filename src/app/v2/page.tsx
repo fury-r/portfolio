@@ -4,7 +4,7 @@ import PageLayout from "./components/Page/PageLayout";
 import About from "./about/About";
 import { DoingCards } from "./about/DoingCards";
 
-export const PortfolioV2 = () => {
+const Portfolio = () => {
   return (
     <div>
       <PageLayout
@@ -23,4 +23,4 @@ export const PortfolioV2 = () => {
   );
 };
 
-export default PortfolioV2;
+export default Portfolio;

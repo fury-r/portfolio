@@ -1,18 +1,18 @@
 "use client";
 import { Container } from "react-bootstrap";
-import Lifeline from "../../assets/projects/lifeline/image_1.png";
-import LifelineImage2 from "../../assets/projects/lifeline/image_3.png";
+import Lifeline from "../../../assets/projects/lifeline/image_1.png";
+import LifelineImage2 from "../../../assets/projects/lifeline/image_3.png";
 
-import Leylines from "../../assets/projects/leylines/image_3.png";
-import LeylinesImage1 from "../../assets/projects/leylines/image_7.png";
-import LeylinesImage2 from "../../assets/projects/leylines/image_11.png";
+import Leylines from "../../../assets/projects/leylines/image_3.png";
+import LeylinesImage1 from "../../../assets/projects/leylines/image_7.png";
+import LeylinesImage2 from "../../../assets/projects/leylines/image_11.png";
 
-import AgileSprint from "../../assets/projects/agilemanagement/image_9.jpg";
-import AgileSprintImage1 from "../../assets/projects/agilemanagement/image_6.png";
-import AgileSprintImage2 from "../../assets/projects/agilemanagement/image_2.png";
-import ERP1 from "../../assets/projects/erp/ERP1.png";
-import Messenger from "../../assets/projects/chatapp/messenger.png";
-import FileSharer from "../../assets/projects/filesharer/image.png";
+import AgileSprint from "../../../assets/projects/agilemanagement/image_9.jpg";
+import AgileSprintImage1 from "../../../assets/projects/agilemanagement/image_6.png";
+import AgileSprintImage2 from "../../../assets/projects/agilemanagement/image_2.png";
+import ERP1 from "../../../assets/projects/erp/ERP1.png";
+import Messenger from "../../../assets/projects/chatapp/messenger.png";
+import FileSharer from "../../../assets/projects/filesharer/image.png";
 
 import "./css/style.css";
 import { MenuItem } from "./types";

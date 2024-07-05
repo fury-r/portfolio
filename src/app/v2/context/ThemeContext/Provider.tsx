@@ -41,6 +41,7 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
         rounded: `${rounded}px`,
       },
       setTheme,
+      setRounded,
     }),
     [mode, rounded, stateChange, theme]
   );

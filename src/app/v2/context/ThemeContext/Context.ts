@@ -6,4 +6,5 @@ export const ThemeContext = React.createContext<{
   mode: MODE;
   theme: any;
   setTheme: React.Dispatch<React.SetStateAction<any>>;
+  setRounded: React.Dispatch<React.SetStateAction<number>>;
 } | null>(null);

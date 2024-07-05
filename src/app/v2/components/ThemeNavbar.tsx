@@ -67,13 +67,13 @@ export const ThemeNavbar = () => {
     >
       {/* <Navbar.Collapse id="responsive-navbar-nav" className="w-full"> */}
       <Nav
-        activeKey={location.pathname}
+        activeKey={location?.pathname || ""}
         className="flex w-full flex-row justify-between px-10 z-10"
       >
         {NAV_ITEMS.map((item, index) => (
           <Nav.Item
             key={(index + 1).toString()}
-            className={`${location.pathname === item.routes ? "active" : ""}`}
+            className={`${location?.pathname === item.routes ? "active" : ""}`}
           >
             <Nav.Link href={item.routes}>{item.title}</Nav.Link>
           </Nav.Item>

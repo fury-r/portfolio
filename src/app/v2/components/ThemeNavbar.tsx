@@ -61,7 +61,7 @@ export const ThemeNavbar = () => {
       style={
         {
           //@ts-ignore
-          // backgroundColor: theme.secondaryColor,
+          // backgroundColor: theme.secondary,
         }
       }
     >

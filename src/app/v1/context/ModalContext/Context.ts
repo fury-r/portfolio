@@ -1,5 +1,5 @@
-import { MenuItem } from "@/app/projects/types";
 import { createContext } from "react";
+import { MenuItem } from "../../projects/types";
 
 export const ModalContext = createContext<{
   data: MenuItem;

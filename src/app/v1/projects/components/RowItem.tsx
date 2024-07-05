@@ -153,7 +153,7 @@ const StyledProject = styled.li`
     z-index: 2;
     padding: 25px;
     border-radius: var(--border-radius);
-    background-color: ${({ theme }) => theme?.secondaryColor};
+    background-color: ${({ theme }) => theme?.secondary};
     color: var(--color);
     font-size: var(--fz-lg);
 

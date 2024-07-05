@@ -48,7 +48,7 @@ const Contact = () => {
       <StyledLabel className="heading-point w-fit">Reach out</StyledLabel>
       <StyledContainer
         style={{
-          border: `1px solid  ${theme.primaryColor}`,
+          border: `1px solid  ${theme.primary}`,
         }}
         className="p-10  rounded-[10px] shadow-sm md:w-2/3 w-[400px] "
       >

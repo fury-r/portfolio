@@ -87,7 +87,7 @@ export const MainNavbar = () => {
       id="nav"
       style={{
         //@ts-ignore
-        backgroundColor: theme.secondaryColor,
+        backgroundColor: theme.secondary,
       }}
     >
       <Navbar.Brand href="/">

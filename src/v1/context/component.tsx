@@ -1,17 +1,10 @@
-import { useState, useEffect } from "react";
-import {
-  Card,
-  Nav,
-  Navbar,
-  FloatingLabel,
-  FloatingLabelProps,
-} from "react-bootstrap";
+import { Card, FloatingLabel, FloatingLabelProps } from "react-bootstrap";
 import DarkModeToggle from "react-dark-mode-toggle";
 import styled from "styled-components";
 import { light } from "./theme";
 
 import { Parallax } from "@react-spring/parallax";
-import React from "react";
+import { useEffect, useState } from "react";
 import { BsPrefixRefForwardingComponent } from "react-bootstrap/esm/helpers";
 type props = {
   theme: any;

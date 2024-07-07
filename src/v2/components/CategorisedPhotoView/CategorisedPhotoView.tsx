@@ -1,5 +1,5 @@
 import { uniq } from "lodash";
-import React, { useState } from "react";
+import { useState } from "react";
 import { ShadowContainer } from "../Container";
 
 export type TCategorisedPhoto<T> = {

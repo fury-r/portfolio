@@ -1,4 +1,3 @@
-import React from "react";
 import PageLayout from "../components/Page/PageLayout";
 import TimeLine from "../components/TimeLine/TimeLine";
 import { SiKnowledgebase } from "react-icons/si";

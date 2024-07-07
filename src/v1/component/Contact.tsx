@@ -1,4 +1,3 @@
-import React from "react";
 import { CgMail } from "react-icons/cg";
 import {
   FaFacebookF,
@@ -41,20 +40,20 @@ const Contact = () => {
     },
   ];
   return (
-      <div className="flex flex-row justify-center m-5 ">
-        {socials.map((value, key) => (
-          <a
-            key={key}
-            href={value.href}
-            className={
-              "social-buttons__button social-button social-button--" + value.css
-            }
-            aria-label={value.label}
-          >
-            {value.icon}
-          </a>
-        ))}
-      </div>
+    <div className="flex flex-row justify-center m-5 ">
+      {socials.map((value, key) => (
+        <a
+          key={key}
+          href={value.href}
+          className={
+            "social-buttons__button social-button social-button--" + value.css
+          }
+          aria-label={value.label}
+        >
+          {value.icon}
+        </a>
+      ))}
+    </div>
   );
 };
 export default Contact;

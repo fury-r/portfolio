@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Profile from "../../../assets/profile.jpg";
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -11,6 +10,7 @@ import {
 import styled from "styled-components";
 import { Contacts } from "./components/Contacts";
 import { ShadowContainer } from "../Container";
+import { useState } from "react";
 const socials = [
   {
     href: "https://www.facebook.com/lostStories11",

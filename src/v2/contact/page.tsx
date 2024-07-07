@@ -1,4 +1,3 @@
-import React from "react";
 import PageLayout from "../components/Page/PageLayout";
 import Location from "./Location";
 import ContactForm from "./ContactForm";

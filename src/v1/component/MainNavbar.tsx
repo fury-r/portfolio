@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   AnimatedStyledLabel,
   StyledRoundedButton,
@@ -11,7 +11,7 @@ import { LuContact } from "react-icons/lu";
 import { BiHomeAlt, BiInfoCircle, BiMoon, BiSun } from "react-icons/bi";
 import { AiOutlineProject } from "react-icons/ai";
 
-import { Nav, Navbar } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 import { Routes } from "../Routes/path";
 import { useTheme } from "styled-components";
 import { useModalContext } from "../context/ModalContext/useContext";

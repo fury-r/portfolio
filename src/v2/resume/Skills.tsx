@@ -1,4 +1,3 @@
-import React from "react";
 import { ShadowContainer } from "../components/Container";
 
 type TData = {

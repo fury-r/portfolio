@@ -1,4 +1,3 @@
-import React from "react";
 import { IconBaseProps } from "react-icons/lib";
 import { SiWebpack } from "react-icons/si";
 import { CiMobile3, CiServer } from "react-icons/ci";

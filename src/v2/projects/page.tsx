@@ -1,4 +1,3 @@
-import React from "react";
 import PageLayout from "../components/Page/PageLayout";
 import ProjectView from "./ProjectView";
 

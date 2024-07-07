@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useEffect } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import { Loader } from "../../components/Loader";
 
 import { ThemeNavbar } from "./ThemeNavbar";

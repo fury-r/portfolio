@@ -1,4 +1,3 @@
-import React from "react";
 import { Container } from "react-bootstrap";
 import { StyledLabel, AnimatedButton } from "./context/component";
 import styled from "styled-components";

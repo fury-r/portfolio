@@ -1,4 +1,3 @@
-import React from "react";
 import { LuContact } from "react-icons/lu";
 import { BiInfoCircle } from "react-icons/bi";
 import { AiOutlineProject } from "react-icons/ai";

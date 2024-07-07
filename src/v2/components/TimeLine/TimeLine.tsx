@@ -1,4 +1,3 @@
-import React from "react";
 import { IconBaseProps } from "react-icons/lib";
 import styled from "styled-components";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import Python from "../../assets/iconprogramming/Python.svg";
 
 import Java from "../../assets/iconprogramming/Java.svg";

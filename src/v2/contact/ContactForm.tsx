@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";

@@ -1,12 +1,12 @@
 {
-  "name": "next-js",
-  "version": "0.1.0",
+  "name": "portfolio",
   "private": true,
+  "version": "0.0.0",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 ",
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "fix-lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0  --fix"
   },
   "dependencies": {
@@ -57,20 +57,24 @@
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "@types/react-google-recaptcha": "^2.1.9",
     "@types/styled-components": "^5.1.28",
-    "@typescript-eslint/eslint-plugin": "^7.8.0",
-    "@typescript-eslint/parser": "^7.0.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
+    "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10",
     "daisyui": "^4.10.3",
-    "eslint": "^8",
+    "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.4",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
     "eslint-plugin-unused-imports": "^3.2.0",
     "postcss": "^8",
-    "tailwindcss": "^3",
+    "tailwindcss": "^3.4.4",
     "turbo": "^1.13.3",
-    "typescript": "^5"
+    "typescript": "^5.2.2",
+    "vite": "^5.3.1"
   }
 }

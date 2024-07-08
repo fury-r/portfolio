@@ -1,4 +1,6 @@
-# My Portfolio Website
+# My Portfolio Website [![Netlify Status](https://api.netlify.com/api/v1/badges/33f75cea-ec4f-49de-9550-74241efc9766/deploy-status)](https://app.netlify.com/sites/rajeevdesssai/deploys)
+
+
 
 This is my personal portfolio website built using modern web technologies including Next.js, SCSS, styled-components, Tailwind CSS, and Turbopack. The project aims to showcase my skills, projects, and experiences in a professional and visually appealing manner.
 

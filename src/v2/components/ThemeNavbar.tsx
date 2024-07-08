@@ -42,7 +42,7 @@ const StyledNavbar = styled(Navbar)`
   font-weight: 500;
   .active {
     color: var(--accent);
-    font-weight: 600;
+    font-weight: 700;
   }
   min-height: 3.5rem;
 

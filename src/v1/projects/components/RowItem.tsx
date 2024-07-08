@@ -1,10 +1,11 @@
+import styled from "styled-components";
+import { TCategorisedPhoto, TCategory } from "../../../types/component";
 import {
   AnimatedStyledLabel,
   AnimatedButton,
   ThemeContainer,
 } from "../../context/component";
 import { MenuItem } from "../types";
-import styled from "styled-components";
 const StyledProject = styled.li`
   position: relative;
   display: grid;
@@ -324,7 +325,7 @@ const StyledProject = styled.li`
   }
 `;
 export const RowItem = (
-  props: MenuItem & {
+  props: TCategorisedPhoto<TCategory> & {
     setSelected: (data: null | MenuItem) => void;
     pos: number;
   }
@@ -334,15 +335,12 @@ export const RowItem = (
       <div className="project-content">
         <div>
           <h3 className="project-overline">{props.title}</h3>
-          <ThemeContainer
-            className="project-description"
-            // dangerouslySetInnerHTML={{ __html: props.desc!}}
-          >
-            {props.desc}
+          <ThemeContainer className="project-description">
+            {props.description}
           </ThemeContainer>
-          {(props.techStack || []).length && (
+          {(props.subItems || []).length && (
             <ul className="project-tech-list">
-              {props.techStack?.map((tech, i) => (
+              {props.subItems?.map((tech, i) => (
                 <li key={i}>{tech}</li>
               ))}
             </ul>
@@ -350,46 +348,22 @@ export const RowItem = (
           <AnimatedButton className="image-button ">
             <a
               className=" image-link"
-              href={props.link}
+              href={props.url}
               target="_blank"
               rel="noopener noreferrer"
             >
               View on Github
             </a>
           </AnimatedButton>
-          {/* <div className="project-links">
-                        {cta && (
-                          <a href={cta} aria-label="Course Link" className="cta">
-                            Learn More
-                          </a>
-                        )}
-                        {github && (
-                          <a href={github} aria-label="GitHub Link">
-                            <Icon name="GitHub" />
-                          </a>
-                        )}
-                        {external && !cta && (
-                          <a href={external} aria-label="External Link" className="external">
-                            <Icon name="External" />
-                          </a>
-                        )}
-                      </div> */}
         </div>
       </div>
 
-      <div
-        className="project-image  color-grey rounded-[10px] relative"
-        // onClick={() =>
-        //   props.setSelected({
-        //     ...omit(props, ["pos", "setSelected"]),
-        //   })
-        // }
-      >
-        <img src={props.iconImage!} className="img  w-full" alt="image" />
-        {props.link && (
+      <div className="project-image  color-grey rounded-[10px] relative">
+        <img src={props.image!} className="img  w-full" alt="image" />
+        {props.url && (
           <a
             className=" image-link"
-            href={props.link}
+            href={props.url}
             target="_blank"
             rel="noopener noreferrer"
           >

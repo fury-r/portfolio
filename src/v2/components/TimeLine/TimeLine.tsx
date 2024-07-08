@@ -83,7 +83,10 @@ const TimeLine = ({ data, icon, title }: ITimeLine) => {
                 <h3 className="font-semibold" style={{ marginBottom: "5px" }}>
                   {sub.subTitle}
                 </h3>
-                <span style={{ fontSize: "14px", color: "var(--accent)" }}>
+                <span
+                  style={{ fontSize: "14px", color: "var(--accent)" }}
+                  className="font-semibold"
+                >
                   {sub.date}
                 </span>
                 <p style={{ marginTop: "10px" }}>{sub.description}</p>

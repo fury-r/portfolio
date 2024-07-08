@@ -1,21 +1,32 @@
 import { uniq } from "lodash";
 import { useState } from "react";
 import { ShadowContainer } from "../Container";
-
-export type TCategorisedPhoto<T> = {
-  type: T;
-  image: string;
-  title: string;
-  description: string;
-  url: string;
-  techStack: string[];
-};
+import { TCategorisedPhoto } from "../../../types/component";
+import styled from "styled-components";
 
 interface ICategorisedPhotoView<T> {
   data: TCategorisedPhoto<T>[];
   // eslint-disable-next-line @typescript-eslint/ban-types
   onClick: Function;
 }
+
+const CategoryContainer = styled(ShadowContainer)`
+  &:hover {
+    transition: 0.3 ease-in-out;
+    .show {
+      transition: 0.3 ease-in-out;
+
+      display: initial;
+    }
+    img {
+      display: none;
+    }
+  }
+  .show {
+    display: none;
+  }
+`;
+
 export const CategorisedPhotoView = <T,>({
   data,
   onClick,
@@ -40,10 +51,10 @@ export const CategorisedPhotoView = <T,>({
           ? data.filter((value) => value.type === selection)
           : data
         ).map((value, index) => (
-          <ShadowContainer
+          <CategoryContainer
             key={index}
             onClick={() => onClick(value)}
-            className=" rounded-lg grid grid-cols-1 p-3 md:h-[250px] max-md:h-[200px] "
+            className=" rounded-lg grid grid-cols-1 p-3 md:h-[250px] max-md:h-[200px]"
           >
             <div className="min-h-[70%] overflow-hidden hover:scale-[1px] w-full">
               <img
@@ -62,7 +73,17 @@ export const CategorisedPhotoView = <T,>({
                 {value.description}
               </h3>
             </div>
-          </ShadowContainer>
+            <div className="show flex flex-col mt-3 overflow-hidden ">
+              <h2 className="font-semibold">Tech Stack</h2>
+              <div className="flex flex-row flex-wrap overflow-hidden text-ellipsis  ">
+                {value.subItems.map((v, index) => (
+                  <span className="m-2" key={index + 1}>
+                    {v}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </CategoryContainer>
         ))}
       </div>
     </div>

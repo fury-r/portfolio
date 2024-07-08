@@ -41,7 +41,7 @@ const StyledInputGroup = styled.div`
             font-size: 14px;
             border: none;
             background: var(--primary);
-            border: 1px solid var(--secondary-color);
+            border: 1px solid var(--secondary);
             outline: none;
             width: 100%;
 

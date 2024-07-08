@@ -89,7 +89,7 @@ export const Companies = () => {
           >
             {company.image ? (
               <img
-                className="img relative top-[-10px] text-slate-950  object-cover"
+                className="img relative top-[-10px] text-slate-950  object-fit"
                 src={company.image}
                 alt={company.name}
                 onClick={() => window.open(company.site)}

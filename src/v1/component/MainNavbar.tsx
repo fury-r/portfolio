@@ -1,14 +1,13 @@
 import { useCallback, useState } from "react";
 import {
   AnimatedStyledLabel,
-  StyledRoundedButton,
   StyledLabel,
   StyledNavItem,
   StyledNavLink,
   StyledNavbar,
 } from "../context/component";
 import { LuContact } from "react-icons/lu";
-import { BiHomeAlt, BiInfoCircle, BiMoon, BiSun } from "react-icons/bi";
+import { BiHomeAlt, BiInfoCircle } from "react-icons/bi";
 import { AiOutlineProject } from "react-icons/ai";
 
 import { Nav } from "react-bootstrap";
@@ -17,6 +16,7 @@ import { useTheme } from "styled-components";
 import { useModalContext } from "../context/ModalContext/useContext";
 import { useThemeContext } from "../context/ThemeContext/useContext";
 import { TNavItem } from "../../types/theme";
+import { ThemeModeButton } from "../../components/ThemeModeButton";
 
 const NAV_ITEMS: TNavItem[] = [
   {
@@ -128,27 +128,20 @@ export const MainNavbar = () => {
         <div className="flex flex-row justify-between items-center ">
           <StyledLabel>Rajeev Dessai</StyledLabel>
           <div className="flex items-center">
-            <StyledRoundedButton
+            <ThemeModeButton
               className={
                 "rounded-[30px] mx-2 shadow-md h-10 w-10 self-center  me-2  rotate-icon button flex justify-center items-center"
               }
+              mode={main}
               onClick={() => stateChange(main === "DARK" ? "LIGHT" : "DARK")}
-            >
-              {main === "DARK" ? (
-                <BiSun color="white" />
-              ) : (
-                <BiMoon
-                  color="black
-          "
-                />
-              )}
-            </StyledRoundedButton>
+            />
           </div>
         </div>
         <button
           className="border-none mini-nav"
           style={{
             border: "none",
+            background: "var(--secondary)",
           }}
           onClick={() => setOpen((prev) => !prev)}
         >

@@ -12,7 +12,7 @@ ${StyledVariables};
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--secondary-color);
+  background-color: var(--secondary);
     color: var(--color);
 
     .heading-point {

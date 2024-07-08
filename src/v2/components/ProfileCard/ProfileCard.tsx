@@ -90,7 +90,7 @@ export const ProfileCard = () => {
   const [show, setShow] = useState(false);
   return (
     <StyledContainer className="transition">
-      <div className="flex flex-row justify-end min-[1250px]:hidden absolute right-0">
+      <div className="flex flex-row justify-end min-[1250px]:hidden absolute right-0 ">
         <StyledShadowContainer
           className=" p-3 rounded-bl-lg border-none conditional-btn"
           onClick={() => setShow((prev) => !prev)}

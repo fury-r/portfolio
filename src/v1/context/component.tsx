@@ -45,27 +45,7 @@ export const StyledButton = styled.button<{
     }
   } */
 `;
-export const StyledRoundedButton = styled.button`
-  color: var(--color);
 
-  outline: 0;
-  border: 0;
-  padding: 10px;
-  background: var(--secondary-color);
-  border-radius: 30px;
-
-  &:hover {
-    border: 10px solid black;
-  }
-  /* @keyframes ripple-effect {
-    0% {
-      box-shadow: 0px;
-    }
-    100% {
-      box-shadow: ${({ theme }: props) => theme.buttonshadow};
-    }
-  } */
-`;
 export const AnimatedButton = styled(StyledButton)`
   display: block;
   padding: 15px;
@@ -76,7 +56,7 @@ export const AnimatedButton = styled(StyledButton)`
 
   position: relative;
   align-items: center;
-  background-color: var(--secondary-color);
+  background-color: var(--secondary);
   border: 1px solid var(--primary);
 
   z-index: 1;
@@ -122,7 +102,7 @@ export const AnimatedButton = styled(StyledButton)`
   }
 `;
 export const ThemeBorderContainer = styled.div`
-  background-color: var(--secondary-color);
+  background-color: var(--secondary);
   text-decoration: none;
   border: 1px solid var(--primary);
 `;
@@ -159,7 +139,7 @@ export const StyledNavLink = styled.a`
 
 export const StyledNavItem = styled.div`
   background-color: ${({ style }) =>
-    style?.backgroundColor || ` var(--secondary-color)`};
+    style?.backgroundColor || ` var(--secondary)`};
   color: var(--color);
   border-radius: 10px;
   margin-right: 15px;
@@ -266,23 +246,6 @@ export const StyledNavbar = styled.nav`
     left: 0px;
   }
 
-  .rotate-icon {
-    transform: rotate(246deg);
-    animation: rotate 3s infinite;
-  }
-  /* .rotate-icon:active::after{
-  animation: rotate 3s normal;
-
-} */
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
   display: grid;
   height: fit-content;
   @media (max-width: 900px) {
@@ -335,7 +298,7 @@ export const StyledCard = styled<any>(Card)`
   border: none;
   width: 70%;
   color: ${({ theme }: props) => theme.theme_text};
-  background: var(--secondary-color);
+  background: var(--secondary);
   box-shadow: ${({ theme }: props) => theme.bordershadow};
 `;
 export const StyledCard2 = styled<any>(Card)`
@@ -344,7 +307,7 @@ export const StyledCard2 = styled<any>(Card)`
   outline: 0;
   padding: 18px;
   border-radius: 8px;
-  background: var(--secondary-color);
+  background: var(--secondary);
 
   &:hover {
     animation: ripple 1.4s ease forwards;
@@ -361,7 +324,7 @@ export const StyledCard2 = styled<any>(Card)`
 
 export const Label = styled.label`
   border-radius: 10px;
-  background: var(--secondary-color);
+  background: var(--secondary);
 
   box-shadow: ${({ theme }: props) => theme.bordershadow};
 `;
@@ -412,7 +375,7 @@ export const AnimatedStyledLabel = styled<StyledFloatingLabelProps>(
   }
 `;
 export const GlassContainer = styled.div`
-  background-color: var(--secondary-color);
+  background-color: var(--secondary);
   border-radius: 15px;
 
   color: var(--color);
@@ -469,11 +432,11 @@ export const Themebody = styled.div<any>`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: ${({ theme }: props) => theme.theme_text};
-  background: var(--secondary-color);
+  background: var(--secondary);
   transition: all 0.5s linear;
 `;
 export const ParallaxLayerTheme = styled<any>(Parallax)`
-  background: var(--secondary-color);
+  background: var(--secondary);
 `;
 
 /* 

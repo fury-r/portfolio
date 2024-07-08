@@ -21,7 +21,7 @@ const StyledVariables = css`
     --primary: ${({ theme }) => theme?.primary};
     --color: ${({ theme }) => theme?.color};
     --shade: ${({ theme }) => theme?.shade};
-    --secondary-color: ${({ theme }) => theme?.secondary};
+    --secondary: ${({ theme }) => theme?.secondary};
     --input-fields: #3e3d42;
     --text-color: ${({ theme }) => theme?.color};
     --accent: ${({ theme }) => theme?.accent};

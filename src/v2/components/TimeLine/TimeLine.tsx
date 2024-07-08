@@ -33,10 +33,11 @@ const StyledTimeline = styled.div`
     position: absolute;
     top: 8px;
     left: -26px;
-    height: 12px;
-    width: 12px;
+    height: 11px;
+    width: 11px;
     border-radius: 30px;
     background: var(--accent);
+    box-shadow: var(--primary) 0px 0px 0px 5px;
   }
 `;
 

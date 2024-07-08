@@ -5,6 +5,8 @@ import { Nav, Navbar } from "react-bootstrap";
 import styled from "styled-components";
 import { TNavItem } from "../../types/theme";
 import { Routes } from "../Routes/path";
+import { ThemeModeButton } from "../../components/ThemeModeButton";
+import { useThemeContext } from "../context/ThemeContext/useContext";
 
 const NAV_ITEMS: TNavItem[] = [
   {
@@ -50,6 +52,7 @@ const StyledNavbar = styled(Navbar)`
 `;
 
 export const ThemeNavbar = () => {
+  const { mode, stateChange, theme } = useThemeContext();
   return (
     <StyledNavbar
       collapseOnSelect
@@ -66,11 +69,21 @@ export const ThemeNavbar = () => {
         {NAV_ITEMS.map((item, index) => (
           <Nav.Item
             key={(index + 1).toString()}
-            className={`${location?.pathname === item.routes ? "active" : ""}`}
+            className={`${
+              location?.pathname === item.routes ? "active" : ""
+            } mx-2`}
           >
             <Nav.Link href={item.routes}>{item.title}</Nav.Link>
           </Nav.Item>
         ))}
+        <ThemeModeButton
+          mode={mode}
+          style={{
+            background: "none",
+          }}
+          iconColor={theme.accent || ""}
+          onClick={() => stateChange(mode === "DARK" ? "LIGHT" : "DARK")}
+        />
       </Nav>
       {/* </Navbar.Collapse> */}
     </StyledNavbar>

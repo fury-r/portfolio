@@ -5,6 +5,7 @@ import { Companies } from "./component/Company";
 import Profile from "../assets/profile.jpg";
 import { useNavigate } from "react-router-dom";
 const IntroductionContainer = styled(Container)`
+  width: 70%;
   .blobby-div {
     display: flex;
     align-content: center;
@@ -19,7 +20,7 @@ const IntroductionContainer = styled(Container)`
     overflow: hidden;
 
     @media (max-width: 740px) {
-      width: 150px;
+      width: 250px;
       height: 150px;
     }
   }
@@ -59,7 +60,7 @@ const IntroductionContainer = styled(Container)`
   .img {
     align-items: center;
     @media (max-width: 768px) {
-      width: 50%;
+      width: 100%;
     }
     transform: scale(0.9);
     border: 1px solid var(--color);
@@ -118,6 +119,8 @@ const Home = () => {
             alt="User photo"
             className=" responsive img blobby-div shadow-md object-fit"
             loading="lazy"
+            width={100}
+            height={100}
           />
           {/* <BiUser className=" responsive img blobby-div" /> */}
         </Container>

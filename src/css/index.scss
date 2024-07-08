@@ -5,7 +5,7 @@
     flex-wrap: wrap;
     justify-content: center;
     margin-top: -10px;
-    background-color: var(--secondary-color);
+    background-color: var(--secondary);
     
     &__button {
     margin: 10px 5px 0;
@@ -14,7 +14,7 @@
     
     $social-button-size: 40px;
     $social-button-icon-size: 0.4;
-    $social-button-background: var(--secondary-color);
+    $social-button-background: var(--secondary);
     $social-button-active-color: #040D12;
     $social-button-transition-time: 0.3s;
     

@@ -13,7 +13,7 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
   }, [main]);
 
   const getThemeFromStorage = useCallback(async () => {
-    const mode = await localStorage.getItem("theme_mode");
+    const mode = await localStorage.getItem("themeMode");
     if (mode) {
       setMain(mode as MODE);
       setTheme(mode === "DARK" ? dark : light);
@@ -27,7 +27,7 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
   const stateChange = useCallback(
     (mode: MODE) => {
       console.log(mode);
-      localStorage.setItem("theme_mode", mode);
+      localStorage.setItem("themeMode", mode);
       setMain(mode);
     },
     [setMain]

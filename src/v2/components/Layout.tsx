@@ -39,15 +39,18 @@ const StyledContainer = styled.div`
   }
 
   .section-1 {
-    width: 25%;
+    width: 22%;
+    height: 100%;
     @media (max-width: 800px) {
       width: 100%;
     }
   }
   .section-2 {
-    width: 50%;
+    width: 60%;
+    margin-top: 45px;
     @media (max-width: 800px) {
       width: 100%;
+      margin-top: 0;
     }
   }
 `;
@@ -75,7 +78,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       <div className="h-full  w-full  gap-5  layout  transition">
         <SideBar
           id="side-view"
-          className="  flex z-20 h-fit  rounded-md   transit  col-span-1 section-1"
+          className="flex z-20 h-fit  rounded-md   transit  col-span-1 section-1"
         >
           <ProfileCard />
         </SideBar>
@@ -84,7 +87,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
           className="flex-col w-fit  md:min-h-[80%] h-fit rounded-md   mb-32 col-span-1 section-2"
         >
           <div className="w-full flex flex-row justify-end top-nav ">
-            <div className="  absolute right-0 h-fit  w-[60%]  ">
+            <div className="absolute right-0 h-fit  w-[60%]  ">
               <ThemeNavbar />
             </div>
           </div>

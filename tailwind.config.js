@@ -1,6 +1,5 @@
-import type { Config } from "tailwindcss";
-
-const config: Config = {
+/** @type {import('tailwindcss').Config} */
+export default {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -22,6 +21,5 @@ const config: Config = {
       "2xl": "2140px",
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [],
 };
-export default config;

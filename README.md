@@ -1,14 +1,18 @@
-# My Portfolio Website
+# My Portfolio Website [![Netlify Status](https://api.netlify.com/api/v1/badges/33f75cea-ec4f-49de-9550-74241efc9766/deploy-status)](https://app.netlify.com/sites/rajeevdesssai/deploys)
+
+
 
 This is my personal portfolio website built using modern web technologies including Next.js, SCSS, styled-components, Tailwind CSS, and Turbopack. The project aims to showcase my skills, projects, and experiences in a professional and visually appealing manner.
 
 ## Technologies Used
 
-- **Next.js**: A React framework for building fast and user-friendly static and dynamic websites.
+- **Next.js**: A React framework for building fast and user-friendly static and dynamic websites. [old version]
+- **React**: React is the library for web and native user interfaces. [new version]
+- **Vite**: Vite is a new breed of frontend build tool that significantly improves the frontend development experience
 - **SCSS**: A CSS preprocessor that adds power and elegance to the basic language.
 - **styled-components**: A library for React and React Native that allows you to use component-level styles in your application.
 - **Tailwind CSS**: A utility-first CSS framework for rapidly building custom user interfaces.
-- **Turbopack**: A new Rust-based incremental bundler optimized for JavaScript and TypeScript, designed to be the successor to Webpack.
+- **Turbopack**: A new Rust-based incremental bundler optimized for JavaScript and TypeScript, designed to be the successor to Webpack. [old version]
 
 ## Getting Started
 
@@ -99,10 +103,12 @@ Tailwind CSS is used for utility-first styling. You can use Tailwind's utility c
 
 ### Acknowledgments
 - Next.js
+- React 
+- Vite
 - Typescript
 - SCSS
 - styled-components
 - Tailwind CSS
 - Turbopack
-
+- Templates [References]
 

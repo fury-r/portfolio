@@ -1,0 +1,2 @@
+<!-- This ensures that all routing is handled by the React Router instead of Netlify’s own servers. -->
+/* /index.html 200

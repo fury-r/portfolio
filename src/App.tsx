@@ -5,11 +5,12 @@ import { TPageVersion } from "./types/page";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import styled from "styled-components";
+import { ToastContainer } from "react-bootstrap";
 
 const PAGES: TPageVersion[] = ["v1", "v2"];
 
 const StyledContainer = styled.div`
-  .btn {
+  .option-btn {
     width: 50px;
     height: 50px;
     background-color: var(--primary);
@@ -44,7 +45,7 @@ function App() {
         >
           {PAGES.map((page, index) => (
             <button
-              className="flex flex-col btn justify-center items-center"
+              className="flex flex-col option-btn justify-center items-center"
               onClick={() => {
                 setShow(false);
                 changePageVersion(page);
@@ -67,6 +68,7 @@ function App() {
         </button>
       </div>
       {pageVersion === "v2" ? <V2Router /> : <V1Router />}
+      <ToastContainer />
     </StyledContainer>
   );
 }

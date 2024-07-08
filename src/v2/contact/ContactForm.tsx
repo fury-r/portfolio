@@ -4,8 +4,9 @@ import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const ContactForm = () => {
-  const [captchaVerified, setCaptchaVerified] = useState(true);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
   const form = useRef<HTMLFormElement>(null);
+
   const handleOnSubmit = (e: any) => {
     e.preventDefault();
     emailjs
@@ -28,7 +29,6 @@ const ContactForm = () => {
       );
     form.current?.reset();
   };
-
   return (
     <Suspense fallback={<>loading...</>}>
       <form ref={form} onSubmit={handleOnSubmit}>
@@ -42,7 +42,7 @@ const ContactForm = () => {
             <ReCAPTCHA
               sitekey={import.meta.env.VITE_APP_PUBLIC_SITE_KEY!}
               onChange={(e) => {
-                setCaptchaVerified(e === null);
+                setCaptchaVerified(e !== null);
               }}
             />
           )}

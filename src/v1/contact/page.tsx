@@ -16,7 +16,7 @@ const StyledContainer = styled(Container)`
 `;
 const Contact = () => {
   const { theme } = useThemeContext();
-  const [captchaVerified, setCaptchaVerified] = useState(true);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
   const form = useRef<HTMLFormElement>(null);
 
   const handleOnSubmit = (e: any) => {
@@ -68,7 +68,7 @@ const Contact = () => {
             <ReCAPTCHA
               sitekey={import.meta.env.VITE_APP_PUBLIC_SITE_KEY!}
               onChange={(e) => {
-                setCaptchaVerified(e === null);
+                setCaptchaVerified(e !== null);
               }}
             />
           </div>
@@ -78,7 +78,7 @@ const Contact = () => {
               className={`w-4/12 rounded-[10px] ${
                 captchaVerified ? "disabled" : ""
               }`}
-              disabled={captchaVerified}
+              disabled={!captchaVerified}
             >
               Submit
             </AnimatedButton>

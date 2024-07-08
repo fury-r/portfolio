@@ -60,6 +60,14 @@ const StyledContainer = styled.div`
     background-color: gray;
     opacity: 0.5;
   }
+
+  &::after {
+    margin-top: 10px;
+  }
+
+  &::before {
+    margin-bottom: 10px;
+  }
 `;
 
 export const Contacts = () => {

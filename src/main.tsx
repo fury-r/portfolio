@@ -4,7 +4,7 @@ import "./index.css";
 import "./css/index.scss";
 import App from "./App";
 import { GlobalContextProvider } from "./context/GlobalContext/Provider";
-import { ToastContainer } from "react-bootstrap";
+import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -13,6 +13,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <App />
       {/* </div> */}
     </GlobalContextProvider>
-    <ToastContainer />
   </React.StrictMode>
 );

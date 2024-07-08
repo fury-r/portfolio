@@ -86,6 +86,7 @@ export const StyledContainer = styled.div`
     }
   }
 `;
+
 export const ProfileCard = () => {
   const [show, setShow] = useState(false);
   return (
@@ -119,7 +120,7 @@ export const ProfileCard = () => {
       </div>
       <div
         id="desktop-contacts "
-        className={`h-[50%] ${!show && "hide-contacts"}`}
+        className={`h-[50%] ${!show && "hide-contacts"} mt-2`}
       >
         <Contacts />
         <div className={` flex flex-row justify-center `}>{SocialFooter}</div>

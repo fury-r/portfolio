@@ -1,4 +1,4 @@
-import { ReactNode, useMemo, useState } from "react";
+import { ReactNode, useCallback, useMemo, useState } from "react";
 import { GlobalContext } from "./Context";
 import { TPageVersion } from "../../types/page";
 
@@ -7,15 +7,24 @@ export const GlobalContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [pageVersion, setPageVersion] = useState<TPageVersion>("v2");
+  const [pageVersion, setPageVersion] = useState<TPageVersion>(
+    (localStorage.getItem("pageVersion") as TPageVersion) || "v2"
+  );
 
-  const changePageVersion = (page: TPageVersion) => {
-    setPageVersion(page);
-  };
+  const changePageVersion = useCallback(
+    (page: TPageVersion) => {
+      if (page !== pageVersion) {
+        localStorage.setItem("pageVersion", page);
+        window.location.href = "/";
+        setPageVersion(page);
+      }
+    },
+    [pageVersion]
+  );
 
   const value = useMemo(
     () => ({ pageVersion, changePageVersion }),
-    [pageVersion]
+    [changePageVersion, pageVersion]
   );
   return (
     <GlobalContext.Provider value={value}>{children}</GlobalContext.Provider>

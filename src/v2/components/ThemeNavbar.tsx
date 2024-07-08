@@ -81,6 +81,7 @@ export const ThemeNavbar = () => {
           style={{
             background: "none",
           }}
+          className="rotate-icon"
           iconColor={theme.accent || ""}
           onClick={() => stateChange(mode === "DARK" ? "LIGHT" : "DARK")}
         />

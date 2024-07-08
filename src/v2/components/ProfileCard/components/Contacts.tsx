@@ -19,7 +19,14 @@ const DATA: TContact[] = [
   {
     icon: (props: IconBaseProps) => <MdPhone {...props} />,
     label: "Contact",
-    value: "+91 -------",
+    value: (
+      <div
+        className="text-ellipsis overflow-hidden"
+        onClick={() => window.open("tel:9158907407")}
+      >
+        +91 9158907407
+      </div>
+    ),
   },
 ];
 

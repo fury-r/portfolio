@@ -1,67 +1,17 @@
 import Profile from "../../../assets/profile.jpg";
 import { IoIosArrowDown } from "react-icons/io";
 
-import {
-  FaFacebookF,
-  FaLinkedinIn,
-  FaGithub,
-  FaInstagram,
-} from "react-icons/fa";
 import styled from "styled-components";
 import { Contacts } from "./components/Contacts";
 import { ShadowContainer } from "../Container";
 import { useState } from "react";
-const socials = [
-  {
-    href: "https://www.facebook.com/lostStories11",
-    label: "Facebook",
-    css: "facebook",
-    icon: <FaFacebookF />,
-  },
-  {
-    href: "https://www.linkedin.com/in/rajeev-dessai-1497741b0/",
-    label: "Linkedin",
-    css: "linkedin",
-    icon: <FaLinkedinIn />,
-  },
-  {
-    href: "https://github.com/fury-r",
-    label: "Github",
-    css: "github",
-    icon: <FaGithub />,
-  },
-  {
-    href: "https://instagram.com/rajeevdessai",
-    label: "Instagram",
-    css: "instagram",
-    icon: <FaInstagram />,
-  },
-];
+import SocialFooter from "../../../components/SocialFooter/SocialFooter";
+
 export const StyledShadowContainer = styled(ShadowContainer)`
   border-top: 0;
   border-right: 0;
   border-radius: 0 0 0 var(--rounded);
 `;
-
-const SocialFooter = (
-  <div
-    className="flex flex-row justify-center items-center  w-full m-3  md:self-end "
-    id="socials"
-  >
-    {socials.map((value, key) => (
-      <a
-        key={key}
-        href={value.href}
-        className={
-          "social-buttons__button social-button social-button--" + value.css
-        }
-        aria-label={value.label}
-      >
-        {value.icon}
-      </a>
-    ))}
-  </div>
-);
 
 export const StyledContainer = styled.div`
   min-height: fit-content;
@@ -123,7 +73,9 @@ export const ProfileCard = () => {
         className={`h-[50%] ${!show && "hide-contacts"} mt-2`}
       >
         <Contacts />
-        <div className={` flex flex-row justify-center `}>{SocialFooter}</div>
+        <div className={` flex flex-row justify-center `}>
+          <SocialFooter />
+        </div>
       </div>
     </StyledContainer>
   );

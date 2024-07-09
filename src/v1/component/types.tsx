@@ -1,8 +1,13 @@
 export type TCompany = {
   name: string;
-  duration: string;
+  duration?: string;
   site: string;
   image?: string;
-  role: string;
+  title: string;
   icon?: JSX.Element;
+  description?: string;
+  subItems?: {
+    subTitle: string;
+    date: string;
+  }[];
 };

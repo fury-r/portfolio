@@ -3,7 +3,6 @@ import { Themebody } from "../context/component";
 import { GlobalStyle } from "../context/GlobalStyle";
 
 import MainFooter from "./Footer";
-import Contact from "./Contact";
 import { MainNavbar } from "./MainNavbar";
 import { ThemeProvider } from "styled-components";
 import { ModalPortal } from "./ModalPortal";
@@ -11,6 +10,7 @@ import { dark, light } from "../context/theme";
 import { useThemeContext } from "../context/ThemeContext/useContext";
 import { ModalProvider } from "../context/ModalContext/Provider";
 import { Loader } from "../../components/Loader";
+import SocialFooter from "../../components/SocialFooter/SocialFooter";
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const { main } = useThemeContext();
@@ -49,7 +49,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                 <div className=" w-full p-3"> {children}</div>
 
                 <div className=" w-full">
-                  <Contact />
+                  <SocialFooter />
                   <MainFooter />
                 </div>
               </div>

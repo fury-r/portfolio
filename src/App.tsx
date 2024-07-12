@@ -1,11 +1,11 @@
-import { useGlobalContext } from "./context/GlobalContext/useContext";
-import { V2Router } from "./v2/Routes/routes";
-import { V1Router } from "./v1/Routes/routes";
-import { TPageVersion } from "./types/page";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import styled from "styled-components";
 import { ToastContainer } from "react-bootstrap";
+import { useGlobalContext } from "./context/GlobalContext/useContext";
+import { V2Router } from "./v2/Routes/routes";
+import { V1Router } from "./v1/Routes/routes";
+import { TPageVersion } from "./types/page";
 
 const PAGES: TPageVersion[] = ["v1", "v2"];
 

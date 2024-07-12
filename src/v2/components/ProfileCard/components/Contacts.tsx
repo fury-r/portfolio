@@ -1,49 +1,46 @@
-import { MdMailOutline, MdPhone } from "react-icons/md";
-import { IconBaseProps } from "react-icons/lib";
 import styled from "styled-components";
-
+import { useDataContext } from "../../../../context/DataContext/useContext";
+import { iconMap } from "../../../../data/icon";
+import { IconType } from "react-icons/lib";
 type TContact = {
-  icon: (props: IconBaseProps) => JSX.Element;
+  icon?: string;
   label: string;
-  value: string | JSX.Element;
+  code?: any;
+  value?: string;
+  css?: string;
 };
 
-const DATA: TContact[] = [
-  {
-    icon: (props: IconBaseProps) => <MdMailOutline {...props} />,
-    label: "Email",
-    value: (
-      <a href="mailto:rajeev.dessai11@gmail.com">rajeev.dessai11@gmail.com</a>
-    ),
-  },
-  {
-    icon: (props: IconBaseProps) => <MdPhone {...props} />,
-    label: "Contact",
-    value: (
-      <div
-        className="text-ellipsis overflow-hidden"
-        onClick={() => window.open("tel:9158907407")}
-      >
-        +91 9158907407
-      </div>
-    ),
-  },
-];
-
-export const Item = ({ icon, label, value }: TContact) => {
+export const Item = ({ icon, label, code, css, value }: TContact) => {
+  let IconElem: string | JSX.Element | IconType = "-";
+  if (css) {
+    IconElem = iconMap[css];
+    IconElem = <IconElem style={{ width: "50%", height: "50%" }} />;
+  }
   return (
     <div
       key={`contact-item`}
       className=" grid grid-cols-10 p-1 items-center w-full max-md:col-span-1 "
     >
       <div className="col-span-3 flex flex-row justify-center  items-center h-full">
-        {icon({ style: { width: "50%", height: "50%" } })}
+        {IconElem}
       </div>
       <div className="col-span-7">
         <div className="text-xs">{label}</div>
-        <div className="text-ellipsis whitespace-nowrap overflow-hidden">
-          {value}
-        </div>
+        {code ? (
+          <div
+            className="text-ellipsis whitespace-nowrap overflow-hidden"
+            dangerouslySetInnerHTML={{ __html: code }}
+          />
+        ) : icon === "contact" ? (
+          <div
+            className="text-ellipsis overflow-hidden"
+            onClick={() => window.open("tel:9158907407")}
+          >
+            +91 9158907407
+          </div>
+        ) : (
+          value
+        )}
       </div>
     </div>
   );
@@ -71,12 +68,15 @@ const StyledContainer = styled.div`
 `;
 
 export const Contacts = () => {
+  const { social } = useDataContext();
   return (
     <StyledContainer className="w-full grid grid-cols-1  h-fit ">
       <div className=" grid grid-cols-1 max-md:grid-cols-2">
-        {DATA.map((value, index) => (
-          <Item {...value} key={(index + 1).toString()} />
-        ))}
+        {social
+          .filter((value) => ["contact", "email"].includes(value.css))
+          .map((value, index) => (
+            <Item {...value} key={(index + 1).toString()} />
+          ))}
       </div>
     </StyledContainer>
   );

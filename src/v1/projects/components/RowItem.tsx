@@ -348,7 +348,7 @@ export const RowItem = (
           <AnimatedButton className="image-button ">
             <a
               className=" image-link"
-              href={props.url}
+              href={props.link}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -360,10 +360,10 @@ export const RowItem = (
 
       <div className="project-image  color-grey rounded-[10px] relative">
         <img src={props.image!} className="img  w-full" alt="image" />
-        {props.url && (
+        {props.link && (
           <a
             className=" image-link"
-            href={props.url}
+            href={props.link}
             target="_blank"
             rel="noopener noreferrer"
           >

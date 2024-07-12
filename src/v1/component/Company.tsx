@@ -1,20 +1,14 @@
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
-import { TCompany } from "./types";
-import DarkOqton from "../../assets/company/DarkOqton.svg";
-import LightOqton from "../../assets/company/LightOqton.svg";
 
-import CtrlSaveDark from "../../assets/company/ctrlsave.png";
-import CtrlSaveWhite from "../../assets/company/ctrlsave-white.png";
-
-import Vtech from "../../assets/company/vtech.png";
 import {
   StyledAccentLabel,
   StyledLabel,
   ThemeBorderContainer,
 } from "../context/component";
-import { useMemo } from "react";
+import {} from "react";
 import { useThemeContext } from "../context/ThemeContext/useContext";
+import { useDataContext } from "../../context/DataContext/useContext";
 
 const StyledContainer = styled(Container)`
   display: grid;
@@ -43,39 +37,8 @@ const StyledContainer = styled(Container)`
 `;
 
 export const Companies = () => {
-  const { main } = useThemeContext();
-  const companies: TCompany[] = useMemo(
-    () => [
-      {
-        name: "Oqton",
-        duration: "Dec 2022 - Present",
-        image: main === "DARK" ? LightOqton : DarkOqton,
-        site: "https://oqton.com",
-        role: "Software Development Consultant",
-      },
-      {
-        name: "13th June Infotech Pvt Ltd",
-        duration: "Sept 2022 - Nov 2022",
-        site: "https://www.linkedin.com/company/13thjune-infotech-private-limited/about/",
-        role: "Consultant/Frontend Engineer",
-      },
-      {
-        name: "Ctrl Save Pvt Ltd",
-        duration: "Oct 2021 - Sept 2022",
-        image: main === "DARK" ? CtrlSaveWhite : CtrlSaveDark,
-        site: "https://www.ctrlsave.in/",
-        role: "Full Stack Developer",
-      },
-      {
-        name: "VTech",
-        duration: "May 2019 - June 2019",
-        image: Vtech,
-        site: "https://vtechgoa.com/",
-        role: "Web Developer",
-      },
-    ],
-    [main]
-  );
+  const { main: mode } = useThemeContext();
+  const { company: companies } = useDataContext();
   return (
     <Container>
       <div className="w-full flex  justify-center">
@@ -87,12 +50,16 @@ export const Companies = () => {
             key={index.toString()}
             className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[320px] pointer "
           >
-            {company.image ? (
+            {company.darkImage || company.lightImage ? (
               <img
                 className="img relative top-[-10px] text-slate-950  object-fit"
-                src={company.image}
+                src={
+                  mode === "DARK" && company.darkImage
+                    ? company.darkImage
+                    : company.lightImage
+                }
                 alt={company.name}
-                onClick={() => window.open(company.site)}
+                onClick={() => window.open(company.link)}
               />
             ) : (
               <StyledAccentLabel className="font-bold text-2xl">
@@ -100,7 +67,10 @@ export const Companies = () => {
               </StyledAccentLabel>
             )}
             <StyledAccentLabel className="text-lg whitespace-nowrap font-bold">
-              {company.role}
+              {
+                //@ts-ignore
+                company.subItems[0]?.subTitle
+              }
             </StyledAccentLabel>
             <StyledAccentLabel className="italic">
               {company.duration}

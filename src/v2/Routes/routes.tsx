@@ -7,12 +7,17 @@ import Contact from "../contact/page";
 import { Routes } from "./path";
 import Template from "../template";
 import { GlobalStyle } from "../theme/GlobalStyle";
+import Landing from "../../landing/Landing";
 export const V2Router = () => {
   return (
     <CustomThemeProvider>
       <GlobalStyle />
       <RouterProvider
         router={createBrowserRouter([
+          {
+            path: "/",
+            element: <Landing />,
+          },
           {
             path: Routes.about.path,
             element: (

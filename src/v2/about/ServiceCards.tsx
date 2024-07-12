@@ -1,8 +1,10 @@
-import { IconBaseProps } from "react-icons/lib";
+import { IconBaseProps, IconType } from "react-icons/lib";
 import { SiWebpack } from "react-icons/si";
 import { CiMobile3, CiServer } from "react-icons/ci";
 import { FaCamera } from "react-icons/fa";
 import { ShadowContainer } from "../components/Container";
+import { useDataContext } from "../../context/DataContext/useContext";
+import { iconMap } from "../../data/icon";
 
 export type TCardData = {
   icon: (props?: IconBaseProps) => JSX.Element;
@@ -37,32 +39,43 @@ const DATA: TCardData[] = [
     icon: (props?: IconBaseProps) => <FaCamera {...props} />,
   },
 ];
-export const DoingCards = () => {
+export const ServiceCards = () => {
+  const { services } = useDataContext();
+
   return (
     <div className="grid grid-cols-2 gap-10 max-md:grid-cols-1">
-      {DATA.map(({ description, icon, title }, index) => (
-        <ShadowContainer
-          key={`doing-${(index + 1).toString()}`}
-          className=" flex flex-row items-center     h-[150px] p-3"
-        >
-          {icon({
-            style: {
-              width: "30%",
-              height: "30%",
-              objectFit: "fill",
-              color: "var(--accent)",
-            },
-          })}
-          <div className="flex flex-col justify-start overflow-hidden h-full w-[60%]">
-            <h1 className="md:text-xl  max-md:text-base font-bold  ">
-              {title}
-            </h1>
-            <label className="text-ellipsis whitespace-pre-line max-md:text-sm overflow-hidden">
-              {description}
-            </label>
-          </div>
-        </ShadowContainer>
-      ))}
+      {services.map(({ description, icon, title }, index) => {
+        let IconElem: string | JSX.Element | IconType = "-";
+        if (icon) {
+          IconElem = iconMap[icon];
+          IconElem = (
+            <IconElem
+              style={{
+                width: "30%",
+                height: "30%",
+                objectFit: "fill",
+                color: "var(--accent)",
+              }}
+            />
+          );
+        }
+        return (
+          <ShadowContainer
+            key={`doing-${(index + 1).toString()}`}
+            className=" flex flex-row items-center     h-[150px] p-3"
+          >
+            {IconElem}
+            <div className="flex flex-col justify-start overflow-hidden h-full w-[60%]">
+              <h1 className="md:text-xl  max-md:text-base font-bold  ">
+                {title}
+              </h1>
+              <label className="text-ellipsis whitespace-pre-line max-md:text-sm overflow-hidden">
+                {description}
+              </label>
+            </div>
+          </ShadowContainer>
+        );
+      })}
     </div>
   );
 };

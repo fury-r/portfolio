@@ -8,15 +8,17 @@ export const GlobalContextProvider = ({
   children: ReactNode;
 }) => {
   const [pageVersion, setPageVersion] = useState<TPageVersion>(
-    (localStorage.getItem("pageVersion") as TPageVersion) || "v2"
+    (localStorage.getItem("pageVersion") as TPageVersion) ||
+      import.meta.env.VITE_APP_DEFAULT_LANDING ||
+      "v2"
   );
 
   const changePageVersion = useCallback(
     (page: TPageVersion) => {
       if (page !== pageVersion) {
         localStorage.setItem("pageVersion", page);
-        window.location.href = "/";
         setPageVersion(page);
+        window.location.href = "/";
       }
     },
     [pageVersion]

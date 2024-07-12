@@ -6,6 +6,7 @@ import { Routes } from "./path";
 import Template from "../template";
 import Contact from "../contact/page";
 import { CustomThemeProvider } from "../context/ThemeContext/Provider";
+import Landing from "../../landing/Landing";
 export const V1Router = () => {
   return (
     <CustomThemeProvider>
@@ -13,6 +14,10 @@ export const V1Router = () => {
       <div className="acursor2"></div>
       <RouterProvider
         router={createBrowserRouter([
+          {
+            path: "/",
+            element: <Landing />,
+          },
           {
             path: Routes.home.path,
             element: (

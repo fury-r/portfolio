@@ -4,7 +4,8 @@ import { MenuItem } from "./types";
 import { RowItem } from "./components/RowItem";
 import { useModalContext } from "../context/ModalContext/useContext";
 import styled from "styled-components";
-import { ProjectsMenu } from "../../data/project";
+import { useDataContext } from "../../context/DataContext/useContext";
+import { omit } from "lodash";
 
 const StyledContainer = styled(Container)`
   .imageContainer {
@@ -24,17 +25,21 @@ const StyledContainer = styled(Container)`
   }
 `;
 const Project = () => {
+  const { projects } = useDataContext();
   const { setData } = useModalContext();
   const handleSetData = (data: MenuItem | null) => setData!(data);
+
   return (
     <StyledContainer className="h-full p-4">
       <Container className="grid grid-cols-1 ">
-        {ProjectsMenu.map((item, index) => (
+        {projects.map((item, index) => (
           <RowItem
             pos={index}
             key={index.toString()}
             setSelected={handleSetData}
-            {...item}
+            {...omit(item, "images")}
+            image={item.images[0]}
+            subItems={item.techStack.map((value) => value.title)}
           />
         ))}
       </Container>

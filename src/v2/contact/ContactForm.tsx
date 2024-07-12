@@ -48,7 +48,10 @@ const ContactForm = () => {
           )}
         </div>
         <div className="flex flex-row justify-center">
-          <button disabled={!captchaVerified} className="btn">
+          <button
+            disabled={!captchaVerified}
+            className={`btn ${!captchaVerified ? "opacity-30" : ""}`}
+          >
             Submit
           </button>
         </div>

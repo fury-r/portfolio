@@ -5,13 +5,11 @@ import { IconBaseProps } from "react-icons/lib";
 import { MdOutlineWorkOutline } from "react-icons/md";
 import { Skills } from "./Skills";
 import { TechStack } from "./TechStack";
-import { useMemo } from "react";
-import { educationData, getCompany } from "../../data/company";
-import { useThemeContext } from "../context/ThemeContext/useContext";
+import { useDataContext } from "../../context/DataContext/useContext";
 
 const Resume = () => {
-  const { mode } = useThemeContext();
-  const experinceData = useMemo(() => getCompany(mode), [mode]);
+  const { company, education } = useDataContext();
+
   return (
     <PageLayout
       title="Resume"
@@ -21,7 +19,7 @@ const Resume = () => {
             <div className="scrollbar scroll  min-w-full max-md:gap-[30px]">
               <div className=" scroll-snap min-w-full">
                 <TimeLine
-                  data={experinceData as TTimeLineEvent[]}
+                  data={company as TTimeLineEvent[]}
                   title="Work Experience"
                   icon={(props?: IconBaseProps) => (
                     <MdOutlineWorkOutline {...props} />
@@ -30,7 +28,7 @@ const Resume = () => {
               </div>
               <div className=" scroll-snap min-w-full">
                 <TimeLine
-                  data={educationData}
+                  data={education as TTimeLineEvent[]}
                   title="Education"
                   icon={(props?: IconBaseProps) => (
                     <SiKnowledgebase {...props} />

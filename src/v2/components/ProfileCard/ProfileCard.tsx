@@ -6,6 +6,7 @@ import { Contacts } from "./components/Contacts";
 import { ShadowContainer } from "../Container";
 import { useState } from "react";
 import SocialFooter from "../../../components/SocialFooter/SocialFooter";
+import { useDataContext } from "../../../context/DataContext/useContext";
 
 export const StyledShadowContainer = styled(ShadowContainer)`
   border-top: 0;
@@ -39,6 +40,8 @@ export const StyledContainer = styled.div`
 
 export const ProfileCard = () => {
   const [show, setShow] = useState(false);
+  const { profile } = useDataContext();
+
   return (
     <StyledContainer className="transition">
       <div className="flex flex-row justify-end min-[1250px]:hidden absolute right-0 ">
@@ -59,12 +62,12 @@ export const ProfileCard = () => {
           />
         </div>
         <div className="flex flex-col items-center justify-between max-lg:items-start  ">
-          <div>Rajeev Dessai</div>
+          <div>{profile.name}</div>
           <div
             className=" p-2 rounded-lg my-2 "
             style={{ background: "var(--primary)" }}
           >
-            <label className="text-sm font-semibold ">Software Engineer</label>
+            <label className="text-sm font-semibold ">{profile.position}</label>
           </div>
         </div>
       </div>

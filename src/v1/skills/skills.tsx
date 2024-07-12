@@ -3,12 +3,12 @@ import {
   StyledLabel,
   ThemeContainer,
 } from "../context/component";
-import { TItem } from "../../types/page";
 import styled from "styled-components";
 import { Container } from "react-bootstrap";
 import { useThemeContext } from "../context/ThemeContext/useContext";
-import { getTech } from "../../data/skills";
 import { useMemo } from "react";
+import { useDataContext } from "../../context/DataContext/useContext";
+import { TTech } from "../../types/component";
 
 const SkillsContainer = styled(Container)`
   display: flex;
@@ -40,60 +40,69 @@ const SkillsContainer = styled(Container)`
   }
 `;
 
-const Row = ({ type, data }: { type: string; data: TItem[] }) => {
+const Row = ({ type, data }: { type: string; data: TTech[] }) => {
+  const { main } = useThemeContext();
+
   return (
     <Container className="flex flex-col  ">
       <div className="w-full flex  justify-center">
         <StyledLabel className="heading-point">{type}</StyledLabel>
       </div>
       <SkillsContainer>
-        {data.map((value, key) => (
-          <ThemeContainer
-            className="transform hover:scale-100  skill-container  motion-reduce:transform-none skill  btn-outline-secondary w-44 h-14  p-2 rounded-[10px] m-4  flex justify-center items-center"
-            key={key.toString()}
-          >
-            <div
-              className={` ${
-                value.iconPath && !value.renderOnlyIcon
-                  ? "grid grid-cols-2 gap-0"
-                  : " flex justify-center"
-              }  w-full `}
+        {data
+          .filter(
+            (value) =>
+              !["OAuth", "Flask", "Redux", "Socket", "Express"].includes(
+                value.title
+              )
+          )
+          .map((value, key) => (
+            <ThemeContainer
+              className="transform hover:scale-100  skill-container  motion-reduce:transform-none skill  btn-outline-secondary w-44 h-14  p-2 rounded-[10px] m-4  flex justify-center items-center"
+              key={key.toString()}
             >
-              {!value.renderOnlyIcon && (
-                <StyledAccentLabel className=" self-center ">
-                  {value.title}
-                </StyledAccentLabel>
-              )}
-              {value.iconPath && (
-                <Container className="p-3">
-                  <img
-                    src={value.iconPath}
-                    width={30}
-                    height={40}
-                    alt={value.title}
-                    loading="lazy"
-                    className="self-center  w-fit object-fit h-[revert-layer]"
-                  />
-                </Container>
-              )}
-            </div>
-          </ThemeContainer>
-        ))}
+              <div
+                className={` ${
+                  (value.lightIcon || value.darkIcon) && !value.renderOnlyIcon
+                    ? "grid grid-cols-2 gap-0"
+                    : " flex justify-center"
+                }  w-full `}
+              >
+                {!value.renderOnlyIcon && (
+                  <StyledAccentLabel className=" self-center ">
+                    {value.title}
+                  </StyledAccentLabel>
+                )}
+                {(value.lightIcon || value.darkIcon) && (
+                  <Container className="p-3">
+                    <img
+                      src={main === "DARK" ? value.darkIcon : value.lightIcon}
+                      width={30}
+                      height={40}
+                      alt={value.title}
+                      loading="lazy"
+                      className="self-center  w-fit object-fit h-[revert-layer]"
+                    />
+                  </Container>
+                )}
+              </div>
+            </ThemeContainer>
+          ))}
       </SkillsContainer>
     </Container>
   );
 };
 
 export const Skills = () => {
-  const { main } = useThemeContext();
-
-  const skills = useMemo(() => {
-    return getTech(main);
-  }, [main]);
+  const { tech } = useDataContext();
+  const skills = useMemo(
+    () => <Row type={"Tech Knowledge"} data={tech} />,
+    [tech]
+  );
 
   return (
     <div id="Skills" className=" ms-3  ext-lg h-min-screen ">
-      <Row type={"Tech Knowledge"} data={skills} />
+      {skills}
     </div>
   );
 };

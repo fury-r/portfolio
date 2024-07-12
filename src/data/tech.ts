@@ -1,4 +1,3 @@
-import { TItem } from "../types/page";
 import Python from "../assets/iconprogramming/Python.svg";
 
 import Java from "../assets/iconprogramming/Java.svg";
@@ -26,107 +25,107 @@ import NextJs from "../assets/iconprogramming/next-js.svg";
 import Docker from "../assets/iconprogramming/docker.svg";
 import Git from "../assets/iconprogramming/Git.svg";
 import TailwindCSS from "../assets/iconprogramming/tailwind-css.svg";
-import { MODE } from "../types/theme";
+import { TTech } from "../types/component";
 
-export const getTech = (mode: MODE): TItem[] => [
+export const techData: TTech[] = [
   {
-    iconPath: Python,
+    lightIcon: Python,
     title: "Python",
   },
   {
-    iconPath: Java,
+    lightIcon: Java,
     title: "Java",
   },
   {
-    iconPath: Javascript,
+    lightIcon: Javascript,
     title: "Javascript",
   },
   {
-    iconPath: Php,
+    lightIcon: Php,
     title: "PHP",
   },
   {
-    iconPath: CSS,
+    lightIcon: CSS,
     title: "CSS",
   },
   {
-    iconPath: Html,
+    lightIcon: Html,
     title: "HTML",
   },
   {
-    iconPath: ReactJs,
+    lightIcon: ReactJs,
     title: "Reactjs",
   },
   {
-    iconPath: Laravel,
+    lightIcon: Laravel,
     title: "Laravel",
   },
   {
-    iconPath: NextJs,
+    lightIcon: NextJs,
     title: "NextJS",
   },
   {
-    iconPath: Sql,
+    lightIcon: Sql,
     title: "SQL",
   },
 
   {
-    iconPath: Mongo,
+    lightIcon: Mongo,
     title: "MongoDb",
   },
   {
-    iconPath: FireBase,
+    lightIcon: FireBase,
     title: "Firebase",
   },
   {
-    iconPath: Moralis,
+    lightIcon: Moralis,
     title: "Moralis",
   },
   {
-    iconPath: mode === "LIGHT" ? NodejsDark : NodeJs,
+    lightIcon: NodejsDark,
+    darkIcon: NodeJs,
     title: "NodeJs",
-    renderOnlyIcon: true,
   },
 
   {
-    iconPath: null,
     title: "web3",
+    renderOnlyIcon: false,
   },
   {
-    iconPath: Ai,
+    lightIcon: Ai,
     title: "Ai/ML",
   },
   {
-    iconPath: Fluter,
+    lightIcon: Fluter,
     title: "Flutter",
   },
   {
-    iconPath: Cpp,
+    lightIcon: Cpp,
     title: "C++",
   },
   {
-    iconPath: Golang,
+    lightIcon: Golang,
     title: "Golang",
   },
   {
-    iconPath: Kotlin,
+    lightIcon: Kotlin,
     title: "Kotlin",
   },
   {
-    iconPath: Docker,
+    lightIcon: Docker,
     title: "Docker",
     renderOnlyIcon: true,
   },
   {
-    iconPath: Grpc,
+    lightIcon: Grpc,
     title: "Grpc",
   },
   {
-    iconPath: Git,
+    lightIcon: Git,
     title: "Git",
   },
   {
-    iconPath: TailwindCSS,
+    lightIcon: TailwindCSS,
     title: "Tailwind",
   },
 ];

@@ -1,5 +1,5 @@
 export const Routes = {
-  about: { path: "/" },
+  about: { path: "/v2" },
   skills: { path: "/v2/skills" },
   resume: { path: "/v2/resume" },
   project: { path: "/v2/projects" },

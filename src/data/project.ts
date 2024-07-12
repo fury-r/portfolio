@@ -9,10 +9,10 @@ import { TCategorisedPhoto, TCategory } from "../types/component";
 
 export const ProjectsMenu: TCategorisedPhoto<TCategory>[] = [
   {
-    title: "Chat Messenger with E2EE ",
+    title: "Chat Messenger with E2EE",
     description:
-      "SecureMessenger is a secure and end-to-end encrypted (E2EE) messaging application designed to prioritize user privacy and data security. ",
-    url: "https://github.com/fury-r/encrypted-messenger",
+      "SecureMessenger is a secure and end-to-end encrypted (E2EE) messaging application designed to prioritize user privacy and data security.",
+    link: "https://github.com/fury-r/encrypted-messenger",
     type: "Mobile",
     image: Messenger,
     subItems: [
@@ -32,7 +32,7 @@ export const ProjectsMenu: TCategorisedPhoto<TCategory>[] = [
     description: `
                 Lifeline, a cross-platform healthcare application, seamlessly connects patients, doctors, and other healthcare professionals, revolutionizing the way healthcare is delivered and experienced
                 `,
-    url: "https://github.com/fury-r/Lifeline",
+    link: "https://github.com/fury-r/Lifeline",
     image: LifelineImage2,
 
     subItems: ["ReactJS", "CSS", "Firebase", "NodeJs", "Express", "Sockets"],
@@ -40,12 +40,11 @@ export const ProjectsMenu: TCategorisedPhoto<TCategory>[] = [
   },
   {
     title: "Project Management Web application",
-    description: ` Streamlining Collaboration and Enhancing Productivity`,
-    url: "https://github.com/Ayush-Noorani/Agile-Project",
+    description: `Streamlining Collaboration and Enhancing Productivity`,
+    link: "https://github.com/Ayush-Noorani/Agile-Project",
     image: AgileSprintImage2,
-
     subItems: [
-      "React Typescript",
+      "React",
       "Redux",
       "Python",
       "Python flask",
@@ -58,7 +57,7 @@ export const ProjectsMenu: TCategorisedPhoto<TCategory>[] = [
   {
     title: "Leylines: A Web3 Social Media",
     description: `Leylines, a Web3-powered social media application, empowers users with ownership, privacy, and creative freedom`,
-    url: "https://github.com/fury-r/web3-social-media",
+    link: "https://github.com/fury-r/web3-social-media",
 
     image: LeylinesImage2,
     subItems: [
@@ -78,7 +77,7 @@ export const ProjectsMenu: TCategorisedPhoto<TCategory>[] = [
     title: "ERP Application",
     description:
       "The Orders Management System is a robust application designed to streamline business operations by efficiently tracking and managing customer orders. It includes a comprehensive product schema for organizing product structures, along with features for adding, editing, and deleting product information. The system also provides expense tracking to help businesses monitor their financials effectively.",
-    url: "https://github.com/fury-r/encrypted-messenger",
+    link: "https://github.com/fury-r/encrypted-messenger",
     image: ERP1,
     subItems: [
       "React",
@@ -98,7 +97,7 @@ export const ProjectsMenu: TCategorisedPhoto<TCategory>[] = [
     title: "File Sharer",
     description:
       "The FileShare Web Application is a platform built to facilitate easy sharing of files through file uploads and QR code generation. It utilizes React with TypeScript on the frontend and Django with Python on the backend. The app allows users to upload files, generate QR codes for those files, and share them effortlessly.",
-    url: "https://github.com/fury-r/filesharer",
+    link: "https://github.com/fury-r/filesharer",
     image: FileSharer,
     subItems: [
       "React",

@@ -1,15 +1,14 @@
 import { Container } from "react-bootstrap";
 import styled from "styled-components";
-import { TCompany } from "./types";
 
 import {
   StyledAccentLabel,
   StyledLabel,
   ThemeBorderContainer,
 } from "../context/component";
-import { useMemo } from "react";
+import {} from "react";
 import { useThemeContext } from "../context/ThemeContext/useContext";
-import { getCompany } from "../../data/company";
+import { useDataContext } from "../../context/DataContext/useContext";
 
 const StyledContainer = styled(Container)`
   display: grid;
@@ -38,8 +37,8 @@ const StyledContainer = styled(Container)`
 `;
 
 export const Companies = () => {
-  const { main } = useThemeContext();
-  const companies: TCompany[] = useMemo(() => getCompany(main), [main]);
+  const { main: mode } = useThemeContext();
+  const { company: companies } = useDataContext();
   return (
     <Container>
       <div className="w-full flex  justify-center">
@@ -51,12 +50,16 @@ export const Companies = () => {
             key={index.toString()}
             className="flex flex-col items-center h-36 p-2 rounded-[10px] justify-center w-[320px] pointer "
           >
-            {company.image ? (
+            {company.darkImage || company.lightImage ? (
               <img
                 className="img relative top-[-10px] text-slate-950  object-fit"
-                src={company.image}
+                src={
+                  mode === "DARK" && company.darkImage
+                    ? company.darkImage
+                    : company.lightImage
+                }
                 alt={company.name}
-                onClick={() => window.open(company.site)}
+                onClick={() => window.open(company.link)}
               />
             ) : (
               <StyledAccentLabel className="font-bold text-2xl">

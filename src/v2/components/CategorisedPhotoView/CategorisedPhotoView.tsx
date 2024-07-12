@@ -5,6 +5,7 @@ import { TCategorisedPhoto } from "../../../types/component";
 import styled from "styled-components";
 
 interface ICategorisedPhotoView<T> {
+  subLabel: string;
   data: TCategorisedPhoto<T>[];
   // eslint-disable-next-line @typescript-eslint/ban-types
   onClick: Function;
@@ -30,6 +31,7 @@ const CategoryContainer = styled(ShadowContainer)`
 export const CategorisedPhotoView = <T,>({
   data,
   onClick,
+  subLabel,
 }: ICategorisedPhotoView<T>) => {
   const [selection, setSelection] = useState<T | "All">("All");
   return (
@@ -74,7 +76,7 @@ export const CategorisedPhotoView = <T,>({
               </h3>
             </div>
             <div className="show flex flex-col mt-3 overflow-hidden ">
-              <h2 className="font-semibold">Tech Stack</h2>
+              <h2 className="font-semibold">{subLabel}</h2>
               <div className="flex flex-row flex-wrap overflow-hidden text-ellipsis  ">
                 {value.subItems.map((v, index) => (
                   <span className="m-2" key={index + 1}>

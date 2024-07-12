@@ -1,6 +1,6 @@
 import PageLayout from "./components/Page/PageLayout";
 import About from "./about/About";
-import { DoingCards } from "./about/DoingCards";
+import { ServiceCards } from "./about/ServiceCards";
 
 const Portfolio = () => {
   return (
@@ -13,7 +13,7 @@ const Portfolio = () => {
           },
           {
             title: "What I am doing",
-            component: <DoingCards />,
+            component: <ServiceCards />,
           },
         ]}
       />

@@ -9,7 +9,7 @@ import { useDataContext } from "../../context/DataContext/useContext";
 
 const Resume = () => {
   const { company, education } = useDataContext();
-
+  console.log(company, education);
   return (
     <PageLayout
       title="Resume"

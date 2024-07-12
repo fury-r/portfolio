@@ -67,7 +67,10 @@ export const Companies = () => {
               </StyledAccentLabel>
             )}
             <StyledAccentLabel className="text-lg whitespace-nowrap font-bold">
-              {company.title}
+              {
+                //@ts-ignore
+                company.subItems[0]?.subTitle
+              }
             </StyledAccentLabel>
             <StyledAccentLabel className="italic">
               {company.duration}

@@ -45,7 +45,11 @@ export const useContentFul = () => {
     try {
       const response = await client.getEntries({ content_type: "portfolio" });
       if (response.items.length > 0)
-        setProfile(response.items[0].fields as TProfile);
+        setProfile({
+          ...response.items[0].fields,
+          //@ts-ignore
+          picture: response.items[0].fields.picture?.fields?.file.url,
+        } as TProfile);
     } catch (error) {
       console.error(error);
     }
@@ -159,6 +163,7 @@ export const useContentFul = () => {
       getTech();
       getSocial();
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

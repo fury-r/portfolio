@@ -57,7 +57,7 @@ export const ProfileCard = () => {
           <img
             width={100}
             className="m-3 rounded-md object-fit"
-            src={Profile}
+            src={profile.picture || Profile}
             alt={"Profile picture"}
           />
         </div>

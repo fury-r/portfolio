@@ -13,6 +13,7 @@ This is my personal portfolio website built using modern web technologies includ
 - **styled-components**: A library for React and React Native that allows you to use component-level styles in your application.
 - **Tailwind CSS**: A utility-first CSS framework for rapidly building custom user interfaces.
 - **Turbopack**: A new Rust-based incremental bundler optimized for JavaScript and TypeScript, designed to be the successor to Webpack. [old version]
+- **ContentFul**:Contentful is the platform where you can update the content of your website, a mobile app or any other platform that displays content.
 
 ## Getting Started
 
@@ -61,7 +62,7 @@ npm run build
 # or
 yarn build
 # or
-turbo run build
+turbo run build [nextjs]
 ```
 
 This will create an optimized build of your application in the .next directory.
@@ -76,7 +77,7 @@ yarn run dev
 ```
 
 
-## Project Structure
+## NextJs Project Structure
 
 ```bash
 /components      # Reusable React components
@@ -88,6 +89,22 @@ yarn run dev
 /tailwind.config.js # Tailwind CSS configuration
 
 ```
+
+## ReactJs Project Structure
+
+```bash
+/components      # Reusable React components
+/context     
+/data            # fallback data
+/v1              # v1 site
+/v2              # v2 site
+/styles          # SCSS styles
+/public          # Static assets
+/tsconfig.json   # TypeScript configuration
+/tailwind.config.js # Tailwind CSS configuration
+
+```
+
 
 ## Styling
 

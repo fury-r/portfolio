@@ -14,9 +14,7 @@ export const useMediaQuery = (size: TScreen) => {
 
   useEffect(() => {
     const resize = () => {
-      console.log(screens[size], window.innerWidth);
       const flag = screens[size] >= window.innerWidth;
-      console.log(flag, isSize);
       if (flag !== isSize) {
         setIsSize(isSize);
       }

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   AnimatedStyledLabel,
   StyledLabel,
@@ -52,6 +52,7 @@ export const MainNavbar = () => {
   const theme = useTheme();
   const { stateChange, main } = useThemeContext();
   const navbar = document.getElementById("nav");
+
   const handleScroll = useCallback(async () => {
     const position = window.scrollY;
     if (scrollPosition <= position && open) {
@@ -67,10 +68,15 @@ export const MainNavbar = () => {
     }
   }, [scrollPosition, navbar, open]);
 
-  window.addEventListener("scroll", handleScroll);
-  const locationpath = location.pathname
-    .split("/")
-    .at(location.pathname.split("/").length - 1);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
+
+  const locationpath = location.pathname.split("v1")[1];
+
   const nav = (
     <Nav
       className={`${open ? "w-full" : " absolute right-6 "} responsive-nav`}
@@ -92,12 +98,11 @@ export const MainNavbar = () => {
             >
               <AnimatedStyledLabel
                 className={
-                  "mr-2 " +
+                  "mr-2  " +
                   ((locationpath?.length === 0 &&
                     value.routes.split("/").filter((value) => value).length ===
                       0) ||
-                  (locationpath?.length !== 0 &&
-                    value.routes.includes(locationpath || ""))
+                  (locationpath?.length !== 0 && value.routes === locationpath)
                     ? "active"
                     : "")
                 }

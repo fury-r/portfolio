@@ -43,7 +43,7 @@ function App() {
         <div
           className={`${
             !show ? "hidden" : ""
-          }  flex flex-col justify-center mb-2  bg-[var(--primary)] rounded-lg`}
+          }  flex flex-col justify-center mb-2  bg-[var(--primary)] rounded-lg  overflow-hidden`}
         >
           {PAGES.map((page, index) => (
             <button

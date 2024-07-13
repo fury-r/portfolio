@@ -73,7 +73,11 @@ export const ThemeNavbar = () => {
               location?.pathname === item.routes ? "active" : ""
             } mx-2`}
           >
-            <Nav.Link href={`/v2${item.routes}`}>{item.title}</Nav.Link>
+            <Nav.Link
+              href={`/v2${item.routes.length === 1 ? "" : item.routes}`}
+            >
+              {item.title}
+            </Nav.Link>
           </Nav.Item>
         ))}
         <ThemeModeButton

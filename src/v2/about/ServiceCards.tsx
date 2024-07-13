@@ -13,7 +13,7 @@ export const ServiceCards = () => {
   const { services } = useDataContext();
 
   return (
-    <div className="grid grid-cols-2 gap-10 max-md:grid-cols-1">
+    <div className="grid grid-cols-2 gap-5 max-md:grid-cols-1">
       {services.map(({ description, icon, title }, index) => {
         let IconElem: string | JSX.Element | IconType = "-";
         if (icon) {
@@ -32,14 +32,14 @@ export const ServiceCards = () => {
         return (
           <ShadowContainer
             key={`doing-${(index + 1).toString()}`}
-            className=" flex flex-row items-center     h-[150px] p-3"
+            className=" flex flex-row items-center  h-[150px] p-3"
           >
             {IconElem}
-            <div className="flex flex-col justify-start overflow-hidden h-full w-[60%]">
-              <h1 className="md:text-xl  max-md:text-base font-bold  ">
+            <div className="flex flex-col justify-start  overflow-hidden h-full w-[60%] ">
+              <h1 className="md:text-md  max-md:text-base font-bold  whitespace-nowrap">
                 {title}
               </h1>
-              <label className="text-ellipsis whitespace-pre-line max-md:text-sm overflow-hidden">
+              <label className="text-ellipsis whitespace-pre-line text-sm ">
                 {description}
               </label>
             </div>

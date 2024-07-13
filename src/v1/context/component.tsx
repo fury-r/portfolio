@@ -65,7 +65,7 @@ export const AnimatedButton = styled(StyledButton)`
     border: 1px solid var(--primary);
   }
   .active {
-    border-bottom: 1px solid #6e07f3;
+    border-bottom: 1px solid var(--color);
   }
 
   .btn-three::before {
@@ -133,7 +133,7 @@ export const StyledNavLink = styled.a`
     transform: scale(1.1);
   }
   .active {
-    border-bottom: 1px solid var(--accent);
+    border-bottom: 1px solid var(--color);
   }
 `;
 

@@ -18,7 +18,7 @@ export const GlobalContextProvider = ({
       if (page !== pageVersion) {
         localStorage.setItem("pageVersion", page);
         setPageVersion(page);
-        window.location.href = "/";
+        window.location.href = "/" + page;
       }
     },
     [pageVersion]

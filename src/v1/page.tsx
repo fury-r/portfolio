@@ -4,6 +4,8 @@ import styled from "styled-components";
 import { Companies } from "./component/Company";
 import Profile from "../assets/profile.jpg";
 import { useNavigate } from "react-router-dom";
+import Wave from "../assets/Wave.svg";
+
 const IntroductionContainer = styled(Container)`
   width: 70%;
   .blobby-div {
@@ -60,7 +62,8 @@ const IntroductionContainer = styled(Container)`
   .img {
     align-items: center;
     @media (max-width: 768px) {
-      width: 100%;
+      width: 70%;
+      height: 70%;
     }
     transform: scale(0.9);
     border: 1px solid var(--color);
@@ -88,9 +91,10 @@ const Home = () => {
             <StyledLabel className=" text-[32px]">Hello</StyledLabel>
             <img
               height={30}
+              width={30}
               className="m-3"
-              src={"../assets/Wave.svg"}
-              alt={""}
+              src={Wave}
+              alt={"wave"}
             />
           </StyledLabel>
           <div className="flex items-center justify-start">
@@ -113,11 +117,11 @@ const Home = () => {
           </AnimatedButton>
         </div>
 
-        <Container className="flex justify-center">
+        <Container className="flex justify-center ">
           <img
             src={Profile}
             alt="User photo"
-            className=" responsive img blobby-div shadow-md object-fit"
+            className=" responsive img blobby-div h-fit shadow-md object-fill"
             loading="lazy"
             width={100}
             height={100}

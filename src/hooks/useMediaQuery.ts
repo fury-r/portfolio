@@ -8,8 +8,6 @@ const screens: Record<TScreen, number> = {
 };
 type TScreen = "sm" | "md" | "lg" | "xl" | "2xl";
 export const useMediaQuery = (size: TScreen) => {
-  console.log(screens[size], screen.width);
-
   const [isSize, setIsSize] = useState(screens[size] >= screen.width);
 
   useEffect(() => {
@@ -27,6 +25,5 @@ export const useMediaQuery = (size: TScreen) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSize, size, screen.width]);
-  console.log(isSize, "size");
   return useMemo(() => isSize, [isSize]);
 };

@@ -4,8 +4,10 @@ import styled from "styled-components";
 import { ToastContainer } from "react-bootstrap";
 import { useGlobalContext } from "./context/GlobalContext/useContext";
 import { V2Router } from "./v2/Routes/routes";
+import Landing from "./landing/Landing";
 import { V1Router } from "./v1/Routes/routes";
 import { TPageVersion } from "./types/page";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const PAGES: TPageVersion[] = ["v1", "v2"];
 
@@ -67,7 +69,23 @@ function App() {
           )}
         </button>
       </div>
-      {pageVersion === "v2" ? <V2Router /> : <V1Router />}
+
+      <RouterProvider
+        router={createBrowserRouter([
+          {
+            path: "/",
+            element: <Landing />,
+          },
+          {
+            path: "/v1/*",
+            element: <V1Router />,
+          },
+          {
+            path: "/v2/*",
+            element: <V2Router />,
+          },
+        ])}
+      />
       <ToastContainer />
     </StyledContainer>
   );

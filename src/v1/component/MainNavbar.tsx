@@ -83,7 +83,7 @@ export const MainNavbar = () => {
             backgroundColor: open ? "transparent" : "",
           }}
         >
-          <StyledNavLink href={value.routes}>
+          <StyledNavLink href={`/v1${value.routes}`}>
             <div
               className={
                 "flex   items-center " +

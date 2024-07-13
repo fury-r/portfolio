@@ -107,7 +107,7 @@ const Home = () => {
           <AnimatedButton
             className="mt-5 rounded-md"
             color="white"
-            onClick={() => push("/contact")}
+            onClick={() => push("/v1/contact")}
           >
             Contact me
           </AnimatedButton>

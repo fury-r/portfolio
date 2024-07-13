@@ -10,7 +10,7 @@ type TContact = {
   css?: string;
 };
 
-export const Item = ({ icon, label, code, css, value }: TContact) => {
+export const Item = ({ label, code, css, value }: TContact) => {
   let IconElem: string | JSX.Element | IconType = "-";
   if (css) {
     IconElem = iconMap[css];
@@ -31,12 +31,12 @@ export const Item = ({ icon, label, code, css, value }: TContact) => {
             className="text-ellipsis whitespace-nowrap overflow-hidden"
             dangerouslySetInnerHTML={{ __html: code }}
           />
-        ) : icon === "contact" ? (
+        ) : css === "contact" ? (
           <div
-            className="text-ellipsis overflow-hidden"
-            onClick={() => window.open("tel:9158907407")}
+            className="text-ellipsis overflow-hidden whitespace-nowrap"
+            onClick={() => window.open(`tel:${value}`)}
           >
-            +91 9158907407
+            {value}
           </div>
         ) : (
           value

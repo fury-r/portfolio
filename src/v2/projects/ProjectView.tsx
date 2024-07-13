@@ -16,9 +16,10 @@ const ProjectView = () => {
         const a = document.createElement("a");
         a.href = value.link;
         a.target = "_blank";
-        document.appendChild(a);
+        a.id = value.title;
+        document.body.appendChild(a);
         a.click();
-        document.removeChild(a);
+        document.body.removeChild(a);
       }}
       subLabel="Tech Stack"
     />

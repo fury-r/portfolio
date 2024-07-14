@@ -1,4 +1,4 @@
-# My Portfolio Website [![Workflow status](https://github.com/fury/portfolio/actions/workflows/actions.yaml/badge.svg?branch=master)](https://github.com/fury/portfolio/actions/workflows/actions.yaml)
+# My Portfolio Website [![Workflow status](https://github.com/fury-r/portfolio/actions/workflows/actions.yaml/badge.svg?branch=master)](https://github.com/fury-r/portfolio/actions/workflows/actions.yaml)
  [![Netlify Status](https://api.netlify.com/api/v1/badges/33f75cea-ec4f-49de-9550-74241efc9766/deploy-status)](https://app.netlify.com/sites/rajeevdesssai/deploys) 
 
 

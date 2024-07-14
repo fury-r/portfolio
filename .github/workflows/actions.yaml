@@ -16,7 +16,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Clean install
-        uses: npm install --frozen-lockfile
+        run: npm install --frozen-lockfile
         shell: bash
       - name: Cache Dependencies
         uses: actions/cache@v2
@@ -26,21 +26,27 @@ jobs:
             ./node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Run lint
-        uses: turbo fix-lint
+        run: npm run fix-lint
         shell: bash
 
-    run-build-app:
-      runs-on: ubuntu-latest
-      strategy:
-        matrix:
-          node-version: [18.x]      
-      steps:
+  run-build-app:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x]
+    steps:
       - name: Check out repository
         uses: actions/checkout@v2
       - name: Clean install
-        uses: npm install --frozen-lockfile
+        run: npm install --frozen-lockfile
         shell: bash
       - name: Cache Dependencies
         uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            ./node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Build app
-        uses: npm run build
+        run: npm run build
+        shell: bash

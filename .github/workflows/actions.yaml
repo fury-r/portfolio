@@ -26,7 +26,7 @@ jobs:
             ./node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
       - name: Run lint
-        run: turbo fix-lint
+        run: npm run fix-lint
         shell: bash
 
   run-build-app:

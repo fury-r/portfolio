@@ -5,8 +5,10 @@ import { ThemeNavbar } from "./ThemeNavbar";
 import { ProfileCard } from "./ProfileCard/ProfileCard";
 import { Container, SideBar } from "./Container";
 import styled from "styled-components";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { motion } from "framer-motion";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(motion.div)`
   .layout {
     display: flex;
     justify-content: center;
@@ -58,6 +60,7 @@ const StyledContainer = styled.div`
 export const Layout = ({ children }: { children: ReactNode }) => {
   const pathname = location.pathname;
   const [splash, setSplash] = useState(pathname.length > 1);
+  const isMobile = useMediaQuery("md");
 
   useEffect(() => {
     let interval;
@@ -71,6 +74,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       clearInterval(interval);
     }
   }, [setSplash, splash]);
+
   return !splash ? (
     <Loader />
   ) : (
@@ -78,12 +82,18 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       <div className="h-full  w-full  gap-5  layout  transition">
         <SideBar
           id="side-view"
+          initial={{ x: -500 }}
+          animate={{ x: 0 }}
+          transition={{ ease: "easeIn", duration: 1 }}
           className="flex z-20 h-fit  rounded-md   transit  col-span-1 section-1"
         >
           <ProfileCard />
         </SideBar>
         <Container
           id="view"
+          initial={{ [isMobile ? "x" : "y"]: [isMobile ? 500 : -500] }}
+          animate={{ [isMobile ? "x" : "y"]: 0 }}
+          transition={{ ease: "easeIn", duration: 1 }}
           className="flex-col w-fit  md:min-h-[80%] h-fit rounded-md   mb-32 col-span-1 section-2"
         >
           <div className="w-full flex flex-row justify-end top-nav ">

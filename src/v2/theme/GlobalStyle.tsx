@@ -40,7 +40,7 @@ body{
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background:var(--primary);
+  background:var(--accent);
   border-radius: 5px;
 }
 

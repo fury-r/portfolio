@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { IconBaseProps } from "react-icons/lib";
 import styled from "styled-components";
 
@@ -18,7 +19,7 @@ interface ITimeLine {
   icon: (props?: IconBaseProps) => JSX.Element;
 }
 
-const StyledTimeline = styled.div`
+const StyledTimeline = styled(motion.div)`
   .timeline-item:not(:last-child)::before {
     content: "";
     position: absolute;

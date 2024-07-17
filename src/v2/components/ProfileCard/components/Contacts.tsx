@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useDataContext } from "../../../../context/DataContext/useContext";
 import { iconMap } from "../../../../data/icon";
 import { IconType } from "react-icons/lib";
+import { motion } from "framer-motion";
 type TContact = {
   icon?: string;
   label: string;
@@ -46,7 +47,7 @@ export const Item = ({ label, code, css, value }: TContact) => {
   );
 };
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(motion.div)`
   padding: 3px 5px;
   &::after,
   &::before {

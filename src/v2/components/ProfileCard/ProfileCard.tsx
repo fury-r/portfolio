@@ -7,6 +7,8 @@ import { ShadowContainer } from "../Container";
 import { useState } from "react";
 import SocialFooter from "../../../components/SocialFooter/SocialFooter";
 import { useDataContext } from "../../../context/DataContext/useContext";
+import { motion } from "framer-motion";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 export const StyledShadowContainer = styled(ShadowContainer)`
   border-top: 0;
@@ -14,7 +16,7 @@ export const StyledShadowContainer = styled(ShadowContainer)`
   border-radius: 0 0 0 var(--rounded);
 `;
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled(motion.div)`
   min-height: fit-content;
   width: 100%;
   @media (max-width: 1920px) {
@@ -41,9 +43,16 @@ export const StyledContainer = styled.div`
 export const ProfileCard = () => {
   const [show, setShow] = useState(false);
   const { profile } = useDataContext();
+  const isMobile = useMediaQuery("md");
 
   return (
-    <StyledContainer className="transition">
+    <StyledContainer
+      className="transition"
+      animate={{
+        ...(isMobile ? { height: show ? 400 : 200 } : {}),
+      }}
+      transition={{ duration: 0.2, ease: "easeInOut" }}
+    >
       <div className="flex flex-row justify-end min-[1250px]:hidden absolute right-0 ">
         <StyledShadowContainer
           className=" p-3 rounded-bl-lg border-none conditional-btn"

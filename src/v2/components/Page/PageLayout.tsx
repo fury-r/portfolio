@@ -1,7 +1,8 @@
+import { motion } from "framer-motion";
 import { ReactNode } from "react";
 import styled from "styled-components";
 
-const StyledPageLayout = styled.div`
+const StyledPageLayout = styled(motion.div)`
   .title {
     position: relative;
     margin-bottom: 15px;

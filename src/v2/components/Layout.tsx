@@ -7,7 +7,6 @@ import { Container, SideBar } from "./Container";
 import styled from "styled-components";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { motion } from "framer-motion";
-import { useThemeContext } from "../context/ThemeContext/useContext";
 
 const StyledContainer = styled(motion.div)`
   .layout {
@@ -62,7 +61,9 @@ export const Layout = ({ children }: { children: ReactNode }) => {
   const pathname = location.pathname;
   const [splash, setSplash] = useState(pathname.length > 1);
   const isMobile = useMediaQuery("md");
-  const { setIsAnimationFinished, isAnimationFinished } = useThemeContext();
+  const [isAnimationFinished, setIsAnimationFinished] = useState(
+    pathname.split("/").length > 1
+  );
 
   useEffect(() => {
     let interval;
@@ -82,11 +83,15 @@ export const Layout = ({ children }: { children: ReactNode }) => {
   ) : (
     <StyledContainer>
       <motion.div
-        initial={{ [isMobile ? "x" : "y"]: [isMobile ? 500 : -500] }}
-        animate={{ [isMobile ? "x" : "y"]: 0 }}
         onAnimationComplete={() => setIsAnimationFinished(true)}
         transition={{ ease: "easeIn", duration: 1.5 }}
         className="h-full  w-full  gap-5  layout  transition"
+        {...(!isAnimationFinished
+          ? {
+              initial: { [isMobile ? "x" : "y"]: [isMobile ? 500 : -500] },
+              animate: { [isMobile ? "x" : "y"]: 0 },
+            }
+          : {})}
       >
         <SideBar
           id="side-view"

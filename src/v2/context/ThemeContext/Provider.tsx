@@ -7,7 +7,6 @@ import { ThemeProvider } from "styled-components";
 export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
   const [mode, setMode] = useState<MODE>("DARK");
   const [theme, setTheme] = useState(dark);
-  const [isAnimationFinished, setIsAnimationFinished] = useState(false);
 
   const [rounded, setRounded] = useState(20);
   useEffect(() => {
@@ -47,10 +46,8 @@ export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
       },
       setTheme,
       setRounded,
-      isAnimationFinished,
-      setIsAnimationFinished,
     }),
-    [isAnimationFinished, mode, rounded, stateChange, theme]
+    [mode, rounded, stateChange, theme]
   );
 
   return (

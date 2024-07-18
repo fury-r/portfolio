@@ -7,13 +7,16 @@ const Portfolio = () => {
     <div>
       <PageLayout
         title="About Me"
+        inViewAnimateTitle={true}
         sections={[
           {
             component: <About />,
+            inViewAnimate: true,
           },
           {
             title: "What I am doing",
             component: <ServiceCards />,
+            inViewAnimateTitle: true,
           },
         ]}
       />

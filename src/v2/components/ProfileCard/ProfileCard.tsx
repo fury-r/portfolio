@@ -4,7 +4,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import styled from "styled-components";
 import { Contacts } from "./components/Contacts";
 import { ShadowContainer } from "../Container";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SocialFooter from "../../../components/SocialFooter/SocialFooter";
 import { useDataContext } from "../../../context/DataContext/useContext";
 import { motion } from "framer-motion";
@@ -41,22 +41,33 @@ export const StyledContainer = styled(motion.div)`
 `;
 
 export const ProfileCard = () => {
-  const [show, setShow] = useState(false);
+  const divRef = useRef<HTMLDivElement | null>(null);
+  const [animate, setAnimate] = useState(false); // animation toggle
   const { profile } = useDataContext();
   const isMobile = useMediaQuery("md");
 
   return (
     <StyledContainer
       className="transition"
+      onAnimationStart={() => {
+        if (!animate && isMobile && divRef.current) {
+          divRef.current!.style.display! = "none";
+        }
+      }}
       animate={{
-        ...(isMobile ? { height: show ? 400 : 200 } : {}),
+        ...(isMobile ? { height: animate ? 400 : 200 } : {}),
+      }}
+      onAnimationComplete={() => {
+        if (animate && isMobile && divRef.current) {
+          divRef.current!.style.display! = "initial";
+        }
       }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
     >
       <div className="flex flex-row justify-end min-[1250px]:hidden absolute right-0 ">
         <StyledShadowContainer
           className=" p-3 rounded-bl-lg border-none conditional-btn"
-          onClick={() => setShow((prev) => !prev)}
+          onClick={() => setAnimate((prev) => !prev)}
         >
           <IoIosArrowDown />
         </StyledShadowContainer>
@@ -82,7 +93,8 @@ export const ProfileCard = () => {
       </div>
       <div
         id="desktop-contacts "
-        className={`h-[50%] ${!show && "hide-contacts"} mt-2`}
+        ref={divRef}
+        className={`h-[50%] ${isMobile && "hide-contacts"} mt-2`}
       >
         <Contacts />
         <div className={` flex flex-row justify-center `}>

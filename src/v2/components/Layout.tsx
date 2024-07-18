@@ -7,6 +7,7 @@ import { Container, SideBar } from "./Container";
 import styled from "styled-components";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { motion } from "framer-motion";
+import { useThemeContext } from "../context/ThemeContext/useContext";
 
 const StyledContainer = styled(motion.div)`
   .layout {
@@ -61,6 +62,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
   const pathname = location.pathname;
   const [splash, setSplash] = useState(pathname.length > 1);
   const isMobile = useMediaQuery("md");
+  const { setIsAnimationFinished, isAnimationFinished } = useThemeContext();
 
   useEffect(() => {
     let interval;
@@ -79,31 +81,35 @@ export const Layout = ({ children }: { children: ReactNode }) => {
     <Loader />
   ) : (
     <StyledContainer>
-      <div className="h-full  w-full  gap-5  layout  transition">
+      <motion.div
+        initial={{ [isMobile ? "x" : "y"]: [isMobile ? 500 : -500] }}
+        animate={{ [isMobile ? "x" : "y"]: 0 }}
+        onAnimationComplete={() => setIsAnimationFinished(true)}
+        transition={{ ease: "easeIn", duration: 1.5 }}
+        className="h-full  w-full  gap-5  layout  transition"
+      >
         <SideBar
           id="side-view"
-          initial={{ x: -500 }}
-          animate={{ x: 0 }}
-          transition={{ ease: "easeIn", duration: 1 }}
           className="flex z-20 h-fit  rounded-md   transit  col-span-1 section-1"
         >
           <ProfileCard />
         </SideBar>
         <Container
           id="view"
-          initial={{ [isMobile ? "x" : "y"]: [isMobile ? 500 : -500] }}
-          animate={{ [isMobile ? "x" : "y"]: 0 }}
-          transition={{ ease: "easeIn", duration: 1 }}
           className="flex-col w-fit  md:min-h-[80%] h-fit rounded-md   mb-32 col-span-1 section-2"
         >
-          <div className="w-full flex flex-row justify-end top-nav ">
-            <div className="absolute right-0 h-fit  w-[60%]  ">
-              <ThemeNavbar />
-            </div>
-          </div>
-          <div className="h-[90%]  p-3">{children}</div>
+          {isAnimationFinished && (
+            <>
+              <div className="w-full flex flex-row justify-end top-nav ">
+                <div className="absolute right-0 h-fit  w-[60%]  ">
+                  <ThemeNavbar />
+                </div>
+              </div>
+              <div className="h-[90%]  p-3">{children}</div>
+            </>
+          )}
         </Container>
-      </div>
+      </motion.div>
       <div className="bottom-nav p-0">
         <ThemeNavbar />
       </div>

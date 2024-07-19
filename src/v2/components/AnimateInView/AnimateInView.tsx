@@ -9,12 +9,14 @@ const AnimateInView = ({
   animate = false,
   style,
   className = "",
+  id = "",
 }: {
   children: React.ReactNode;
   animate?: boolean;
   style?: CSSProperties;
   getStyle?: (isInView: boolean) => CSSProperties;
   className?: string;
+  id?: string;
 }) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const isInView = useInView(ref, { once: true });
@@ -22,7 +24,8 @@ const AnimateInView = ({
 
   return (
     <div
-      className={"w-full h-full " + className}
+      id={id}
+      className={"" + className}
       style={{
         ...(animate
           ? getStyle

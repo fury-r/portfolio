@@ -9,6 +9,7 @@ import SocialFooter from "../../../components/SocialFooter/SocialFooter";
 import { useDataContext } from "../../../context/DataContext/useContext";
 import { motion } from "framer-motion";
 import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import AnimateInView from "../AnimateInView/AnimateInView";
 
 export const StyledShadowContainer = styled(ShadowContainer)`
   border-top: 0;
@@ -42,6 +43,8 @@ export const StyledContainer = styled(motion.div)`
 
 export const ProfileCard = () => {
   const divRef = useRef<HTMLDivElement | null>(null);
+
+  const animateOnLoad = location.pathname.length === 3;
   const [animate, setAnimate] = useState(false); // animation toggle
   const { profile } = useDataContext();
   const isMobile = useMediaQuery("md");
@@ -73,15 +76,21 @@ export const ProfileCard = () => {
         </StyledShadowContainer>
       </div>
       <div className="grid xl:grid-cols-1 gap-4 my-4 items-center max-[1250px]:grid-cols-2 md:p-3  w-full h-[50%] p-2">
-        <div className=" rounded-md flex flex-col items-center  ">
+        <AnimateInView
+          animate={animateOnLoad}
+          className=" rounded-md flex flex-col items-center  "
+        >
           <img
             width={100}
             className="m-3 rounded-md object-fit"
             src={profile.picture || Profile}
             alt={"Profile picture"}
           />
-        </div>
-        <div className="flex flex-col items-center justify-between max-lg:items-start  ">
+        </AnimateInView>
+        <AnimateInView
+          animate={animateOnLoad}
+          className="flex flex-col items-center justify-between max-lg:items-start  "
+        >
           <div>{profile.name}</div>
           <div
             className=" p-2 rounded-lg my-2 "
@@ -89,17 +98,19 @@ export const ProfileCard = () => {
           >
             <label className="text-sm font-semibold ">{profile.position}</label>
           </div>
-        </div>
+        </AnimateInView>
       </div>
       <div
         id="desktop-contacts "
         ref={divRef}
         className={`h-[50%] ${isMobile && "hide-contacts"} mt-2`}
       >
-        <Contacts />
-        <div className={` flex flex-row justify-center `}>
-          <SocialFooter />
-        </div>
+        <AnimateInView animate={animateOnLoad && !isMobile}>
+          <Contacts />
+          <div className={` flex flex-row justify-center `}>
+            <SocialFooter />
+          </div>
+        </AnimateInView>
       </div>
     </StyledContainer>
   );

@@ -9,7 +9,7 @@ export const Skills = () => {
       {services.map((value, index) => (
         <AnimateInView
           getStyle={(isInView: boolean) => ({
-            transform: isInView ? "none" : "translateX(1200px)",
+            transform: isInView ? "none" : "translateX(120px)",
             opacity: isInView ? 1 : 0,
             transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
           })}

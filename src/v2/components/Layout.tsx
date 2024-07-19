@@ -1,12 +1,13 @@
 import { ReactNode, useState, useEffect } from "react";
-import { Loader } from "../../components/Loader";
+import { motion } from "framer-motion";
+import styled from "styled-components";
 
+import { Loader } from "../../components/Loader";
 import { ThemeNavbar } from "./ThemeNavbar";
 import { ProfileCard } from "./ProfileCard/ProfileCard";
 import { Container, SideBar } from "./Container";
-import styled from "styled-components";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { motion } from "framer-motion";
+import AnimateInView from "./AnimateInView/AnimateInView";
 
 const StyledContainer = styled(motion.div)`
   .layout {
@@ -61,9 +62,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
   const pathname = location.pathname;
   const [splash, setSplash] = useState(pathname.length > 1);
   const isMobile = useMediaQuery("md");
-  const [isAnimationFinished, setIsAnimationFinished] = useState(
-    pathname.split("/").length > 1
-  );
+  const [isAnimationFinished, setIsAnimationFinished] = useState(true);
 
   useEffect(() => {
     let interval;
@@ -106,9 +105,9 @@ export const Layout = ({ children }: { children: ReactNode }) => {
           {isAnimationFinished && (
             <>
               <div className="w-full flex flex-row justify-end top-nav ">
-                <div className="absolute right-0 h-fit  w-[60%]  ">
+                <AnimateInView className="absolute right-0 h-fit  w-[60%]  ">
                   <ThemeNavbar />
-                </div>
+                </AnimateInView>
               </div>
               <div className="h-[90%]  p-3">{children}</div>
             </>

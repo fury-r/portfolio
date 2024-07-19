@@ -13,7 +13,8 @@ This is my personal portfolio website built using modern web technologies includ
 - **styled-components**: A library for React and React Native that allows you to use component-level styles in your application.
 - **Tailwind CSS**: A utility-first CSS framework for rapidly building custom user interfaces.
 - **Turbopack**: A new Rust-based incremental bundler optimized for JavaScript and TypeScript, designed to be the successor to Webpack. [old version]
-- **ContentFul**:Contentful is the platform where you can update the content of your website, a mobile app or any other platform that displays content.
+- **ContentFul**: Contentful is the platform where you can update the content of your website, a mobile app or any other platform that displays content.
+- **react-icon-cloud**: An interactive 3D tag cloud component for React that renders text, images, and simple icons into a interactive 3D tag cloud.
 
 ## Getting Started
 
@@ -128,4 +129,5 @@ Tailwind CSS is used for utility-first styling. You can use Tailwind's utility c
 - Tailwind CSS
 - Turbopack
 - Templates [References]
+- [react-icon-cloud](https://github.com/teaguestockwell/react-icon-cloud)
 

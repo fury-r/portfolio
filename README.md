@@ -12,6 +12,7 @@ This is my personal portfolio website built using modern web technologies includ
 - **SCSS**: A CSS preprocessor that adds power and elegance to the basic language.
 - **styled-components**: A library for React and React Native that allows you to use component-level styles in your application.
 - **Tailwind CSS**: A utility-first CSS framework for rapidly building custom user interfaces.
+- **Framer motion**: Framer Motion is a popular open-source library for React that allows developers to create animations and interactions easily.
 - **Turbopack**: A new Rust-based incremental bundler optimized for JavaScript and TypeScript, designed to be the successor to Webpack. [old version]
 - **ContentFul**: Contentful is the platform where you can update the content of your website, a mobile app or any other platform that displays content.
 - **react-icon-cloud**: An interactive 3D tag cloud component for React that renders text, images, and simple icons into a interactive 3D tag cloud.
@@ -120,14 +121,14 @@ Tailwind CSS is used for utility-first styling. You can use Tailwind's utility c
 
 
 ### Acknowledgments
-- Next.js
-- React 
-- Vite
-- Typescript
-- SCSS
-- styled-components
-- Tailwind CSS
-- Turbopack
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Typescript](https://www.typescriptlang.org/)
+- [SCSS](https://sass-lang.com/)
+- [styled-components](https://styled-components.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- Turbopack[https://turbo.build/]
 - Templates [References]
 - [react-icon-cloud](https://github.com/teaguestockwell/react-icon-cloud)
-
+- [framer-motion](https://www.framer.com/motion/)

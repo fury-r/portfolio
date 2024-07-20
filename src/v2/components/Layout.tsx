@@ -1,12 +1,15 @@
 import { ReactNode, useState, useEffect } from "react";
-import { Loader } from "../../components/Loader";
+import { motion } from "framer-motion";
+import styled from "styled-components";
 
+import { Loader } from "../../components/Loader";
 import { ThemeNavbar } from "./ThemeNavbar";
 import { ProfileCard } from "./ProfileCard/ProfileCard";
 import { Container, SideBar } from "./Container";
-import styled from "styled-components";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import AnimateInView from "./AnimateInView/AnimateInView";
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(motion.div)`
   .layout {
     display: flex;
     justify-content: center;
@@ -28,6 +31,8 @@ const StyledContainer = styled.div`
       position: fixed;
       bottom: 0px;
       width: 100%;
+      left: 0px;
+      right: 0px;
     }
   }
   .top-nav {
@@ -58,6 +63,8 @@ const StyledContainer = styled.div`
 export const Layout = ({ children }: { children: ReactNode }) => {
   const pathname = location.pathname;
   const [splash, setSplash] = useState(pathname.length > 1);
+  const isMobile = useMediaQuery("md");
+  const [isAnimationFinished, setIsAnimationFinished] = useState(true);
 
   useEffect(() => {
     let interval;
@@ -71,11 +78,22 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       clearInterval(interval);
     }
   }, [setSplash, splash]);
+
   return !splash ? (
     <Loader />
   ) : (
     <StyledContainer>
-      <div className="h-full  w-full  gap-5  layout  transition">
+      <motion.div
+        onAnimationComplete={() => setIsAnimationFinished(true)}
+        transition={{ ease: "easeIn", duration: 1.5 }}
+        className="h-full w-full gap-5 layout transition"
+        {...(!isAnimationFinished
+          ? {
+              initial: { [isMobile ? "x" : "y"]: [isMobile ? 500 : -500] },
+              animate: { [isMobile ? "x" : "y"]: 0 },
+            }
+          : {})}
+      >
         <SideBar
           id="side-view"
           className="flex z-20 h-fit  rounded-md   transit  col-span-1 section-1"
@@ -86,14 +104,18 @@ export const Layout = ({ children }: { children: ReactNode }) => {
           id="view"
           className="flex-col w-fit  md:min-h-[80%] h-fit rounded-md   mb-32 col-span-1 section-2"
         >
-          <div className="w-full flex flex-row justify-end top-nav ">
-            <div className="absolute right-0 h-fit  w-[60%]  ">
-              <ThemeNavbar />
-            </div>
-          </div>
-          <div className="h-[90%]  p-3">{children}</div>
+          {isAnimationFinished && (
+            <>
+              <div className="w-full flex flex-row justify-end top-nav ">
+                <AnimateInView className="absolute right-0 h-fit  w-[60%]  ">
+                  <ThemeNavbar />
+                </AnimateInView>
+              </div>
+              <div className="h-[90%]  p-3">{children}</div>
+            </>
+          )}
         </Container>
-      </div>
+      </motion.div>
       <div className="bottom-nav p-0">
         <ThemeNavbar />
       </div>

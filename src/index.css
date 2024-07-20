@@ -12,6 +12,14 @@ body {
   height: 100%;
   width: 100%;
   overflow: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable both-edges;
+
+  @media (max-width: 800px) {
+    body::-webkit-scrollbar {
+      width: 2px;
+    }
+  }
 }
 
 .btn {
@@ -30,10 +38,6 @@ body {
 }
 body::-webkit-scrollbar {
   width: 10px;
-
-  @media (max-width: 900px) {
-    width: 5px;
-  }
 }
 
 body::-webkit-scrollbar-track {
@@ -47,7 +51,13 @@ body::-webkit-scrollbar-thumb {
   box-shadow: inset 1px 1px 0 hsla(0, 0%, 100%, 0.11),
     inset -1px -1px 0 hsla(0, 0%, 100%, 0.11);
 }
+body::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+}
 
+body::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+}
 body::-webkit-scrollbar-thumb:hover {
   background: hsla(0, 0%, 100%, 0.15);
 }

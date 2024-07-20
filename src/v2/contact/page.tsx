@@ -13,6 +13,7 @@ const Contact = () => {
         {
           title: "Reach out.",
           component: <ContactForm />,
+          inViewAnimate: true,
         },
       ]}
     />

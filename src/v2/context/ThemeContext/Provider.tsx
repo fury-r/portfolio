@@ -7,6 +7,7 @@ import { ThemeProvider } from "styled-components";
 export const CustomThemeProvider = ({ children }: { children: ReactNode }) => {
   const [mode, setMode] = useState<MODE>("DARK");
   const [theme, setTheme] = useState(dark);
+
   const [rounded, setRounded] = useState(20);
   useEffect(() => {
     setTheme(mode === "DARK" ? dark : light);

@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
 import { IconBaseProps } from "react-icons/lib";
 import styled from "styled-components";
+import AnimateInView from "../AnimateInView/AnimateInView";
 
 export type TTimeLine = {
   title: string;
@@ -18,7 +20,7 @@ interface ITimeLine {
   icon: (props?: IconBaseProps) => JSX.Element;
 }
 
-const StyledTimeline = styled.div`
+const StyledTimeline = styled(motion.div)`
   .timeline-item:not(:last-child)::before {
     content: "";
     position: absolute;
@@ -54,10 +56,11 @@ const TimeLine = ({ data, icon, title }: ITimeLine) => {
           <h2 className="text-xl font-bold">{title}</h2>
         </div>
         {data?.map((item, index) => (
-          <div
+          <AnimateInView
             key={index}
             style={{ marginBottom: "40px", position: "relative" }}
             className="flex flex-col timeline-item"
+            animate
           >
             <>
               <h3 className="font-bold" style={{ marginBottom: "5px" }}>
@@ -93,7 +96,7 @@ const TimeLine = ({ data, icon, title }: ITimeLine) => {
               </div>
             ))}
             <p style={{ marginTop: "10px" }}>{item.description}</p>
-          </div>
+          </AnimateInView>
         ))}
       </div>
     </StyledTimeline>

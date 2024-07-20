@@ -4,9 +4,12 @@ import { IoIosArrowDown } from "react-icons/io";
 import styled from "styled-components";
 import { Contacts } from "./components/Contacts";
 import { ShadowContainer } from "../Container";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import SocialFooter from "../../../components/SocialFooter/SocialFooter";
 import { useDataContext } from "../../../context/DataContext/useContext";
+import { motion } from "framer-motion";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
+import AnimateInView from "../AnimateInView/AnimateInView";
 
 export const StyledShadowContainer = styled(ShadowContainer)`
   border-top: 0;
@@ -14,7 +17,7 @@ export const StyledShadowContainer = styled(ShadowContainer)`
   border-radius: 0 0 0 var(--rounded);
 `;
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled(motion.div)`
   min-height: fit-content;
   width: 100%;
   @media (max-width: 1920px) {
@@ -39,29 +42,59 @@ export const StyledContainer = styled.div`
 `;
 
 export const ProfileCard = () => {
-  const [show, setShow] = useState(false);
+  const divRef = useRef<HTMLDivElement | null>(null);
+
+  const animateOnLoad = location.pathname.length === 3;
+  const [animate, setAnimate] = useState(false); // animation toggle
   const { profile } = useDataContext();
+  const isMobile = useMediaQuery("md");
 
   return (
-    <StyledContainer className="transition">
+    <StyledContainer
+      className="transition"
+      onAnimationStart={() => {
+        if (!animate && isMobile && divRef.current) {
+          divRef.current!.style.display! = "none";
+        } else if (!isMobile && divRef.current) {
+          divRef.current!.style.display! = "initial";
+        }
+      }}
+      animate={{
+        ...(isMobile
+          ? { height: animate ? 400 : 200 }
+          : { height: "fit-content" }),
+      }}
+      onAnimationComplete={() => {
+        if (animate && isMobile && divRef.current) {
+          divRef.current!.style.display! = "initial";
+        }
+      }}
+      transition={{ duration: 0.2, ease: "easeInOut" }}
+    >
       <div className="flex flex-row justify-end min-[1250px]:hidden absolute right-0 ">
         <StyledShadowContainer
           className=" p-3 rounded-bl-lg border-none conditional-btn"
-          onClick={() => setShow((prev) => !prev)}
+          onClick={() => setAnimate((prev) => !prev)}
         >
           <IoIosArrowDown />
         </StyledShadowContainer>
       </div>
       <div className="grid xl:grid-cols-1 gap-4 my-4 items-center max-[1250px]:grid-cols-2 md:p-3  w-full h-[50%] p-2">
-        <div className=" rounded-md flex flex-col items-center  ">
+        <AnimateInView
+          animate={animateOnLoad}
+          className=" rounded-md flex flex-col items-center  "
+        >
           <img
             width={100}
             className="m-3 rounded-md object-fit"
             src={profile.picture || Profile}
             alt={"Profile picture"}
           />
-        </div>
-        <div className="flex flex-col items-center justify-between max-lg:items-start  ">
+        </AnimateInView>
+        <AnimateInView
+          animate={animateOnLoad}
+          className="flex flex-col items-center justify-between max-lg:items-start  "
+        >
           <div>{profile.name}</div>
           <div
             className=" p-2 rounded-lg my-2 "
@@ -69,16 +102,19 @@ export const ProfileCard = () => {
           >
             <label className="text-sm font-semibold ">{profile.position}</label>
           </div>
-        </div>
+        </AnimateInView>
       </div>
       <div
         id="desktop-contacts "
-        className={`h-[50%] ${!show && "hide-contacts"} mt-2`}
+        ref={divRef}
+        className={`h-[50%] ${isMobile && "hide-contacts"} mt-2`}
       >
-        <Contacts />
-        <div className={` flex flex-row justify-center `}>
-          <SocialFooter />
-        </div>
+        <AnimateInView animate={animateOnLoad && !isMobile}>
+          <Contacts />
+          <div className={` flex flex-row justify-center `}>
+            <SocialFooter />
+          </div>
+        </AnimateInView>
       </div>
     </StyledContainer>
   );

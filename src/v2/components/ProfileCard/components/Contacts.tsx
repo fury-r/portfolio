@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useDataContext } from "../../../../context/DataContext/useContext";
 import { iconMap } from "../../../../data/icon";
 import { IconType } from "react-icons/lib";
+import { motion } from "framer-motion";
+import { GradientBox } from "../../Container";
 type TContact = {
   icon?: string;
   label: string;
@@ -9,6 +11,12 @@ type TContact = {
   value?: string;
   css?: string;
 };
+export const StyledGradientBox = styled(GradientBox)`
+  &::before {
+    border-radius: 10px;
+  }
+  border-radius: 10px;
+`;
 
 export const Item = ({ label, code, css, value }: TContact) => {
   let IconElem: string | JSX.Element | IconType = "-";
@@ -21,9 +29,9 @@ export const Item = ({ label, code, css, value }: TContact) => {
       key={`contact-item`}
       className=" grid grid-cols-10 p-1 items-center w-full max-md:col-span-1 "
     >
-      <div className="col-span-3 flex flex-row justify-center  items-center h-full">
+      <StyledGradientBox className="col-span-3 flex flex-row justify-center  items-center h-full w-2/3 rounded-none">
         {IconElem}
-      </div>
+      </StyledGradientBox>
       <div className="col-span-7">
         <div className="text-xs">{label}</div>
         {code ? (
@@ -46,7 +54,7 @@ export const Item = ({ label, code, css, value }: TContact) => {
   );
 };
 
-const StyledContainer = styled.div`
+const StyledContainer = styled(motion.div)`
   padding: 3px 5px;
   &::after,
   &::before {

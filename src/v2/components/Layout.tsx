@@ -33,6 +33,7 @@ const StyledContainer = styled(motion.div)`
       width: 100%;
       left: 0px;
       right: 0px;
+      z-index:2;
     }
   }
   .top-nav {

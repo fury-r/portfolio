@@ -1,5 +1,5 @@
 import { IconBaseProps, IconType } from "react-icons/lib";
-import { ShadowContainer } from "../components/Container";
+import { GradientBox } from "../components/Container";
 import { useDataContext } from "../../context/DataContext/useContext";
 import { iconMap } from "../../data/icon";
 import AnimateInView from "../components/AnimateInView/AnimateInView";
@@ -33,9 +33,9 @@ export const ServiceCards = () => {
         }
         return (
           <AnimateInView animate key={`doing-${(index + 1).toString()}`}>
-            <ShadowContainer
+            <GradientBox
               key={`doing-${(index + 1).toString()}`}
-              className=" flex flex-row items-center  h-[150px] p-3"
+              className=" flex flex-row items-center h-[150px] p-3"
             >
               {IconElem}
               <div className="flex flex-col justify-start  overflow-hidden h-full w-[60%] ">
@@ -46,7 +46,7 @@ export const ServiceCards = () => {
                   {description}
                 </label>
               </div>
-            </ShadowContainer>
+            </GradientBox>
           </AnimateInView>
         );
       })}

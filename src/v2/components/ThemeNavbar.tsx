@@ -15,7 +15,7 @@ const NAV_ITEMS: TNavItem[] = [
     routes: Routes.about.path,
   },
   {
-    title: "Resume",
+    title: "Resumé",
     icon: <BiInfoCircle />,
     routes: Routes.resume.path,
   },

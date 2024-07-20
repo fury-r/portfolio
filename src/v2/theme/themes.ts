@@ -20,10 +20,10 @@ export const light: TColorTheme = {
   color: "#244855",
   tertiary: "#ededed",
   accent: "#3D52A0",
-  darkAccent: "hsla(60, 15%, 80%, 0.75)",
+  darkAccent: "hsl(0deg 0% 80.94% / 75%)",
   shadow1: "-4px 8px 24px hsla(0, 0%, 100%, 0.125)",
   shadow2: "0 16px 30px hsla(0, 0%, 100%, 0.125)",
   shadow3: "0 16px 40px hsla(0, 0%, 100%, 0.125)",
   bgGradientPrimary:
-    "linear-gradient( to bottom right, hsla(60, 1%, 18%, 0.251) 0%, hsla(60, 2%, 11%, 0) 100% ), hsl(60, 2%, 13%)",
+    "linear-gradient(to right bottom, rgb(105 105 102 / 25%) 0%, rgb(205 205 196 / 0%) 100%), rgb(255 255 255)",
 };

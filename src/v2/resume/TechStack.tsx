@@ -64,7 +64,7 @@ export const TechStack = () => {
                   loading="lazy"
                   src={item.icon}
                   alt={item.title}
-                  width={100}
+                  width={80}
                   height={80}
                   className="object-contain"
                 />

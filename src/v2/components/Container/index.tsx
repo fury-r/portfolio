@@ -31,3 +31,17 @@ export const ShadowContainer = styled(motion.div)`
   inset: 1px;
   border: 1px solid var(--primary);
 `;
+
+export const GradientBox = styled(ShadowContainer)`
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0.2px;
+    background: var(--bg-gradient-primary);
+    border-radius: inherit;
+    z-index: -1;
+  }
+  background: var(--primary);
+  z-index: 1;
+`;

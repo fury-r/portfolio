@@ -13,13 +13,8 @@ export const useMediaQuery = (size: TScreen) => {
   useEffect(() => {
     const resize = () => {
       const flag = screens[size] >= window.innerWidth;
-      console.log(
-        "Resize",
-        screens[size] >= window.innerWidth,
-        flag !== isSize
-      );
       if (flag !== isSize) {
-        setIsSize(isSize);
+        setIsSize(flag);
       }
     };
 
@@ -30,5 +25,6 @@ export const useMediaQuery = (size: TScreen) => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSize, size, screen.width]);
+
   return useMemo(() => isSize, [isSize]);
 };

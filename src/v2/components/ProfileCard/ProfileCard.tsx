@@ -55,10 +55,14 @@ export const ProfileCard = () => {
       onAnimationStart={() => {
         if (!animate && isMobile && divRef.current) {
           divRef.current!.style.display! = "none";
+        } else if (!isMobile && divRef.current) {
+          divRef.current!.style.display! = "initial";
         }
       }}
       animate={{
-        ...(isMobile ? { height: animate ? 400 : 200 } : {}),
+        ...(isMobile
+          ? { height: animate ? 400 : 200 }
+          : { height: "fit-content" }),
       }}
       onAnimationComplete={() => {
         if (animate && isMobile && divRef.current) {

@@ -31,6 +31,8 @@ const StyledContainer = styled(motion.div)`
       position: fixed;
       bottom: 0px;
       width: 100%;
+      left: 0px;
+      right: 0px;
     }
   }
   .top-nav {
@@ -84,7 +86,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
       <motion.div
         onAnimationComplete={() => setIsAnimationFinished(true)}
         transition={{ ease: "easeIn", duration: 1.5 }}
-        className="h-full  w-full  gap-5  layout  transition"
+        className="h-full w-full gap-5 layout transition"
         {...(!isAnimationFinished
           ? {
               initial: { [isMobile ? "x" : "y"]: [isMobile ? 500 : -500] },

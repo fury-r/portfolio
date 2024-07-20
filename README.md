@@ -128,7 +128,7 @@ Tailwind CSS is used for utility-first styling. You can use Tailwind's utility c
 - [SCSS](https://sass-lang.com/)
 - [styled-components](https://styled-components.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- Turbopack[https://turbo.build/]
+- [Turbopack](https://turbo.build/)
 - Templates [References]
 - [react-icon-cloud](https://github.com/teaguestockwell/react-icon-cloud)
 - [framer-motion](https://www.framer.com/motion/)

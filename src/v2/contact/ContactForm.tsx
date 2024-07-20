@@ -33,7 +33,7 @@ const ContactForm = () => {
     <Suspense fallback={<>loading...</>}>
       <form ref={form} onSubmit={handleOnSubmit}>
         <div className="grid grid-cols-2 gap-10 my-3">
-          <input placeholder="Username" />
+          <input placeholder="Name" />
           <input placeholder="Email" />
         </div>
         <textarea placeholder="Description" rows={3} className="w-full p-3 " />

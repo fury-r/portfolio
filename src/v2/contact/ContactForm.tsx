@@ -3,6 +3,14 @@ import { toast } from "react-toastify";
 import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";
 
+const TOASTER_PROPS = {
+  style: {
+    background: "var(--secondary)",
+    color: "var(--color)",
+    borderRadius: "var(--rounded)",
+  },
+};
+
 const ContactForm = () => {
   const [captchaVerified, setCaptchaVerified] = useState(false);
   const form = useRef<HTMLFormElement>(null);
@@ -20,11 +28,11 @@ const ContactForm = () => {
       )
       .then(
         () => {
-          toast.success("Message has been sent.Thank You 🙂!");
+          toast.success("Message has been sent.Thank You 🙂!", TOASTER_PROPS);
         },
         (error) => {
           console.error(error);
-          toast.error("Failed to send.Try again 🙁!");
+          toast.error("Failed to send.Try again 🙁!", TOASTER_PROPS);
         }
       );
     form.current?.reset();
@@ -33,10 +41,15 @@ const ContactForm = () => {
     <Suspense fallback={<>loading...</>}>
       <form ref={form} onSubmit={handleOnSubmit}>
         <div className="grid grid-cols-2 gap-10 my-3">
-          <input placeholder="Name" />
-          <input placeholder="Email" />
+          <input placeholder="Name" name="user_name" />
+          <input placeholder="Email" name="user_email" />
         </div>
-        <textarea placeholder="Description" rows={3} className="w-full p-3 " />
+        <textarea
+          placeholder="Description"
+          rows={3}
+          className="w-full p-3"
+          name="user_description"
+        />
         <div className="flex justify-center m-4 ">
           {import.meta.env.VITE_APP_PUBLIC_SITE_KEY && (
             <ReCAPTCHA

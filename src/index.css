@@ -13,7 +13,6 @@ body {
   width: 100%;
   overflow: auto;
   overflow-x: hidden;
-  scrollbar-gutter: stable both-edges;
 
   @media (max-width: 800px) {
     body::-webkit-scrollbar {

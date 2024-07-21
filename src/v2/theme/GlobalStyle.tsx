@@ -23,7 +23,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 
 body{
-  color:var(--color)
+  color:var(--color);
+  scrollbar-gutter: stable both-edges;
+
 }
 
  

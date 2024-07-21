@@ -20,7 +20,7 @@ const NAV_ITEMS: TNavItem[] = [
     routes: Routes.resume.path,
   },
   {
-    title: "Project",
+    title: "Projects",
     icon: <AiOutlineProject />,
     routes: Routes.project.path,
   },

@@ -34,7 +34,7 @@ const StyledTimeline = styled(motion.div)`
     content: "";
     position: absolute;
     top: 8px;
-    left: -26px;
+    left: -25px;
     height: 11px;
     width: 11px;
     border-radius: 30px;
@@ -48,7 +48,7 @@ const TimeLine = ({ data, icon, title }: ITimeLine) => {
     <StyledTimeline className="px-2">
       <div style={{ position: "relative", paddingLeft: "20px" }}>
         <div style={{ marginBottom: "40px", position: "relative" }}>
-          <div className="z-10  left-[-35px] p-1 rounded-lg absolute h-[30px] w-fit flex flex-row justify-center items-end">
+          <div className="z-10  left-[-34px] p-1 rounded-lg absolute h-[30px] w-fit flex flex-row justify-center items-end">
             {icon({
               style: { height: "100%", width: "100%", color: "var(--accent)" },
             })}

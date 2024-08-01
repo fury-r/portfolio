@@ -62,7 +62,7 @@ export const CategorisedPhotoView = <T,>({
               transform: isInView
                 ? "none"
                 : `translate${index % 2 == 0 ? "Y" : "X"}(${
-                    index === 0 ? 100 : (isMobile ? 20 : 100) * index
+                    index === 0 ? 100 : (isMobile ? 20 : 40) * index
                   }px)`,
               opacity: isInView ? 1 : 0,
               transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",

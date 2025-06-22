@@ -1,7 +1,7 @@
 import { LuContact } from "react-icons/lu";
 import { BiInfoCircle } from "react-icons/bi";
 import { AiOutlineProject } from "react-icons/ai";
-import { FaCertificate } from "react-icons/fa";
+// import { FaCertificate } from "react-icons/fa";
 import { Nav, Navbar } from "react-bootstrap";
 import styled from "styled-components";
 import { TNavItem } from "../../types/theme";
@@ -25,11 +25,11 @@ const NAV_ITEMS: TNavItem[] = [
     icon: <AiOutlineProject />,
     routes: Routes.project.path,
   },
-  {
-    title: "Certifications",
-    icon: <FaCertificate />,
-    routes: Routes.project.path,
-  },
+  // {
+  //   title: "Certifications",
+  //   icon: <FaCertificate />,
+  //   routes: Routes.project.path,
+  // },
   {
     title: "Contact",
     icon: <LuContact />,

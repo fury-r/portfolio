@@ -62,7 +62,7 @@ export const CategorisedPhotoView = <T,>({
               transform: isInView
                 ? "none"
                 : `translate${index % 2 == 0 ? "Y" : "X"}(${
-                    index === 0 ? 100 : (isMobile ? 20 : 100) * index
+                    index === 0 ? 100 : (isMobile ? 20 : 30) * index
                   }px)`,
               opacity: isInView ? 1 : 0,
               transition: "all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.5s",
@@ -71,7 +71,7 @@ export const CategorisedPhotoView = <T,>({
           >
             <CategoryContainer
               onClick={() => onClick(value)}
-              className=" rounded-lg grid grid-cols-1 p-3 md:h-[250px] max-md:h-[200px]"
+              className="rounded-lg grid grid-cols-1 p-3 md:h-[250px] max-md:h-[200px] cursor-pointer"
             >
               <div className="min-h-[70%] overflow-hidden hover:scale-[1px] w-full">
                 <img

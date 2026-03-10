@@ -35,16 +35,14 @@ export const ServiceCards = () => {
           <AnimateInView animate key={`doing-${(index + 1).toString()}`}>
             <GradientBox
               key={`doing-${(index + 1).toString()}`}
-              className="group flex flex-row items-center h-[150px] p-4 rounded-xl transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+              className=" flex flex-row items-center h-[150px] p-3"
             >
-              <div className="basis-[35%] transition-transform duration-200 motion-safe:group-hover:scale-105">
-                {IconElem}
-              </div>
-              <div className="flex flex-col justify-start overflow-hidden h-full basis-[65%]">
-                <h1 className="text-base md:text-lg font-bold">
+              {IconElem}
+              <div className="flex flex-col justify-start  overflow-hidden h-full w-[60%] ">
+                <h1 className="md:text-md  max-md:text-base font-bold  whitespace-nowrap">
                   {title}
                 </h1>
-                <label className="text-ellipsis whitespace-pre-line text-sm md:text-[0.95rem] opacity-90">
+                <label className="text-ellipsis whitespace-pre-line text-sm ">
                   {description}
                 </label>
               </div>

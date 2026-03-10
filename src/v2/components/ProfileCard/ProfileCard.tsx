@@ -85,9 +85,8 @@ export const ProfileCard = () => {
           className=" rounded-md flex flex-col items-center  "
         >
           <img
-            width={120}
-            className="m-3 rounded-full object-cover border-2 shadow-lg transition-transform duration-200 motion-safe:hover:scale-105"
-            style={{ borderColor: "var(--accent)" }}
+            width={100}
+            className="m-3 rounded-md object-fit"
             src={profile.picture || Profile}
             alt={"Profile picture"}
           />
@@ -96,9 +95,9 @@ export const ProfileCard = () => {
           animate={animateOnLoad}
           className="flex flex-col items-center justify-between max-lg:items-start  "
         >
-          <div className="text-lg font-semibold tracking-tight">{profile.name}</div>
+          <div>{profile.name}</div>
           <div
-            className="px-3 py-2 rounded-full my-2 text-center"
+            className=" p-2 rounded-lg my-2 "
             style={{ background: "var(--primary)" }}
           >
             <label className="text-sm font-semibold ">{profile.position}</label>

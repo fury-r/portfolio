@@ -14,15 +14,26 @@ const StyledPageLayout = styled(motion.div)`
     position: absolute;
     bottom: -5px;
     left: 0px;
-    width: 30px;
+    width: 0;
     height: 3px;
     background: var(--accent);
     border-radius: 3px;
+    animation: title-line 450ms ease-in-out forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .title::after {
+      animation: none;
+      width: 40px;
+    }
   }
   @media (min-width: 580px) {
     .title::after {
-      width: 40px;
       height: 5px;
+    }
+  }
+  @keyframes title-line {
+    to {
+      width: 40px;
     }
   }
 `;

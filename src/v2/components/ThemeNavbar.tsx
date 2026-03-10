@@ -41,13 +41,33 @@ const StyledNavbar = styled(Navbar)`
   background-color: var(--darkAccent);
   border: 1px solid var(--primary);
   border-radius: 0 var(--rounded) 0 var(--rounded);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
 
   font-size: 15px;
   font-weight: 500;
-  .active {
+  .nav-link {
+    position: relative;
+    color: var(--color);
+    padding: 0.5rem 0.25rem 0.65rem;
+    transition: color 0.2s ease-in-out;
+  }
+  .nav-link:hover {
+    color: var(--accent);
+  }
+  .active .nav-link {
     color: var(--accent);
     font-weight: 700;
+  }
+  .active .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    border-radius: 4px;
+    background: var(--accent);
   }
   min-height: 3.5rem;
 

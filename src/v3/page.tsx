@@ -30,9 +30,9 @@ const V3Portfolio = () => {
           </p>
 
           <div className="mt-6 grid gap-3">
-            {highlights.map((item, index) => (
+            {highlights.map((item) => (
               <div
-                key={index + 1}
+                key={item}
                 className="rounded-xl border border-slate-700/80 bg-slate-900/70 px-4 py-3 text-slate-200 shadow-lg shadow-cyan-950/20"
               >
                 {item}
@@ -79,9 +79,9 @@ const V3Portfolio = () => {
             Core Stack Snapshot
           </h2>
           <div className="flex flex-wrap gap-2">
-            {selectedTech.map((tech, index) => (
+            {selectedTech.map((tech) => (
               <span
-                key={index + 1}
+                key={tech.title}
                 className="rounded-full border border-slate-600 bg-slate-950 px-3 py-1 text-sm text-slate-200"
               >
                 {tech.title}
@@ -96,9 +96,9 @@ const V3Portfolio = () => {
             {socials
               .filter((item) => item.href || item.code || item.value)
               .slice(0, 5)
-              .map((item, index) => (
+              .map((item) => (
                 <a
-                  key={index + 1}
+                  key={item.label}
                   href={item.href || "mailto:rajeev.dessai11@gmail.com"}
                   target={item.href ? "_blank" : undefined}
                   rel={item.href ? "noreferrer" : undefined}
@@ -114,9 +114,9 @@ const V3Portfolio = () => {
       <section className="mx-auto max-w-6xl px-6 pb-20">
         <h2 className="mb-5 text-2xl font-semibold text-white">Featured Work</h2>
         <div className="grid gap-4 md:grid-cols-3">
-          {selectedProjects.map((project, index) => (
+          {selectedProjects.map((project) => (
             <a
-              key={index + 1}
+              key={project.title}
               href={project.link}
               target="_blank"
               rel="noreferrer"

@@ -2,6 +2,7 @@ import { createClient } from "contentful";
 import {
   useCallback,
   useEffect,
+  useMemo,
   useState,
   startTransition,
   useTransition,
@@ -19,10 +20,17 @@ import { socials } from "../../../data/socials";
 import { companyData } from "../../../data/company";
 
 export const useContentFul = () => {
-  const client = createClient({
-    space: import.meta.env.VITE_APP_PUBLIC_CONTENT_SPACE_ID,
-    accessToken: import.meta.env.VITE_APP_PUBLIC_CONTENT_ACCESS_TOKEN,
-  });
+  const client = useMemo(() => {
+    const space = import.meta.env.VITE_APP_PUBLIC_CONTENT_SPACE_ID;
+    const accessToken = import.meta.env.VITE_APP_PUBLIC_CONTENT_ACCESS_TOKEN;
+
+    if (!space || !accessToken) return null;
+
+    return createClient({
+      space,
+      accessToken,
+    });
+  }, []);
 
   const [profile, setProfile] = useState<TProfile>({
     about: "-",
@@ -42,6 +50,7 @@ export const useContentFul = () => {
   const [isPending, setState] = useTransition();
 
   const getProfile = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "portfolio" });
       if (response.items.length > 0)
@@ -56,6 +65,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getCompany = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "company" });
       if (response.items.length > 0)
@@ -78,6 +88,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getServices = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "doings" });
       if (response.items.length > 0)
@@ -88,6 +99,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getProjects = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "projects" });
       if (response.items.length > 0)
@@ -117,6 +129,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getEducations = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "education" });
       if (response.items.length > 0)
@@ -127,6 +140,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getTech = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "tech" });
       if (response.items.length > 0)
@@ -143,6 +157,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getSocial = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "social" });
       if (response.items.length > 0)
@@ -153,6 +168,8 @@ export const useContentFul = () => {
   }, [client]);
 
   useEffect(() => {
+    if (!client) return;
+
     setState(() => {
       getProfile();
 

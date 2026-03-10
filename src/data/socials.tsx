@@ -8,7 +8,7 @@ export const socials: TSocial[] = [
     icon: "facebook",
   },
   {
-    href: "https://www.linkedin.com/in/rajeev-dessai-1497741b0/",
+    href: "https://www.linkedin.com/in/rajeevdessai/",
     label: "Linkedin",
     css: "linkedin",
     icon: "linkedin",

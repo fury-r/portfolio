@@ -9,9 +9,9 @@ import { TCategorisedPhoto, TCategory } from "../types/component";
 
 export const ProjectsMenu: TCategorisedPhoto<TCategory>[] = [
   {
-    title: "Chat Messenger with E2EE",
+    title: "SecureMessenger (E2EE)",
     description:
-      "SecureMessenger is a secure and end-to-end encrypted (E2EE) messaging application designed to prioritize user privacy and data security.",
+      "Secure and end-to-end encrypted messaging app with Kotlin Android client, gRPC + Protocol Buffers communication, Node.js middleware, and Go backend services.",
     link: "https://github.com/fury-r/encrypted-messenger",
     type: "Mobile",
     image: Messenger,
@@ -28,86 +28,84 @@ export const ProjectsMenu: TCategorisedPhoto<TCategory>[] = [
     ],
   },
   {
-    title: "Lifeline",
-    description: `
-                Lifeline, a cross-platform healthcare application, seamlessly connects patients, doctors, and other healthcare professionals, revolutionizing the way healthcare is delivered and experienced
-                `,
-    link: "https://github.com/fury-r/Lifeline",
-    image: LifelineImage2,
-
-    subItems: ["ReactJS", "CSS", "Firebase", "NodeJs", "Express", "Sockets"],
+    title: "MCP WebRTC Transport",
+    description:
+      "Monorepo for a WebRTC-based MCP transport demo with a reusable TypeScript package, React + Vite frontend, and Django Channels signaling backend.",
+    link: "https://github.com/fury-r/mcp-webrtc-transport",
+    image: FileSharer,
+    subItems: [
+      "TypeScript",
+      "React",
+      "Vite",
+      "WebRTC",
+      "MCP",
+      "Django",
+      "Channels",
+    ],
     type: "Web",
   },
   {
-    title: "Project Management Web application",
-    description: `Streamlining Collaboration and Enhancing Productivity`,
-    link: "https://github.com/Ayush-Noorani/Agile-Project",
+    title: "Medical Chatbot RAG",
+    description:
+      "Flask-based medical chatbot using Retrieval-Augmented Generation with Llama 2, Pinecone vector search, and Hugging Face integrations.",
+    link: "https://github.com/fury-r/medical-chatbot-rag",
+    image: LifelineImage2,
+    subItems: [
+      "Python",
+      "Python Flask",
+      "RAG",
+      "Llama 2",
+      "Pinecone",
+      "Hugging Face",
+      "JavaScript",
+    ],
+    type: "Web",
+  },
+  {
+    title: "MCQ Generator with LangChain",
+    description:
+      "Streamlit app that turns uploaded documents into multiple-choice quizzes using LangChain and OpenAI models, deployed on AWS EC2.",
+    link: "https://github.com/fury-r/ai-mcq-generator",
+    image: ERP1,
+    subItems: [
+      "Python",
+      "Streamlit",
+      "LangChain",
+      "OpenAI",
+      "AWS EC2",
+    ],
+    type: "Web",
+  },
+  {
+    title: "Web3 Social Media POC",
+    description:
+      "Proof-of-concept social media app with messaging, profile management, feed interactions, and NFT transfers powered by Next.js, Flask, and Solidity.",
+    link: "https://github.com/fury-r/leylines-web3",
+    image: LeylinesImage2,
+    subItems: [
+      "Next.js",
+      "Flask",
+      "Solidity",
+      "MongoDB",
+      "Web3",
+      "Moralis",
+    ],
+    type: "Web",
+  },
+  {
+    title: "CRUD To-Do App",
+    description:
+      "Full-stack to-do starter kit with React + TypeScript frontend and Node.js + Express backend using SQLite and JWT-based authentication.",
+    link: "https://github.com/fury-r/crud-to-do-app",
     image: AgileSprintImage2,
     subItems: [
       "React",
-      "Redux",
-      "Python",
-      "Python flask",
-      "Mongodb",
-      "CSS",
-      "Sockets",
-    ],
-    type: "Web",
-  },
-  {
-    title: "Leylines: A Web3 Social Media",
-    description: `Leylines, a Web3-powered social media application, empowers users with ownership, privacy, and creative freedom`,
-    link: "https://github.com/fury-r/web3-social-media",
-
-    image: LeylinesImage2,
-    subItems: [
-      "Next JS",
-      "CSS",
-      "TailwindCSS",
-      "Python",
-      "Python Flask",
-      "Mongodb",
-      "Web3",
-      "MoralisDb",
-      "Sockets",
-    ],
-    type: "Web",
-  },
-  {
-    title: "ERP Application",
-    description:
-      "The Orders Management System is a robust application designed to streamline business operations by efficiently tracking and managing customer orders. It includes a comprehensive product schema for organizing product structures, along with features for adding, editing, and deleting product information. The system also provides expense tracking to help businesses monitor their financials effectively.",
-    link: "https://github.com/fury-r/encrypted-messenger",
-    image: ERP1,
-    subItems: [
-      "React",
-      "Redux",
-      "Vite",
       "Typescript",
       "Node.js",
-      "GraphQL",
-      "styled-components",
-      "OAuth",
-      "JEST",
-      "MongoDB",
-    ],
-    type: "Web",
-  },
-  {
-    title: "File Sharer",
-    description:
-      "The FileShare Web Application is a platform built to facilitate easy sharing of files through file uploads and QR code generation. It utilizes React with TypeScript on the frontend and Django with Python on the backend. The app allows users to upload files, generate QR codes for those files, and share them effortlessly.",
-    link: "https://github.com/fury-r/filesharer",
-    image: FileSharer,
-    subItems: [
-      "React",
-      "Vite",
-      "Typescript",
-      "Tailwind",
-      "Socket",
-      "Python",
-      "Django",
+      "Express",
       "SQLite",
+      "JWT",
+      "Redux",
     ],
     type: "Web",
   },

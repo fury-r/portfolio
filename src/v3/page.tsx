@@ -3,7 +3,7 @@ import { ProjectsMenu } from "../data/project";
 import { techData } from "../data/tech";
 import { socials } from "../data/socials";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { RiSparkling2Line } from "react-icons/ri";
 import { BsStars } from "react-icons/bs";
@@ -32,12 +32,169 @@ const osApps = [
 
 type ViewMode = "portfolio" | "os";
 type ThemeMode = "dark" | "light";
+type AccentTheme = "cyan" | "violet" | "rose" | "emerald";
 type OsAppId = (typeof osApps)[number]["id"];
 
+const accentThemeMap: Record<
+  AccentTheme,
+  {
+    dark: {
+      text: string;
+      soft: string;
+      softBorder: string;
+      strong: string;
+      softHover: string;
+      ring: string;
+      cardHover: string;
+      solidButton: string;
+      solidButtonHover: string;
+      navHover: string;
+      activeApp: string;
+      blob: string;
+    };
+    light: {
+      text: string;
+      soft: string;
+      softBorder: string;
+      strong: string;
+      softHover: string;
+      ring: string;
+      cardHover: string;
+      solidButton: string;
+      solidButtonHover: string;
+      navHover: string;
+      activeApp: string;
+      blob: string;
+    };
+  }
+> = {
+  cyan: {
+    dark: {
+      text: "text-cyan-300",
+      soft: "bg-cyan-400/10",
+      softBorder: "border-cyan-400/30",
+      strong: "border-cyan-400/60",
+      softHover: "hover:border-cyan-300 hover:text-cyan-200",
+      ring: "ring-cyan-400/40",
+      cardHover: "hover:border-cyan-400",
+      solidButton: "bg-cyan-400 text-slate-950",
+      solidButtonHover: "hover:bg-cyan-300",
+      navHover: "hover:bg-cyan-400/10",
+      activeApp: "bg-cyan-500/20 text-cyan-200",
+      blob: "bg-cyan-400/20",
+    },
+    light: {
+      text: "text-cyan-700",
+      soft: "bg-cyan-100",
+      softBorder: "border-cyan-300",
+      strong: "border-cyan-500/70",
+      softHover: "hover:border-cyan-500 hover:text-cyan-700",
+      ring: "ring-cyan-500/35",
+      cardHover: "hover:border-cyan-500",
+      solidButton: "bg-cyan-600 text-white",
+      solidButtonHover: "hover:bg-cyan-500",
+      navHover: "hover:bg-cyan-50",
+      activeApp: "bg-cyan-100 text-cyan-700",
+      blob: "bg-cyan-300/30",
+    },
+  },
+  violet: {
+    dark: {
+      text: "text-violet-300",
+      soft: "bg-violet-400/10",
+      softBorder: "border-violet-400/30",
+      strong: "border-violet-400/60",
+      softHover: "hover:border-violet-300 hover:text-violet-200",
+      ring: "ring-violet-400/40",
+      cardHover: "hover:border-violet-400",
+      solidButton: "bg-violet-400 text-slate-950",
+      solidButtonHover: "hover:bg-violet-300",
+      navHover: "hover:bg-violet-400/10",
+      activeApp: "bg-violet-500/20 text-violet-200",
+      blob: "bg-violet-400/20",
+    },
+    light: {
+      text: "text-violet-700",
+      soft: "bg-violet-100",
+      softBorder: "border-violet-300",
+      strong: "border-violet-500/70",
+      softHover: "hover:border-violet-500 hover:text-violet-700",
+      ring: "ring-violet-500/35",
+      cardHover: "hover:border-violet-500",
+      solidButton: "bg-violet-600 text-white",
+      solidButtonHover: "hover:bg-violet-500",
+      navHover: "hover:bg-violet-50",
+      activeApp: "bg-violet-100 text-violet-700",
+      blob: "bg-violet-300/30",
+    },
+  },
+  rose: {
+    dark: {
+      text: "text-rose-300",
+      soft: "bg-rose-400/10",
+      softBorder: "border-rose-400/30",
+      strong: "border-rose-400/60",
+      softHover: "hover:border-rose-300 hover:text-rose-200",
+      ring: "ring-rose-400/40",
+      cardHover: "hover:border-rose-400",
+      solidButton: "bg-rose-400 text-slate-950",
+      solidButtonHover: "hover:bg-rose-300",
+      navHover: "hover:bg-rose-400/10",
+      activeApp: "bg-rose-500/20 text-rose-200",
+      blob: "bg-rose-400/20",
+    },
+    light: {
+      text: "text-rose-700",
+      soft: "bg-rose-100",
+      softBorder: "border-rose-300",
+      strong: "border-rose-500/70",
+      softHover: "hover:border-rose-500 hover:text-rose-700",
+      ring: "ring-rose-500/35",
+      cardHover: "hover:border-rose-500",
+      solidButton: "bg-rose-600 text-white",
+      solidButtonHover: "hover:bg-rose-500",
+      navHover: "hover:bg-rose-50",
+      activeApp: "bg-rose-100 text-rose-700",
+      blob: "bg-rose-300/30",
+    },
+  },
+  emerald: {
+    dark: {
+      text: "text-emerald-300",
+      soft: "bg-emerald-400/10",
+      softBorder: "border-emerald-400/30",
+      strong: "border-emerald-400/60",
+      softHover: "hover:border-emerald-300 hover:text-emerald-200",
+      ring: "ring-emerald-400/40",
+      cardHover: "hover:border-emerald-400",
+      solidButton: "bg-emerald-400 text-slate-950",
+      solidButtonHover: "hover:bg-emerald-300",
+      navHover: "hover:bg-emerald-400/10",
+      activeApp: "bg-emerald-500/20 text-emerald-200",
+      blob: "bg-emerald-400/20",
+    },
+    light: {
+      text: "text-emerald-700",
+      soft: "bg-emerald-100",
+      softBorder: "border-emerald-300",
+      strong: "border-emerald-500/70",
+      softHover: "hover:border-emerald-500 hover:text-emerald-700",
+      ring: "ring-emerald-500/35",
+      cardHover: "hover:border-emerald-500",
+      solidButton: "bg-emerald-600 text-white",
+      solidButtonHover: "hover:bg-emerald-500",
+      navHover: "hover:bg-emerald-50",
+      activeApp: "bg-emerald-100 text-emerald-700",
+      blob: "bg-emerald-300/30",
+    },
+  },
+};
+
 const V3Portfolio = () => {
-  const selectedProjects = ProjectsMenu.slice(0, 3);
+  const selectedProjects = ProjectsMenu.slice(0, 6);
   const selectedTech = techData.slice(0, 12);
   const [theme, setTheme] = useState<ThemeMode>("dark");
+  const [accentTheme, setAccentTheme] = useState<AccentTheme>("cyan");
   const [viewMode, setViewMode] = useState<ViewMode>("portfolio");
   const [activeApp, setActiveApp] = useState<OsAppId>("profile");
   const [clock, setClock] = useState(() =>
@@ -47,6 +204,10 @@ const V3Portfolio = () => {
     })
   );
   const isDark = theme === "dark";
+
+  const accent = useMemo(() => {
+    return isDark ? accentThemeMap[accentTheme].dark : accentThemeMap[accentTheme].light;
+  }, [accentTheme, isDark]);
 
   useEffect(() => {
     const id = window.setInterval(() => {
@@ -63,32 +224,36 @@ const V3Portfolio = () => {
 
   return (
     <main
-      className={`min-h-screen transition-colors duration-300 ${
+      className={`relative min-h-screen overflow-hidden transition-colors duration-500 ${
         isDark ? "bg-slate-950 text-slate-100" : "bg-slate-100 text-slate-900"
       }`}
     >
+      <div className="pointer-events-none absolute inset-0">
+        <motion.div
+          className={`absolute -left-24 top-16 h-72 w-72 rounded-full blur-3xl ${accent.blob}`}
+          animate={{ scale: [1, 1.15, 1], x: [0, 30, 0], y: [0, -20, 0] }}
+          transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className={`absolute -right-24 bottom-10 h-80 w-80 rounded-full blur-3xl ${accent.blob}`}
+          animate={{ scale: [1.1, 0.95, 1.1], x: [0, -20, 0], y: [0, 25, 0] }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+
       <header
         className={`sticky top-0 z-20 border-b backdrop-blur-xl transition-colors ${
-          isDark
-            ? "border-slate-800/80 bg-slate-950/80"
-            : "border-slate-300/80 bg-slate-100/80"
+          isDark ? "border-slate-800/80 bg-slate-950/80" : "border-slate-300/80 bg-slate-100/80"
         }`}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-2 px-6 py-3">
-          <a
-            href="#home"
-            className={`inline-flex items-center gap-2 font-semibold ${
-              isDark ? "text-white" : "text-slate-900"
-            }`}
-          >
-            <BsStars className={isDark ? "text-cyan-300" : "text-indigo-500"} />
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-6 py-3">
+          <a href="#home" className={`inline-flex items-center gap-2 font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>
+            <BsStars className={accent.text} />
             Rajeev Dessai
           </a>
           <nav
             className={`hidden items-center gap-2 rounded-full border p-1 md:flex ${
-              isDark
-                ? "border-slate-700 bg-slate-900/70"
-                : "border-slate-300 bg-white/80"
+              isDark ? "border-slate-700 bg-slate-900/70" : "border-slate-300 bg-white/80"
             }`}
           >
             {navItems.map((item) => (
@@ -96,259 +261,213 @@ const V3Portfolio = () => {
                 key={item.id}
                 href={`#${item.id}`}
                 className={`rounded-full px-4 py-2 text-sm transition ${
-                  isDark
-                    ? "text-slate-300 hover:bg-slate-800 hover:text-cyan-200"
-                    : "text-slate-700 hover:bg-slate-200 hover:text-indigo-700"
+                  isDark ? `text-slate-300 ${accent.navHover}` : `text-slate-700 ${accent.navHover}`
                 }`}
               >
                 {item.label}
               </a>
             ))}
           </nav>
-          <div className="flex items-center gap-2">
-            <button
+          <div className="flex flex-wrap items-center justify-end gap-2">
+            <div
+              className={`flex items-center gap-1 rounded-full border p-1 ${
+                isDark ? "border-slate-700 bg-slate-900/70" : "border-slate-300 bg-white/80"
+              }`}
+            >
+              {(Object.keys(accentThemeMap) as AccentTheme[]).map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  aria-label={`Use ${option} color theme`}
+                  onClick={() => setAccentTheme(option)}
+                  className={`h-6 w-6 rounded-full border transition ${
+                    accentTheme === option
+                      ? isDark
+                        ? "scale-110 border-white"
+                        : "scale-110 border-slate-700"
+                      : "border-transparent opacity-80 hover:opacity-100"
+                  } ${accentThemeMap[option].light.soft}`}
+                />
+              ))}
+            </div>
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               type="button"
               onClick={() => setTheme((prev) => (prev === "dark" ? "light" : "dark"))}
               className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-medium transition ${
-                isDark
-                  ? "border-slate-600 text-slate-200 hover:border-cyan-300 hover:text-cyan-200"
-                  : "border-slate-400 text-slate-700 hover:border-indigo-500 hover:text-indigo-700"
+                isDark ? `border-slate-600 text-slate-200 ${accent.softHover}` : `border-slate-400 text-slate-700 ${accent.softHover}`
               }`}
             >
               {isDark ? <MdLightMode /> : <MdDarkMode />}
               {isDark ? "Light" : "Dark"}
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               type="button"
-              onClick={() =>
-                setViewMode((prev) => (prev === "portfolio" ? "os" : "portfolio"))
-              }
+              onClick={() => setViewMode((prev) => (prev === "portfolio" ? "os" : "portfolio"))}
               className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm font-medium transition ${
-                isDark
-                  ? "border-cyan-400/60 text-cyan-200 hover:bg-cyan-400/10"
-                  : "border-indigo-500/70 text-indigo-700 hover:bg-indigo-100"
+                isDark ? `${accent.strong} ${accent.text} ${accent.navHover}` : `${accent.strong} ${accent.text} ${accent.navHover}`
               }`}
             >
               {viewMode === "portfolio" ? <HiOutlineDesktopComputer /> : <PiBrowserBold />}
               {viewMode === "portfolio" ? "OS Mode" : "Portfolio"}
-            </button>
+            </motion.button>
           </div>
         </div>
       </header>
+
       {viewMode === "portfolio" ? (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}>
-          <section
+        <motion.section initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.45 }} className="mx-auto grid max-w-6xl gap-6 px-6 pb-16 pt-10 md:grid-cols-[280px_1fr]">
+          <motion.aside
             id="home"
-            className="mx-auto flex max-w-6xl flex-col gap-10 px-6 pb-16 pt-12 lg:flex-row lg:items-start"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+            className={`h-fit rounded-3xl border p-4 shadow-xl md:sticky md:top-24 ${
+              isDark ? "border-slate-700 bg-slate-900/85 shadow-slate-950/80" : "border-slate-300 bg-white/90 shadow-slate-300/50"
+            }`}
           >
-            <motion.div
-              className="flex-1"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-            >
-              <p
-                className={`mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1 text-sm ${
-                  isDark
-                    ? "border-cyan-400/30 bg-cyan-400/10 text-cyan-300"
-                    : "border-indigo-400/30 bg-indigo-400/10 text-indigo-700"
+            <img src={ProfileImage} alt="Rajeev Dessai" className={`h-64 w-full rounded-2xl object-cover ring-2 ${accent.ring}`} />
+            <h1 className={`mt-4 text-2xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>Rajeev Dessai</h1>
+            <p className={`mt-2 text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+              Software Development Consultant crafting scalable products and thoughtful developer experiences.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <a
+                href="https://www.linkedin.com/in/rajeevdessai/"
+                target="_blank"
+                rel="noreferrer"
+                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition ${accent.solidButton} ${accent.solidButtonHover}`}
+              >
+                LinkedIn <FaArrowUpRightFromSquare />
+              </a>
+              <a
+                href="https://github.com/fury-r"
+                target="_blank"
+                rel="noreferrer"
+                className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                  isDark ? `border-slate-600 text-slate-100 ${accent.softHover}` : `border-slate-400 text-slate-800 ${accent.softHover}`
                 }`}
               >
-                <RiSparkling2Line />
-                Portfolio v3 • Developer-first UI
-              </p>
-              <h1 className={`text-4xl font-bold leading-tight md:text-6xl ${isDark ? "text-white" : "text-slate-900"}`}>
-                Rajeev Dessai
-              </h1>
-              <p className={`mt-2 text-lg md:text-xl ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                Software Development Consultant crafting scalable products and
-                thoughtful developer experiences.
-              </p>
+                GitHub <FaArrowUpRightFromSquare />
+              </a>
+            </div>
+          </motion.aside>
 
-              <div className="mt-6 grid gap-3">
+          <div className="grid gap-6">
+            <motion.section
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35 }}
+              className={`rounded-3xl border p-6 ${isDark ? "border-slate-700 bg-slate-900/80" : "border-slate-300 bg-white/90"}`}
+            >
+              <p className={`mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-1 text-sm ${accent.softBorder} ${accent.soft} ${accent.text}`}>
+                <RiSparkling2Line />
+                Portfolio v3 • v2-style layout + creamy motion
+              </p>
+              <div className="grid gap-3">
                 {highlights.map((item, index) => (
                   <motion.div
                     key={item}
-                    className={`rounded-xl border px-4 py-3 shadow-lg transition ${
+                    whileHover={{ y: -2, scale: 1.01 }}
+                    whileTap={{ scale: 0.995 }}
+                    className={`rounded-xl border px-4 py-3 text-sm shadow transition ${
                       isDark
-                        ? "border-slate-700/80 bg-slate-900/70 text-slate-200 shadow-cyan-950/20 hover:border-cyan-400/50"
-                        : "border-slate-300 bg-white text-slate-700 shadow-slate-300/40 hover:border-indigo-400/70"
+                        ? `border-slate-700/80 bg-slate-950/60 text-slate-200 ${accent.cardHover}`
+                        : `border-slate-300 bg-slate-50 text-slate-700 ${accent.cardHover}`
                     }`}
-                    initial={{ opacity: 0, x: -12 }}
+                    initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.35, delay: index * 0.08 }}
+                    transition={{ duration: 0.3, delay: index * 0.08 }}
                   >
                     {item}
                   </motion.div>
                 ))}
               </div>
+            </motion.section>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="https://www.linkedin.com/in/rajeevdessai/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`inline-flex items-center gap-2 rounded-full px-5 py-2.5 font-semibold transition ${
-                    isDark
-                      ? "bg-cyan-400 text-slate-950 hover:bg-cyan-300"
-                      : "bg-indigo-600 text-white hover:bg-indigo-500"
-                  }`}
-                >
-                  LinkedIn
-                  <FaArrowUpRightFromSquare />
-                </a>
-                <a
-                  href="https://github.com/fury-r"
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`inline-flex items-center gap-2 rounded-full border px-5 py-2.5 font-semibold transition ${
-                    isDark
-                      ? "border-slate-600 text-slate-100 hover:border-cyan-300 hover:text-cyan-200"
-                      : "border-slate-400 text-slate-800 hover:border-indigo-500 hover:text-indigo-700"
-                  }`}
-                >
-                  GitHub
-                  <FaArrowUpRightFromSquare />
-                </a>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="w-full max-w-md"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: 0.12 }}
-            >
-              <div
-                className={`rounded-3xl border p-4 shadow-2xl ${
-                  isDark
-                    ? "border-slate-700 bg-gradient-to-b from-slate-900 to-slate-950 shadow-cyan-950/30"
-                    : "border-slate-300 bg-gradient-to-b from-white to-slate-100 shadow-slate-300/50"
+            <section id="stack" className="grid gap-4 lg:grid-cols-2">
+              <motion.div
+                whileHover={{ y: -4 }}
+                className={`rounded-2xl border p-6 shadow-lg transition ${
+                  isDark ? "border-slate-700 bg-slate-900/80" : "border-slate-300 bg-white/90"
                 }`}
               >
-                <img
-                  src={ProfileImage}
-                  alt="Rajeev Dessai"
-                  className={`h-full w-full rounded-2xl object-cover ring-2 ${
-                    isDark ? "ring-cyan-400/40" : "ring-indigo-400/35"
-                  }`}
-                />
-                <div
-                  className={`mt-4 rounded-xl border p-3 text-sm ${
-                    isDark
-                      ? "border-slate-700/80 bg-slate-900/70 text-slate-200"
-                      : "border-slate-300 bg-white/80 text-slate-700"
-                  }`}
-                >
-                  Open to consulting, product engineering, and AI-led platform work.
-                </div>
-              </div>
-            </motion.div>
-          </section>
-
-          <section
-            id="stack"
-            className="mx-auto grid max-w-6xl gap-6 px-6 pb-10 md:grid-cols-2"
-          >
-            <motion.div
-              className={`rounded-2xl border p-6 shadow-lg ${
-                isDark
-                  ? "border-slate-700 bg-slate-900/70 shadow-slate-950/60"
-                  : "border-slate-300 bg-white/80 shadow-slate-300/50"
-              }`}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.35 }}
-            >
-              <h2 className={`mb-4 text-xl font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>
-                Core Stack Snapshot
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {selectedTech.map((tech) => (
-                  <span
-                    key={tech.title}
-                    className={`rounded-full border px-3 py-1 text-sm transition ${
-                      isDark
-                        ? "border-slate-600 bg-slate-950 text-slate-200 hover:border-cyan-300 hover:text-cyan-200"
-                        : "border-slate-300 bg-slate-100 text-slate-700 hover:border-indigo-500 hover:text-indigo-700"
-                    }`}
-                  >
-                    {tech.title}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              className={`rounded-2xl border p-6 shadow-lg ${
-                isDark
-                  ? "border-slate-700 bg-slate-900/70 shadow-slate-950/60"
-                  : "border-slate-300 bg-white/80 shadow-slate-300/50"
-              }`}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.35, delay: 0.08 }}
-            >
-              <h2 className={`mb-4 text-xl font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>Connect</h2>
-              <div className="grid gap-2">
-                {socials
-                  .filter((item) => item.href || item.code || item.value)
-                  .slice(0, 5)
-                  .map((item) => (
-                    <a
-                      key={item.label}
-                      href={item.href || "mailto:rajeev.dessai11@gmail.com"}
-                      target={item.href ? "_blank" : undefined}
-                      rel={item.href ? "noreferrer" : undefined}
-                      className={`rounded-lg border px-4 py-2 transition ${
-                        isDark
-                          ? "border-slate-700 text-slate-200 hover:border-cyan-300 hover:text-cyan-200"
-                          : "border-slate-300 text-slate-700 hover:border-indigo-500 hover:text-indigo-700"
+                <h2 className={`mb-4 text-xl font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>Core Stack Snapshot</h2>
+                <div className="flex flex-wrap gap-2">
+                  {selectedTech.map((tech) => (
+                    <span
+                      key={tech.title}
+                      className={`rounded-full border px-3 py-1 text-sm transition ${
+                        isDark ? `border-slate-600 bg-slate-950 text-slate-200 ${accent.softHover}` : `border-slate-300 bg-slate-100 text-slate-700 ${accent.softHover}`
                       }`}
                     >
-                      {item.label}
-                    </a>
+                      {tech.title}
+                    </span>
                   ))}
-              </div>
-            </motion.div>
-          </section>
+                </div>
+              </motion.div>
+              <motion.div
+                whileHover={{ y: -4 }}
+                className={`rounded-2xl border p-6 shadow-lg transition ${
+                  isDark ? "border-slate-700 bg-slate-900/80" : "border-slate-300 bg-white/90"
+                }`}
+              >
+                <h2 className={`mb-4 text-xl font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>Connect</h2>
+                <div className="grid gap-2">
+                  {socials
+                    .filter((item) => item.href || item.code || item.value)
+                    .slice(0, 5)
+                    .map((item) => (
+                      <a
+                        key={item.label}
+                        href={item.href || "mailto:rajeev.dessai11@gmail.com"}
+                        target={item.href ? "_blank" : undefined}
+                        rel={item.href ? "noreferrer" : undefined}
+                        className={`rounded-lg border px-4 py-2 text-sm transition ${
+                          isDark ? `border-slate-700 text-slate-200 ${accent.softHover}` : `border-slate-300 text-slate-700 ${accent.softHover}`
+                        }`}
+                      >
+                        {item.label}
+                      </a>
+                    ))}
+                </div>
+              </motion.div>
+            </section>
 
-          <section id="projects" className="mx-auto max-w-6xl px-6 pb-20">
-            <h2 className={`mb-5 text-2xl font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>Featured Work</h2>
-            <div className="grid gap-4 md:grid-cols-3">
-              {selectedProjects.map((project, idx) => (
-                <motion.a
-                  key={project.title}
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className={`group rounded-2xl border p-5 transition duration-200 hover:-translate-y-1 hover:shadow-xl ${
-                    isDark
-                      ? "border-slate-700 bg-slate-900/70 hover:border-cyan-400 hover:shadow-cyan-950/20"
-                      : "border-slate-300 bg-white/90 hover:border-indigo-500 hover:shadow-slate-300/50"
-                  }`}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.3, delay: idx * 0.07 }}
-                >
-                  <h3 className={`text-lg font-medium ${isDark ? "text-white group-hover:text-cyan-200" : "text-slate-900 group-hover:text-indigo-700"}`}>
-                    {project.title}
-                  </h3>
-                  <p className={`mt-2 line-clamp-3 text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                    {project.description}
-                  </p>
-                  <p className={`mt-4 inline-flex items-center gap-2 text-sm font-medium ${isDark ? "text-cyan-300" : "text-indigo-700"}`}>
-                    View project
-                    <FaArrowUpRightFromSquare />
-                  </p>
-                </motion.a>
-              ))}
-            </div>
-          </section>
-        </motion.div>
+            <section id="projects">
+              <h2 className={`mb-5 text-2xl font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>Featured Work</h2>
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {selectedProjects.map((project, idx) => (
+                  <motion.a
+                    key={project.title}
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    whileHover={{ y: -8, scale: 1.01 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`group rounded-2xl border p-5 transition duration-300 ${
+                      isDark ? `border-slate-700 bg-slate-900/80 ${accent.cardHover}` : `border-slate-300 bg-white/95 ${accent.cardHover}`
+                    }`}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.35, delay: idx * 0.06 }}
+                  >
+                    <h3 className={`text-lg font-medium ${isDark ? "text-white" : "text-slate-900"}`}>{project.title}</h3>
+                    <p className={`mt-2 line-clamp-3 text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>{project.description}</p>
+                    <p className={`mt-4 inline-flex items-center gap-2 text-sm font-medium ${accent.text}`}>
+                      View project
+                      <FaArrowUpRightFromSquare />
+                    </p>
+                  </motion.a>
+                ))}
+              </div>
+            </section>
+          </div>
+        </motion.section>
       ) : (
         <motion.section
           className="mx-auto max-w-6xl px-6 pb-20 pt-10"
@@ -356,47 +475,37 @@ const V3Portfolio = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.35 }}
         >
-          <div
-            className={`rounded-3xl border p-4 shadow-2xl ${
-              isDark
-                ? "border-slate-700 bg-slate-900/85 shadow-cyan-950/20"
-                : "border-slate-300 bg-white/90 shadow-slate-300/40"
-            }`}
-          >
+          <div className={`rounded-3xl border p-4 shadow-2xl ${isDark ? "border-slate-700 bg-slate-900/85" : "border-slate-300 bg-white/90"}`}>
             <div
               className={`mb-4 flex items-center justify-between rounded-xl border px-4 py-2 text-sm ${
                 isDark ? "border-slate-700 bg-slate-950 text-slate-300" : "border-slate-300 bg-slate-100 text-slate-700"
               }`}
             >
-              <span>Portfolio OS • {theme} mode</span>
+              <span>Portfolio OS • {theme} mode • {accentTheme}</span>
               <span>{clock}</span>
             </div>
 
             <div className="grid gap-4 md:grid-cols-[220px_1fr]">
-              <aside
-                className={`rounded-2xl border p-3 ${
-                  isDark ? "border-slate-700 bg-slate-950/80" : "border-slate-300 bg-slate-100"
-                }`}
-              >
+              <aside className={`rounded-2xl border p-3 ${isDark ? "border-slate-700 bg-slate-950/80" : "border-slate-300 bg-slate-100"}`}>
                 <div className="mb-2 text-xs uppercase tracking-wider opacity-70">Apps</div>
                 <div className="grid gap-2">
                   {osApps.map((app) => (
-                    <button
+                    <motion.button
+                      whileHover={{ x: 3 }}
+                      whileTap={{ scale: 0.98 }}
                       key={app.id}
                       type="button"
                       onClick={() => setActiveApp(app.id)}
                       className={`rounded-lg px-3 py-2 text-left text-sm transition ${
                         activeApp === app.id
-                          ? isDark
-                            ? "bg-cyan-500/20 text-cyan-200"
-                            : "bg-indigo-100 text-indigo-700"
+                          ? accent.activeApp
                           : isDark
                             ? "text-slate-300 hover:bg-slate-800"
                             : "text-slate-700 hover:bg-white"
                       }`}
                     >
                       {app.label}
-                    </button>
+                    </motion.button>
                   ))}
                 </div>
               </aside>
@@ -406,13 +515,11 @@ const V3Portfolio = () => {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
-                className={`rounded-2xl border p-4 ${
-                  isDark ? "border-slate-700 bg-slate-950/80" : "border-slate-300 bg-white"
-                }`}
+                className={`rounded-2xl border p-4 ${isDark ? "border-slate-700 bg-slate-950/80" : "border-slate-300 bg-white"}`}
               >
                 {activeApp === "profile" && (
                   <div className="grid gap-4 lg:grid-cols-[220px_1fr]">
-                    <img src={ProfileImage} alt="Rajeev Dessai" className="h-52 w-full rounded-xl object-cover" />
+                    <img src={ProfileImage} alt="Rajeev Dessai" className={`h-52 w-full rounded-xl object-cover ring-2 ${accent.ring}`} />
                     <div>
                       <h2 className="text-2xl font-bold">Rajeev Dessai</h2>
                       <p className={`mt-2 text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>
@@ -456,15 +563,11 @@ const V3Portfolio = () => {
                           target="_blank"
                           rel="noreferrer"
                           className={`rounded-xl border p-3 transition ${
-                            isDark
-                              ? "border-slate-700 hover:border-cyan-400"
-                              : "border-slate-300 hover:border-indigo-500"
+                            isDark ? `border-slate-700 ${accent.cardHover}` : `border-slate-300 ${accent.cardHover}`
                           }`}
                         >
                           <p className="font-semibold">{project.title}</p>
-                          <p className={`mt-1 text-xs ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                            {project.description}
-                          </p>
+                          <p className={`mt-1 text-xs ${isDark ? "text-slate-300" : "text-slate-700"}`}>{project.description}</p>
                         </a>
                       ))}
                     </div>
@@ -484,9 +587,7 @@ const V3Portfolio = () => {
                             target={item.href ? "_blank" : undefined}
                             rel={item.href ? "noreferrer" : undefined}
                             className={`rounded-lg border px-3 py-2 text-sm transition ${
-                              isDark
-                                ? "border-slate-700 text-slate-200 hover:border-cyan-300"
-                                : "border-slate-300 text-slate-700 hover:border-indigo-500"
+                              isDark ? `border-slate-700 text-slate-200 ${accent.softHover}` : `border-slate-300 text-slate-700 ${accent.softHover}`
                             }`}
                           >
                             {item.label}

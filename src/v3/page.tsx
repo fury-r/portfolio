@@ -34,6 +34,7 @@ type ViewMode = "portfolio" | "os";
 type ThemeMode = "dark" | "light";
 type AccentTheme = "cyan" | "violet" | "rose" | "emerald";
 type OsAppId = (typeof osApps)[number]["id"];
+const FEATURED_PROJECT_COUNT = 6;
 
 const accentThemeMap: Record<
   AccentTheme,
@@ -191,7 +192,7 @@ const accentThemeMap: Record<
 };
 
 const V3Portfolio = () => {
-  const selectedProjects = ProjectsMenu.slice(0, 6);
+  const selectedProjects = ProjectsMenu.slice(0, FEATURED_PROJECT_COUNT);
   const selectedTech = techData.slice(0, 12);
   const [theme, setTheme] = useState<ThemeMode>("dark");
   const [accentTheme, setAccentTheme] = useState<AccentTheme>("cyan");

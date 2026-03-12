@@ -651,7 +651,7 @@ const V3Portfolio = () => {
                     type="button"
                     onClick={() => setActiveApp(app.id)}
                     aria-label={`Open ${app.label} app`}
-                    className={`flex h-14 w-14 flex-col items-center justify-center rounded-2xl border text-xs transition md:h-14 md:w-14 ${
+                    className={`flex h-14 w-14 flex-col items-center justify-center rounded-2xl border text-xs transition ${
                       activeApp === app.id
                         ? isDark
                           ? `${accent.activeApp} border-white/20`

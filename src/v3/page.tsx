@@ -500,10 +500,7 @@ const V3Portfolio = () => {
               }`}
             >
               <span>Portfolio OS • {theme} mode • {accentTheme}</span>
-              <div className="flex items-center gap-2">
-                <span className="text-xs opacity-80">Wi‑Fi</span>
-                <span>{clock}</span>
-              </div>
+              <span>{clock}</span>
             </div>
 
             <div className="relative grid gap-4">
@@ -639,6 +636,7 @@ const V3Portfolio = () => {
                     key={app.id}
                     type="button"
                     onClick={() => setActiveApp(app.id)}
+                    aria-label={`Open ${app.label} app`}
                     className={`flex h-14 w-14 flex-col items-center justify-center rounded-2xl border text-xs transition ${
                       activeApp === app.id
                         ? isDark

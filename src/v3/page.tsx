@@ -344,7 +344,7 @@ const V3Portfolio = () => {
               isDark ? "border-slate-700 bg-slate-900/85 shadow-slate-950/80" : "border-slate-300 bg-white/90 shadow-slate-300/50"
             }`}
           >
-            <img src={ProfileImage} alt="Rajeev Dessai" className={`h-64 w-full rounded-2xl object-cover ring-2 ${accent.ring}`} />
+            <img src={ProfileImage} alt="Rajeev Dessai" className={`h-44 w-full rounded-2xl object-cover ring-2 sm:h-56 md:h-64 ${accent.ring}`} />
             <h1 className={`mt-4 text-2xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>Rajeev Dessai</h1>
             <p className={`mt-2 text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>
               Software Development Consultant crafting scalable products and thoughtful developer experiences.
@@ -530,7 +530,7 @@ const V3Portfolio = () => {
                 >
                   {activeApp === "profile" && (
                     <div className="grid gap-4 lg:grid-cols-[220px_1fr]">
-                      <img src={ProfileImage} alt="Rajeev Dessai" className={`h-52 w-full rounded-xl object-cover ring-2 ${accent.ring}`} />
+                      <img src={ProfileImage} alt="Rajeev Dessai" className={`h-40 w-full rounded-xl object-cover ring-2 sm:h-48 md:h-52 ${accent.ring}`} />
                       <div>
                         <h2 className="text-2xl font-bold">Rajeev Dessai</h2>
                         <p className={`mt-2 text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>

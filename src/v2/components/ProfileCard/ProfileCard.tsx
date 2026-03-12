@@ -84,12 +84,13 @@ export const ProfileCard = () => {
           animate={animateOnLoad}
           className=" rounded-md flex flex-col items-center  "
         >
-          <img
-            width={100}
-            className="m-3 rounded-md object-fit"
-            src={profile.picture || Profile}
-            alt={"Profile picture"}
-          />
+          <div className="m-3 h-28 w-28 overflow-hidden rounded-md">
+            <img
+              className="h-full w-full object-cover"
+              src={profile.picture || Profile}
+              alt={"Profile picture"}
+            />
+          </div>
         </AnimateInView>
         <AnimateInView
           animate={animateOnLoad}
@@ -102,6 +103,7 @@ export const ProfileCard = () => {
           >
             <label className="text-sm font-semibold ">{profile.position}</label>
           </div>
+          <div className="text-xs opacity-80">Goa, India • 3 years experience</div>
         </AnimateInView>
       </div>
       <div

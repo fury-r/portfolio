@@ -2,7 +2,7 @@ import DarkOqton from "../assets/company/DarkOqton.svg";
 import LightOqton from "../assets/company/LightOqton.svg";
 import CtrlSaveWhite from "../assets/company/ctrlsave-white.png";
 import Vtech from "../assets/company/vtech.png";
-import { TCompany } from "../types/component";
+import { TCompany, TEducation } from "../types/component";
 
 export const companyData: TCompany[] = [
   {
@@ -17,7 +17,7 @@ export const companyData: TCompany[] = [
     subItems: [
       {
         subTitle: "Intermediate Software Engineer",
-        date: "12/2022 - Present",
+        date: "Dec 2022 - Present",
       },
     ],
   },
@@ -31,7 +31,7 @@ export const companyData: TCompany[] = [
     subItems: [
       {
         subTitle: "Consultant Engineer",
-        date: "09/2022 - 11/2022",
+        date: "Sep 2022 - Nov 2022",
       },
     ],
   },
@@ -47,7 +47,7 @@ export const companyData: TCompany[] = [
     subItems: [
       {
         subTitle: "Full Stack Developer",
-        date: "10/2021 - 09/2022",
+        date: "Oct 2021 - Sep 2022",
       },
     ],
   },
@@ -62,23 +62,31 @@ export const companyData: TCompany[] = [
     subItems: [
       {
         subTitle: "Web Developer (Intern)",
-        date: "05/2019 - 06/2019",
+        date: "May 2019 - Jun 2019",
       },
     ],
   },
 ];
 
-export const educationData = [
+export const educationData: TEducation[] = [
   {
+    name: "Parvatibai Chowgule College (Goa University)",
+    link: "https://www.unigoa.ac.in/",
     title: "Master of Science in Information Technology",
-    subTitle: "Parvatibai Chowgule College (Goa University)",
+    subTitle: "Goa, India",
     date: "2023",
+    course: "Master of Science in Information Technology",
+    marks: "9.47 / 10",
     description: "CGPA: 9.47 / 10",
   },
   {
+    name: "Parvatibai Chowgule College (Goa University)",
+    link: "https://www.unigoa.ac.in/",
     title: "Bachelor in Vocation (Software Development)",
-    subTitle: "Parvatibai Chowgule College (Goa University)",
+    subTitle: "Goa, India",
     date: "2021",
+    course: "Bachelor in Vocation (Software Development)",
+    marks: "8.02 / 10",
     description: "CGPA: 8.02 / 10",
   },
 ];

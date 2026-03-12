@@ -44,9 +44,7 @@ export const useContentFul = () => {
   });
 
   const [company, setCompany] = useState<TCompany[]>(companyData);
-  const [education, setEducation] = useState<TEducation[]>(
-    educationData as unknown as TEducation[]
-  );
+  const [education, setEducation] = useState<TEducation[]>(educationData);
 
   const [services, setServices] = useState<TService[]>(servicesData);
   const [projects, setProjects] = useState<TProject[]>([]);

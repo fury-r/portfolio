@@ -647,7 +647,9 @@ const V3Portfolio = () => {
                           : "border-white/80 bg-white/80 text-slate-700 hover:bg-white"
                     }`}
                   >
-                    <span className="text-base leading-none">{osAppIcons[app.id]}</span>
+                    <span aria-hidden="true" className="text-base leading-none">
+                      {osAppIcons[app.id]}
+                    </span>
                     <span className="mt-1">{app.label}</span>
                   </motion.button>
                 ))}

@@ -201,7 +201,7 @@ const V3Portfolio = () => {
   const selectedProjects = ProjectsMenu.slice(0, FEATURED_PROJECT_COUNT);
   const selectedTech = techData.slice(0, 12);
   const [theme, setTheme] = useState<ThemeMode>("dark");
-  const [accentTheme, setAccentTheme] = useState<AccentTheme>("cyan");
+  const [accentTheme, setAccentTheme] = useState<AccentTheme>("violet");
   const [viewMode, setViewMode] = useState<ViewMode>("portfolio");
   const [activeApp, setActiveApp] = useState<OsAppId>("profile");
   const [clock, setClock] = useState(() =>
@@ -228,6 +228,12 @@ const V3Portfolio = () => {
 
     return () => window.clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    if (viewMode === "portfolio" && accentTheme === "cyan") {
+      setAccentTheme("violet");
+    }
+  }, [viewMode, accentTheme]);
 
   return (
     <main
@@ -281,7 +287,9 @@ const V3Portfolio = () => {
                 isDark ? "border-slate-700 bg-slate-900/70" : "border-slate-300 bg-white/80"
               }`}
             >
-              {(Object.keys(accentThemeMap) as AccentTheme[]).map((option) => (
+              {(Object.keys(accentThemeMap) as AccentTheme[])
+                .filter((option) => viewMode === "os" || option !== "cyan")
+                .map((option) => (
                 <button
                   key={option}
                   type="button"
@@ -477,13 +485,13 @@ const V3Portfolio = () => {
         </motion.section>
       ) : (
         <motion.section
-          className="mx-auto max-w-6xl px-6 pb-20 pt-10"
+          className="mx-auto max-w-6xl px-3 pb-20 pt-8 md:px-6 md:pt-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.35 }}
         >
           <div
-            className={`relative overflow-hidden rounded-[2.25rem] border p-4 shadow-2xl ${
+            className={`relative mx-auto w-full max-w-[420px] overflow-hidden rounded-[2.5rem] border p-4 shadow-2xl md:max-w-none md:rounded-[2.25rem] ${
               isDark ? "border-slate-700/80 bg-slate-900/75" : "border-slate-300/90 bg-white/65"
             } backdrop-blur-2xl`}
           >
@@ -499,6 +507,12 @@ const V3Portfolio = () => {
                 isDark ? "border-white/15 bg-slate-950/55 text-slate-200" : "border-white/60 bg-white/70 text-slate-700"
               }`}
             >
+              <div className="hidden items-center gap-1.5 md:flex">
+                <span className="h-3 w-3 rounded-full bg-rose-400/90" />
+                <span className="h-3 w-3 rounded-full bg-amber-400/90" />
+                <span className="h-3 w-3 rounded-full bg-emerald-400/90" />
+              </div>
+              <span className="absolute left-1/2 top-2 h-5 w-28 -translate-x-1/2 rounded-full bg-slate-900/80 md:hidden" />
               <span>Portfolio OS • {theme} mode • {accentTheme}</span>
               <span>{clock}</span>
             </div>
@@ -510,7 +524,7 @@ const V3Portfolio = () => {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
-                  className={`order-2 rounded-3xl border p-4 md:order-1 ${
+                  className={`order-2 rounded-[2rem] border p-4 md:order-1 md:rounded-3xl ${
                     isDark ? "border-white/15 bg-slate-950/55" : "border-white/70 bg-white/75"
                   } backdrop-blur-xl`}
                 >
@@ -596,7 +610,7 @@ const V3Portfolio = () => {
                 </motion.div>
 
                 <aside
-                  className={`order-1 rounded-3xl border p-3 md:order-2 ${
+                  className={`order-1 hidden rounded-3xl border p-3 md:order-2 md:block ${
                     isDark ? "border-white/15 bg-slate-950/45" : "border-white/70 bg-white/70"
                   } backdrop-blur-xl`}
                 >
@@ -625,9 +639,9 @@ const V3Portfolio = () => {
               </div>
 
               <div
-                className={`mx-auto flex w-fit items-center gap-2 rounded-3xl border px-3 py-2 ${
+                className={`mx-auto flex w-full max-w-[360px] items-center justify-between gap-2 rounded-3xl border px-3 py-2 md:w-fit md:max-w-none md:justify-start ${
                   isDark ? "border-white/20 bg-slate-950/55" : "border-white/80 bg-white/80"
-                } backdrop-blur-2xl`}
+                } backdrop-blur-2xl md:mx-auto`}
               >
                 {osApps.map((app) => (
                   <motion.button
@@ -637,7 +651,7 @@ const V3Portfolio = () => {
                     type="button"
                     onClick={() => setActiveApp(app.id)}
                     aria-label={`Open ${app.label} app`}
-                    className={`flex h-14 w-14 flex-col items-center justify-center rounded-2xl border text-xs transition ${
+                    className={`flex h-14 w-14 flex-col items-center justify-center rounded-2xl border text-xs transition md:h-14 md:w-14 ${
                       activeApp === app.id
                         ? isDark
                           ? `${accent.activeApp} border-white/20`

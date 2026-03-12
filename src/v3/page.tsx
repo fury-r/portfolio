@@ -29,6 +29,12 @@ const osApps = [
   { id: "projects", label: "Projects" },
   { id: "connect", label: "Connect" },
 ] as const;
+const osAppIcons: Record<(typeof osApps)[number]["id"], string> = {
+  profile: "👤",
+  stack: "🧰",
+  projects: "🚀",
+  connect: "💬",
+};
 
 type ViewMode = "portfolio" | "os";
 type ThemeMode = "dark" | "light";
@@ -476,128 +482,178 @@ const V3Portfolio = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.35 }}
         >
-          <div className={`rounded-3xl border p-4 shadow-2xl ${isDark ? "border-slate-700 bg-slate-900/85" : "border-slate-300 bg-white/90"}`}>
+          <div
+            className={`relative overflow-hidden rounded-[2.25rem] border p-4 shadow-2xl ${
+              isDark ? "border-slate-700/80 bg-slate-900/75" : "border-slate-300/90 bg-white/65"
+            } backdrop-blur-2xl`}
+          >
             <div
-              className={`mb-4 flex items-center justify-between rounded-xl border px-4 py-2 text-sm ${
-                isDark ? "border-slate-700 bg-slate-950 text-slate-300" : "border-slate-300 bg-slate-100 text-slate-700"
+              className={`pointer-events-none absolute inset-0 ${
+                isDark
+                  ? "bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.12),transparent_55%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.08),transparent_50%)]"
+                  : "bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.8),transparent_55%),radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.5),transparent_50%)]"
+              }`}
+            />
+            <div
+              className={`relative mb-4 flex items-center justify-between rounded-2xl border px-4 py-2 text-sm ${
+                isDark ? "border-white/15 bg-slate-950/55 text-slate-200" : "border-white/60 bg-white/70 text-slate-700"
               }`}
             >
               <span>Portfolio OS • {theme} mode • {accentTheme}</span>
-              <span>{clock}</span>
+              <div className="flex items-center gap-2">
+                <span className="text-xs opacity-80">Wi‑Fi</span>
+                <span>{clock}</span>
+              </div>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-[220px_1fr]">
-              <aside className={`rounded-2xl border p-3 ${isDark ? "border-slate-700 bg-slate-950/80" : "border-slate-300 bg-slate-100"}`}>
-                <div className="mb-2 text-xs uppercase tracking-wider opacity-70">Apps</div>
-                <div className="grid gap-2">
-                  {osApps.map((app) => (
-                    <motion.button
-                      whileHover={{ x: 3 }}
-                      whileTap={{ scale: 0.98 }}
-                      key={app.id}
-                      type="button"
-                      onClick={() => setActiveApp(app.id)}
-                      className={`rounded-lg px-3 py-2 text-left text-sm transition ${
-                        activeApp === app.id
-                          ? accent.activeApp
-                          : isDark
-                            ? "text-slate-300 hover:bg-slate-800"
-                            : "text-slate-700 hover:bg-white"
-                      }`}
-                    >
-                      {app.label}
-                    </motion.button>
-                  ))}
-                </div>
-              </aside>
-
-              <motion.div
-                key={activeApp}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className={`rounded-2xl border p-4 ${isDark ? "border-slate-700 bg-slate-950/80" : "border-slate-300 bg-white"}`}
-              >
-                {activeApp === "profile" && (
-                  <div className="grid gap-4 lg:grid-cols-[220px_1fr]">
-                    <img src={ProfileImage} alt="Rajeev Dessai" className={`h-52 w-full rounded-xl object-cover ring-2 ${accent.ring}`} />
+            <div className="relative grid gap-4">
+              <div className="grid gap-4 md:grid-cols-[1fr_220px]">
+                <motion.div
+                  key={activeApp}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className={`order-2 rounded-3xl border p-4 md:order-1 ${
+                    isDark ? "border-white/15 bg-slate-950/55" : "border-white/70 bg-white/75"
+                  } backdrop-blur-xl`}
+                >
+                  {activeApp === "profile" && (
+                    <div className="grid gap-4 lg:grid-cols-[220px_1fr]">
+                      <img src={ProfileImage} alt="Rajeev Dessai" className={`h-52 w-full rounded-xl object-cover ring-2 ${accent.ring}`} />
+                      <div>
+                        <h2 className="text-2xl font-bold">Rajeev Dessai</h2>
+                        <p className={`mt-2 text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>
+                          Software Development Consultant focused on scalable web experiences.
+                        </p>
+                        <ul className="mt-4 grid gap-2 text-sm">
+                          {highlights.map((item) => (
+                            <li key={item} className={isDark ? "text-slate-200" : "text-slate-700"}>
+                              • {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                  {activeApp === "stack" && (
                     <div>
-                      <h2 className="text-2xl font-bold">Rajeev Dessai</h2>
-                      <p className={`mt-2 text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                        Software Development Consultant focused on scalable web experiences.
-                      </p>
-                      <ul className="mt-4 grid gap-2 text-sm">
-                        {highlights.map((item) => (
-                          <li key={item} className={isDark ? "text-slate-200" : "text-slate-700"}>
-                            • {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
-                {activeApp === "stack" && (
-                  <div>
-                    <h2 className="mb-3 text-xl font-semibold">Installed Stack</h2>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedTech.map((tech) => (
-                        <span
-                          key={tech.title}
-                          className={`rounded-full border px-3 py-1 text-sm ${
-                            isDark ? "border-slate-600 bg-slate-900 text-slate-200" : "border-slate-300 bg-slate-100 text-slate-700"
-                          }`}
-                        >
-                          {tech.title}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {activeApp === "projects" && (
-                  <div>
-                    <h2 className="mb-3 text-xl font-semibold">Project Explorer</h2>
-                    <div className="grid gap-3 md:grid-cols-2">
-                      {selectedProjects.map((project) => (
-                        <a
-                          key={project.title}
-                          href={project.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className={`rounded-xl border p-3 transition ${
-                            isDark ? `border-slate-700 ${accent.cardHover}` : `border-slate-300 ${accent.cardHover}`
-                          }`}
-                        >
-                          <p className="font-semibold">{project.title}</p>
-                          <p className={`mt-1 text-xs ${isDark ? "text-slate-300" : "text-slate-700"}`}>{project.description}</p>
-                        </a>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                {activeApp === "connect" && (
-                  <div>
-                    <h2 className="mb-3 text-xl font-semibold">Social Console</h2>
-                    <div className="grid gap-2 sm:grid-cols-2">
-                      {socials
-                        .filter((item) => item.href || item.code || item.value)
-                        .slice(0, 6)
-                        .map((item) => (
-                          <a
-                            key={item.label}
-                            href={item.href || "mailto:rajeev.dessai11@gmail.com"}
-                            target={item.href ? "_blank" : undefined}
-                            rel={item.href ? "noreferrer" : undefined}
-                            className={`rounded-lg border px-3 py-2 text-sm transition ${
-                              isDark ? `border-slate-700 text-slate-200 ${accent.softHover}` : `border-slate-300 text-slate-700 ${accent.softHover}`
+                      <h2 className="mb-3 text-xl font-semibold">Installed Stack</h2>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedTech.map((tech) => (
+                          <span
+                            key={tech.title}
+                            className={`rounded-full border px-3 py-1 text-sm ${
+                              isDark ? "border-slate-600 bg-slate-900 text-slate-200" : "border-slate-300 bg-slate-100 text-slate-700"
                             }`}
                           >
-                            {item.label}
+                            {tech.title}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {activeApp === "projects" && (
+                    <div>
+                      <h2 className="mb-3 text-xl font-semibold">Project Explorer</h2>
+                      <div className="grid gap-3 md:grid-cols-2">
+                        {selectedProjects.map((project) => (
+                          <a
+                            key={project.title}
+                            href={project.link}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={`rounded-xl border p-3 transition ${
+                              isDark ? `border-slate-700 ${accent.cardHover}` : `border-slate-300 ${accent.cardHover}`
+                            }`}
+                          >
+                            <p className="font-semibold">{project.title}</p>
+                            <p className={`mt-1 text-xs ${isDark ? "text-slate-300" : "text-slate-700"}`}>{project.description}</p>
                           </a>
                         ))}
+                      </div>
+                    </div>
+                  )}
+                  {activeApp === "connect" && (
+                    <div>
+                      <h2 className="mb-3 text-xl font-semibold">Social Console</h2>
+                      <div className="grid gap-2 sm:grid-cols-2">
+                        {socials
+                          .filter((item) => item.href || item.code || item.value)
+                          .slice(0, 6)
+                          .map((item) => (
+                            <a
+                              key={item.label}
+                              href={item.href || "mailto:rajeev.dessai11@gmail.com"}
+                              target={item.href ? "_blank" : undefined}
+                              rel={item.href ? "noreferrer" : undefined}
+                              className={`rounded-lg border px-3 py-2 text-sm transition ${
+                                isDark ? `border-slate-700 text-slate-200 ${accent.softHover}` : `border-slate-300 text-slate-700 ${accent.softHover}`
+                              }`}
+                            >
+                              {item.label}
+                            </a>
+                          ))}
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+
+                <aside
+                  className={`order-1 rounded-3xl border p-3 md:order-2 ${
+                    isDark ? "border-white/15 bg-slate-950/45" : "border-white/70 bg-white/70"
+                  } backdrop-blur-xl`}
+                >
+                  <div className="mb-2 text-xs uppercase tracking-wider opacity-70">Widgets</div>
+                  <div className="grid gap-2">
+                    <div
+                      className={`rounded-2xl border px-3 py-2 text-sm ${
+                        isDark ? "border-white/15 bg-slate-900/60 text-slate-300" : "border-white/80 bg-white/80 text-slate-700"
+                      }`}
+                    >
+                      Active App
+                      <p className={`mt-1 text-base font-semibold ${accent.text}`}>
+                        {osApps.find((app) => app.id === activeApp)?.label}
+                      </p>
+                    </div>
+                    <div
+                      className={`rounded-2xl border px-3 py-2 text-sm ${
+                        isDark ? "border-white/15 bg-slate-900/60 text-slate-300" : "border-white/80 bg-white/80 text-slate-700"
+                      }`}
+                    >
+                      Focus Mode
+                      <p className="mt-1 text-base font-semibold">{viewMode === "os" ? "Enabled" : "Disabled"}</p>
                     </div>
                   </div>
-                )}
-              </motion.div>
+                </aside>
+              </div>
+
+              <div
+                className={`mx-auto flex w-fit items-center gap-2 rounded-3xl border px-3 py-2 ${
+                  isDark ? "border-white/20 bg-slate-950/55" : "border-white/80 bg-white/80"
+                } backdrop-blur-2xl`}
+              >
+                {osApps.map((app) => (
+                  <motion.button
+                    whileHover={{ y: -4, scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    key={app.id}
+                    type="button"
+                    onClick={() => setActiveApp(app.id)}
+                    className={`flex h-14 w-14 flex-col items-center justify-center rounded-2xl border text-xs transition ${
+                      activeApp === app.id
+                        ? isDark
+                          ? `${accent.activeApp} border-white/20`
+                          : `${accent.activeApp} border-white`
+                        : isDark
+                          ? "border-white/10 bg-slate-900/60 text-slate-200 hover:bg-slate-800/80"
+                          : "border-white/80 bg-white/80 text-slate-700 hover:bg-white"
+                    }`}
+                  >
+                    <span className="text-base leading-none">{osAppIcons[app.id]}</span>
+                    <span className="mt-1">{app.label}</span>
+                  </motion.button>
+                ))}
+              </div>
             </div>
           </div>
         </motion.section>

@@ -2,7 +2,7 @@ import DarkOqton from "../assets/company/DarkOqton.svg";
 import LightOqton from "../assets/company/LightOqton.svg";
 import CtrlSaveWhite from "../assets/company/ctrlsave-white.png";
 import Vtech from "../assets/company/vtech.png";
-import { TCompany } from "../types/component";
+import { TCompany, TEducation } from "../types/component";
 
 export const companyData: TCompany[] = [
   {
@@ -11,76 +11,82 @@ export const companyData: TCompany[] = [
     darkImage: LightOqton,
     lightImage: DarkOqton,
     link: "https://oqton.com",
-    title: "Software Development Consultant",
+    title: "Intermediate Software Engineer",
     description:
-      "I specialize in developing UI and middleware for the MOS system, crafting responsive UI components with React and robust APIs using Node.js. My contributions include IoT integration, automation with Selenium Java, and ensuring seamless system integration for user-friendly applications.",
+      "Working on front-end bug fixes and feature development, managing Node.js middleware, onboarding IoT-compatible devices, building PyQt-based UI tooling, writing emulation scripts, and developing Golang backend integrations with SAP and QuickBooks.",
     subItems: [
       {
-        subTitle: "Software Development Consultant",
-        date: "06/2023-Present",
-      },
-      {
-        subTitle: "Junior Software Engineer",
-        date: "12/2022 - 06/2023",
+        subTitle: "Intermediate Software Engineer",
+        date: "Dec 2022 - Present",
       },
     ],
   },
   {
     name: "13th June Infotech Pvt Ltd",
-    duration: "Sept 2022 - Nov 2022",
+    duration: "Sep 2022 - Nov 2022",
     link: "https://www.linkedin.com/company/13thjune-infotech-private-limited/about/",
-    title: "Consultant/Frontend Engineer",
+    title: "Consultant Engineer",
     description:
-      "As a Consultant Engineer, I led the transformation of a financial application from C++ to a modern web platform using React, HTML, and CSS. Over three months, I collaborated with the team to analyze requirements, optimize the codebase, and implement frontend solutions in React, gaining expertise in web development and project management.",
+      "Managed and guided ReactJS front-end development and transformed processed data into normalized UI-ready formats for meaningful presentation.",
     subItems: [
       {
         subTitle: "Consultant Engineer",
-        date: "09/2022-11/2022",
+        date: "Sep 2022 - Nov 2022",
       },
     ],
   },
   {
     name: "Ctrl Save Pvt Ltd",
-    duration: "Oct 2021 - Sept 2022",
+    duration: "Oct 2021 - Sep 2022",
     darkImage: CtrlSaveWhite,
     lightImage: CtrlSaveWhite,
     link: "https://www.ctrlsave.in/",
     title: "Full Stack Developer",
     description:
-      "As a Full Stack Developer, I have developed four applications using technologies like React Native, Python, Flask, SQL, SQLAlchemy, HTML, and CSS. Projects include a Stock Trading Platform with real-time data streaming, a Barista App for coffee ordering, a Shopping App akin to Myntra, and a Logistics App for truck bookings. I utilized my front-end and back-end skills to implement features such as order tracking, personalized recommendations, and route optimization, contributing to innovative software solutions.",
+      "Handled front-end and back-end development for multiple mobile applications, implemented UI designs, and optimized database queries for faster data retrieval.",
     subItems: [
       {
         subTitle: "Full Stack Developer",
-        date: "10/2021-11/2022",
+        date: "Oct 2021 - Sep 2022",
       },
     ],
   },
   {
-    name: "VTech",
+    name: "V-Tech Computer Solutions",
     duration: "May 2019 - June 2019",
     lightImage: Vtech,
     link: "https://vtechgoa.com/",
     title: "Web Developer",
     description:
-      "As a Web Developer, I developed the company's weblink using HTML, JavaScript, CSS, jQuery, and PHP, focusing on user-friendly interface design and cross-browser compatibility. This title enhanced my hands-on experience in web development and strengthened my skills in front-end technologies.",
+      "Developed a company website using HTML, CSS, and JavaScript.",
     subItems: [
       {
         subTitle: "Web Developer (Intern)",
-        date: "05/2019-06/2019",
+        date: "May 2019 - Jun 2019",
       },
     ],
   },
 ];
 
-export const educationData = [
+export const educationData: TEducation[] = [
   {
-    title: "Masters of Science in Information Technology.[9.47 CGPA]",
-    date: "2021 — 2023",
-    description: "Masters of Science in Information Technology.[9.47 CGPA]",
+    name: "Parvatibai Chowgule College (Goa University)",
+    link: "https://www.unigoa.ac.in/",
+    title: "Master of Science in Information Technology",
+    subTitle: "Goa, India",
+    date: "2023",
+    course: "Master of Science in Information Technology",
+    marks: "9.47 / 10",
+    description: "CGPA: 9.47 / 10",
   },
   {
-    title: "Parvatibai Chowgule College of Arts and Science (Goa University)",
-    date: "2018 — 2021",
-    description: "Bachelors of Vocation in Software Development.[8.02 CGPA]",
+    name: "Parvatibai Chowgule College (Goa University)",
+    link: "https://www.unigoa.ac.in/",
+    title: "Bachelor in Vocation (Software Development)",
+    subTitle: "Goa, India",
+    date: "2021",
+    course: "Bachelor in Vocation (Software Development)",
+    marks: "8.02 / 10",
+    description: "CGPA: 8.02 / 10",
   },
 ];

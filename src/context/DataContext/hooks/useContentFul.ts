@@ -2,6 +2,7 @@ import { createClient } from "contentful";
 import {
   useCallback,
   useEffect,
+  useMemo,
   useState,
   startTransition,
   useTransition,
@@ -17,31 +18,43 @@ import {
 } from "../../../types/component";
 import { socials } from "../../../data/socials";
 import { companyData } from "../../../data/company";
+import { educationData } from "../../../data/company";
+import { services as servicesData } from "../../../data/service";
+import { techData } from "../../../data/tech";
 
 export const useContentFul = () => {
-  const client = createClient({
-    space: import.meta.env.VITE_APP_PUBLIC_CONTENT_SPACE_ID,
-    accessToken: import.meta.env.VITE_APP_PUBLIC_CONTENT_ACCESS_TOKEN,
-  });
+  const client = useMemo(() => {
+    const space = import.meta.env.VITE_APP_PUBLIC_CONTENT_SPACE_ID;
+    const accessToken = import.meta.env.VITE_APP_PUBLIC_CONTENT_ACCESS_TOKEN;
+
+    if (!space || !accessToken) return null;
+
+    return createClient({
+      space,
+      accessToken,
+    });
+  }, []);
 
   const [profile, setProfile] = useState<TProfile>({
-    about: "-",
-    name: "-",
-    position: "-",
+    about:
+      "Software Engineer with 3 years of experience in full-stack web development. Proven ability to work independently and as part of a team to deliver high-quality products on time. Eager to learn new technologies and take on new challenges.",
+    name: "Rajeev Dessai",
+    position: "Software Engineer",
     picture: null,
   });
 
   const [company, setCompany] = useState<TCompany[]>(companyData);
-  const [education, setEducation] = useState<TEducation[]>([]);
+  const [education, setEducation] = useState<TEducation[]>(educationData);
 
-  const [services, setServices] = useState<TService[]>([]);
+  const [services, setServices] = useState<TService[]>(servicesData);
   const [projects, setProjects] = useState<TProject[]>([]);
-  const [tech, setTech] = useState<TTech[]>([]);
+  const [tech, setTech] = useState<TTech[]>(techData);
   const [social, setSocial] = useState<TSocial[]>(socials);
 
   const [isPending, setState] = useTransition();
 
   const getProfile = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "portfolio" });
       if (response.items.length > 0)
@@ -56,6 +69,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getCompany = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "company" });
       if (response.items.length > 0)
@@ -78,6 +92,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getServices = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "doings" });
       if (response.items.length > 0)
@@ -88,6 +103,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getProjects = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "projects" });
       if (response.items.length > 0)
@@ -117,6 +133,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getEducations = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "education" });
       if (response.items.length > 0)
@@ -127,6 +144,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getTech = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "tech" });
       if (response.items.length > 0)
@@ -143,6 +161,7 @@ export const useContentFul = () => {
   }, [client]);
 
   const getSocial = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "social" });
       if (response.items.length > 0)
@@ -153,6 +172,8 @@ export const useContentFul = () => {
   }, [client]);
 
   useEffect(() => {
+    if (!client) return;
+
     setState(() => {
       getProfile();
 

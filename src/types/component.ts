@@ -72,4 +72,6 @@ export type TProject = {
 export type TEducation = Omit<TCompany, "subItems"> & {
   course: string;
   marks: string;
+  date?: string;
+  subTitle?: string;
 };

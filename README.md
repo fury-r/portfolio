@@ -3,7 +3,7 @@
 
 
 
-This is my personal portfolio website built using modern web technologies including Next.js, SCSS, styled-components, Tailwind CSS, and Turbopack. The project aims to showcase my skills, projects, and experiences in a professional and visually appealing manner.
+This is my personal portfolio website built using modern web technologies including Next.js, SCSS, styled-components, Tailwind CSS, and Turbopack. The project was made to showcase my skills, projects, and experience in a professional and visually appealing way for recruiters, collaborators, and developer communities.
 
 ## Technologies Used
 
@@ -101,6 +101,7 @@ yarn run dev
 /data            # fallback data
 /v1              # v1 site
 /v2              # v2 site
+/v3              # v3 site (latest developer-focused UI)
 /styles          # SCSS styles
 /public          # Static assets
 /tsconfig.json   # TypeScript configuration

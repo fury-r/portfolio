@@ -37,6 +37,6 @@ export const socials: TSocial[] = [
     css: "contact",
 
     label: "Contact",
-    value: "+91 9158907407",
+    value: "+91 9158987407 / +91 7972431714",
   },
 ];

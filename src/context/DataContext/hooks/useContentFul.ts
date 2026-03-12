@@ -18,6 +18,9 @@ import {
 } from "../../../types/component";
 import { socials } from "../../../data/socials";
 import { companyData } from "../../../data/company";
+import { educationData } from "../../../data/company";
+import { services as servicesData } from "../../../data/service";
+import { techData } from "../../../data/tech";
 
 export const useContentFul = () => {
   const client = useMemo(() => {
@@ -33,18 +36,21 @@ export const useContentFul = () => {
   }, []);
 
   const [profile, setProfile] = useState<TProfile>({
-    about: "-",
-    name: "-",
-    position: "-",
+    about:
+      "Software Engineer with 3 years of experience in full-stack web development. Proven ability to work independently and as part of a team to deliver high-quality products on time. Eager to learn new technologies and take on new challenges.",
+    name: "Rajeev Dessai",
+    position: "Software Engineer",
     picture: null,
   });
 
   const [company, setCompany] = useState<TCompany[]>(companyData);
-  const [education, setEducation] = useState<TEducation[]>([]);
+  const [education, setEducation] = useState<TEducation[]>(
+    educationData as unknown as TEducation[]
+  );
 
-  const [services, setServices] = useState<TService[]>([]);
+  const [services, setServices] = useState<TService[]>(servicesData);
   const [projects, setProjects] = useState<TProject[]>([]);
-  const [tech, setTech] = useState<TTech[]>([]);
+  const [tech, setTech] = useState<TTech[]>(techData);
   const [social, setSocial] = useState<TSocial[]>(socials);
 
   const [isPending, setState] = useTransition();

@@ -12,9 +12,9 @@ import { HiOutlineDesktopComputer } from "react-icons/hi";
 import { PiBrowserBold } from "react-icons/pi";
 
 const highlights = [
-  "Building performant product UIs with React + TypeScript",
-  "Designing full-stack systems with Node.js, GraphQL, and Python",
-  "Delivering AI, IoT, and Web3 experiences for production teams",
+  "3 years of full-stack experience delivering production-ready products",
+  "Building scalable web systems with React, TypeScript, Node.js, Python, and Golang",
+  "Hands-on delivery across IoT middleware, enterprise integrations, and modern UI platforms",
 ];
 
 const navItems = [
@@ -347,7 +347,7 @@ const V3Portfolio = () => {
             <img src={ProfileImage} alt="Rajeev Dessai" className={`h-44 w-full rounded-2xl object-cover ring-2 sm:h-56 md:h-64 ${accent.ring}`} />
             <h1 className={`mt-4 text-2xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>Rajeev Dessai</h1>
             <p className={`mt-2 text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-              Software Development Consultant crafting scalable products and thoughtful developer experiences.
+              Software Engineer focused on building reliable, scalable full-stack applications.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               <a
@@ -534,7 +534,7 @@ const V3Portfolio = () => {
                       <div>
                         <h2 className="text-2xl font-bold">Rajeev Dessai</h2>
                         <p className={`mt-2 text-sm ${isDark ? "text-slate-300" : "text-slate-700"}`}>
-                          Software Development Consultant focused on scalable web experiences.
+                          Software Engineer focused on scalable web experiences.
                         </p>
                         <ul className="mt-4 grid gap-2 text-sm">
                           {highlights.map((item) => (

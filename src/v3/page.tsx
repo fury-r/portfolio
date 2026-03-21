@@ -639,7 +639,7 @@ const AboutSection: React.FC = () => {
     >
       {/* Hero */}
       <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible" style={{ marginBottom: 32 }}>
-        <p style={{ color: "var(--v3-text2)", fontSize: 14, marginBottom: 8 }}>Hi there 👋, I'm</p>
+        <p style={{ color: "var(--v3-text2)", fontSize: 14, marginBottom: 8 }}>Hi there 👋, I&apos;m</p>
         <h1 style={{ color: "var(--v3-text)", fontSize: 40, fontWeight: 800, margin: "0 0 8px", lineHeight: 1.1 }}>
           {name}
         </h1>
@@ -982,7 +982,7 @@ const ProjectsSection: React.FC = () => {
         custom={1} variants={fadeUp} initial="hidden" animate="visible"
         style={{ color: "var(--v3-text2)", fontSize: 15, marginBottom: 24 }}
       >
-        A selection of things I've built.
+        A selection of things I&apos;ve built.
       </motion.p>
 
       {/* Filter tabs */}
@@ -1149,7 +1149,7 @@ const ContactSection: React.FC = () => {
         custom={1} variants={fadeUp} initial="hidden" animate="visible"
         style={{ color: "var(--v3-text2)", fontSize: 15, marginBottom: 32 }}
       >
-        I'm always open to new opportunities and collaborations.
+        I&apos;m always open to new opportunities and collaborations.
       </motion.p>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 32 }}>
@@ -1201,7 +1201,7 @@ const ContactSection: React.FC = () => {
             style={{ borderRadius: 14, overflow: "hidden", border: "1px solid var(--v3-border)" }}
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116953.44217685494!2d73.7364965!3d15.2993265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfb36d98c0e82b%3A0x4a4f33d5bf1d4538!2sGoa%2C%20India!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d116953.44217685494!2d73.7364965!3d15.2993265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbfb36d98c0e82b%3A0x4a4f33d5bf1d4538!2sGoa%2C%20India!5e0!3m2!1sen!2sus!5m2!1sen!2sus"
               width="100%"
               height="200"
               style={{ border: 0, display: "block" }}

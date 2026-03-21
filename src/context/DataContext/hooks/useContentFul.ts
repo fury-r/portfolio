@@ -17,31 +17,73 @@ import {
 } from "../../../types/component";
 import { socials } from "../../../data/socials";
 import { companyData } from "../../../data/company";
+import { services as localServices } from "../../../data/service";
+import { techData } from "../../../data/tech";
+import { ProjectsMenu } from "../../../data/project";
+
+const hasContentfulCredentials =
+  !!import.meta.env.VITE_APP_PUBLIC_CONTENT_SPACE_ID &&
+  !!import.meta.env.VITE_APP_PUBLIC_CONTENT_ACCESS_TOKEN;
+
+const client = hasContentfulCredentials
+  ? createClient({
+      space: import.meta.env.VITE_APP_PUBLIC_CONTENT_SPACE_ID,
+      accessToken: import.meta.env.VITE_APP_PUBLIC_CONTENT_ACCESS_TOKEN,
+    })
+  : null;
+
+const localProfile: TProfile = {
+  name: "Rajeev Dessai",
+  position: "Software Engineer",
+  about:
+    "Software Engineer with 3 years of experience in full-stack web development. Proven ability to work independently and as part of a team to deliver high-quality products on time. Eager to learn new technologies and take on new challenges.",
+  picture: null,
+};
+
+const localEducation: TEducation[] = [
+  {
+    name: "Parvatibai Chowgule College (Goa University)",
+    title: "Master of Science in Information Technology",
+    duration: "2021 — 2023",
+    link: "",
+    course: "MSc Information Technology",
+    marks: "9.47 CGPA",
+    description: "Master of Science in Information Technology. CGPA: 9.47/10",
+  },
+  {
+    name: "Parvatibai Chowgule College (Goa University)",
+    title: "Bachelors in Vocation (Software Development)",
+    duration: "2018 — 2021",
+    link: "",
+    course: "BVoc Software Development",
+    marks: "8.02 CGPA",
+    description: "Bachelors in Vocation in Software Development. CGPA: 8.02/10",
+  },
+];
+
+const localProjects: TProject[] = ProjectsMenu.map((p) => ({
+  title: p.title,
+  type: p.type,
+  images: [p.image],
+  link: p.link,
+  description: p.description,
+  techStack: p.subItems.map((s) => ({ title: s })),
+}));
 
 export const useContentFul = () => {
-  const client = createClient({
-    space: import.meta.env.VITE_APP_PUBLIC_CONTENT_SPACE_ID,
-    accessToken: import.meta.env.VITE_APP_PUBLIC_CONTENT_ACCESS_TOKEN,
-  });
 
-  const [profile, setProfile] = useState<TProfile>({
-    about: "-",
-    name: "-",
-    position: "-",
-    picture: null,
-  });
-
+  const [profile, setProfile] = useState<TProfile>(localProfile);
   const [company, setCompany] = useState<TCompany[]>(companyData);
-  const [education, setEducation] = useState<TEducation[]>([]);
-
-  const [services, setServices] = useState<TService[]>([]);
-  const [projects, setProjects] = useState<TProject[]>([]);
-  const [tech, setTech] = useState<TTech[]>([]);
+  const [education, setEducation] = useState<TEducation[]>(localEducation);
+  const [services, setServices] = useState<TService[]>(localServices);
+  const [projects, setProjects] = useState<TProject[]>(localProjects);
+  const [tech, setTech] = useState<TTech[]>(techData);
   const [social, setSocial] = useState<TSocial[]>(socials);
 
   const [isPending, setState] = useTransition();
 
   const getProfile = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "portfolio" });
       if (response.items.length > 0)
@@ -53,9 +95,10 @@ export const useContentFul = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [client]);
+  }, []);
 
   const getCompany = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "company" });
       if (response.items.length > 0)
@@ -75,9 +118,10 @@ export const useContentFul = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [client]);
+  }, []);
 
   const getServices = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "doings" });
       if (response.items.length > 0)
@@ -85,9 +129,10 @@ export const useContentFul = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [client]);
+  }, []);
 
   const getProjects = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "projects" });
       if (response.items.length > 0)
@@ -114,9 +159,10 @@ export const useContentFul = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [client]);
+  }, []);
 
   const getEducations = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "education" });
       if (response.items.length > 0)
@@ -124,9 +170,10 @@ export const useContentFul = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [client]);
+  }, []);
 
   const getTech = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "tech" });
       if (response.items.length > 0)
@@ -140,9 +187,10 @@ export const useContentFul = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [client]);
+  }, []);
 
   const getSocial = useCallback(async () => {
+    if (!client) return;
     try {
       const response = await client.getEntries({ content_type: "social" });
       if (response.items.length > 0)
@@ -150,7 +198,7 @@ export const useContentFul = () => {
     } catch (error) {
       console.error(error);
     }
-  }, [client]);
+  }, []);
 
   useEffect(() => {
     setState(() => {

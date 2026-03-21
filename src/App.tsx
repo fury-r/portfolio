@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoClose } from "react-icons/io5";
 import styled from "styled-components";
 import { ToastContainer } from "react-toastify";
@@ -38,39 +38,50 @@ const StyledContainer = styled.div`
 function App() {
   const { pageVersion, changePageVersion } = useGlobalContext();
   const [show, setShow] = useState(false);
+  // Hide the global switcher on v3 — v3 has its own built-in version switcher.
+  // Track pathname via state so we react properly to both initial load and SPA navigation.
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  useEffect(() => {
+    const handler = () => setCurrentPath(window.location.pathname);
+    window.addEventListener("popstate", handler);
+    return () => window.removeEventListener("popstate", handler);
+  }, []);
+  const isV3 = currentPath.startsWith("/v3");
 
   return (
     <StyledContainer className="w-full h-full ">
-      <div className=" fixed bottom-16 right-5 z-30 transition flex flex-col items-center ">
-        <div
-          className={`${
-            !show ? "hidden" : ""
-          }  flex flex-col justify-center mb-2  bg-[var(--primary)] rounded-lg  overflow-hidden`}
-        >
-          {PAGES.map((page, index) => (
-            <button
-              className="flex flex-col option-btn justify-center items-center"
-              onClick={() => {
-                setShow(false);
-                changePageVersion(page);
-              }}
-              key={index + 1}
-            >
-              {page}
-            </button>
-          ))}
+      {!isV3 && (
+        <div className=" fixed bottom-16 right-5 z-30 transition flex flex-col items-center ">
+          <div
+            className={`${
+              !show ? "hidden" : ""
+            }  flex flex-col justify-center mb-2  bg-[var(--primary)] rounded-lg  overflow-hidden`}
+          >
+            {PAGES.map((page, index) => (
+              <button
+                className="flex flex-col option-btn justify-center items-center"
+                onClick={() => {
+                  setShow(false);
+                  changePageVersion(page);
+                }}
+                key={index + 1}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+          <button
+            className="btn round-btn w-1 flex flex-row justify-center items-center"
+            onClick={() => setShow((prev) => !prev)}
+          >
+            {show ? (
+              <IoClose />
+            ) : (
+              <h5 className="text-sm font-semibold shadow-md"> {pageVersion}</h5>
+            )}
+          </button>
         </div>
-        <button
-          className="btn round-btn w-1 flex flex-row justify-center items-center"
-          onClick={() => setShow((prev) => !prev)}
-        >
-          {show ? (
-            <IoClose />
-          ) : (
-            <h5 className="text-sm font-semibold shadow-md"> {pageVersion}</h5>
-          )}
-        </button>
-      </div>
+      )}
 
       <RouterProvider
         router={createBrowserRouter([

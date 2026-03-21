@@ -6,11 +6,12 @@ import { useGlobalContext } from "./context/GlobalContext/useContext";
 import { V2Router } from "./v2/Routes/routes";
 import Landing from "./landing/Landing";
 import { V1Router } from "./v1/Routes/routes";
+import { V3Router } from "./v3/Routes/routes";
 import { TPageVersion } from "./types/page";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
-const PAGES: TPageVersion[] = ["v1", "v2"];
+const PAGES: TPageVersion[] = ["v1", "v2", "v3"];
 
 const StyledContainer = styled.div`
   .option-btn {
@@ -84,6 +85,10 @@ function App() {
           {
             path: "/v2/*",
             element: <V2Router />,
+          },
+          {
+            path: "/v3/*",
+            element: <V3Router />,
           },
         ])}
       />

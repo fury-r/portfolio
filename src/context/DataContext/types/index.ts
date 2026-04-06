@@ -3,4 +3,7 @@ export type TProfile = {
   position: string;
   about: string;
   picture: any;
+  email?: string;
+  phone?: string;
+  location?: string;
 };

@@ -19,6 +19,7 @@ export const iconMap: Record<string, IconType> = {
   email: MdMailOutline,
   photography: FaCamera,
   webDev: SiWebpack,
+  backend: CiServer,
   backendDev: CiServer,
   ["mobile-app-dev"]: CiMobile3,
 };

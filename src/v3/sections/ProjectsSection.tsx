@@ -37,7 +37,7 @@ const ProjectsSection: React.FC = () => {
       initial="initial"
       animate="animate"
       exit="exit"
-      style={{ padding: "36px 36px 48px" }}
+      style={{ padding: "clamp(20px, 4vw, 36px) clamp(16px, 4vw, 36px) 48px" }}
     >
       <motion.h2
         custom={0}

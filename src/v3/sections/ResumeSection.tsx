@@ -16,7 +16,7 @@ const ResumeSection: React.FC = () => {
       initial="initial"
       animate="animate"
       exit="exit"
-      style={{ padding: "36px 36px 48px" }}
+      style={{ padding: "clamp(20px, 4vw, 36px) clamp(16px, 4vw, 36px) 48px" }}
     >
       <motion.h3
         custom={0}
@@ -156,12 +156,13 @@ const ResumeSection: React.FC = () => {
                   }}
                 >
                   <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: s.percentage + "%" }}
+                    initial={{ scaleX: 0 }}
+                    whileInView={{ scaleX: 1 }}
+                    viewport={{ once: true, margin: "-40px" }}
                     transition={{
-                      delay: i * 0.07 + 0.3,
-                      duration: 0.9,
-                      ease: "easeOut",
+                      delay: i * 0.06 + 0.2,
+                      duration: 0.8,
+                      ease: [0.22, 1, 0.36, 1],
                     }}
                     style={{
                       height: "100%",
@@ -173,8 +174,10 @@ const ResumeSection: React.FC = () => {
                         accentColor +
                         "99)",
                       boxShadow: glassMode
-                        ? "0 0 8px " + accentColor + "88"
+                        ? "0 0 8px " + accentColor + "77"
                         : "none",
+                      transformOrigin: "left",
+                      width: s.percentage + "%",
                     }}
                   />
                 </div>
@@ -208,7 +211,8 @@ const ResumeSection: React.FC = () => {
                 custom={i}
                 variants={fadeUp}
                 initial="hidden"
-                animate="visible"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-30px" }}
                 whileHover={{
                   scale: 1.1,
                   y: -3,

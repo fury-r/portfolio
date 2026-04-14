@@ -14,7 +14,14 @@ const MobileLayout: React.FC<{ basePath: string }> = ({ basePath }) => (
     }}
   >
     <MobileProfileHeader />
-    <div style={{ flex: 1, overflow: "auto" }}>
+    <div
+      style={{
+        flex: 1,
+        overflow: "auto",
+        scrollBehavior: "smooth",
+        overscrollBehavior: "contain",
+      }}
+    >
       <ContentRouter />
     </div>
     <MobileTabBar basePath={basePath} />

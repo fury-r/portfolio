@@ -1,6 +1,5 @@
 import React from "react";
 import { PARTICLES } from "../constants";
-import { V3_CSS } from "../utils";
 
 interface AnimatedBackgroundProps {
   accent: string;
@@ -17,10 +16,10 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
     hb = parseInt(c.slice(5, 7), 16);
   const rgba = (a: number) =>
     "rgba(" + hr + "," + hg + "," + hb + "," + a + ")";
-  const bA = glassMode ? 0.72 : 0.55,
-    bB = glassMode ? 0.48 : 0.3;
-  const bC = glassMode ? 0.55 : 0.38,
-    bD = glassMode ? 0.38 : 0.2;
+  const bA = glassMode ? 0.65 : 0.48,
+    bB = glassMode ? 0.4 : 0.25;
+  const bC = glassMode ? 0.48 : 0.32,
+    bD = glassMode ? 0.3 : 0.16;
   return (
     <div
       style={{
@@ -29,21 +28,22 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
         overflow: "hidden",
         zIndex: 0,
         pointerEvents: "none",
+        contain: "strict",
       }}
     >
-      <style dangerouslySetInnerHTML={{ __html: V3_CSS }} />
       <div
         className="v3-blob"
         style={{
           position: "absolute",
           left: "0%",
           top: "0%",
-          width: 680,
-          height: 680,
+          width: 600,
+          height: 600,
           borderRadius: "50%",
           background: rgba(bA),
-          filter: "blur(110px)",
+          filter: "blur(75px)",
           animation: "v3blob0 24s ease-in-out infinite",
+          willChange: "transform",
         }}
       />
       <div
@@ -52,12 +52,13 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           position: "absolute",
           right: "2%",
           top: "-5%",
-          width: 500,
-          height: 500,
+          width: 460,
+          height: 460,
           borderRadius: "50%",
           background: rgba(bB),
-          filter: "blur(95px)",
+          filter: "blur(65px)",
           animation: "v3blob1 30s ease-in-out infinite",
+          willChange: "transform",
         }}
       />
       <div
@@ -66,12 +67,13 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           position: "absolute",
           left: "30%",
           bottom: "0%",
-          width: 560,
-          height: 560,
+          width: 500,
+          height: 500,
           borderRadius: "50%",
           background: rgba(bC),
-          filter: "blur(120px)",
+          filter: "blur(80px)",
           animation: "v3blob2 26s ease-in-out infinite",
+          willChange: "transform",
         }}
       />
       <div
@@ -80,12 +82,13 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           position: "absolute",
           right: "25%",
           bottom: "20%",
-          width: 380,
-          height: 380,
+          width: 340,
+          height: 340,
           borderRadius: "50%",
           background: rgba(bD),
-          filter: "blur(80px)",
+          filter: "blur(55px)",
           animation: "v3blob3 20s ease-in-out infinite",
+          willChange: "transform",
         }}
       />
       <div className="v3-grid" />
@@ -100,15 +103,16 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
             width: p.s,
             height: p.s,
             borderRadius: "50%",
-            background: rgba(0.6),
-            boxShadow: "0 0 " + p.s * 3 + "px " + rgba(0.5),
+            background: rgba(0.55),
+            boxShadow: "0 0 " + p.s * 2 + "px " + rgba(0.4),
             animation:
               p.anim + " " + p.dur + "s ease-in-out " + p.del + "s infinite",
+            willChange: "transform, opacity",
           }}
         />
       ))}
 
-      {/* ── iOS 26 Liquid Glass: caustic mesh overlay ── */}
+      {/* iOS 26 Liquid Glass: caustic mesh overlay */}
       {glassMode && (
         <div
           style={{
@@ -118,60 +122,45 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
             zIndex: 1,
             background: [
               "radial-gradient(ellipse 70% 55% at 20% 30%, " +
-                rgba(0.18) +
+                rgba(0.14) +
                 " 0%, transparent 60%)",
               "radial-gradient(ellipse 50% 65% at 75% 65%, " +
-                rgba(0.14) +
+                rgba(0.1) +
                 " 0%, transparent 55%)",
-              "radial-gradient(ellipse 40% 35% at 55% 15%, rgba(255,255,255,0.06) 0%, transparent 50%)",
             ].join(", "),
             backgroundSize: "120% 120%",
             animation: "v3caustic 18s ease-in-out infinite",
             mixBlendMode: "screen",
+            willChange: "background-position",
           }}
         />
       )}
 
-      {/* ── iOS 26: SVG light-refraction filter definition ── */}
+      {/* SVG filter definitions — inert at 0x0 */}
       <svg style={{ position: "absolute", width: 0, height: 0 }} aria-hidden>
         <defs>
-          <filter id="v3-refract" x="-10%" y="-10%" width="120%" height="120%">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.018 0.012"
-              numOctaves="3"
-              seed="8"
-              result="noise"
-            />
-            <feDisplacementMap
-              in="SourceGraphic"
-              in2="noise"
-              scale={glassMode ? "18" : "8"}
-              xChannelSelector="R"
-              yChannelSelector="G"
-            />
-          </filter>
           <filter id="v3-iris" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="28" />
+            <feGaussianBlur stdDeviation="20" />
           </filter>
         </defs>
       </svg>
 
-      {/* ── iOS 26: iris glow orb follows accent ── */}
+      {/* Iris glow orb */}
       {glassMode && (
         <div
           style={{
             position: "absolute",
             top: "38%",
             left: "46%",
-            width: 320,
-            height: 320,
+            width: 280,
+            height: 280,
             borderRadius: "50%",
-            background: rgba(0.22),
+            background: rgba(0.18),
             filter: "url(#v3-iris)",
             animation: "v3irisglow 10s ease-in-out infinite",
             pointerEvents: "none",
             zIndex: 1,
+            willChange: "transform, opacity",
           }}
         />
       )}
@@ -179,4 +168,4 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   );
 };
 
-export default AnimatedBackground;
+export default React.memo(AnimatedBackground);

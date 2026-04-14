@@ -16,7 +16,8 @@ const ServiceCard: React.FC<{
       custom={i + 2}
       variants={fadeUp}
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-40px" }}
       style={{ perspective: 800 }}
     >
       <motion.div
@@ -185,4 +186,4 @@ const ServiceCard: React.FC<{
   );
 };
 
-export default ServiceCard;
+export default React.memo(ServiceCard);

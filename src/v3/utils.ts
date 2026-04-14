@@ -2,8 +2,8 @@ import React from "react";
 
 export const glass = (extra?: React.CSSProperties): React.CSSProperties => ({
     background: "var(--v3-surface)",
-    backdropFilter: "saturate(200%) blur(var(--v3-blur-amt, 28px))",
-    WebkitBackdropFilter: "saturate(200%) blur(var(--v3-blur-amt, 28px))",
+    backdropFilter: "saturate(160%) blur(var(--v3-blur-amt, 18px))",
+    WebkitBackdropFilter: "saturate(160%) blur(var(--v3-blur-amt, 18px))",
     border: "1px solid var(--v3-border)",
     ...extra,
 });
@@ -14,8 +14,8 @@ export const glass = (extra?: React.CSSProperties): React.CSSProperties => ({
  */
 export const liquidGlass = (accent: string, extra?: React.CSSProperties): React.CSSProperties => ({
     background: "var(--v3-liquid-surface, rgba(255,255,255,0.10))",
-    backdropFilter: "saturate(var(--v3-liquid-saturate, 280%)) blur(var(--v3-blur-amt, 52px)) brightness(var(--v3-liquid-brightness, 1.06))",
-    WebkitBackdropFilter: "saturate(var(--v3-liquid-saturate, 280%)) blur(var(--v3-blur-amt, 52px)) brightness(var(--v3-liquid-brightness, 1.06))",
+    backdropFilter: "saturate(var(--v3-liquid-saturate, 180%)) blur(var(--v3-blur-amt, 24px)) brightness(var(--v3-liquid-brightness, 1.04))",
+    WebkitBackdropFilter: "saturate(var(--v3-liquid-saturate, 180%)) blur(var(--v3-blur-amt, 24px)) brightness(var(--v3-liquid-brightness, 1.04))",
     border: "1px solid var(--v3-liquid-border, rgba(255,255,255,0.30))",
     boxShadow: [
         "0 8px 32px rgba(0,0,0,0.28)",
@@ -37,22 +37,22 @@ export const ios26SpringSoft = (delay = 0) =>
     ({ type: "spring" as const, stiffness: 220, damping: 22, mass: 1, delay });
 
 export const fadeUp = {
-    hidden: { opacity: 0, y: 28, filter: "blur(4px)" },
+    hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
-        opacity: 1, y: 0, filter: "none",
-        transition: { delay: i * 0.07, type: "spring", stiffness: 200, damping: 20 },
+        opacity: 1, y: 0,
+        transition: { delay: i * 0.06, type: "spring", stiffness: 260, damping: 24 },
     }),
 };
 
 export const pageVariants = {
-    initial: { opacity: 0, scale: 0.97, y: 16, filter: "blur(6px)" },
+    initial: { opacity: 0, y: 14 },
     animate: {
-        opacity: 1, scale: 1, y: 0, filter: "none",
-        transition: { duration: 0.38, ease: [0.22, 1, 0.36, 1] }
+        opacity: 1, y: 0,
+        transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] }
     },
     exit: {
-        opacity: 0, scale: 0.97, y: -16, filter: "blur(6px)",
-        transition: { duration: 0.22 }
+        opacity: 0, y: -10,
+        transition: { duration: 0.18 }
     },
 };
 

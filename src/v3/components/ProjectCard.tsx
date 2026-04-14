@@ -220,4 +220,4 @@ const ProjectCard: React.FC<{
   );
 };
 
-export default ProjectCard;
+export default React.memo(ProjectCard);

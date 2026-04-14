@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useV3ThemeContext } from "../context/ThemeContext/useContext";
-import { useTilt } from "../hooks/useTilt";
 import TitleBar from "../components/TitleBar";
 import Sidebar from "../components/Sidebar";
 import Dock from "../components/Dock";
@@ -13,37 +12,32 @@ interface DesktopWindowProps {
 
 const DesktopWindow: React.FC<DesktopWindowProps> = ({ basePath }) => {
   const { accentColor, glassMode } = useV3ThemeContext();
-  const { rotateX, rotateY, onMove, onLeave } = useTilt(1.5);
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.93, y: 28 }}
+      initial={{ opacity: 0, scale: 0.94, y: 24 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 150, damping: 22 }}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
+      transition={{ type: "spring", stiffness: 180, damping: 24 }}
       style={{
         width: "93vw",
         height: "92vh",
         borderRadius: 22,
         background: "var(--v3-window-bg, rgba(18,18,24,0.78))",
-        backdropFilter: "saturate(220%) blur(var(--v3-blur-amt, 28px))",
-        WebkitBackdropFilter: "saturate(220%) blur(var(--v3-blur-amt, 28px))",
+        backdropFilter: "saturate(160%) blur(var(--v3-blur-amt, 18px))",
+        WebkitBackdropFilter: "saturate(160%) blur(var(--v3-blur-amt, 18px))",
         border: "1px solid var(--v3-window-border, rgba(255,255,255,0.13))",
         boxShadow: glassMode
-          ? "0 50px 120px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.08), 0 0 100px " +
+          ? "0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08), 0 0 80px " +
             accentColor +
-            "18, inset 0 1px 0 rgba(255,255,255,0.14)"
-          : "0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06), 0 0 80px " +
+            "15, inset 0 1px 0 rgba(255,255,255,0.12)"
+          : "0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06), 0 0 60px " +
             accentColor +
-            "12",
+            "10",
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
         position: "relative",
         zIndex: 1,
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
+        contain: "layout style",
       }}
     >
       {/* Top specular */}
@@ -105,6 +99,8 @@ const DesktopWindow: React.FC<DesktopWindowProps> = ({ basePath }) => {
             overflow: "auto",
             display: "flex",
             flexDirection: "column",
+            scrollBehavior: "smooth",
+            overscrollBehavior: "contain",
           }}
         >
           <ContentRouter />

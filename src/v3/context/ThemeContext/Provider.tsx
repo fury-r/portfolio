@@ -17,15 +17,15 @@ function applyTheme(mode: ThemeMode, accent: string, glass: boolean) {
       root.style.setProperty("--v3-border", "rgba(255,255,255,0.22)");
       root.style.setProperty("--v3-text", "#ffffff");
       root.style.setProperty("--v3-text2", "rgba(235,235,245,0.70)");
-      root.style.setProperty("--v3-blur-amt", "52px");
+      root.style.setProperty("--v3-blur-amt", "28px");
       root.style.setProperty("--v3-window-bg", "rgba(5,5,14,0.14)");
       root.style.setProperty("--v3-window-border", "rgba(255,255,255,0.22)");
       root.style.setProperty("--v3-specular", "rgba(255,255,255,0.16)");
       // iOS 26 liquid glass — dark glass vars
       root.style.setProperty("--v3-liquid-surface", "rgba(255,255,255,0.08)");
       root.style.setProperty("--v3-liquid-border", "rgba(255,255,255,0.30)");
-      root.style.setProperty("--v3-liquid-saturate", "300%");
-      root.style.setProperty("--v3-liquid-brightness", "1.08");
+      root.style.setProperty("--v3-liquid-saturate", "200%");
+      root.style.setProperty("--v3-liquid-brightness", "1.06");
     } else {
       root.style.setProperty("--v3-bg", "#050507");
       root.style.setProperty("--v3-bg2", "#0d0d14");
@@ -53,14 +53,14 @@ function applyTheme(mode: ThemeMode, accent: string, glass: boolean) {
       root.style.setProperty("--v3-border", "rgba(255,255,255,0.60)");
       root.style.setProperty("--v3-text", "#1c1c1e");
       root.style.setProperty("--v3-text2", "rgba(60,60,67,0.72)");
-      root.style.setProperty("--v3-blur-amt", "52px");
+      root.style.setProperty("--v3-blur-amt", "28px");
       root.style.setProperty("--v3-window-bg", "rgba(255,255,255,0.16)");
       root.style.setProperty("--v3-window-border", "rgba(255,255,255,0.60)");
       root.style.setProperty("--v3-specular", "rgba(255,255,255,0.50)");
       // iOS 26 liquid glass — light glass vars
       root.style.setProperty("--v3-liquid-surface", "rgba(255,255,255,0.28)");
       root.style.setProperty("--v3-liquid-border", "rgba(255,255,255,0.70)");
-      root.style.setProperty("--v3-liquid-saturate", "250%");
+      root.style.setProperty("--v3-liquid-saturate", "200%");
       root.style.setProperty("--v3-liquid-brightness", "1.04");
     } else {
       root.style.setProperty("--v3-bg", "#f0f0f5");

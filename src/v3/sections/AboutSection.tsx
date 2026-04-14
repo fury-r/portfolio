@@ -40,7 +40,7 @@ const AboutSection: React.FC = () => {
       initial="initial"
       animate="animate"
       exit="exit"
-      style={{ padding: "36px 36px 48px" }}
+      style={{ padding: "clamp(20px, 4vw, 36px) clamp(16px, 4vw, 36px) 48px" }}
     >
       <motion.div
         custom={0}
@@ -67,7 +67,7 @@ const AboutSection: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1, type: "spring" }}
           style={{
-            fontSize: 46,
+            fontSize: "clamp(28px, 5vw, 46px)",
             fontWeight: 800,
             margin: "0 0 10px",
             lineHeight: 1.06,

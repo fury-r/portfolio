@@ -56,16 +56,6 @@ export const PARTICLES = [
     { id: 7, x: 90, y: 10, s: 2, dur: 13, del: 6, anim: "v3pd" },
     { id: 8, x: 33, y: 60, s: 3, dur: 19, del: 1, anim: "v3pa" },
     { id: 9, x: 72, y: 78, s: 2, dur: 17, del: 3, anim: "v3pb" },
-    { id: 10, x: 5, y: 48, s: 3, dur: 21, del: 7, anim: "v3pc" },
-    { id: 11, x: 48, y: 32, s: 2, dur: 14, del: 4, anim: "v3pd" },
-    { id: 12, x: 78, y: 42, s: 3, dur: 16, del: 2, anim: "v3pa" },
-    { id: 13, x: 25, y: 90, s: 2, dur: 23, del: 5, anim: "v3pb" },
-    { id: 14, x: 60, y: 65, s: 3, dur: 18, del: 0, anim: "v3pc" },
-    { id: 15, x: 92, y: 33, s: 2, dur: 15, del: 8, anim: "v3pd" },
-    { id: 16, x: 38, y: 18, s: 3, dur: 20, del: 3, anim: "v3pa" },
-    { id: 17, x: 12, y: 58, s: 2, dur: 13, del: 6, anim: "v3pb" },
-    { id: 18, x: 58, y: 48, s: 3, dur: 17, del: 1, anim: "v3pc" },
-    { id: 19, x: 85, y: 85, s: 2, dur: 24, del: 4, anim: "v3pd" },
 ];
 
 export interface NavItem { label: string; path: string; icon: React.ReactNode; }

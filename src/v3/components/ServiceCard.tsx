@@ -43,10 +43,14 @@ const ServiceCard: React.FC<{
           height: "100%",
         }}
       >
+        {/* Grain texture */}
+        <div className="v3-noise" style={{ zIndex: 0 }} />
         <div
           style={{
             height: "80%",
             width: "100%",
+            position: "relative",
+            zIndex: 1,
           }}
         >
           {glassMode && (

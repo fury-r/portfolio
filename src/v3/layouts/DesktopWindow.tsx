@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useV3ThemeContext } from "../context/ThemeContext/useContext";
 import TitleBar from "../components/TitleBar";
 import Sidebar from "../components/Sidebar";
 import Dock from "../components/Dock";
 import ContentRouter from "../components/ContentRouter";
+import CursorSpotlight from "../components/CursorSpotlight";
 
 interface DesktopWindowProps {
   basePath: string;
@@ -12,8 +13,19 @@ interface DesktopWindowProps {
 
 const DesktopWindow: React.FC<DesktopWindowProps> = ({ basePath }) => {
   const { accentColor, glassMode } = useV3ThemeContext();
+  const windowRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [scrollPct, setScrollPct] = useState(0);
+
+  const handleScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const pct = el.scrollTop / (el.scrollHeight - el.clientHeight) || 0;
+    setScrollPct(Math.min(pct * 100, 100));
+  };
   return (
     <motion.div
+      ref={windowRef}
       initial={{ opacity: 0, scale: 0.94, y: 24 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 180, damping: 24 }}
@@ -40,6 +52,11 @@ const DesktopWindow: React.FC<DesktopWindowProps> = ({ basePath }) => {
         contain: "layout style",
       }}
     >
+      {/* Cursor spotlight — follows mouse inside the window */}
+      <CursorSpotlight
+        containerRef={windowRef as React.RefObject<HTMLDivElement>}
+      />
+
       {/* Top specular */}
       <div
         style={{
@@ -72,7 +89,7 @@ const DesktopWindow: React.FC<DesktopWindowProps> = ({ basePath }) => {
           }}
         />
       )}
-      {/* Shimmer sweep */}
+      {/* Shimmer sweep (glass mode) */}
       {glassMode && (
         <div
           style={{
@@ -90,10 +107,13 @@ const DesktopWindow: React.FC<DesktopWindowProps> = ({ basePath }) => {
           }}
         />
       )}
+
       <TitleBar />
       <div style={{ display: "flex", flex: 1, overflow: "hidden" }}>
         <Sidebar basePath={basePath} />
         <div
+          ref={scrollRef}
+          onScroll={handleScroll}
           style={{
             flex: 1,
             overflow: "auto",
@@ -101,8 +121,33 @@ const DesktopWindow: React.FC<DesktopWindowProps> = ({ basePath }) => {
             flexDirection: "column",
             scrollBehavior: "smooth",
             overscrollBehavior: "contain",
+            position: "relative",
           }}
         >
+          {/* Scroll progress bar */}
+          <div
+            style={{
+              position: "sticky",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: 2,
+              zIndex: 50,
+              background: "var(--v3-border)",
+              flexShrink: 0,
+            }}
+          >
+            <div
+              style={{
+                height: "100%",
+                width: scrollPct + "%",
+                background: `linear-gradient(90deg, ${accentColor}, ${accentColor}bb)`,
+                borderRadius: "0 2px 2px 0",
+                transition: "width 0.1s linear",
+                boxShadow: glassMode ? `0 0 8px ${accentColor}88` : "none",
+              }}
+            />
+          </div>
           <ContentRouter />
         </div>
       </div>

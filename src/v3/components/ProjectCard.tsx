@@ -47,14 +47,18 @@ const ProjectCard: React.FC<{
           rotateX,
           rotateY,
           transformStyle: "preserve-3d",
+          position: "relative",
         }}
       >
+        {/* Grain texture */}
+        <div className="v3-noise" style={{ zIndex: 0 }} />
         <div
           style={{
             height: 162,
+            position: "relative",
+            zIndex: 1,
             overflow: "hidden",
             background: accentColor + "10",
-            position: "relative",
           }}
         >
           {project.images && project.images.length > 0 ? (
@@ -110,7 +114,7 @@ const ProjectCard: React.FC<{
             {typeof project.type === "string" ? project.type : "Project"}
           </span>
         </div>
-        <div style={{ padding: 20, position: "relative" }}>
+        <div style={{ padding: 20, position: "relative", zIndex: 1 }}>
           {glassMode && (
             <div
               style={{

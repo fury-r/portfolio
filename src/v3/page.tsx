@@ -4,6 +4,7 @@ import AnimatedBackground from "./components/AnimatedBackground";
 import DesktopWindow from "./layouts/DesktopWindow";
 import MobileLayout from "./layouts/MobileLayout";
 import { V3_CSS } from "./utils";
+import SplashScreen from "./components/SplashScreen";
 
 // Inject keyframe CSS once — never re-injects after first mount
 const V3GlobalStyles: React.FC = () => {
@@ -17,6 +18,7 @@ const V3GlobalStyles: React.FC = () => {
 // ─── V3 Layout ────────────────────────────────────────────────────────────────
 const V3Layout: React.FC = () => {
   const { accentColor, glassMode } = useV3ThemeContext();
+  const [splashDone, setSplashDone] = useState(false);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 768);
   const basePath = "/v3";
   useEffect(() => {
@@ -25,6 +27,8 @@ const V3Layout: React.FC = () => {
     return () => window.removeEventListener("resize", h);
   }, []);
   return (
+    <>
+      {!splashDone && <SplashScreen onDone={() => setSplashDone(true)} />}
     <div
       style={{
         width: "100vw",
@@ -54,6 +58,7 @@ const V3Layout: React.FC = () => {
         <DesktopWindow basePath={basePath} />
       )}
     </div>
+    </>
   );
 };
 

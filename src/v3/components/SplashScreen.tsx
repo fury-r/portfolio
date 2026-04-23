@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useV3ThemeContext } from "../context/ThemeContext/useContext";
-import { FALLBACK } from "../constants";
 import { accentRgba } from "../utils";
 
 // ── Deterministic seeded stars ────────────────────────────────────────────────
@@ -10,53 +9,13 @@ const sr = () => {
   _seed = (_seed * 16807 + 0) % 2147483647;
   return (_seed - 1) / 2147483646;
 };
-const STARS = Array.from({ length: 60 }, () => ({
+const STARS = Array.from({ length: 80 }, () => ({
   x: sr() * 100,
   y: sr() * 100,
-  s: sr() * 2 + 0.5,
-  d: sr() * 4 + 3,
-  o: sr() * 0.5 + 0.3,
+  s: sr() * 2.5 + 0.4,
+  d: sr() * 5 + 3,
+  o: sr() * 0.6 + 0.2,
 }));
-
-// ── Letter reveal ─────────────────────────────────────────────────────────────
-const LetterReveal: React.FC<{
-  text: string;
-  accent: string;
-  delay?: number;
-}> = ({ text, accent, delay = 0 }) => (
-  <span
-    style={{
-      display: "inline-flex",
-      flexWrap: "wrap",
-      justifyContent: "center",
-    }}
-  >
-    {text.split("").map((ch, i) => (
-      <motion.span
-        key={i}
-        initial={{ opacity: 0, y: 28, filter: "blur(8px)" }}
-        animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        transition={{
-          delay: delay + i * 0.04,
-          duration: 0.55,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-        style={{
-          display: "inline-block",
-          whiteSpace: ch === " " ? "pre" : "normal",
-          background: `linear-gradient(135deg, #fff 20%, ${accent} 80%, #fff 120%)`,
-          backgroundSize: "200% auto",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          animation: "v3splashshimmer 3s linear infinite",
-          animationDelay: `${i * 0.08}s`,
-        }}
-      >
-        {ch}
-      </motion.span>
-    ))}
-  </span>
-);
 
 // ── Aurora orb ────────────────────────────────────────────────────────────────
 const Orb: React.FC<{
@@ -73,54 +32,89 @@ const Orb: React.FC<{
       left: x,
       top: y,
       width: size,
-      height: size * 0.6,
+      height: size * 0.65,
       borderRadius: "50%",
       background: color,
-      filter: "blur(70px)",
-      opacity: 0.55,
+      filter: "blur(80px)",
+      opacity: 0.6,
       animation: `v3splashorb ${dur}s ease-in-out ${delay}s infinite alternate`,
       pointerEvents: "none",
     }}
   />
 );
 
-// ── Progress ring ─────────────────────────────────────────────────────────────
-const ProgressRing: React.FC<{ progress: number; accent: string }> = ({
-  progress,
-  accent,
-}) => {
-  const r = 42;
-  const circ = 2 * Math.PI * r;
-  const dash = circ * (1 - progress / 100);
+// ── Spinning ring ─────────────────────────────────────────────────────────────
+const SpinRing: React.FC<{
+  r: number;
+  stroke: string;
+  dash: number;
+  gap: number;
+  dur: number;
+  reverse?: boolean;
+  opacity?: number;
+}> = ({ r, stroke, dash, gap, dur, reverse = false, opacity = 1 }) => {
+  const size = (r + 6) * 2;
   return (
     <svg
-      width={100}
-      height={100}
-      style={{ position: "absolute", inset: 0, margin: "auto" }}
+      width={size}
+      height={size}
+      style={{ position: "absolute", inset: 0, margin: "auto", opacity }}
     >
-      {/* Track */}
       <circle
-        cx={50}
-        cy={50}
+        cx={size / 2}
+        cy={size / 2}
         r={r}
         fill="none"
-        stroke="rgba(255,255,255,0.08)"
+        stroke={stroke}
+        strokeWidth={1.5}
+        strokeDasharray={`${dash} ${gap}`}
+        strokeLinecap="round"
+        style={{
+          transformOrigin: "50% 50%",
+          animation: `v3spinring ${dur}s linear infinite ${reverse ? "reverse" : ""}`,
+          filter: `drop-shadow(0 0 4px ${stroke})`,
+        }}
+      />
+    </svg>
+  );
+};
+
+// ── Progress ring ─────────────────────────────────────────────────────────────
+const ProgressRing: React.FC<{
+  progress: number;
+  accent: string;
+  r: number;
+}> = ({ progress, accent, r }) => {
+  const size = (r + 6) * 2;
+  const circ = 2 * Math.PI * r;
+  const offset = circ * (1 - progress / 100);
+  return (
+    <svg
+      width={size}
+      height={size}
+      style={{ position: "absolute", inset: 0, margin: "auto" }}
+    >
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={r}
+        fill="none"
+        stroke="rgba(255,255,255,0.06)"
         strokeWidth={3}
       />
-      {/* Progress */}
       <motion.circle
-        cx={50}
-        cy={50}
+        cx={size / 2}
+        cy={size / 2}
         r={r}
         fill="none"
         stroke={accent}
         strokeWidth={3}
         strokeLinecap="round"
         strokeDasharray={circ}
-        strokeDashoffset={dash}
-        transform="rotate(-90 50 50)"
-        style={{ filter: `drop-shadow(0 0 6px ${accent})` }}
-        transition={{ duration: 0.1 }}
+        strokeDashoffset={offset}
+        transform={`rotate(-90 ${size / 2} ${size / 2})`}
+        style={{ filter: `drop-shadow(0 0 8px ${accent})` }}
+        transition={{ duration: 0.08 }}
       />
     </svg>
   );
@@ -133,10 +127,9 @@ const SplashScreen: React.FC<{ onDone: () => void }> = ({ onDone }) => {
   const [phase, setPhase] = useState<"in" | "hold" | "out">("in");
   const rafRef = useRef<number | null>(null);
   const startRef = useRef<number | null>(null);
-  const DURATION = 2400; // ms to fill progress bar
+  const DURATION = 2200;
 
   useEffect(() => {
-    // Start progress after brief delay for intro animation
     const t = setTimeout(() => {
       const tick = (ts: number) => {
         if (!startRef.current) startRef.current = ts;
@@ -149,19 +142,16 @@ const SplashScreen: React.FC<{ onDone: () => void }> = ({ onDone }) => {
           setTimeout(() => {
             setPhase("out");
             setTimeout(onDone, 900);
-          }, 300);
+          }, 280);
         }
       };
       rafRef.current = requestAnimationFrame(tick);
-    }, 600);
+    }, 500);
     return () => {
       clearTimeout(t);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [onDone]);
-
-  const name = FALLBACK.name;
-  const role = FALLBACK.position;
 
   return (
     <AnimatePresence>
@@ -172,86 +162,99 @@ const SplashScreen: React.FC<{ onDone: () => void }> = ({ onDone }) => {
           exit={{
             opacity: 0,
             scale: 1.06,
-            filter: "blur(12px)",
+            filter: "blur(14px)",
             transition: { duration: 0.75, ease: [0.4, 0, 0.2, 1] },
           }}
           style={{
             position: "fixed",
             inset: 0,
             zIndex: 9999,
-            background: "#080b12",
+            background: "#07090f",
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
             overflow: "hidden",
           }}
         >
-          {/* ── CSS for splash-specific keyframes ── */}
           <style>{`
-                        @keyframes v3splashorb {
-                            from { transform: translate(-10%, -10%) scale(1); }
-                            to   { transform: translate(10%, 10%) scale(1.18); }
-                        }
-                        @keyframes v3splashshimmer {
-                            0%   { background-position: 200% center; }
-                            100% { background-position: -200% center; }
-                        }
-                        @keyframes v3splashgrid {
-                            0%   { opacity: 0.03; }
-                            50%  { opacity: 0.07; }
-                            100% { opacity: 0.03; }
-                        }
-                        @keyframes v3splashtwinkle {
-                            0%,100% { opacity: 0.2; transform: scale(0.8); }
-                            50%     { opacity: 1;   transform: scale(1.2); }
-                        }
-                    `}</style>
+            @keyframes v3splashorb {
+              from { transform: translate(-12%, -12%) scale(1); }
+              to   { transform: translate(12%, 12%) scale(1.22); }
+            }
+            @keyframes v3splashgrid {
+              0%,100% { opacity: 0.025; }
+              50%     { opacity: 0.065; }
+            }
+            @keyframes v3splashtwinkle {
+              0%,100% { opacity: 0.15; transform: scale(0.7); }
+              50%     { opacity: 1;    transform: scale(1.3); }
+            }
+            @keyframes v3spinring {
+              from { transform: rotate(0deg); }
+              to   { transform: rotate(360deg); }
+            }
+            @keyframes v3gradrotate {
+              from { transform: rotate(0deg); }
+              to   { transform: rotate(360deg); }
+            }
+            @keyframes v3splashpulse {
+              0%,100% { transform: scale(1);    opacity: 0.5; }
+              50%     { transform: scale(1.08); opacity: 0.9; }
+            }
+          `}</style>
 
-          {/* ── Aurora background ── */}
+          {/* ── Aurora orbs ── */}
           <Orb
-            color={accentRgba(accentColor, 0.6)}
-            size={700}
-            x="-15%"
-            y="-20%"
+            color={accentRgba(accentColor, 0.65)}
+            size={750}
+            x="-18%"
+            y="-22%"
             dur={7}
             delay={0}
           />
           <Orb
-            color="rgba(55,120,255,0.5)"
-            size={600}
-            x="60%"
-            y="50%"
+            color="rgba(60,130,255,0.5)"
+            size={620}
+            x="62%"
+            y="52%"
             dur={9}
-            delay={1.5}
+            delay={1.4}
           />
           <Orb
-            color="rgba(130,60,255,0.45)"
-            size={500}
-            x="20%"
-            y="55%"
+            color="rgba(140,60,255,0.45)"
+            size={520}
+            x="22%"
+            y="58%"
             dur={11}
-            delay={0.8}
+            delay={0.7}
           />
           <Orb
-            color={accentRgba(accentColor, 0.3)}
-            size={400}
-            x="75%"
-            y="-10%"
+            color={accentRgba(accentColor, 0.28)}
+            size={420}
+            x="78%"
+            y="-12%"
             dur={8}
-            delay={2}
+            delay={2.1}
+          />
+          <Orb
+            color="rgba(255,80,140,0.25)"
+            size={360}
+            x="45%"
+            y="70%"
+            dur={6}
+            delay={0.3}
           />
 
-          {/* ── Grid overlay ── */}
+          {/* ── Grid ── */}
           <div
             style={{
               position: "absolute",
               inset: 0,
               backgroundImage: `
-                            linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)
-                        `,
-              backgroundSize: "60px 60px",
+                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px)
+              `,
+              backgroundSize: "56px 56px",
               animation: "v3splashgrid 4s ease-in-out infinite",
               pointerEvents: "none",
             }}
@@ -270,7 +273,7 @@ const SplashScreen: React.FC<{ onDone: () => void }> = ({ onDone }) => {
                 borderRadius: "50%",
                 background: "#fff",
                 opacity: s.o,
-                animation: `v3splashtwinkle ${s.d}s ease-in-out ${i * 0.15}s infinite`,
+                animation: `v3splashtwinkle ${s.d}s ease-in-out ${i * 0.12}s infinite`,
                 pointerEvents: "none",
               }}
             />
@@ -282,211 +285,106 @@ const SplashScreen: React.FC<{ onDone: () => void }> = ({ onDone }) => {
               position: "absolute",
               inset: 0,
               background:
-                "radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.65) 100%)",
+                "radial-gradient(ellipse at center, transparent 25%, rgba(0,0,0,0.7) 100%)",
               pointerEvents: "none",
             }}
           />
 
-          {/* ── Center content ── */}
-          <div
-            style={{
-              position: "relative",
-              zIndex: 2,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: 16,
-              padding: "0 24px",
-              textAlign: "center",
-            }}
+          {/* ── Center orbital system ── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.6 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            style={{ position: "relative", width: 220, height: 220 }}
           >
-            {/* Avatar / logo mark */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                delay: 0.1,
-                duration: 0.6,
-                ease: [0.22, 1, 0.36, 1],
-              }}
+            {/* Outer spinning dashed ring */}
+            <SpinRing
+              r={100}
+              stroke={accentRgba(accentColor, 0.35)}
+              dash={12}
+              gap={18}
+              dur={14}
+              opacity={0.8}
+            />
+            {/* Middle counter-spin */}
+            <SpinRing
+              r={78}
+              stroke={accentRgba(accentColor, 0.25)}
+              dash={6}
+              gap={28}
+              dur={9}
+              reverse
+              opacity={0.6}
+            />
+            {/* Progress ring */}
+            <ProgressRing progress={progress} accent={accentColor} r={58} />
+
+            {/* Core glow */}
+            <div
               style={{
-                width: 72,
-                height: 72,
+                position: "absolute",
+                inset: 0,
+                margin: "auto",
+                width: 90,
+                height: 90,
                 borderRadius: "50%",
-                border: `2px solid ${accentColor}`,
-                boxShadow: `0 0 0 6px ${accentRgba(accentColor, 0.15)}, 0 0 40px ${accentRgba(accentColor, 0.4)}`,
-                background: `radial-gradient(circle at 35% 35%, ${accentRgba(accentColor, 0.35)}, transparent 70%)`,
+                background: `radial-gradient(circle at 38% 35%, ${accentRgba(accentColor, 0.5)}, transparent 70%)`,
+                boxShadow: [
+                  `0 0 0 1px ${accentRgba(accentColor, 0.3)}`,
+                  `0 0 30px ${accentRgba(accentColor, 0.4)}`,
+                  `0 0 70px ${accentRgba(accentColor, 0.15)}`,
+                ].join(", "),
+                animation: "v3splashpulse 2.6s ease-in-out infinite",
+              }}
+            />
+
+            {/* Rotating conic ring inside core */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                margin: "auto",
+                width: 90,
+                height: 90,
+                borderRadius: "50%",
+                background: `conic-gradient(from 0deg, transparent 55%, ${accentColor} 78%, transparent 100%)`,
+                animation: "v3gradrotate 2.2s linear infinite",
+                opacity: 0.55,
+              }}
+            />
+
+            {/* Percentage */}
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                marginBottom: 8,
-                overflow: "hidden",
-                position: "relative",
               }}
             >
-              {/* Rotating ring inside avatar */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: -2,
-                  borderRadius: "50%",
-                  background: `conic-gradient(from 0deg, transparent 60%, ${accentColor} 80%, transparent 100%)`,
-                  animation: "v3gradrotate 2.5s linear infinite",
-                  opacity: 0.8,
-                }}
-              />
               <span
                 style={{
-                  fontSize: 26,
-                  fontWeight: 800,
                   color: "#fff",
-                  position: "relative",
-                  zIndex: 1,
-                  letterSpacing: -0.5,
+                  fontSize: 22,
+                  fontWeight: 700,
+                  letterSpacing: "-0.03em",
+                  fontVariantNumeric: "tabular-nums",
                 }}
               >
-                {name
-                  .split(" ")
-                  .map((w) => w[0])
-                  .join("")}
+                {Math.round(progress)}
+                <span style={{ fontSize: 13, fontWeight: 400, opacity: 0.6 }}>
+                  %
+                </span>
               </span>
-            </motion.div>
-
-            {/* Eyebrow label */}
-            <motion.p
-              initial={{ opacity: 0, letterSpacing: "0.3em" }}
-              animate={{ opacity: 0.55, letterSpacing: "0.18em" }}
-              transition={{ delay: 0.3, duration: 0.7 }}
-              style={{
-                color: "#fff",
-                fontSize: 11,
-                fontWeight: 600,
-                textTransform: "uppercase",
-                margin: 0,
-                letterSpacing: "0.18em",
-              }}
-            >
-              Portfolio · {new Date().getFullYear()}
-            </motion.p>
-
-            {/* Name */}
-            <h1
-              style={{
-                margin: 0,
-                fontSize: "clamp(36px, 8vw, 72px)",
-                fontWeight: 800,
-                lineHeight: 1.05,
-                letterSpacing: "-0.03em",
-              }}
-            >
-              <LetterReveal text={name} accent={accentColor} delay={0.45} />
-            </h1>
-
-            {/* Role */}
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 0.65, y: 0 }}
-              transition={{
-                delay: 0.45 + name.length * 0.04 + 0.15,
-                duration: 0.5,
-              }}
-              style={{
-                color: "#fff",
-                fontSize: "clamp(14px, 2.5vw, 18px)",
-                fontWeight: 400,
-                margin: 0,
-                letterSpacing: "0.01em",
-              }}
-            >
-              {role}
-            </motion.p>
-
-            {/* Progress section */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 0.4 }}
-              style={{
-                marginTop: 32,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 14,
-              }}
-            >
-              {/* Ring with percentage */}
-              <div style={{ position: "relative", width: 100, height: 100 }}>
-                <ProgressRing progress={progress} accent={accentColor} />
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <span
-                    style={{
-                      color: "#fff",
-                      fontSize: 18,
-                      fontWeight: 700,
-                      letterSpacing: "-0.02em",
-                    }}
-                  >
-                    {Math.round(progress)}
-                  </span>
-                </div>
-              </div>
-
-              {/* Bar below ring */}
-              <div
-                style={{
-                  width: "clamp(160px, 28vw, 280px)",
-                  height: 3,
-                  background: "rgba(255,255,255,0.1)",
-                  borderRadius: 2,
-                  overflow: "hidden",
-                }}
-              >
-                <motion.div
-                  style={{
-                    height: "100%",
-                    borderRadius: 2,
-                    background: `linear-gradient(90deg, ${accentColor}, ${accentRgba(accentColor, 0.5)})`,
-                    boxShadow: `0 0 10px ${accentColor}`,
-                    width: progress + "%",
-                  }}
-                  transition={{ duration: 0.1 }}
-                />
-              </div>
-
-              <motion.p
-                animate={{ opacity: [0.4, 0.9, 0.4] }}
-                transition={{
-                  duration: 1.8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                style={{
-                  color: "rgba(255,255,255,0.45)",
-                  fontSize: 11,
-                  fontWeight: 500,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  margin: 0,
-                }}
-              >
-                Loading...
-              </motion.p>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
 
           {/* ── Bottom accent line ── */}
           <motion.div
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ delay: 0.8, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ delay: 0.6, duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
             style={{
               position: "absolute",
               bottom: 0,
@@ -508,13 +406,13 @@ const SplashScreen: React.FC<{ onDone: () => void }> = ({ onDone }) => {
             <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 0.4, scale: 1 }}
-              transition={{ delay: 0.2 + i * 0.1, duration: 0.4 }}
+              animate={{ opacity: 0.35, scale: 1 }}
+              transition={{ delay: 0.15 + i * 0.08, duration: 0.4 }}
               style={{
                 position: "absolute",
                 ...pos,
-                width: 20,
-                height: 20,
+                width: 18,
+                height: 18,
                 borderTop: i < 2 ? `1.5px solid ${accentColor}` : "none",
                 borderBottom: i >= 2 ? `1.5px solid ${accentColor}` : "none",
                 borderLeft: i % 2 === 0 ? `1.5px solid ${accentColor}` : "none",

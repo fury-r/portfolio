@@ -1,144 +1,102 @@
-import React, { useState, memo } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { useV3ThemeContext } from "../context/ThemeContext/useContext";
 import { NAV_ITEMS } from "../constants";
-import { ios26Spring } from "../utils";
+import { accentRgba } from "../utils";
 
+// ─── constants ───────────────────────────────────────────────────────────────
+const ITEM_SIZE = 44;
+const ITEM_GAP = 14;
+const PAD_X = 28;
+const BAR_HEIGHT = 60;
+const CIRCLE_R = 30; // floating circle radius
+const CIRCLE_LIFT = 14; // px the circle center sits above bar top
+const NOTCH_DEPTH = 22; // px the notch dips below bar top
+const NOTCH_HALF_W = 72;
+const NOTCH_BLEND = 38;
+const BAR_CORNER_R = 16;
+const SOFT_SPRING = { stiffness: 200, damping: 26, mass: 1 };
+const ITEM_SPRING = { stiffness: 380, damping: 30, mass: 0.8 };
+
+// Fixed bar width — computed from layout constants
+const BAR_WIDTH =
+  PAD_X * 2 + NAV_ITEMS.length * ITEM_SIZE + (NAV_ITEMS.length - 1) * ITEM_GAP;
+
+// Item center X values within the bar coordinate space
+const ITEM_CENTERS = NAV_ITEMS.map(
+  (_, i) => PAD_X + i * (ITEM_SIZE + ITEM_GAP) + ITEM_SIZE / 2,
+);
+
+// ─── SVG path builder ────────────────────────────────────────────────────────
+function buildNotchedPath(cx: number): string {
+  const w = BAR_WIDTH;
+  const h = BAR_HEIGHT;
+  const r = BAR_CORNER_R;
+  const nd = NOTCH_DEPTH;
+  // Clamp notch half-width so it never overshoots bar edges
+  const nhw = Math.min(NOTCH_HALF_W, cx - 2, w - cx - 2);
+  const nb = Math.min(NOTCH_BLEND, nhw - 4);
+  const notchL = cx - nhw;
+  const notchR = cx + nhw;
+
+  return [
+    `M 0 0`,
+    notchL > 2 ? `L ${notchL} 0` : ``,
+    // Smooth curve into notch
+    `C ${notchL + nb} 0 ${cx - CIRCLE_R} ${nd} ${cx} ${nd}`,
+    // Smooth curve out of notch
+    `C ${cx + CIRCLE_R} ${nd} ${notchR - nb} 0 ${notchR} 0`,
+    notchR < w - 2 ? `L ${w} 0` : ``,
+    // Right side + bottom-right corner
+    `L ${w} ${h - r}`,
+    `Q ${w} ${h} ${w - r} ${h}`,
+    // Bottom edge + bottom-left corner
+    `L ${r} ${h}`,
+    `Q 0 ${h} 0 ${h - r}`,
+    `Z`,
+  ]
+    .filter(Boolean)
+    .join(" ");
+}
+
+// ─── Dock ────────────────────────────────────────────────────────────────────
 interface DockProps {
   basePath: string;
 }
 
-interface DockItemProps {
-  item: (typeof NAV_ITEMS)[0];
-  basePath: string;
-  isActive: boolean;
-  hoveredIdx: number | null;
-  myIdx: number;
-  accentColor: string;
-  glassMode: boolean;
-  onHover: (i: number | null) => void;
-}
-
-const DockItem = memo<DockItemProps>(
-  ({
-    item,
-    basePath,
-    isActive,
-    hoveredIdx,
-    myIdx,
-    accentColor,
-    glassMode,
-    onHover,
-  }) => {
-    const dist = hoveredIdx === null ? 99 : Math.abs(myIdx - hoveredIdx);
-    const magScale =
-      dist === 0 ? 1.42 : dist === 1 ? 1.16 : dist === 2 ? 1.05 : 1;
-    const magY = dist === 0 ? -16 : dist === 1 ? -8 : dist === 2 ? -3 : 0;
-    const iconBtn: React.CSSProperties = {
-      width: 46,
-      height: 46,
-      borderRadius: 13,
-      background: isActive ? accentColor + "2e" : "rgba(255,255,255,0.07)",
-      border: isActive
-        ? "1.5px solid " + accentColor + "66"
-        : "1px solid rgba(255,255,255,0.12)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      color: isActive ? accentColor : "var(--v3-text2)",
-      transition: "all 0.15s",
-      boxShadow:
-        isActive && glassMode
-          ? "0 0 14px " + accentColor + "44"
-          : isActive
-            ? "0 0 8px " + accentColor + "22"
-            : "none",
-      position: "relative",
-      overflow: "hidden",
-    };
-    return (
-      <Link
-        key={item.path}
-        to={basePath + item.path}
-        style={{ textDecoration: "none" }}
-      >
-        <motion.div
-          onHoverStart={() => onHover(myIdx)}
-          onHoverEnd={() => onHover(null)}
-          animate={{ y: magY, scale: magScale }}
-          transition={ios26Spring()}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 5,
-            transformOrigin: "bottom center",
-          }}
-        >
-          <div style={iconBtn}>
-            {item.icon}
-            {isActive && glassMode && (
-              <div
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: "-100%",
-                  width: "60%",
-                  height: "100%",
-                  background:
-                    "linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.22) 50%, transparent 70%)",
-                  animation: "v3cardshine 3s ease-in-out infinite",
-                }}
-              />
-            )}
-          </div>
-          <motion.span
-            animate={{
-              opacity: dist === 0 ? 1 : 0.6,
-              fontSize: dist === 0 ? "11px" : "10px",
-            }}
-            transition={ios26Spring()}
-            style={{
-              color: isActive ? accentColor : "var(--v3-text2)",
-              fontWeight: isActive ? 700 : 400,
-            }}
-          >
-            {item.label}
-          </motion.span>
-          {isActive && (
-            <motion.div
-              layoutId="dock-active"
-              style={{
-                width: 4,
-                height: 4,
-                borderRadius: "50%",
-                background: accentColor,
-                boxShadow: glassMode
-                  ? "0 0 8px " +
-                    accentColor +
-                    ", 0 0 14px " +
-                    accentColor +
-                    "55"
-                  : "0 0 6px " + accentColor,
-              }}
-            />
-          )}
-        </motion.div>
-      </Link>
-    );
-  },
-);
-
-DockItem.displayName = "DockItem";
-
 const Dock: React.FC<DockProps> = ({ basePath }) => {
   const location = useLocation();
-  const { accentColor, glassMode } = useV3ThemeContext();
-  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const { accentColor, glassMode, mode } = useV3ThemeContext();
+  const isLight = mode === "LIGHT";
   const activePath = location.pathname.replace(basePath, "") || "/";
+
+  const activeIdx = NAV_ITEMS.findIndex(
+    (item) =>
+      activePath === item.path ||
+      (item.path !== "/" && activePath.startsWith(item.path)),
+  );
+  const safeIdx = activeIdx < 0 ? 0 : activeIdx;
+
+  // Spring-animated X that drives both the notch and the floating circle
+  const rawActiveX = useMotionValue(ITEM_CENTERS[safeIdx]);
+  const activeX = useSpring(rawActiveX, SOFT_SPRING);
+
+  useEffect(() => {
+    rawActiveX.set(ITEM_CENTERS[safeIdx]);
+  }, [safeIdx]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // SVG notch path derived from live activeX spring
+  const svgPath = useTransform(activeX, buildNotchedPath);
+
+  // Circle left-edge position
+  const circleLeft = useTransform(activeX, (cx) => cx - CIRCLE_R);
+
   return (
-    <div
+    <motion.div
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 220, damping: 24, delay: 0.15 }}
       style={{
         display: "flex",
         justifyContent: "center",
@@ -146,91 +104,158 @@ const Dock: React.FC<DockProps> = ({ basePath }) => {
         flexShrink: 0,
       }}
     >
-      <div style={{ position: "relative" }}>
-        {glassMode && (
+      {/* Outer wrapper — top padding makes room for the floating circle */}
+      <div style={{ position: "relative", paddingTop: CIRCLE_R + CIRCLE_LIFT }}>
+        {/* ── Floating active circle ── */}
+        <motion.div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            x: circleLeft,
+            width: CIRCLE_R * 2,
+            height: CIRCLE_R * 2,
+            borderRadius: "50%",
+            background: accentColor,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#fff",
+            zIndex: 3,
+            boxShadow: [
+              `0 6px 28px ${accentRgba(accentColor, 0.55)}`,
+              `inset 0 1px 0 rgba(255,255,255,0.3)`,
+            ].join(", "),
+          }}
+        >
+          {NAV_ITEMS[safeIdx]?.icon}
+        </motion.div>
+
+        {/* ── Bar ── */}
+        <div
+          style={{
+            position: "relative",
+            width: BAR_WIDTH,
+            height: BAR_HEIGHT,
+          }}
+        >
+          {/* Backdrop blur */}
           <div
             style={{
               position: "absolute",
-              top: "100%",
-              left: "5%",
-              right: "5%",
-              height: 16,
-              background:
-                "linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 100%)",
-              filter: "blur(4px)",
-              transform: "scaleY(-0.4)",
-              transformOrigin: "top",
+              inset: 0,
+              backdropFilter: "saturate(180%) blur(20px)",
+              WebkitBackdropFilter: "saturate(180%) blur(20px)",
+              borderRadius: BAR_CORNER_R,
               pointerEvents: "none",
+              zIndex: 0,
             }}
           />
-        )}
-        <motion.div
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{
-            type: "spring",
-            stiffness: 220,
-            damping: 24,
-            delay: 0.1,
-          }}
-          style={{
-            backdropFilter: "saturate(160%) blur(var(--v3-blur-amt, 18px))",
-            WebkitBackdropFilter:
-              "saturate(160%) blur(var(--v3-blur-amt, 18px))",
-            background: glassMode
-              ? "rgba(255,255,255,0.04)"
-              : "rgba(30,30,38,0.75)",
-            border: "1px solid var(--v3-window-border, rgba(255,255,255,0.14))",
-            borderRadius: 22,
-            padding: "10px 18px",
-            display: "flex",
-            alignItems: "flex-end",
-            gap: 10,
-            boxShadow: glassMode
-              ? "0 10px 36px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 50px " +
-                accentColor +
-                "12"
-              : "0 8px 28px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.08)",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          {glassMode && (
-            <div
-              style={{
-                position: "absolute",
-                top: "-50%",
-                left: "-60%",
-                width: "50%",
-                height: "200%",
-                background:
-                  "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%)",
-                animation: "v3shimmer 9s ease-in-out 1s infinite",
-                pointerEvents: "none",
-              }}
+
+          {/* SVG notched background — fill + border */}
+          <motion.svg
+            viewBox={`0 0 ${BAR_WIDTH} ${BAR_HEIGHT}`}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: BAR_WIDTH,
+              height: BAR_HEIGHT,
+              overflow: "visible",
+              pointerEvents: "none",
+              zIndex: 1,
+            }}
+          >
+            <defs>
+              <filter
+                id="dock-drop"
+                x="-10%"
+                y="-60%"
+                width="120%"
+                height="220%"
+              >
+                <feDropShadow
+                  dx="0"
+                  dy="8"
+                  stdDeviation="14"
+                  floodOpacity="0.38"
+                  floodColor="#000"
+                />
+              </filter>
+            </defs>
+            {/* Fill with shadow */}
+            <motion.path
+              d={svgPath}
+              fill={
+                isLight
+                  ? glassMode ? "rgba(255,255,255,0.60)" : "rgba(250,250,255,0.97)"
+                  : glassMode ? "rgba(255,255,255,0.07)" : "rgba(20,20,28,0.95)"
+              }
+              filter="url(#dock-drop)"
             />
-          )}
-          {NAV_ITEMS.map((item, i) => {
-            const isActive =
-              activePath === item.path ||
-              (item.path !== "/" && activePath.startsWith(item.path));
-            return (
-              <DockItem
-                key={item.path}
-                item={item}
-                basePath={basePath}
-                isActive={isActive}
-                hoveredIdx={hoveredIdx}
-                myIdx={i}
-                accentColor={accentColor}
-                glassMode={glassMode}
-                onHover={setHoveredIdx}
-              />
-            );
-          })}
-        </motion.div>
+            {/* Border stroke */}
+            <motion.path
+              d={svgPath}
+              fill="none"
+              stroke={isLight && !glassMode ? "rgba(0,0,0,0.10)" : "rgba(255,255,255,0.13)"}
+              strokeWidth={1}
+            />
+            {/* Specular inner top highlight */}
+            <motion.path
+              d={svgPath}
+              fill="none"
+              stroke={isLight && !glassMode ? "rgba(0,0,0,0.04)" : "rgba(255,255,255,0.22)"}
+              strokeWidth={0.75}
+              opacity={0.5}
+            />
+          </motion.svg>
+
+          {/* Items */}
+          <div
+            style={{
+              position: "relative",
+              zIndex: 2,
+              height: "100%",
+              padding: `0 ${PAD_X}px`,
+              display: "flex",
+              alignItems: "center",
+              gap: ITEM_GAP,
+            }}
+          >
+            {NAV_ITEMS.map((item) => {
+              const isActive =
+                activePath === item.path ||
+                (item.path !== "/" && activePath.startsWith(item.path));
+              return (
+                <Link
+                  key={item.path}
+                  to={basePath + item.path}
+                  style={{ textDecoration: "none" }}
+                >
+                  <motion.div
+                    whileHover={isActive ? {} : { scale: 1.2 }}
+                    whileTap={{ scale: 0.88 }}
+                    transition={ITEM_SPRING}
+                    style={{
+                      width: ITEM_SIZE,
+                      height: ITEM_SIZE,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      // Hidden when active — icon shown in floating circle
+                      color: "var(--v3-text2)",
+                      opacity: isActive ? 0 : 1,
+                    }}
+                  >
+                    {item.icon}
+                  </motion.div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

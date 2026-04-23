@@ -12,16 +12,14 @@ export type TCardData = {
 
 export const ServiceCards = () => {
   const { services } = useDataContext();
-
   return (
     <div className="grid grid-cols-2 gap-5 max-md:grid-cols-1">
       {services.map(({ description, icon, title }, index) => {
         let IconElem: string | JSX.Element | IconType = "-";
-
-        if (icon) {
-          IconElem = iconMap[icon];
+        if (icon && iconMap[icon]) {
+          const Element = iconMap[icon];
           IconElem = (
-            <IconElem
+            <Element
               style={{
                 width: "30%",
                 height: "30%",

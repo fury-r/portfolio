@@ -10,6 +10,7 @@
     "fix-lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0  --fix"
   },
   "dependencies": {
+    "@chenglou/pretext": "^0.0.4",
     "@emailjs/browser": "^4.3.3",
     "@emotion/react": "^11.4.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",

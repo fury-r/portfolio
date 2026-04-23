@@ -224,4 +224,5 @@ const ProjectCard: React.FC<{
   );
 };
 
-export default React.memo(ProjectCard);
+const ProjectCardMemo = React.memo(ProjectCard);
+export default ProjectCardMemo;

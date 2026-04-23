@@ -218,4 +218,5 @@ const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   );
 };
 
-export default React.memo(AnimatedBackground);
+const AnimatedBackgroundMemo = React.memo(AnimatedBackground);
+export default AnimatedBackgroundMemo;

@@ -190,4 +190,5 @@ const ServiceCard: React.FC<{
   );
 };
 
-export default React.memo(ServiceCard);
+const ServiceCardMemo = React.memo(ServiceCard);
+export default ServiceCardMemo;
